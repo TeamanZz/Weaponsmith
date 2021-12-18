@@ -143,7 +143,6 @@ public class GameManager : MonoBehaviour
                 react = true;
                 Debug.Log(bodyItem.itemPrefab.gameObject + " | " + resultBody.itemPrefab.gameObject);
                 Debug.Log(tipItem.itemPrefab.gameObject + " | " + resultTip.itemPrefab.gameObject);
-
             }
             else
                 react = false;
