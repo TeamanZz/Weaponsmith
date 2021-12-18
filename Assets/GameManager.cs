@@ -114,6 +114,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        resultBody = null;
+        resultTip = null;
 
         newObjects.Clear();
     }
@@ -127,19 +129,32 @@ public class GameManager : MonoBehaviour
         previewPanel.SetActive(false);
         itemsBar.SetActive(false);
 
-        if (bodyItem.itemPrefab.gameObject == resultBody.itemPrefab.gameObject && tipItem.itemPrefab.gameObject == resultTip.itemPrefab.gameObject)
+        if (resultBody == null || resultBody == null)
         {
-            Debug.Log("Good result");
-            react = true;
+            setAi.FeedBack(false);
+            RemoveObject();
+        }
+
+        if (bodyItem.itemPrefab.gameObject == resultBody.itemPrefab.gameObject)
+        {
+            if (tipItem.itemPrefab.gameObject == resultBody.itemPrefab.gameObject)
+            {
+                Debug.Log("Good result");
+                react = true;
+                Debug.Log(bodyItem.itemPrefab.gameObject + " | " + resultBody.itemPrefab.gameObject);
+                Debug.Log(tipItem.itemPrefab.gameObject + " | " + resultTip.itemPrefab.gameObject);
+
+            }
+            else
+                react = false;
         }
         else
         {
             Debug.Log("Bad result");
             react = false;
         }
-        Debug.Log(bodyItem.itemPrefab.gameObject + " | " + resultBody.itemPrefab.gameObject);
-        Debug.Log(tipItem.itemPrefab.gameObject + " | " + resultTip.itemPrefab.gameObject);
-        //
+
+
         setAi.FeedBack(react);
         RemoveObject();
     }

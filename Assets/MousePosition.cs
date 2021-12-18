@@ -43,15 +43,6 @@ public class MousePosition : MonoBehaviour
 
     }
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        if (delivered == false)
-            return;
-
-        setTime = destroyTime;
-        renderer.material.color = mainColor;
-    }
-
     public void Update()
     {
         if (delivered == true)
@@ -223,6 +214,7 @@ public class MousePosition : MonoBehaviour
                 {
                     tipChildren.OnMouseDrag();
                     tipChildren.renderer.material.color = Color.red;
+
                     //  красить все
                 }
 
@@ -263,6 +255,7 @@ public class MousePosition : MonoBehaviour
         move = false;
         remove = false;
 
+        transform.localScale = new Vector3(1f, 1f, 1f);
         setTime = 99;
         renderer.material.color = mainColor;
 
