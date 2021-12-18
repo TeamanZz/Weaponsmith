@@ -5316,7 +5316,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: WeaponType_int
-    m_EventTreshold: 12
+    m_EventTreshold: 7
   - m_ConditionMode: 6
     m_ConditionEvent: MeleeType_int
     m_EventTreshold: 1

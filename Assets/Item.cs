@@ -16,6 +16,10 @@ public class Item
     public Vector3 prefabScale;
     public Vector3 prefabRotation;
 
+    [Header("Preview settings")]
+    public Vector3 previewScale;
+    public Vector3 previewRotation;
+
     [Header("World settings")]
     public Vector3 prefabInWorldScale;
     public Vector3 prefabWorldRotation;

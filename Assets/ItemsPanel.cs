@@ -121,7 +121,7 @@ public class ItemsPanel : MonoBehaviour
                 break;
         }
 
-        Debug.Log(setTypesOfPanel);
+        //Debug.Log(setTypesOfPanel);
     }
 
     public void CreatingNewPanels(Item newItem)

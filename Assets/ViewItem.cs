@@ -45,9 +45,10 @@ public class ViewItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         prefabInWorldScale = newItem.prefabInWorldScale;
         prefabWorldRotation = newItem.prefabWorldRotation;
 
-        viewObject = Instantiate(newItem.itemPrefab, prefabPoint);
+        viewObject = Instantiate(newItem.itemPrefab, prefabPoint); 
+        
         viewObject.transform.localScale = prefabScale;
-        viewObject.transform.rotation = Quaternion.Euler(prefabRotation);
+        viewObject.transform.localRotation = Quaternion.Euler(prefabRotation);
         setLayer = newItem.setLayer;
     }
 
@@ -82,7 +83,7 @@ public class ViewItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         LayerMask mask = 5;
         copyMainPanel = Instantiate(itemPrefab);
         copyMainPanel.AddComponent<MousePosition>();
-        copyMainPanel.layer = mask.value;
+        copyMainPanel.layer = mask;
 
         copyMainPanel.transform.localScale = prefabInWorldScale;
         copyMainPanel.transform.rotation = Quaternion.Euler(prefabWorldRotation);
@@ -91,6 +92,7 @@ public class ViewItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         mouse.viewItem = this;
         mouse.delivered = false;
         mouse.item = item;
+        mouse.thisObject = copyMainPanel;
 
         mouse.tableMask = tableMask;
         mouse.setConnectLayer = setLayer;
@@ -145,15 +147,50 @@ public class ViewItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         if (mouse.goodPoint == true)
         {
-            //Destroy(gameObject);
+            mouse.InitializationChild();
+
+            if (mouse.transform.parent != null)
+            {
+                if (mouse.transform.parent.childCount > 1)
+                {
+                    Debug.Log(mouse.transform.parent.childCount);
+                    GameObject removingObject = null;
+
+                    Debug.Log(mouse.transform.parent.GetChild(0).gameObject + "  Mouse parent obj");
+                    removingObject = mouse.transform.parent.GetChild(0).gameObject;
+                    removingObject.transform.parent = mouse.transform;
+
+                    if (removingObject.GetComponent<MousePosition>())
+                    {
+                        MousePosition remoovingObjectScript;
+                        remoovingObjectScript = removingObject.GetComponent<MousePosition>();
+
+                        if (remoovingObjectScript.tipChildren != null)
+                        {
+                            remoovingObjectScript.tipChildren.RemoveParent(mouse);
+                            Debug.Log(remoovingObjectScript.tipChildren + " new");
+                        }
+                        else
+                            Debug.Log("Removing object children = null");
+                    }
+
+                    //Debug.Log(removingObject + "   Removing object");
+                    Destroy(removingObject);
+                }
+            }
+
             GameManager.gameManager.newObjects.Add(mouse.gameObject);
         }
         else
         {
             Destroy(mouse.gameObject);
+            //  если не поставили - удаляем
         }
+        //  UI control
+
         mouse.renderer.material.color = objectColor;
         mouse.mainColor = objectColor;
+
         mouse.delivered = true;
     }
 
