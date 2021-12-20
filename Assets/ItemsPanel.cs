@@ -13,7 +13,7 @@ public class ItemsPanel : MonoBehaviour
     public List<Item> tipItems = new List<Item>();
     public List<Item> accessoryItems = new List<Item>();
 
-    public TypesOfPanels setTypesOfPanel;
+    [HideInInspector] public TypesOfPanels setTypesOfPanel;
     public enum TypesOfPanels
     {
         body,
@@ -24,9 +24,9 @@ public class ItemsPanel : MonoBehaviour
     [Space(5f)]
     [Header("View settings")]
     public ScrollRect scrollRect;
-    [Tooltip("Места в которых создаем разные элементы, у каждого свое")]
+    [Tooltip("пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ")]
     public GridLayoutGroup[] group;
-    [Tooltip("Будем отключать image")]
+    [Tooltip("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ image")]
     public RectTransform[] viewGrupGameObject;
     public Image[] buttonBackground;
 
@@ -87,7 +87,6 @@ public class ItemsPanel : MonoBehaviour
             case 2:
                 types = TypesOfPanels.accessory;
                 break;
-
         }
 
         if (types == setTypesOfPanel)

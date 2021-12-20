@@ -1,0 +1,72 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class PanelsHandler : MonoBehaviour
+{
+    public static PanelsHandler Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    [SerializeField] private List<string> panelNames = new List<string>();
+    [SerializeField] private List<GameObject> panels = new List<GameObject>();
+    [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
+    [SerializeField] private TextMeshProUGUI panelName;
+    [SerializeField] private GameObject commonElement;
+    [SerializeField] private List<GameObject> enchantPanelEffects = new List<GameObject>();
+
+    public void OpenPanel(int panelIndex)
+    {
+        //Enchant panel
+        if (panelIndex == 4)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                panels[i].SetActive(false);
+            }
+
+            for (int i = 0; i < enchantPanelEffects.Count; i++)
+            {
+                enchantPanelEffects[i].SetActive(true);
+            }
+
+            commonElement.SetActive(false);
+            panels[4].SetActive(true);
+            return;
+        }
+
+        for (int i = 0; i < panels.Count; i++)
+        {
+            if (i == panelIndex)
+            {
+                panels[i].SetActive(true);
+            }
+            else
+            {
+                panels[i].SetActive(false);
+            }
+        }
+        commonElement.SetActive(true);
+        for (int i = 0; i < enchantPanelEffects.Count; i++)
+        {
+            enchantPanelEffects[i].SetActive(false);
+        }
+    }
+
+    public void ResetButtonColorOnDeselect()
+    {
+        for (int i = 0; i < bottomButtons.Count; i++)
+        {
+            bottomButtons[i].ResetColor();
+        }
+    }
+
+    public void ShowPanelName(int panelIndex)
+    {
+        panelName.text = panelNames[panelIndex];
+    }
+}

@@ -121,10 +121,11 @@ public class MousePosition : MonoBehaviour
             Debug.Log(item.itemPrefab + " -- body result");
         }
 
-        if (item.setLayer == tipLayer) {
+        if (item.setLayer == tipLayer)
+        {
             GameManager.gameManager.resultTip = item;
             Debug.Log(item.itemPrefab + " -- body result");
-        } 
+        }
     }
 
     public void OnMouseDown()
@@ -138,8 +139,8 @@ public class MousePosition : MonoBehaviour
 
         setTime = timeToMove;
         move = true;
-        remove = false; 
-        
+        remove = false;
+
         RecordTheResult();
         if (tipChildren != null)
             tipChildren.RecordTheResult();
@@ -161,17 +162,15 @@ public class MousePosition : MonoBehaviour
         {
             float distance = Vector3.Distance(transform.position, lastPosition);
             //Debug.Log(distance + " - distance" + " | " + move + " - move" + " | " + remove + " - remove");
-            
+
             if (distance < 0.75f)
             {
                 if (setTime > 0)
                 {
-                    if(Physics.Raycast(ray, out hit, float.MaxValue, tableMask) && thisParent.gameObject == GameManager.mainTable)
+                    if (Physics.Raycast(ray, out hit, float.MaxValue, tableMask) && thisParent.gameObject == GameManager.mainTable)
                     {
                         transform.position = hit.point;
                     }
-
-
                 }
                 else
                 {
@@ -193,7 +192,7 @@ public class MousePosition : MonoBehaviour
 
                 transform.localScale = new Vector3(Mathf.Clamp(distanceToBox / 2, 0.25f, 1f), Mathf.Clamp(distanceToBox / 2, 0.25f, 1f), Mathf.Clamp(distanceToBox / 2, 0.25f, 1f));
 
-                if(distanceToBox < 0.5f)
+                if (distanceToBox < 0.5f)
                 {
                     RecordTheResult();
                     if (tipChildren != null)
@@ -215,7 +214,7 @@ public class MousePosition : MonoBehaviour
                     tipChildren.OnMouseDrag();
                     tipChildren.renderer.material.color = Color.red;
 
-                    //  красить все
+                    //  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
                 }
 
             }
@@ -242,30 +241,28 @@ public class MousePosition : MonoBehaviour
             GameManager.gameManager.resultTip = null;
     }
 
-    public void OnMouseUp()
-    {
-        if (delivered == false)
-            return;
+    // public void OnMouseUp()
+    // {
+    //     if (delivered == false)
+    //         return;
 
-        if (thisParent.gameObject == GameManager.mainTable)
-        {
-            Debug.Log("Main object return");
-            transform.position = GameManager.gameManager.craftPoint.position;
-        }
-        move = false;
-        remove = false;
+    //     if (thisParent.gameObject == GameManager.mainTable)
+    //     {
+    //         Debug.Log("Main object return");
+    //         transform.position = GameManager.gameManager.craftPoint.position;
+    //     }
+    //     move = false;
+    //     remove = false;
 
-        transform.localScale = new Vector3(1f, 1f, 1f);
-        setTime = 99;
-        renderer.material.color = mainColor;
+    //     transform.localScale = new Vector3(1f, 1f, 1f);
+    //     setTime = 99;
+    //     renderer.material.color = mainColor;
 
-        if (tipChildren != null)
-        {
-            //tipColor = tipChildren.mainColor;
-            tipChildren.OnMouseUp();
-            //  красить все
-        }
-    }
-
-
+    //     if (tipChildren != null)
+    //     {
+    //         //tipColor = tipChildren.mainColor;
+    //         tipChildren.OnMouseUp();
+    //         //  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+    //     }
+    // }
 }
