@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class CraftItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int index;
+    public void SpawnItem()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Vector3 spawnPosition = new Vector3(Random.Range(-2.4f, 1.6f), 4.3f, Random.Range(-0.021f, -2.279f));
+        var newItem = Instantiate(CraftManager.Instance.itemsBodies[index], spawnPosition, Quaternion.Euler(Quaternion.identity.x, Quaternion.identity.y, Random.Range(0, 360)));
     }
 }

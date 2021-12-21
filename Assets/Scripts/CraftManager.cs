@@ -6,8 +6,9 @@ public class CraftManager : MonoBehaviour
 {
     public static CraftManager Instance;
 
-    public GameObject newItemPrefab;
-    //public GameObject spawnParticlesPrefab;
+    public List<GameObject> itemsBodies = new List<GameObject>();
+    public List<GameObject> itemsTips = new List<GameObject>();
+    public List<GameObject> wholeItems = new List<GameObject>();
 
     public bool isSpawned;
 
@@ -16,14 +17,20 @@ public class CraftManager : MonoBehaviour
         Instance = this;
     }
 
-    public void SpawnNewItem(Vector3 position, Quaternion rotation)
+    private IEnumerator SpawnDelayCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        isSpawned = false;
+    }
+
+    public void SpawnNewItem(int itemIndex, Vector3 position, Quaternion rotation)
     {
         if (!isSpawned)
         {
-            var newItem = Instantiate(newItemPrefab, position, rotation);
+            var newItem = Instantiate(wholeItems[itemIndex], position, rotation);
             // var spawnParticles = Instantiate(spawnParticlesPrefab, position + new Vector3(0, 0.5f, 0), rotation);
-
             isSpawned = true;
+            StartCoroutine(SpawnDelayCoroutine());
         }
     }
 }
