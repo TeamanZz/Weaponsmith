@@ -19,6 +19,11 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private GameObject commonElement;
     [SerializeField] private List<GameObject> enchantPanelEffects = new List<GameObject>();
 
+    [Header("Sub panels in craft panel")]
+    [SerializeField] private GameObject bodyContent;
+    [SerializeField] private GameObject tipContent;
+    [SerializeField] private TextMeshProUGUI craftPanelLabel;
+
     public void OpenPanel(int panelIndex)
     {
         //Enchant panel
@@ -68,5 +73,21 @@ public class PanelsHandler : MonoBehaviour
     public void ShowPanelName(int panelIndex)
     {
         panelName.text = panelNames[panelIndex];
+    }
+
+    public void SwitchCraftPanelContent()
+    {
+        if (bodyContent.activeSelf == true)
+        {
+            bodyContent.SetActive(false);
+            tipContent.SetActive(true);
+            craftPanelLabel.text = "Tip";
+        }
+        else
+        {
+            bodyContent.SetActive(true);
+            tipContent.SetActive(false);
+            craftPanelLabel.text = "Body";
+        }
     }
 }
