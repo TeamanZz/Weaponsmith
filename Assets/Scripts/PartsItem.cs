@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PartsItem : MonoBehaviour
 {
+    [SerializeField] private int index;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private GameObject buyButton;
 
@@ -18,6 +19,7 @@ public class PartsItem : MonoBehaviour
     public void BuyItem()
     {
         //TO DO: ADD TO CRAFT ITEMS AVAILABLE LIST
+        CraftManager.Instance.UnlockCraftWeapon(index);
         CollapseItemView();
     }
 

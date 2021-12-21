@@ -10,6 +10,9 @@ public class CraftManager : MonoBehaviour
     public List<GameObject> itemsTips = new List<GameObject>();
     public List<GameObject> wholeItems = new List<GameObject>();
 
+    public List<CraftItem> craftPanelBodies = new List<CraftItem>();
+    public List<CraftItem> craftPanelTips = new List<CraftItem>();
+
     public bool isSpawned;
 
     private void Awake()
@@ -32,5 +35,11 @@ public class CraftManager : MonoBehaviour
             isSpawned = true;
             StartCoroutine(SpawnDelayCoroutine());
         }
+    }
+
+    public void UnlockCraftWeapon(int index)
+    {
+        craftPanelBodies[index].gameObject.SetActive(true);
+        craftPanelTips[index].gameObject.SetActive(true);
     }
 }
