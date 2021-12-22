@@ -20,9 +20,9 @@ public class CraftItem : MonoBehaviour
         }
     }
 
-    public enum ItemType
-    {
-        Body,
-        Tip
-    }
+}
+public enum ItemType
+{
+    Body,
+    Tip
 }

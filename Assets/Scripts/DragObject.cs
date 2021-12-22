@@ -10,7 +10,9 @@ public class DragObject : MonoBehaviour
 
     private float yPos = 2;
     public int index;
+    public ItemType itemType;
     public bool isWholeItem;
+
     void OnMouseDown()
     {
         mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
@@ -37,16 +39,19 @@ public class DragObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-
-
         DragObject dragObject;
         if (other.gameObject.TryGetComponent<DragObject>(out dragObject))
         {
             if (isWholeItem || dragObject.isWholeItem)
                 return;
+
             if (CraftManager.Instance.isSpawned)
                 return;
+
             if (dragObject.index != index)
+                return;
+
+            if (dragObject.itemType == itemType)
                 return;
 
             CraftManager.Instance.SpawnNewItem(index, transform.position, transform.rotation);
