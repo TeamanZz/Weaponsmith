@@ -12,6 +12,7 @@ public class CraftManager : MonoBehaviour
 
     public List<CraftItem> craftPanelBodies = new List<CraftItem>();
     public List<CraftItem> craftPanelTips = new List<CraftItem>();
+    public GameObject spawnParticles;
 
     public bool isSpawned;
 
@@ -31,7 +32,7 @@ public class CraftManager : MonoBehaviour
         if (!isSpawned)
         {
             var newItem = Instantiate(wholeItems[itemIndex], position, rotation);
-            // var spawnParticles = Instantiate(spawnParticlesPrefab, position + new Vector3(0, 0.5f, 0), rotation);
+            var newParticles = Instantiate(spawnParticles, newItem.transform.position, Quaternion.identity);
             isSpawned = true;
             StartCoroutine(SpawnDelayCoroutine());
         }

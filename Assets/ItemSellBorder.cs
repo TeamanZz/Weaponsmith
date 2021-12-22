@@ -12,6 +12,7 @@ public class ItemSellBorder : MonoBehaviour
         {
             if (!dragObject.isWholeItem)
                 return;
+            var newParticles = Instantiate(destroyParticles, dragObject.transform.position + new Vector3(0, 0.1f, 0), Quaternion.Euler(-90, 0, 0));
             Destroy(other.gameObject);
         }
     }
