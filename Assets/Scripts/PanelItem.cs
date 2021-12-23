@@ -28,10 +28,13 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [SerializeField] private int buysEdgeCount;
     [SerializeField] private List<ItemCondition> itemConditionsList = new List<ItemCondition>();
 
+    public AnimationCurve costCurve;
+
     private void Awake()
     {
         if (currentState != PanelItemState.Unknown)
             SetItemName();
+        price = (int)costCurve.Evaluate(buysCount);
         UpdateView();
         if (itemName == "Hammer power")
             SetUnavailableItemView();
@@ -177,8 +180,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         generalIncreaseValue += increaseValue;
         increaseValue = (int)(increaseValue * 1.2f);
-        price = (int)(price * 1.4f);
         buysCount++;
+        price = (int)costCurve.Evaluate(buysCount);
+        // price = (int)(price * 1.4f);
     }
 
     private void UpdateView()
