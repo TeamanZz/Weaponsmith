@@ -26,7 +26,7 @@ public class ItemSellBorder : MonoBehaviour
             var newParticles = Instantiate(destroyParticles, dragObject.transform.position + new Vector3(0, 0.1f, 0), Quaternion.Euler(-90, 0, 0));
             MakeBorderWhite();
             Destroy(other.gameObject);
-            int reward = MoneyHandler.Instance.GetRewardForCraft();
+            int reward = MoneyHandler.Instance.GetRewardForCraft(dragObject.index);
             SpawnRewardText(reward);
         }
     }

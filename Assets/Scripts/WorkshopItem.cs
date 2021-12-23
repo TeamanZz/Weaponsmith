@@ -13,7 +13,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
 
     private void Awake()
     {
-        priceText.text = "$" + price.ToString();
+        priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
     }
 
     public void BuyItem()

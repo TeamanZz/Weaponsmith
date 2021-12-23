@@ -439,6 +439,81 @@ MonoBehaviour:
   rewardTextPrefab: {fileID: 2050246010523962062, guid: 1d119a84c42ea4f4cb70877d5dc4c9e4, type: 3}
   rewardTextSpawnPoint: {x: 0, y: 0, z: 0}
   tableCanvas: {fileID: 763959412}
+--- !u!1 &21733122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 21733123}
+  - component: {fileID: 21733125}
+  - component: {fileID: 21733124}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &21733123
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21733122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.3820508, y: 1.3820508, z: 1.3820508}
+  m_Children: []
+  m_Father: {fileID: 1857392865}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 152}
+  m_SizeDelta: {x: 228, y: 200}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &21733124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21733122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7529412}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8a9de47c0e1be44978e80f3ce335f89f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 8.37
+--- !u!222 &21733125
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21733122}
+  m_CullTransparentMesh: 1
 --- !u!1 &29545982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,6 +2226,8 @@ MonoBehaviour:
   priceText: {fileID: 99622623}
   buysCountText: {fileID: 1126464781}
   buyButton: {fileID: 460156491}
+  buyButtonComponent: {fileID: 0}
+  buyButtonImage: {fileID: 0}
   progressBar: {fileID: 246389529}
   completedSign: {fileID: 348528840}
   itemIcon: {fileID: 2082746832}
@@ -2164,16 +2241,16 @@ MonoBehaviour:
   price: 0
   buysEdgeCount: 500
   itemConditionsList:
-  - count: 100
+  - count: 5
     itemName: Fire intensity
     conditionIsMet: 0
-  - count: 200
+  - count: 5
     itemName: Strength
     conditionIsMet: 0
-  - count: 250
+  - count: 5
     itemName: Hammer power
     conditionIsMet: 0
-  - count: 300
+  - count: 5
     itemName: Speed
     conditionIsMet: 0
   costCurve:
@@ -2200,6 +2277,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  buttonDefaultColor: {r: 0, g: 0.5647059, b: 1, a: 1}
 --- !u!114 &139833119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5940,6 +6018,8 @@ MonoBehaviour:
   priceText: {fileID: 283210498}
   buysCountText: {fileID: 1141625537}
   buyButton: {fileID: 1713688794}
+  buyButtonComponent: {fileID: 0}
+  buyButtonImage: {fileID: 0}
   progressBar: {fileID: 418845892}
   completedSign: {fileID: 324722872}
   itemIcon: {fileID: 866281504}
@@ -5953,10 +6033,10 @@ MonoBehaviour:
   price: 0
   buysEdgeCount: 600
   itemConditionsList:
-  - count: 300
+  - count: 9
     itemName: Speed
     conditionIsMet: 0
-  - count: 350
+  - count: 9
     itemName: Networking
     conditionIsMet: 0
   costCurve:
@@ -5983,6 +6063,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  buttonDefaultColor: {r: 0, g: 0.5647059, b: 1, a: 1}
 --- !u!114 &376179188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10417,7 +10498,7 @@ RectTransform:
   - {fileID: 553568654}
   - {fileID: 1826404663}
   m_Father: {fileID: 1857392865}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.08547314}
@@ -12140,7 +12221,7 @@ RectTransform:
   - {fileID: 1812558166}
   - {fileID: 452983023}
   m_Father: {fileID: 1857392865}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.08469445}
   m_AnchorMax: {x: 1, y: 0.372}
@@ -12926,6 +13007,8 @@ MonoBehaviour:
   priceText: {fileID: 858479497}
   buysCountText: {fileID: 1668891201}
   buyButton: {fileID: 1132125793}
+  buyButtonComponent: {fileID: 0}
+  buyButtonImage: {fileID: 0}
   progressBar: {fileID: 2074675825}
   completedSign: {fileID: 1718575331}
   itemIcon: {fileID: 1665723500}
@@ -12963,6 +13046,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  buttonDefaultColor: {r: 0, g: 0.5647059, b: 1, a: 1}
 --- !u!114 &755430579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14989,11 +15073,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1857392865}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.20256, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 679.24, y: 60.216}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &883792742
@@ -21705,6 +21789,8 @@ MonoBehaviour:
   priceText: {fileID: 123785124}
   buysCountText: {fileID: 1422973902}
   buyButton: {fileID: 1794369540}
+  buyButtonComponent: {fileID: 0}
+  buyButtonImage: {fileID: 0}
   progressBar: {fileID: 793355660}
   completedSign: {fileID: 1222604926}
   itemIcon: {fileID: 880259518}
@@ -21718,13 +21804,13 @@ MonoBehaviour:
   price: 0
   buysEdgeCount: 400
   itemConditionsList:
-  - count: 50
+  - count: 3
     itemName: Fire intensity
     conditionIsMet: 0
-  - count: 100
+  - count: 7
     itemName: Strength
     conditionIsMet: 0
-  - count: 200
+  - count: 10
     itemName: Hammer power
     conditionIsMet: 0
   costCurve:
@@ -21751,6 +21837,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  buttonDefaultColor: {r: 0, g: 0.5647059, b: 1, a: 1}
 --- !u!114 &1325174111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22311,7 +22398,7 @@ RectTransform:
   - {fileID: 655977529}
   - {fileID: 1462618240}
   m_Father: {fileID: 1857392865}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.08547314}
   m_AnchorMax: {x: 1, y: 1}
@@ -23607,11 +23694,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1857392865}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.20256, y: -60.21582}
+  m_AnchoredPosition: {x: 0, y: -60.21582}
   m_SizeDelta: {x: 679.24, y: 60.216}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1428061317
@@ -26272,6 +26359,8 @@ MonoBehaviour:
   priceText: {fileID: 1540442452}
   buysCountText: {fileID: 322473009}
   buyButton: {fileID: 1475059215}
+  buyButtonComponent: {fileID: 0}
+  buyButtonImage: {fileID: 0}
   progressBar: {fileID: 892445041}
   completedSign: {fileID: 911425061}
   itemIcon: {fileID: 1648589287}
@@ -26285,10 +26374,10 @@ MonoBehaviour:
   price: 0
   buysEdgeCount: 300
   itemConditionsList:
-  - count: 70
+  - count: 3
     itemName: Fire intensity
     conditionIsMet: 0
-  - count: 150
+  - count: 5
     itemName: Strength
     conditionIsMet: 0
   costCurve:
@@ -26324,6 +26413,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  buttonDefaultColor: {r: 0, g: 0.5647059, b: 1, a: 1}
 --- !u!114 &1612582958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28439,6 +28529,8 @@ MonoBehaviour:
   priceText: {fileID: 1506104203}
   buysCountText: {fileID: 111975108}
   buyButton: {fileID: 2011312940}
+  buyButtonComponent: {fileID: 0}
+  buyButtonImage: {fileID: 0}
   progressBar: {fileID: 409536837}
   completedSign: {fileID: 966841227}
   itemIcon: {fileID: 464133220}
@@ -28476,6 +28568,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  buttonDefaultColor: {r: 0, g: 0.5647059, b: 1, a: 1}
 --- !u!114 &1783671670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30027,6 +30120,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 21733123}
   - {fileID: 883792741}
   - {fileID: 1428061316}
   - {fileID: 1356635659}

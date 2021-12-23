@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class RewardText : MonoBehaviour
 {
-
     private void Start()
     {
         transform.DOLocalMoveZ(-2, 2);

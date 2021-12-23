@@ -13,6 +13,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private TextMeshProUGUI buysCountText;
     [SerializeField] private GameObject buyButton;
+    [SerializeField] private Button buyButtonComponent;
+    [SerializeField] private Image buyButtonImage;
     [SerializeField] private GameObject progressBar;
     [SerializeField] private GameObject completedSign;
     [SerializeField] private GameObject itemIcon;
@@ -29,9 +31,26 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [SerializeField] private List<ItemCondition> itemConditionsList = new List<ItemCondition>();
 
     public AnimationCurve costCurve;
+    public Color buttonDefaultColor;
+    private void FixedUpdate()
+    {
+        if (price <= MoneyHandler.Instance.moneyCount)
+        {
+            buyButtonComponent.enabled = true;
+            buyButtonImage.color = buttonDefaultColor;
+        }
+        else
+        {
+            buyButtonComponent.enabled = false;
+            buyButtonImage.color = Color.gray;
+        }
+    }
 
     private void Awake()
     {
+        buyButtonComponent = buyButton.transform.GetChild(1).GetComponent<Button>();
+        buyButtonImage = buyButton.transform.GetChild(1).GetComponent<Image>();
+
         if (currentState != PanelItemState.Unknown)
             SetItemName();
         price = (int)costCurve.Evaluate(buysCount);
@@ -79,6 +98,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     public void BuyItem()
     {
+        MoneyHandler.Instance.moneyCount -= price;
         MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
         UpdateItemValues();
         UpdateView();
@@ -188,7 +208,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void UpdateView()
     {
         generalIncreaseValueText.text = "+$" + generalIncreaseValue.ToString() + "/s";
-        priceText.text = "$" + price.ToString();
+        priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
 
         buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
         progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);

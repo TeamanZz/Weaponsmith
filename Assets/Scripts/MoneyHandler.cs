@@ -7,7 +7,7 @@ public class MoneyHandler : MonoBehaviour
 {
     public static MoneyHandler Instance;
 
-    [SerializeField] private int moneyCount;
+    public int moneyCount;
     [SerializeField] private int moneyPerSecond;
 
     [SerializeField] private TextMeshProUGUI moneyPerSecondText;
@@ -32,10 +32,10 @@ public class MoneyHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moneyPerSecondText.text = "$ " + moneyPerSecond.ToString() + "/s";
+        moneyPerSecondText.text = "$ " + FormatNumsHelper.FormatNum((float)moneyPerSecond) + "/s";
     }
 
-    public int GetRewardForCraft()
+    public int GetRewardForCraft(int weaponCoefficient)
     {
         int reward = moneyPerSecond * 10;
         moneyCount += reward;
@@ -48,7 +48,7 @@ public class MoneyHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(timeBetweenMoneyIncrease);
             moneyCount += moneyPerSecond;
-            moneyCountText.text = moneyCount.ToString() + " $";
+            moneyCountText.text = FormatNumsHelper.FormatNum((float)moneyCount) + " $";
         }
     }
 }
