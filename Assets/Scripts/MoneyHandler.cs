@@ -35,6 +35,13 @@ public class MoneyHandler : MonoBehaviour
         moneyPerSecondText.text = "$ " + moneyPerSecond.ToString() + "/s";
     }
 
+    public int GetRewardForCraft()
+    {
+        int reward = moneyPerSecond * 10;
+        moneyCount += reward;
+        return reward;
+    }
+
     private IEnumerator IEIncreaseMoneyCount()
     {
         while (true)
