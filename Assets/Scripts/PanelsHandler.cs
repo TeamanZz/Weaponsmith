@@ -24,6 +24,11 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private GameObject tipContent;
     [SerializeField] private TextMeshProUGUI craftPanelLabel;
 
+    [SerializeField] private Vector3 cameraTablePosition;
+    [SerializeField] private Vector3 cameraTableRotation;
+    [SerializeField] private Vector3 cameraRoomPosition;
+    [SerializeField] private Vector3 cameraRoomRotation;
+
     public void OpenPanel(int panelIndex)
     {
         //Enchant panel
@@ -49,12 +54,25 @@ public class PanelsHandler : MonoBehaviour
             if (i == panelIndex)
             {
                 panels[i].SetActive(true);
+
+                if (i == 2 || i == 3)
+                {
+                    Camera.main.transform.localPosition = cameraTablePosition;
+                    Camera.main.transform.localRotation = Quaternion.Euler(cameraTableRotation.x, cameraTableRotation.y, cameraTableRotation.z);
+                }
+                else
+                {
+                    Camera.main.transform.localPosition = cameraRoomPosition;
+                    Camera.main.transform.localRotation = Quaternion.Euler(cameraRoomRotation.x, cameraRoomRotation.y, cameraRoomRotation.z);
+                }
             }
             else
             {
                 panels[i].SetActive(false);
             }
         }
+
+
         commonElement.SetActive(true);
         for (int i = 0; i < enchantPanelEffects.Count; i++)
         {

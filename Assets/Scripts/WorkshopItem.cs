@@ -8,6 +8,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private GameObject buyButton;
 
+    [SerializeField] private int index;
     [SerializeField] private int price;
 
     private void Awake()
@@ -17,6 +18,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
 
     public void BuyItem()
     {
+        RoomObjectsHandler.Instance.UnlockObject(index);
         CollapseItemView();
     }
 
