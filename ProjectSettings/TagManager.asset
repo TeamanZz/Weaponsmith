@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Slot02
+  - Slot01
+  - Slot04
+  - Slot05
+  - Slot03
+  - DropReward
+  - PinPoint
+  - clawInside
   layers:
   - Default
   - TransparentFX
@@ -15,7 +23,7 @@ TagManager:
   - Body
   - Tip
   - CanvasParticles
-  - 
+  - CanvasWeapon
   - 
   - 
   - 

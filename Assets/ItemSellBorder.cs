@@ -35,7 +35,7 @@ public class ItemSellBorder : MonoBehaviour
     {
         GameObject newRewardText = Instantiate(rewardTextPrefab, tableCanvas.transform);
         newRewardText.transform.localRotation = Quaternion.Euler(0, 51, -90);
-        newRewardText.GetComponent<TextMeshProUGUI>().text = "+ " + reward + "$";
+        newRewardText.GetComponent<TextMeshProUGUI>().text = "+ " + FormatNumsHelper.FormatNum((float)reward) + " $";
     }
 
     public void MakeBorderGreen()

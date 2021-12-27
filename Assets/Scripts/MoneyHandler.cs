@@ -48,7 +48,7 @@ public class MoneyHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(timeBetweenMoneyIncrease);
             moneyCount += moneyPerSecond;
-            moneyCountText.text = FormatNumsHelper.FormatNum((float)moneyCount) + " $";
+            moneyCountText.text = FormatNumsHelper.FormatNum((float)moneyCount);
         }
     }
 }

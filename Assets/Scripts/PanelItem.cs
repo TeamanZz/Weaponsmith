@@ -48,8 +48,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void Awake()
     {
-        buyButtonComponent = buyButton.transform.GetChild(1).GetComponent<Button>();
-        buyButtonImage = buyButton.transform.GetChild(1).GetComponent<Image>();
+        buyButtonComponent = buyButton.GetComponent<Button>();
+        buyButtonImage = buyButton.GetComponent<Image>();
 
         if (currentState != PanelItemState.Unknown)
             SetItemName();
