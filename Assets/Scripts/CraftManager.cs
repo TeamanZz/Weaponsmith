@@ -27,6 +27,28 @@ public class CraftManager : MonoBehaviour
         isSpawned = false;
     }
 
+    public GameObject GetCraftItemPiece(ItemType itemType, CraftItemPiece itemPiece)
+    {
+        List<GameObject> itemsList = new List<GameObject>();
+
+        if (itemType == ItemType.Body)
+            itemsList = itemsBodies;
+        else
+            itemsList = itemsTips;
+
+        if (itemPiece == CraftItemPiece.WoodenSword)
+        {
+            return itemsBodies[0];
+        }
+
+        if (itemPiece == CraftItemPiece.Axe)
+        {
+            return itemsBodies[1];
+        }
+
+        return null;
+    }
+
     public void SpawnNewItem(int itemIndex, Vector3 position, Quaternion rotation)
     {
         if (!isSpawned)

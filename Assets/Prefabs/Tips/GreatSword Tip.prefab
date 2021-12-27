@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9073698113704016679
+--- !u!1 &5652211211393483652
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,79 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3115274453525348647}
-  - component: {fileID: 9091393355888934444}
-  - component: {fileID: 4978760171370578349}
-  - component: {fileID: 9073698113704016677}
-  - component: {fileID: 9073698113704016678}
-  - component: {fileID: 9073698113704016676}
+  - component: {fileID: 5652211211393483655}
   m_Layer: 0
-  m_Name: Axe Body
+  m_Name: GreatSword Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3115274453525348647
+--- !u!4 &5652211211393483655
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9073698113704016679}
-  m_LocalRotation: {x: 0.50000006, y: 0.49999997, z: -0.50000006, w: 0.49999997}
-  m_LocalPosition: {x: 0.22, y: 1.41, z: -1.34}
-  m_LocalScale: {x: 80, y: 80, z: 80}
-  m_Children: []
+  m_GameObject: {fileID: 5652211211393483652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.2, y: 0, z: -0.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 377962127599361649}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &9091393355888934444
+--- !u!1 &6208392924821681507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 377962127599361649}
+  - component: {fileID: 2617528506062493738}
+  - component: {fileID: 6491396297588515925}
+  - component: {fileID: 6208392924821681509}
+  - component: {fileID: 6208392924821681506}
+  - component: {fileID: 6208392924821681508}
+  m_Layer: 0
+  m_Name: Axe Tip Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &377962127599361649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6208392924821681507}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.032, y: -0.514, z: 0}
+  m_LocalScale: {x: 80, y: 80, z: 80}
+  m_Children: []
+  m_Father: {fileID: 5652211211393483655}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2617528506062493738
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9073698113704016679}
-  m_Mesh: {fileID: -5246598823220893252, guid: 2f22d47b0ddc15f49855941f70634ce2, type: 3}
---- !u!23 &4978760171370578349
+  m_GameObject: {fileID: 6208392924821681507}
+  m_Mesh: {fileID: -4086998909138814676, guid: 5a1a2bcc013c4f541bdebb54328291f2, type: 3}
+--- !u!23 &6491396297588515925
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9073698113704016679}
+  m_GameObject: {fileID: 6208392924821681507}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,41 +115,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9073698113704016677
+--- !u!65 &6208392924821681509
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9073698113704016679}
+  m_GameObject: {fileID: 6208392924821681507}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.001776924, y: 0.0074044643, z: 0.00096667337}
-  m_Center: {x: 0.0011973381, y: 0.0037022321, z: -0.000000014083862}
---- !u!114 &9073698113704016678
+  m_Size: {x: 0.012042421, y: 0.021074256, z: 0.001327229}
+  m_Center: {x: 0.00011614785, y: 0.0054569384, z: 6.519258e-10}
+--- !u!114 &6208392924821681506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9073698113704016679}
+  m_GameObject: {fileID: 6208392924821681507}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 437cbab46101cf743b673cb91967dc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  itemType: 0
+  itemType: 1
   isWholeItem: 0
---- !u!54 &9073698113704016676
+--- !u!54 &6208392924821681508
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9073698113704016679}
+  m_GameObject: {fileID: 6208392924821681507}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0

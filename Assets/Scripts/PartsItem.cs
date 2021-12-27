@@ -18,7 +18,6 @@ public class PartsItem : MonoBehaviour
 
     public void BuyItem()
     {
-        //TO DO: ADD TO CRAFT ITEMS AVAILABLE LIST
         CraftManager.Instance.UnlockCraftWeapon(index);
         CollapseItemView();
     }
