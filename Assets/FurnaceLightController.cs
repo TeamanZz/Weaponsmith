@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class FurnaceLightController : MonoBehaviour
 {
+    public static FurnaceLightController Instance;
     [SerializeField] AnimationCurve lightIntensity;
 
     private float currentTime, totalTime;
+    public float lightCoefficient;
     private Light furnaceLight;
     public GameObject particles;
     public Transform particlesParent;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -28,7 +35,7 @@ public class FurnaceLightController : MonoBehaviour
 
     private void Update()
     {
-        furnaceLight.intensity = lightIntensity.Evaluate(currentTime);
+        furnaceLight.intensity = lightIntensity.Evaluate(currentTime) * lightCoefficient;
 
         currentTime += Time.deltaTime;
 

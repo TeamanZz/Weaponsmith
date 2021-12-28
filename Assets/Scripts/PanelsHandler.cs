@@ -59,11 +59,14 @@ public class PanelsHandler : MonoBehaviour
                 {
                     Camera.main.transform.localPosition = cameraTablePosition;
                     Camera.main.transform.localRotation = Quaternion.Euler(cameraTableRotation.x, cameraTableRotation.y, cameraTableRotation.z);
+                    FurnaceLightController.Instance.lightCoefficient = 5;
                 }
                 else
                 {
                     Camera.main.transform.localPosition = cameraRoomPosition;
                     Camera.main.transform.localRotation = Quaternion.Euler(cameraRoomRotation.x, cameraRoomRotation.y, cameraRoomRotation.z);
+                    FurnaceLightController.Instance.lightCoefficient = 1;
+
                 }
             }
             else

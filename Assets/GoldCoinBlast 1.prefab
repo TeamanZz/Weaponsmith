@@ -9625,7 +9625,7 @@ GameObject:
   - component: {fileID: 19806904}
   - component: {fileID: 19938058}
   m_Layer: 0
-  m_Name: GoldCoinBlast
+  m_Name: GoldCoinBlast 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
