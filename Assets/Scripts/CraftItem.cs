@@ -24,5 +24,5 @@ public enum ItemType
 public enum CraftItemPiece
 {
     WoodenSword,
-    Axe,
+    Axe
 }

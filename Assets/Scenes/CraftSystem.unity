@@ -16152,9 +16152,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195101ab02695d948957120f70fc2bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsBodies: []
-  itemsTips: []
-  wholeItems: []
+  itemsBodies:
+  - {fileID: 9073698113704016679, guid: fb2dc31fc05a31f45b064fcb0251c99e, type: 3}
+  - {fileID: 9073698113704016679, guid: 381ef2bf3f9039141a6f7294859241ea, type: 3}
+  - {fileID: 9073698113704016679, guid: df4c1249a7bc5f541acf485dcfae0b38, type: 3}
+  - {fileID: 9073698113704016679, guid: b00632779186b6d4485fa165331e7edb, type: 3}
+  - {fileID: 9073698113704016679, guid: d5f1f7c79c6999946bebcbf464de794a, type: 3}
+  - {fileID: 9073698113704016679, guid: 21b61abf7141dcf48910b37911a6ee69, type: 3}
+  - {fileID: 9073698113704016679, guid: 06e5df9a4be61744f87000b510663c1e, type: 3}
+  - {fileID: 9073698113704016679, guid: 40711c6af03230347a1aadfd70190ac3, type: 3}
+  itemsTips:
+  - {fileID: 5652211211393483652, guid: 231a9da9e05fdc6438485525063249b9, type: 3}
+  - {fileID: 5652211211393483652, guid: a33c8abc8f7d4534687f574ab2ed1ad6, type: 3}
+  - {fileID: 5652211211393483652, guid: 0c5e43f0eafdecc48bea365e4102f061, type: 3}
+  - {fileID: 5652211211393483652, guid: 6c38398bc1d2e064d8c460e52c369638, type: 3}
+  - {fileID: 5652211211393483652, guid: 9a08de541a0f84c48ac92d4df43e9be3, type: 3}
+  - {fileID: 5652211211393483652, guid: 96449609f99f0594b8e50914b85e4cd9, type: 3}
+  - {fileID: 5652211211393483652, guid: 16cc81d83d59fbd4ea87b8e93c273e7b, type: 3}
+  - {fileID: 5652211211393483652, guid: a1a06152f982d594390a56a1556d5534, type: 3}
+  wholeItems:
+  - {fileID: 3224236571474766945, guid: f8102dbedbef7954788e938bf1c19ee7, type: 3}
+  - {fileID: 3224236571474766945, guid: 0083d8891679bb445b3b009defbcf678, type: 3}
+  - {fileID: 3224236571474766945, guid: 1480d8e405ca165478be4c48ab3ab1fe, type: 3}
+  - {fileID: 3224236571474766945, guid: cc2b90b5334dbf54b8f875538bb1231d, type: 3}
+  - {fileID: 3224236571474766945, guid: 5a3d144ab6532be4fac14cee0c09f24b, type: 3}
+  - {fileID: 3224236571474766945, guid: 06914c22512eebf4182c096a7495ee34, type: 3}
+  - {fileID: 3224236571474766945, guid: c880ad192ad9fb74fb6344ccf161f97b, type: 3}
+  - {fileID: 3224236571474766945, guid: dd478e8ec90c7a049b467b5d22c96479, type: 3}
   craftPanelBodies: []
   craftPanelTips: []
   spawnParticles: {fileID: 119968, guid: 0d198807190ac1545bd6a66e49045db8, type: 3}

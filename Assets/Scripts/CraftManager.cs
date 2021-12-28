@@ -38,12 +38,12 @@ public class CraftManager : MonoBehaviour
 
         if (itemPiece == CraftItemPiece.WoodenSword)
         {
-            return itemsBodies[0];
+            return itemsList[0];
         }
 
         if (itemPiece == CraftItemPiece.Axe)
         {
-            return itemsBodies[1];
+            return itemsList[1];
         }
 
         return null;
