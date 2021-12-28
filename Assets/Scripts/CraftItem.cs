@@ -24,5 +24,11 @@ public enum ItemType
 public enum CraftItemPiece
 {
     WoodenSword,
-    Axe
+    GreatSwordHook,
+    BlackSword,
+    Axe,
+    ElvenAxe,
+    GreatAxe,
+    GoblinMace,
+    ElvenMace
 }

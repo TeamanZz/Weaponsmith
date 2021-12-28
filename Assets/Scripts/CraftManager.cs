@@ -37,14 +37,16 @@ public class CraftManager : MonoBehaviour
             itemsList = itemsTips;
 
         if (itemPiece == CraftItemPiece.WoodenSword)
-        {
             return itemsList[0];
-        }
 
         if (itemPiece == CraftItemPiece.Axe)
-        {
             return itemsList[1];
-        }
+
+        if (itemPiece == CraftItemPiece.BlackSword)
+            return itemsList[2];
+
+        if (itemPiece == CraftItemPiece.ElvenAxe)
+            return itemsList[3];
 
         return null;
     }
@@ -62,6 +64,20 @@ public class CraftManager : MonoBehaviour
 
     public void UnlockCraftWeapon(int index)
     {
+        if (index >= 0 && index < 2)
+        {
+            craftPanelBodies[0].gameObject.SetActive(false);
+            craftPanelTips[0].gameObject.SetActive(false);
+            craftPanelBodies[1].gameObject.SetActive(false);
+            craftPanelTips[1].gameObject.SetActive(false);
+        }
+        if (index >= 2 && index < 4)
+        {
+            craftPanelBodies[2].gameObject.SetActive(false);
+            craftPanelTips[2].gameObject.SetActive(false);
+            craftPanelBodies[3].gameObject.SetActive(false);
+            craftPanelTips[3].gameObject.SetActive(false);
+        }
         craftPanelBodies[index].gameObject.SetActive(true);
         craftPanelTips[index].gameObject.SetActive(true);
     }
