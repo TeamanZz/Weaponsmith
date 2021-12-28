@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437cbab46101cf743b673cb91967dc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 1
+  index: 3
   itemType: 0
   isWholeItem: 0
 --- !u!54 &9073698113704016676

@@ -13,7 +13,7 @@ public class PartsItem : MonoBehaviour
 
     private void Awake()
     {
-        priceText.text = "$" + price.ToString();
+        priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
     }
 
     public void BuyItem()

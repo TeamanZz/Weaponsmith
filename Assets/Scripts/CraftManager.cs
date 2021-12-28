@@ -39,14 +39,26 @@ public class CraftManager : MonoBehaviour
         if (itemPiece == CraftItemPiece.WoodenSword)
             return itemsList[0];
 
-        if (itemPiece == CraftItemPiece.Axe)
+        if (itemPiece == CraftItemPiece.GreatSwordHook)
             return itemsList[1];
 
         if (itemPiece == CraftItemPiece.BlackSword)
             return itemsList[2];
 
-        if (itemPiece == CraftItemPiece.ElvenAxe)
+        if (itemPiece == CraftItemPiece.Axe)
             return itemsList[3];
+
+        if (itemPiece == CraftItemPiece.ElvenAxe)
+            return itemsList[4];
+
+        if (itemPiece == CraftItemPiece.GreatAxe)
+            return itemsList[5];
+
+        if (itemPiece == CraftItemPiece.GoblinMace)
+            return itemsList[6];
+
+        if (itemPiece == CraftItemPiece.ElvenMace)
+            return itemsList[7];
 
         return null;
     }
@@ -64,20 +76,32 @@ public class CraftManager : MonoBehaviour
 
     public void UnlockCraftWeapon(int index)
     {
-        if (index >= 0 && index < 2)
+        if (index >= 0 && index < 3)
         {
             craftPanelBodies[0].gameObject.SetActive(false);
             craftPanelTips[0].gameObject.SetActive(false);
             craftPanelBodies[1].gameObject.SetActive(false);
             craftPanelTips[1].gameObject.SetActive(false);
-        }
-        if (index >= 2 && index < 4)
-        {
             craftPanelBodies[2].gameObject.SetActive(false);
             craftPanelTips[2].gameObject.SetActive(false);
+        }
+        if (index >= 3 && index < 6)
+        {
             craftPanelBodies[3].gameObject.SetActive(false);
             craftPanelTips[3].gameObject.SetActive(false);
+            craftPanelBodies[4].gameObject.SetActive(false);
+            craftPanelTips[4].gameObject.SetActive(false);
+            craftPanelBodies[5].gameObject.SetActive(false);
+            craftPanelTips[5].gameObject.SetActive(false);
         }
+        if (index >= 6 && index < 8)
+        {
+            craftPanelBodies[6].gameObject.SetActive(false);
+            craftPanelTips[6].gameObject.SetActive(false);
+            craftPanelBodies[7].gameObject.SetActive(false);
+            craftPanelTips[7].gameObject.SetActive(false);
+        }
+
         craftPanelBodies[index].gameObject.SetActive(true);
         craftPanelTips[index].gameObject.SetActive(true);
     }

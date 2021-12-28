@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437cbab46101cf743b673cb91967dc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
+  index: 7
   itemType: 1
   isWholeItem: 0
 --- !u!54 &6208392924821681508
