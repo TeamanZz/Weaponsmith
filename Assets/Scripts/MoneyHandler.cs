@@ -9,11 +9,13 @@ public class MoneyHandler : MonoBehaviour
 
     public int moneyCount;
     [SerializeField] private int moneyPerSecond;
+    [SerializeField] private GameObject currencyPopupPrefab;
 
     [SerializeField] private TextMeshProUGUI moneyPerSecondText;
     [SerializeField] private TextMeshProUGUI moneyCountText;
 
     private float timeBetweenMoneyIncrease = 0.5f;
+    public Transform canvasTransform;
 
     private void Awake()
     {
@@ -23,6 +25,7 @@ public class MoneyHandler : MonoBehaviour
     private void Start()
     {
         StartCoroutine(IEIncreaseMoneyCount());
+        StartCoroutine(IESpawnCurrency());
     }
 
     public void IncreaseMoneyPerSecondValue(int value)
@@ -49,6 +52,17 @@ public class MoneyHandler : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenMoneyIncrease);
             moneyCount += moneyPerSecond;
             moneyCountText.text = FormatNumsHelper.FormatNum((float)moneyCount);
+        }
+    }
+
+    private IEnumerator IESpawnCurrency()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(3);
+            var newPopup = Instantiate(currencyPopupPrefab, canvasTransform);
+            newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((float)moneyPerSecond * 3) + "$";
+            newPopup.transform.SetAsFirstSibling();
         }
     }
 }
