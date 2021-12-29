@@ -23,6 +23,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [SerializeField] private GameObject itemConditionsGO;
     [SerializeField] private Image progressBarFilled;
 
+    [SerializeField] private Animator buyButtonAnimator;
+    [SerializeField] private Animator iconAnimator;
+    [SerializeField] private Animator generalIncreaseValueTextAnimator;
+    [SerializeField] private Animator buysCountTextAnimator;
+
     [SerializeField] private string itemName;
     [SerializeField] private int generalIncreaseValue;
     [SerializeField] private int increaseValue;
@@ -50,6 +55,10 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         buyButtonComponent = buyButton.GetComponent<Button>();
         buyButtonImage = buyButton.GetComponent<Image>();
+        buyButtonAnimator = buyButton.GetComponent<Animator>();
+        iconAnimator = itemIcon.GetComponent<Animator>();
+        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
+        buysCountTextAnimator = buysCountText.GetComponent<Animator>();
 
         if (currentState != PanelItemState.Unknown)
             SetItemName();
@@ -57,6 +66,14 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         UpdateView();
         if (itemName == "Hammer power")
             SetUnavailableItemView();
+    }
+
+    private void PlayJumpAnimation()
+    {
+        buyButtonAnimator.Play("Jump", 0, 0);
+        iconAnimator.Play("Jump", 0, 0);
+        generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
+        buysCountTextAnimator.Play("Jump", 0, 0);
     }
 
     public void CheckConditions(PanelItem checkedItem)
@@ -102,7 +119,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
         UpdateItemValues();
         UpdateView();
-
+        PlayJumpAnimation();
         ItemsManager.Instance.CheckConditions(this);
         CheckOnCollapse();
         // SetUnknownItemView();

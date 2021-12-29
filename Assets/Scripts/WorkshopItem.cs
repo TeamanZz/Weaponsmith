@@ -13,6 +13,8 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     public Color buttonDefaultColor;
     [SerializeField] private int index;
     [SerializeField] private int price;
+    [SerializeField] private GameObject itemIcon;
+    [SerializeField] private Animator iconAnimator;
 
     private void Update()
     {
@@ -32,6 +34,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     {
         buyButtonComponent = buyButton.GetComponent<Button>();
         buyButtonImage = buyButton.GetComponent<Image>();
+        iconAnimator = itemIcon.GetComponent<Animator>();
         priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
     }
 
@@ -39,6 +42,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     {
         RoomObjectsHandler.Instance.UnlockObject(index);
         CollapseItemView();
+        iconAnimator.Play("Jump", 0, 0);
     }
 
     public void CollapseItemView()
