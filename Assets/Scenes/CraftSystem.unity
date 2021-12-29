@@ -982,7 +982,7 @@ MonoBehaviour:
   buyButton: {fileID: 1648205193}
   buttonDefaultColor: {r: 0.4117647, g: 0.7254902, b: 1, a: 1}
   index: 3
-  price: 150000
+  price: 1500000
 --- !u!114 &63823357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13127,7 +13127,7 @@ MonoBehaviour:
   buyButton: {fileID: 351661884}
   buttonDefaultColor: {r: 0.4117647, g: 0.7254902, b: 1, a: 1}
   index: 4
-  price: 500000
+  price: 5000000
 --- !u!114 &788115651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13874,7 +13874,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 339.5083, y: 0}
   m_SizeDelta: {x: 680, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &881117964
@@ -15437,7 +15437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: price
-      value: 500
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: particles
@@ -16555,7 +16555,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1084979090
 MonoBehaviour:
@@ -16805,7 +16805,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: price
-      value: 70000
+      value: 1000000
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: particles
@@ -17563,7 +17563,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1141625536
 GameObject:
@@ -19737,7 +19737,7 @@ Transform:
   m_LocalScale: {x: 10.335, y: 0.3952, z: 15.143}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1271587898
 GameObject:
@@ -19979,7 +19979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: price
-      value: 150000
+      value: 700000
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: particles
@@ -21681,6 +21681,101 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
   m_PrefabInstance: {fileID: 1358635605}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1362648306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1362648310}
+  - component: {fileID: 1362648309}
+  - component: {fileID: 1362648308}
+  - component: {fileID: 1362648307}
+  m_Layer: 6
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!65 &1362648307
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362648306}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1362648308
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362648306}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1362648309
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362648306}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1362648310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362648306}
+  m_LocalRotation: {x: -0.000000054660916, y: -0.7071057, z: -0.000000059604645, w: 0.70710784}
+  m_LocalPosition: {x: -0.08333375, y: 1.3429997, z: -1.188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1364245295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21770,7 +21865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 236.23402
+      value: 236.23404
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -22125,7 +22220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1388336585
 GameObject:
@@ -23141,7 +23236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: price
-      value: 50000
+      value: 300000
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: particles
@@ -24150,7 +24245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: price
-      value: 2000
+      value: 30000
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: particles
@@ -26538,7 +26633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 236.23402
+      value: 236.23404
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -28797,7 +28892,7 @@ RectTransform:
   - {fileID: 937843453}
   - {fileID: 1558093853}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -29330,7 +29425,7 @@ MonoBehaviour:
   buyButton: {fileID: 221308039}
   buttonDefaultColor: {r: 0.4117647, g: 0.7254902, b: 1, a: 1}
   index: 0
-  price: 500
+  price: 5000
 --- !u!224 &1887345497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31570,7 +31665,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 108168657060587086, guid: c52b82282e833764d8c3c63924ae6c93, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199376182298276562, guid: c52b82282e833764d8c3c63924ae6c93, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199464916486172736, guid: c52b82282e833764d8c3c63924ae6c93, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199719510941880646, guid: c52b82282e833764d8c3c63924ae6c93, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199725575420129948, guid: c52b82282e833764d8c3c63924ae6c93, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 108168657060587086, guid: c52b82282e833764d8c3c63924ae6c93, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c52b82282e833764d8c3c63924ae6c93, type: 3}
 --- !u!1001 &2052982747
 PrefabInstance:
@@ -32074,7 +32190,7 @@ MonoBehaviour:
   buyButton: {fileID: 244375240}
   buttonDefaultColor: {r: 0.4117647, g: 0.7254902, b: 1, a: 1}
   index: 1
-  price: 5000
+  price: 50000
 --- !u!114 &2083985206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32130,7 +32246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: price
-      value: 5000
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: particles
@@ -32423,7 +32539,7 @@ MonoBehaviour:
   buyButton: {fileID: 1652384961}
   buttonDefaultColor: {r: 0.4117647, g: 0.7254902, b: 1, a: 1}
   index: 2
-  price: 50000
+  price: 500000
 --- !u!114 &2098975724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38274,7 +38390,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  lightCoefficient: 0
+  lightCoefficient: 1
   particles: {fileID: 128010, guid: 5741a47058fe5c14eb6fb978dee8021d, type: 3}
   particlesParent: {fileID: 554647249}
 --- !u!1001 &2729927523950503146
@@ -38498,7 +38614,7 @@ Transform:
   - {fileID: 289694102}
   - {fileID: 763959409}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1001 &4131383745581052415
 PrefabInstance:
@@ -38517,7 +38633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: price
-      value: 20000
+      value: 400000
       objectReference: {fileID: 0}
     - target: {fileID: 4131383744928461152, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
       propertyPath: particles

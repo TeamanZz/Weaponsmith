@@ -9,9 +9,9 @@ public class CraftItem : MonoBehaviour
 
     public void SpawnItem()
     {
-        Vector3 spawnPosition = new Vector3(Random.Range(-2.4f, 1.6f), 4.3f, Random.Range(-0.021f, -2.279f));
+        Vector3 spawnPosition = new Vector3(Random.Range(-2.4f, 1.6f), 4.3f, -1.188f);
         var newItemPiece = CraftManager.Instance.GetCraftItemPiece(itemType, itemPiece);
-        Instantiate(newItemPiece, spawnPosition, Quaternion.Euler(Random.Range(0, 360), Quaternion.identity.y, Quaternion.identity.z));
+        Instantiate(newItemPiece, spawnPosition, Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Quaternion.identity.z));
     }
 }
 
