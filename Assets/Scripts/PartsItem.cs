@@ -15,11 +15,16 @@ public class PartsItem : MonoBehaviour
 
     [SerializeField] private int price;
     [SerializeField] private GameObject particles;
+
+    [SerializeField] private Animator iconAnimator;
+    [SerializeField] private GameObject itemIcon;
+
     private void Awake()
     {
         buyButtonComponent = buyButton.GetComponent<Button>();
         buyButtonImage = buyButton.GetComponent<Image>();
         priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
+        iconAnimator = itemIcon.GetComponent<Animator>();
 
     }
 
@@ -39,6 +44,7 @@ public class PartsItem : MonoBehaviour
 
     public void BuyItem()
     {
+        iconAnimator.Play("Weapon Jump", 0, 0);
         // SpawnParticles();
         CraftManager.Instance.UnlockCraftWeapon(index);
         CollapseItemView();
