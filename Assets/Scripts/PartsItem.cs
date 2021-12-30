@@ -44,7 +44,7 @@ public class PartsItem : MonoBehaviour
 
     public void BuyItem()
     {
-        iconAnimator.Play("Weapon Jump", 0, 0);
+        iconAnimator.Play("Jump", 0, 0);
         // SpawnParticles();
         CraftManager.Instance.UnlockCraftWeapon(index);
         CollapseItemView();

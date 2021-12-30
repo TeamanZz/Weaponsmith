@@ -12,6 +12,13 @@ public class DragObject : MonoBehaviour
     public int index;
     public ItemType itemType;
     public bool isWholeItem;
+    private float offsetedY;
+    // private void Awake()
+    // {
+    //     var offsetedY = 
+    // }
+
+    private bool offsetedYWas;
 
     void OnMouseDown()
     {
@@ -26,6 +33,9 @@ public class DragObject : MonoBehaviour
     {
         if (isWholeItem)
             ItemSellBorder.Instance.MakeBorderWhite();
+
+        offsetedYWas = false;
+
     }
 
     private Vector3 GetMouseAsWorldPoint()
@@ -41,8 +51,14 @@ public class DragObject : MonoBehaviour
 
     void OnMouseDrag()
     {
+        if (!offsetedYWas)
+        {
+            offsetedY = transform.position.y + 0.5f;
+            offsetedYWas = true;
+        }
         transform.position = GetMouseAsWorldPoint() + mOffset;
-        transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
+        transform.position = new Vector3(transform.position.x, offsetedY, transform.position.z);
+
     }
 
     private void OnCollisionEnter(Collision other)

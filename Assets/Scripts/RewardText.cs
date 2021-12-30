@@ -7,7 +7,17 @@ public class RewardText : MonoBehaviour
 {
     private void Start()
     {
-        transform.DOLocalMoveZ(-2, 1f).SetEase(Ease.InFlash);
-        Destroy(gameObject, 2);
+        transform.DOLocalMoveZ(-0.75f, 1f).SetEase(Ease.OutBack);
+        // Destroy(gameObject, 2);
+        StartCoroutine(IEFlyHigh());
+    }
+
+    private IEnumerator IEFlyHigh()
+    {
+        yield return new WaitForSeconds(1);
+        transform.DOLocalMoveZ(-2, 0.2f).SetEase(Ease.Flash);
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+
     }
 }
