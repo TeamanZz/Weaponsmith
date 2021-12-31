@@ -28,6 +28,7 @@ public class ItemSellBorder : MonoBehaviour
             Destroy(other.gameObject);
             int reward = MoneyHandler.Instance.GetRewardForCraft(dragObject.index);
             SpawnRewardText(reward);
+            SFX.Instance.PlaySell();
         }
     }
 

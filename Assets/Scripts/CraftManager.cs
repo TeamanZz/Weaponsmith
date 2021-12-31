@@ -69,6 +69,7 @@ public class CraftManager : MonoBehaviour
         {
             var newItem = Instantiate(wholeItems[itemIndex], position, rotation);
             var newParticles = Instantiate(spawnParticles, newItem.transform.position, Quaternion.identity);
+            SFX.Instance.PlayMade();
             isSpawned = true;
             StartCoroutine(SpawnDelayCoroutine());
         }
