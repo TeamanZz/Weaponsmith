@@ -7,6 +7,7 @@ public class RoomObjectsHandler : MonoBehaviour
     public static RoomObjectsHandler Instance;
 
     public List<GameObject> roomObjects = new List<GameObject>();
+    public List<WorkshopItem> workshopPanelItems = new List<WorkshopItem>();
     public GameObject appearParticles;
 
     private void Awake()
@@ -18,5 +19,10 @@ public class RoomObjectsHandler : MonoBehaviour
     {
         roomObjects[index].SetActive(true);
         Instantiate(appearParticles, roomObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
+    }
+
+    public void UnlockObjectWithoutParticles(int index)
+    {
+        roomObjects[index].SetActive(true);
     }
 }

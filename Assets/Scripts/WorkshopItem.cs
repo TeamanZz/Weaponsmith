@@ -43,6 +43,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         RoomObjectsHandler.Instance.UnlockObject(index);
         CollapseItemView();
         iconAnimator.Play("Jump", 0, 0);
+        PlayerPrefs.SetString("WorkshopGameobject" + index, "unlocked");
     }
 
     public void CollapseItemView()

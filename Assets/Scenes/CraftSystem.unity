@@ -1613,7 +1613,7 @@ MonoBehaviour:
   buysCountTextAnimator: {fileID: 0}
   itemName: Networking
   generalIncreaseValue: 0
-  increaseValue: 70
+  increaseValue: 20
   price: 0
   buysEdgeCount: 500
   itemConditionsList:
@@ -5164,7 +5164,7 @@ MonoBehaviour:
   buysCountTextAnimator: {fileID: 0}
   itemName: Skill
   generalIncreaseValue: 0
-  increaseValue: 200
+  increaseValue: 30
   price: 0
   buysEdgeCount: 600
   itemConditionsList:
@@ -14492,7 +14492,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -15815,6 +15815,7 @@ GameObject:
   - component: {fileID: 1084979090}
   - component: {fileID: 1084979091}
   - component: {fileID: 1084979092}
+  - component: {fileID: 1084979093}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -15895,7 +15896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be840708e737a74898d4669b07248b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyCount: 0
+  moneyCount: 5900000
   moneyPerSecond: 1
   currencyPopupPrefab: {fileID: 7092055385622762730, guid: b7f015f8c4c9582439cfc0e853de7c9a, type: 3}
   moneyPerSecondText: {fileID: 1428061317}
@@ -15913,7 +15914,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1084979090
 MonoBehaviour:
@@ -16004,7 +16005,25 @@ MonoBehaviour:
   - {fileID: 1507161361}
   - {fileID: 58778845}
   - {fileID: 34878952}
+  workshopPanelItems:
+  - {fileID: 1887345496}
+  - {fileID: 2083985205}
+  - {fileID: 2098975723}
+  - {fileID: 63823356}
+  - {fileID: 788115650}
   appearParticles: {fileID: 119968, guid: 0d198807190ac1545bd6a66e49045db8, type: 3}
+--- !u!114 &1084979093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084979085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 653d456f1339da446b86d187f0d12c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1097176847
 GameObject:
   m_ObjectHideFlags: 0
@@ -17971,7 +17990,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1195768038
 GameObject:
@@ -20599,7 +20618,7 @@ MonoBehaviour:
   buysCountTextAnimator: {fileID: 0}
   itemName: Speed
   generalIncreaseValue: 0
-  increaseValue: 35
+  increaseValue: 13
   price: 0
   buysEdgeCount: 400
   itemConditionsList:
@@ -21755,7 +21774,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1388336585
 GameObject:
@@ -21867,7 +21886,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1394620490
 MonoBehaviour:
@@ -23328,7 +23347,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1486075624
 GameObject:
@@ -24924,7 +24943,7 @@ MonoBehaviour:
   buysCountTextAnimator: {fileID: 0}
   itemName: Hammer power
   generalIncreaseValue: 0
-  increaseValue: 11
+  increaseValue: 8
   price: 0
   buysEdgeCount: 300
   itemConditionsList:
