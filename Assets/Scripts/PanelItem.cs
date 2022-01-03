@@ -7,6 +7,7 @@ using TMPro;
 public class PanelItem : MonoBehaviour, IBuyableItem
 {
     public PanelItemState currentState;
+    public int index;
     public int buysCount;
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
@@ -52,6 +53,26 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     }
 
     private void Awake()
+    {
+        // PlayerPrefs.DeleteAll();
+        Initialize();
+    }
+
+    private void Start()
+    {
+        InvokeRepeating("SaveData", 3, 3);
+    }
+
+    private void SaveData()
+    {
+        SaveState();
+        PlayerPrefs.SetFloat($"UpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
+        PlayerPrefs.SetFloat($"UpgradeItem{index}price", price);
+        PlayerPrefs.SetFloat($"UpgradeItem{index}increaseValue", increaseValue);
+        PlayerPrefs.SetFloat($"UpgradeItem{index}buysCount", buysCount);
+    }
+
+    private void Initialize()
     {
         buyButtonComponent = buyButton.GetComponent<Button>();
         buyButtonImage = buyButton.GetComponent<Image>();
@@ -142,22 +163,91 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
             SetUnknownItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
         }
 
         if (currentState == PanelItemState.Unavailable)
         {
             SetUnavailableItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "unavailable");
         }
 
         if (currentState == PanelItemState.Available)
         {
             SetAvailableItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "available");
         }
+    }
+
+    private void OnDestroy()
+    {
+        ChangeState(currentState);
+        SaveData();
+    }
+
+    private void SaveState()
+    {
+        if (currentState == PanelItemState.Collapsed)
+        {
+            PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
+        }
+
+        if (currentState == PanelItemState.Unknown)
+        {
+            PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
+        }
+
+        if (currentState == PanelItemState.Unavailable)
+        {
+            PlayerPrefs.SetString("UpgradeItem" + index, "unavailable");
+        }
+
+        if (currentState == PanelItemState.Available)
+        {
+            PlayerPrefs.SetString("UpgradeItem" + index, "available");
+        }
+    }
+
+    public void ChangeStateViaLoader(PanelItemState newState)
+    {
+        Initialize();
+        generalIncreaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}generalIncreaseValue");
+        price = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}price");
+        increaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}increaseValue");
+        buysCount = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}buysCount");
+        currentState = newState;
+        ItemsManager.Instance.CheckConditions(this);
+
+        if (currentState == PanelItemState.Collapsed)
+        {
+            CollapseItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
+        }
+
+        if (currentState == PanelItemState.Unknown)
+        {
+            SetUnknownItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
+        }
+
+        if (currentState == PanelItemState.Unavailable)
+        {
+            SetUnavailableItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "unavailable");
+        }
+
+        if (currentState == PanelItemState.Available)
+        {
+            SetAvailableItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "available");
+        }
+        UpdateView();
     }
 
     public void SetAvailableItemView()
@@ -169,6 +259,16 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         progressBar.SetActive(true);
         buyButton.SetActive(true);
         completedSign.SetActive(false);
+        itemIcon.SetActive(true);
+        itemNameText.text = itemName;
+
+        for (int i = 0; i < itemConditionsList.Count; i++)
+        {
+            //200 Fire power
+            itemConditionsGO.transform.GetChild(i).gameObject.SetActive(true);
+            string conditionText = $"{itemConditionsList[i].count} {itemConditionsList[i].itemName}";
+            itemConditionsGO.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = conditionText;
+        }
     }
 
     public void SetUnavailableItemView()
@@ -216,7 +316,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void UpdateItemValues()
     {
         generalIncreaseValue += increaseValue;
-        increaseValue = (int)(increaseValue * 1.2f);
+        increaseValue += (2 * index);
+        if (index == 0)
+        {
+            increaseValue = (int)(increaseValue * 1.1f);
+        }
         buysCount++;
         price = (int)costCurve.Evaluate(buysCount);
         // price = (int)(price * 1.4f);
@@ -224,7 +328,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void UpdateView()
     {
-        generalIncreaseValueText.text = "+$" + generalIncreaseValue.ToString() + "/s";
+        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((float)generalIncreaseValue) + "/s";
         priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
 
         buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();

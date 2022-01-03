@@ -19,7 +19,7 @@ public class ClientAI : MonoBehaviour
     public void Awake()
     {
         reactionPanel.alpha = 0f;
-        goodReaction.alpha = 0f;      
+        goodReaction.alpha = 0f;
         badReaction.alpha = 0f;
     }
 
@@ -56,11 +56,11 @@ public class ClientAI : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if(active == false)
-        {
-            GameManager.gameManager.NewClient();
-            GameManager.gameManager.setAi = this;
-        }
-        active = true;
+        // if(active == false)
+        // {
+        //     GameManager.gameManager.NewClient();
+        //     GameManager.gameManager.setAi = this;
+        // }
+        // active = true;
     }
 }

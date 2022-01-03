@@ -24,7 +24,6 @@ public class ItemsManager : MonoBehaviour
 
     public void MakeNextUnknownItemAsUnavailable()
     {
-        Debug.Log(1);
         var nextItem = panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (nextItem != null)
             nextItem.ChangeState(PanelItemState.Unavailable);

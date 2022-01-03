@@ -20,10 +20,24 @@ public class MoneyHandler : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        moneyPerSecond = PlayerPrefs.GetInt("MoneyPerSecond");
+        if (moneyPerSecond == 0)
+            moneyPerSecond = 1;
+    }
+
+    private void OnDestroy()
+    {
+        SaveMoneyPerSec();
+    }
+
+    private void SaveMoneyPerSec()
+    {
+        PlayerPrefs.SetInt("MoneyPerSecond", moneyPerSecond);
     }
 
     private void Start()
     {
+        InvokeRepeating("SaveMoneyPerSec", 1, 3);
         StartCoroutine(IEIncreaseMoneyCount());
         StartCoroutine(IESpawnCurrency());
     }

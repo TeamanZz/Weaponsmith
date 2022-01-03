@@ -21,11 +21,7 @@ public class PartsItem : MonoBehaviour
 
     private void Awake()
     {
-        buyButtonComponent = buyButton.GetComponent<Button>();
-        buyButtonImage = buyButton.GetComponent<Image>();
-        priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
-        iconAnimator = itemIcon.GetComponent<Animator>();
-
+        Initialize();
     }
 
     private void Update()
@@ -42,8 +38,29 @@ public class PartsItem : MonoBehaviour
         }
     }
 
+    private void Initialize()
+    {
+        buyButtonComponent = buyButton.GetComponent<Button>();
+        buyButtonImage = buyButton.GetComponent<Image>();
+        priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
+        iconAnimator = itemIcon.GetComponent<Animator>();
+    }
+
     public void BuyItem()
     {
+        // Debug.Log("buyed");
+        Initialize();
+        iconAnimator.Play("Jump", 0, 0);
+        // SpawnParticles();
+        CraftManager.Instance.UnlockCraftWeapon(index);
+        CollapseItemView();
+        PlayerPrefs.SetString("BlueprintPanelItem" + (index - 1), "unlocked");
+    }
+
+    public void BuyItemViaPrefs()
+    {
+        // Debug.Log("buyed");
+        Initialize();
         iconAnimator.Play("Jump", 0, 0);
         // SpawnParticles();
         CraftManager.Instance.UnlockCraftWeapon(index);
