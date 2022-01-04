@@ -38,6 +38,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     public AnimationCurve costCurve;
     public Color buttonDefaultColor;
+
     private void FixedUpdate()
     {
         if (price <= MoneyHandler.Instance.moneyCount)

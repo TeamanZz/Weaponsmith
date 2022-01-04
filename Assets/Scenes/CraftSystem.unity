@@ -8188,7 +8188,7 @@ Transform:
   m_LocalScale: {x: 2.2867622, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2226455377798015868}
-  m_RootOrder: 62
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &554647249 stripped
 Transform:
@@ -8577,7 +8577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 339.5083, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 680, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &576430379
@@ -14592,7 +14592,7 @@ Transform:
   m_LocalScale: {x: 2.2867622, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2226455377798015868}
-  m_RootOrder: 61
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &992480113
 GameObject:
@@ -19256,7 +19256,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2226455377798015868}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
 --- !u!108 &1271587900
 Light:
@@ -25930,7 +25930,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2226455377798015868}
-  m_RootOrder: 60
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1681826882
 GameObject:
@@ -38070,7 +38070,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2226455377798015868}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2226455377132862456
 PrefabInstance:
@@ -39101,11 +39101,14 @@ Transform:
   - {fileID: 2226455377370750065}
   - {fileID: 2226455377556635958}
   - {fileID: 2226455378489605938}
-  - {fileID: 2226455378299452081}
-  - {fileID: 2226455378387008117}
-  - {fileID: 2226455377930849076}
   - {fileID: 2226455377113775791}
   - {fileID: 1271587899}
+  - {fileID: 1673611335}
+  - {fileID: 976642157}
+  - {fileID: 2226455378299452081}
+  - {fileID: 554447318}
+  - {fileID: 2226455378387008117}
+  - {fileID: 2226455377930849076}
   - {fileID: 2226455377294284652}
   - {fileID: 2226455377665511590}
   - {fileID: 2226455377318417445}
@@ -39153,9 +39156,6 @@ Transform:
   - {fileID: 1889138189}
   - {fileID: 929526821}
   - {fileID: 713413017}
-  - {fileID: 1673611335}
-  - {fileID: 976642157}
-  - {fileID: 554447318}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

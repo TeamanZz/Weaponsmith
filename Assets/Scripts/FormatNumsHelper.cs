@@ -11,7 +11,7 @@ public static class FormatNumsHelper
             "M",
             "B",
             "T"
-        };
+    };
 
     public static string FormatNum(double num)
     {
