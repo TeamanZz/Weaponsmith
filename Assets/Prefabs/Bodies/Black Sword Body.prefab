@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9073698113704016678}
   - component: {fileID: 9073698113704016676}
   m_Layer: 0
-  m_Name: GreatAxe Body
+  m_Name: Black Sword Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9073698113704016679}
-  m_Mesh: {fileID: 8418630891500234780, guid: 3f678ecd363585a4d9c23061be835b8b, type: 3}
+  m_Mesh: {fileID: 6655439452689945673, guid: 4ec42022fb5737d4f8298a85dafd84ff, type: 3}
 --- !u!23 &4978760171370578349
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -95,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0018841997, y: 0.024933392, z: 0.00096667337}
-  m_Center: {x: 0.00004521981, y: 0.012466696, z: -0.000000014062971}
+  m_Size: {x: 0.0056500644, y: 0.0078596985, z: 0.00096667337}
+  m_Center: {x: 0.00006555468, y: 0.0039298492, z: -0.000000014062971}
 --- !u!114 &9073698113704016678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437cbab46101cf743b673cb91967dc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 5
+  index: 2
   itemType: 0
   isWholeItem: 0
 --- !u!54 &9073698113704016676

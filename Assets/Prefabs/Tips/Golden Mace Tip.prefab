@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5652211211393483655}
   m_Layer: 0
-  m_Name: Goblin Mace Tip
+  m_Name: Golden Mace Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6208392924821681507}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.032, y: -1.075, z: 0}
+  m_LocalPosition: {x: -0.032, y: -0.886, z: 0}
   m_LocalScale: {x: 80, y: 80, z: 80}
   m_Children: []
   m_Father: {fileID: 5652211211393483655}
@@ -73,7 +73,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6208392924821681507}
-  m_Mesh: {fileID: 3056468076565042485, guid: cdd8a949c53ea534e8e49f68b5f7ad7d, type: 3}
+  m_Mesh: {fileID: 7842084268299151731, guid: d53eb13300c7f374ca93e0ce1e7aa278, type: 3}
 --- !u!23 &6491396297588515925
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,8 +126,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0045793676, y: 0.007912259, z: 0.0038911551}
-  m_Center: {x: 0.000043155625, y: 0.014072691, z: -0.00003883168}
+  m_Size: {x: 0.0045793676, y: 0.009064555, z: 0.0038911551}
+  m_Center: {x: 0.000043155625, y: 0.01349654, z: -0.00003883168}
 --- !u!114 &6208392924821681506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437cbab46101cf743b673cb91967dc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 6
+  index: 7
   itemType: 1
   isWholeItem: 0
 --- !u!54 &6208392924821681508
