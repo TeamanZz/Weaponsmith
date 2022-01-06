@@ -12,12 +12,12 @@ public class PartsItem : MonoBehaviour
     private Button buyButtonComponent;
     private Image buyButtonImage;
     public Color buttonDefaultColor;
-
     [SerializeField] private int price;
     [SerializeField] private GameObject particles;
 
     [SerializeField] private Animator iconAnimator;
     [SerializeField] private GameObject itemIcon;
+    public List<GameObject> oldWeaponVersions = new List<GameObject>();
 
     private void Awake()
     {
@@ -46,25 +46,27 @@ public class PartsItem : MonoBehaviour
         iconAnimator = itemIcon.GetComponent<Animator>();
     }
 
-    public void BuyItem()
+    public void UnlockItem()
     {
-        // Debug.Log("buyed");
         Initialize();
         iconAnimator.Play("Jump", 0, 0);
-        // SpawnParticles();
         CraftManager.Instance.UnlockCraftWeapon(index);
         CollapseItemView();
+        HideOldWeaponVersions();
+    }
+
+    public void BuyItem()
+    {
+        UnlockItem();
         PlayerPrefs.SetString("BlueprintPanelItem" + (index - 1), "unlocked");
     }
 
-    public void BuyItemViaPrefs()
+    public void HideOldWeaponVersions()
     {
-        // Debug.Log("buyed");
-        Initialize();
-        iconAnimator.Play("Jump", 0, 0);
-        // SpawnParticles();
-        CraftManager.Instance.UnlockCraftWeapon(index);
-        CollapseItemView();
+        for (int i = 0; i < oldWeaponVersions.Count; i++)
+        {
+            oldWeaponVersions[i].SetActive(false);
+        }
     }
 
     public void CollapseItemView()

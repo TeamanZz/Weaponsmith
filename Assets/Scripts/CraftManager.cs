@@ -53,33 +53,33 @@ public class CraftManager : MonoBehaviour
 
     public void UnlockCraftWeapon(int index)
     {
-        if (index >= 0 && index < 3)
-        {
-            craftPanelBodies[0].gameObject.SetActive(false);
-            craftPanelTips[0].gameObject.SetActive(false);
-            craftPanelBodies[1].gameObject.SetActive(false);
-            craftPanelTips[1].gameObject.SetActive(false);
-            craftPanelBodies[2].gameObject.SetActive(false);
-            craftPanelTips[2].gameObject.SetActive(false);
-        }
-        if (index >= 3 && index < 6)
-        {
-            craftPanelBodies[3].gameObject.SetActive(false);
-            craftPanelTips[3].gameObject.SetActive(false);
-            craftPanelBodies[4].gameObject.SetActive(false);
-            craftPanelTips[4].gameObject.SetActive(false);
-            craftPanelBodies[5].gameObject.SetActive(false);
-            craftPanelTips[5].gameObject.SetActive(false);
-        }
-        if (index >= 6 && index < 8)
-        {
-            craftPanelBodies[6].gameObject.SetActive(false);
-            craftPanelTips[6].gameObject.SetActive(false);
-            craftPanelBodies[7].gameObject.SetActive(false);
-            craftPanelTips[7].gameObject.SetActive(false);
-        }
-
-        craftPanelBodies[index].gameObject.SetActive(true);
-        craftPanelTips[index].gameObject.SetActive(true);
+        // if (index == 0)
+        // {
+        //     craftPanelBodies[0].gameObject.SetActive(false);
+        //     craftPanelTips[0].gameObject.SetActive(false);
+        //     // craftPanelBodies[1].gameObject.SetActive();
+        //     craftPanelTips[1].gameObject.SetActive(false);
+        //     craftPanelBodies[2].gameObject.SetActive(false);
+        //     craftPanelTips[2].gameObject.SetActive(false);
+        // }
+        // if (index >= 3 && index < 6)
+        // {
+        //     craftPanelBodies[3].gameObject.SetActive(false);
+        //     craftPanelTips[3].gameObject.SetActive(false);
+        //     craftPanelBodies[4].gameObject.SetActive(false);
+        //     craftPanelTips[4].gameObject.SetActive(false);
+        //     craftPanelBodies[5].gameObject.SetActive(false);
+        //     craftPanelTips[5].gameObject.SetActive(false);
+        // }
+        // if (index >= 6 && index < 8)
+        // {
+        //     craftPanelBodies[6].gameObject.SetActive(false);
+        //     craftPanelTips[6].gameObject.SetActive(false);
+        //     craftPanelBodies[7].gameObject.SetActive(false);
+        //     craftPanelTips[7].gameObject.SetActive(false);
+        // }
+        Debug.Log(index + 1);
+        craftPanelBodies[index + 1].gameObject.SetActive(true);
+        craftPanelTips[index + 1].gameObject.SetActive(true);
     }
 }

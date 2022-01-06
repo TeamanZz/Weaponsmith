@@ -52,8 +52,7 @@ public class PrefsHandler : MonoBehaviour
         {
             if (PlayerPrefs.GetString("BlueprintPanelItem" + i) == "unlocked")
             {
-                Debug.Log("asasa");
-                blueprintsList[i].BuyItemViaPrefs();
+                blueprintsList[i].UnlockItem();
             }
         }
     }
@@ -78,7 +77,6 @@ public class PrefsHandler : MonoBehaviour
             if (value == "available")
             {
                 ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
-                // Debug.Log("available");
             }
         }
     }
