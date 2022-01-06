@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PrefsHandler : MonoBehaviour
 {
@@ -24,12 +25,12 @@ public class PrefsHandler : MonoBehaviour
 
     private void SaveMoney()
     {
-        PlayerPrefs.SetInt("MoneyCount", MoneyHandler.Instance.moneyCount);
+        PlayerPrefs.SetString("MoneyCount", MoneyHandler.Instance.moneyCount.ToString());
     }
 
     private void LoadMoney()
     {
-        MoneyHandler.Instance.moneyCount = PlayerPrefs.GetInt("MoneyCount");
+        MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount"));
     }
 
     private void LoadWorkshopItems()

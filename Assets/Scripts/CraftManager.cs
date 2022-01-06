@@ -36,31 +36,7 @@ public class CraftManager : MonoBehaviour
         else
             itemsList = itemsTips;
 
-        if (itemPiece == CraftItemPiece.WoodenSword)
-            return itemsList[0];
-
-        if (itemPiece == CraftItemPiece.GreatSwordHook)
-            return itemsList[1];
-
-        if (itemPiece == CraftItemPiece.BlackSword)
-            return itemsList[2];
-
-        if (itemPiece == CraftItemPiece.Axe)
-            return itemsList[3];
-
-        if (itemPiece == CraftItemPiece.ElvenAxe)
-            return itemsList[4];
-
-        if (itemPiece == CraftItemPiece.GreatAxe)
-            return itemsList[5];
-
-        if (itemPiece == CraftItemPiece.GoblinMace)
-            return itemsList[6];
-
-        if (itemPiece == CraftItemPiece.ElvenMace)
-            return itemsList[7];
-
-        return null;
+        return itemsList[(int)itemPiece];
     }
 
     public void SpawnNewItem(int itemIndex, Vector3 position, Quaternion rotation)

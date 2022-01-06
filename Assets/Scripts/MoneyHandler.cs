@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class MoneyHandler : MonoBehaviour
 {
     public static MoneyHandler Instance;
 
-    public int moneyCount;
+    public long moneyCount;
     [SerializeField] private int moneyPerSecond;
     [SerializeField] private GameObject currencyPopupPrefab;
 
