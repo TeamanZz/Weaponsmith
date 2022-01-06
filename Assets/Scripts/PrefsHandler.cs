@@ -30,7 +30,7 @@ public class PrefsHandler : MonoBehaviour
 
     private void LoadMoney()
     {
-        MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount"));
+        MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount", "50000000"));
     }
 
     private void LoadWorkshopItems()

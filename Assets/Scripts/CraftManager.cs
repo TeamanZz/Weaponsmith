@@ -78,7 +78,7 @@ public class CraftManager : MonoBehaviour
         //     craftPanelBodies[7].gameObject.SetActive(false);
         //     craftPanelTips[7].gameObject.SetActive(false);
         // }
-        Debug.Log(index + 1);
+        // Debug.Log(index + 1);
         craftPanelBodies[index + 1].gameObject.SetActive(true);
         craftPanelTips[index + 1].gameObject.SetActive(true);
     }

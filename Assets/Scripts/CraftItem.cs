@@ -38,5 +38,6 @@ public enum CraftItemPiece
     GoldenAxe,
     BlackSword,
     GreatAxe,
-    GoldenMace
+    GoldenMace,
+    M1911
 }
