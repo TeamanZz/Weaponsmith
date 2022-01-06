@@ -62,7 +62,6 @@ public class PrefsHandler : MonoBehaviour
         for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
         {
             string value = PlayerPrefs.GetString("UpgradeItem" + i);
-            Debug.Log(value);
             if (value == "collapsed")
             {
                 ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);

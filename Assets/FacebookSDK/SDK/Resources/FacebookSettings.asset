@@ -16,9 +16,9 @@ MonoBehaviour:
   clientTokens:
   - 
   appIds:
-  - 454641366105826
+  - 471157364584478
   appLabels:
-  - Name
+  - Idle Weaponsmith
   cookie: 1
   logging: 1
   status: 1
