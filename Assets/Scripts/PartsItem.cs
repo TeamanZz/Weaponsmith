@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PartsItem : MonoBehaviour
 {
     [SerializeField] private int index;
-    [SerializeField] private int price;
+    public int price;
     public Color buttonDefaultColor;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private GameObject particles;
@@ -19,6 +19,7 @@ public class PartsItem : MonoBehaviour
     [SerializeField] private GameObject itemIcon;
     [SerializeField] private GameObject itemIconBlack;
     public List<GameObject> oldWeaponVersions = new List<GameObject>();
+    [HideInInspector] public bool wasBoughted;
 
     private void Awake()
     {
@@ -55,6 +56,7 @@ public class PartsItem : MonoBehaviour
         CollapseItemView();
         HideOldWeaponVersions();
         itemIconBlack.SetActive(false);
+        wasBoughted = true;
     }
 
     public void BuyItem()

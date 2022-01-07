@@ -55,6 +55,18 @@ public class PanelsHandler : MonoBehaviour
             {
                 panels[i].SetActive(true);
 
+                //disable workshop notification
+                if (i == 0)
+                {
+                    MarkNotificationHandler.Instance.workshopMark.SetActive(false);
+                }
+
+                //disable blueprints notification
+                if (i == 3)
+                {
+                    MarkNotificationHandler.Instance.blueprintsMark.SetActive(false);
+                }
+
                 if (i == 2 || i == 3)
                 {
                     Camera.main.transform.localPosition = cameraTablePosition;

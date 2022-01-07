@@ -5,7 +5,13 @@ using System;
 
 public class PrefsHandler : MonoBehaviour
 {
+    public static PrefsHandler Instance;
     public List<PartsItem> blueprintsList = new List<PartsItem>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -30,7 +36,7 @@ public class PrefsHandler : MonoBehaviour
 
     private void LoadMoney()
     {
-        MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount", "50000000"));
+        MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount", "0"));
     }
 
     private void LoadWorkshopItems()

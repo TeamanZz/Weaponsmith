@@ -7,14 +7,16 @@ using UnityEngine.UI;
 public class WorkshopItem : MonoBehaviour, IBuyableItem
 {
     [SerializeField] private TextMeshProUGUI priceText;
-    [SerializeField] private GameObject buyButton;
+    public GameObject buyButton;
     private Button buyButtonComponent;
     private Image buyButtonImage;
     public Color buttonDefaultColor;
     [SerializeField] private int index;
-    [SerializeField] private int price;
+    public int price;
     [SerializeField] private GameObject itemIcon;
     [SerializeField] private Animator iconAnimator;
+
+    [HideInInspector] public bool wasBoughted;
 
     private void Update()
     {
@@ -40,6 +42,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
 
     public void BuyItem()
     {
+        MoneyHandler.Instance.moneyCount -= price;
         RoomObjectsHandler.Instance.UnlockObject(index);
         CollapseItemView();
         iconAnimator.Play("Jump", 0, 0);
@@ -50,5 +53,6 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     {
         buyButton.SetActive(false);
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
+        wasBoughted = true;
     }
 }
