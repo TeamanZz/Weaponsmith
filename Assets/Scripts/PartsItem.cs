@@ -58,7 +58,7 @@ public class PartsItem : MonoBehaviour
     public void BuyItem()
     {
         UnlockItem();
-        PlayerPrefs.SetString("BlueprintPanelItem" + (index - 1), "unlocked");
+        PlayerPrefs.SetString("BlueprintPanelItem" + (index), "unlocked");
     }
 
     public void HideOldWeaponVersions()
