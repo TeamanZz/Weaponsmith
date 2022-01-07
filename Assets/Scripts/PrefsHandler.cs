@@ -26,7 +26,7 @@ public class PrefsHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        SaveMoney();
+        // SaveMoney();
     }
 
     private void SaveMoney()

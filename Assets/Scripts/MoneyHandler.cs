@@ -28,7 +28,7 @@ public class MoneyHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        SaveMoneyPerSec();
+        // SaveMoneyPerSec();
     }
 
     private void SaveMoneyPerSec()

@@ -189,7 +189,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void OnDestroy()
     {
         ChangeState(currentState);
-        SaveData();
+        // SaveData();
     }
 
     private void SaveState()
