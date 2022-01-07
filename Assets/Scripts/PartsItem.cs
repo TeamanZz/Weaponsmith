@@ -7,16 +7,17 @@ using UnityEngine.UI;
 public class PartsItem : MonoBehaviour
 {
     [SerializeField] private int index;
+    [SerializeField] private int price;
+    public Color buttonDefaultColor;
     [SerializeField] private TextMeshProUGUI priceText;
+    [SerializeField] private GameObject particles;
     [SerializeField] private GameObject buyButton;
     private Button buyButtonComponent;
     private Image buyButtonImage;
-    public Color buttonDefaultColor;
-    [SerializeField] private int price;
-    [SerializeField] private GameObject particles;
 
-    [SerializeField] private Animator iconAnimator;
+    private Animator iconAnimator;
     [SerializeField] private GameObject itemIcon;
+    [SerializeField] private GameObject itemIconBlack;
     public List<GameObject> oldWeaponVersions = new List<GameObject>();
 
     private void Awake()
@@ -53,6 +54,7 @@ public class PartsItem : MonoBehaviour
         CraftManager.Instance.UnlockCraftWeapon(index);
         CollapseItemView();
         HideOldWeaponVersions();
+        itemIconBlack.SetActive(false);
     }
 
     public void BuyItem()
