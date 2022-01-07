@@ -1158,10 +1158,10 @@ RectTransform:
   m_Father: {fileID: 881117963}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340, y: -442.5}
-  m_SizeDelta: {x: 680, y: 120}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63823356
 MonoBehaviour:
@@ -2179,10 +2179,10 @@ RectTransform:
   m_Father: {fileID: 576430378}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 340, y: -570}
+  m_SizeDelta: {x: 680, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &139833118
 MonoBehaviour:
@@ -6466,10 +6466,10 @@ RectTransform:
   m_Father: {fileID: 576430378}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 340, y: -697.5}
+  m_SizeDelta: {x: 680, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &376179187
 MonoBehaviour:
@@ -6905,7 +6905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &405504839
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10559,10 +10559,10 @@ RectTransform:
   m_Father: {fileID: 1433738568}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 339.50827, y: 0}
-  m_SizeDelta: {x: 680, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 339.50827, y: -378.75}
+  m_SizeDelta: {x: 680, y: 757.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &576430379
 MonoBehaviour:
@@ -13957,10 +13957,10 @@ RectTransform:
   m_Father: {fileID: 576430378}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 340, y: -60}
+  m_SizeDelta: {x: 680, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &755430578
 MonoBehaviour:
@@ -15840,10 +15840,10 @@ RectTransform:
   m_Father: {fileID: 881117963}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340, y: -570}
-  m_SizeDelta: {x: 680, y: 120}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &788115650
 MonoBehaviour:
@@ -15861,7 +15861,7 @@ MonoBehaviour:
   buyButton: {fileID: 351661884}
   buttonDefaultColor: {r: 0.4117647, g: 0.7254902, b: 1, a: 1}
   index: 4
-  price: 5000000
+  price: 9000000
   itemIcon: {fileID: 1111627942}
   iconAnimator: {fileID: 0}
   wasBoughted: 0
@@ -17420,10 +17420,10 @@ RectTransform:
   m_Father: {fileID: 1195768039}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 339.5083, y: -315}
-  m_SizeDelta: {x: 680, y: 630}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 339.5083, y: 0}
+  m_SizeDelta: {x: 680, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &881117964
 MonoBehaviour:
@@ -23387,7 +23387,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.16992188, y: -0.00091552734}
-  m_SizeDelta: {x: -0.34000015, y: 630}
+  m_SizeDelta: {x: -0.34000015, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1195768040
 MonoBehaviour:
@@ -26882,10 +26882,10 @@ RectTransform:
   m_Father: {fileID: 576430378}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 340, y: -442.5}
+  m_SizeDelta: {x: 680, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1325174110
 MonoBehaviour:
@@ -29212,7 +29212,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.16992188, y: 0}
-  m_SizeDelta: {x: -0.34000015, y: 0}
+  m_SizeDelta: {x: -0.34000015, y: 757.5}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1433738569
 MonoBehaviour:
@@ -32274,10 +32274,10 @@ RectTransform:
   m_Father: {fileID: 576430378}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 340, y: -315}
+  m_SizeDelta: {x: 680, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1612582957
 MonoBehaviour:
@@ -35364,10 +35364,10 @@ RectTransform:
   m_Father: {fileID: 576430378}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 340, y: -187.5}
+  m_SizeDelta: {x: 680, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1783671669
 MonoBehaviour:
@@ -35664,7 +35664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1811898896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37498,7 +37498,7 @@ MonoBehaviour:
   buyButton: {fileID: 221308039}
   buttonDefaultColor: {r: 0.4117647, g: 0.7254902, b: 1, a: 1}
   index: 0
-  price: 5000
+  price: 3000
   itemIcon: {fileID: 1540185}
   iconAnimator: {fileID: 0}
   wasBoughted: 0
@@ -37518,10 +37518,10 @@ RectTransform:
   m_Father: {fileID: 881117963}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340, y: -60}
-  m_SizeDelta: {x: 680, y: 120}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1887345498
 MonoBehaviour:
@@ -41093,10 +41093,10 @@ RectTransform:
   m_Father: {fileID: 881117963}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340, y: -187.5}
-  m_SizeDelta: {x: 680, y: 120}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2083985205
 MonoBehaviour:
@@ -41381,10 +41381,10 @@ RectTransform:
   m_Father: {fileID: 881117963}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340, y: -315}
-  m_SizeDelta: {x: 680, y: 120}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2098975723
 MonoBehaviour:
@@ -41402,7 +41402,7 @@ MonoBehaviour:
   buyButton: {fileID: 1652384961}
   buttonDefaultColor: {r: 0.4117647, g: 0.7254902, b: 1, a: 1}
   index: 2
-  price: 500000
+  price: 250000
   itemIcon: {fileID: 1670630274}
   iconAnimator: {fileID: 0}
   wasBoughted: 0
