@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PartsItem : MonoBehaviour
 {
     [SerializeField] private int index;
-    public int price;
+    public long price;
     public Color buttonDefaultColor;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private GameObject particles;
