@@ -39,5 +39,13 @@ public enum CraftItemPiece
     BlackSword,
     GreatAxe,
     GoldenMace,
-    M1911
+    M1911,
+    G3A4,
+    SKS,
+    Deagle,
+    AK74,
+    SVD,
+    SciFiPistol,
+    SciFiRifle,
+    SciFiSniper
 }
