@@ -48,6 +48,8 @@ public class CraftManager : MonoBehaviour
             SFX.Instance.PlayMade();
             isSpawned = true;
             StartCoroutine(SpawnDelayCoroutine());
+
+            FTUEManager.Instance.ChangeFTUEState(6);
         }
     }
 

@@ -29,6 +29,8 @@ public class ItemSellBorder : MonoBehaviour
             int reward = MoneyHandler.Instance.GetRewardForCraft(dragObject.index);
             SpawnRewardText(reward);
             SFX.Instance.PlaySell();
+
+            FTUEManager.Instance.ChangeFTUEState(7);
         }
     }
 
