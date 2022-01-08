@@ -20,5 +20,13 @@ public class PlayerPrefsTool : MonoBehaviour
     //     oldValue += 10000;
     //     PlayerPrefs.SetInt("PopulationPoints", oldValue);
     // }
+
+    [MenuItem("PlayerPrefs/temp")]
+    static void Temp()
+    {
+        PlayerPrefs.SetString("needLaunch", "");
+        // PlayerPrefs.SetString("FTUECompleted", "");
+        // PlayerPrefs.SetInt("LastFTUEState", 0);
+    }
 #endif
 }

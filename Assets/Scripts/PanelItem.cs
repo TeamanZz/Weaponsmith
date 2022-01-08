@@ -219,8 +219,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         Initialize();
         generalIncreaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}generalIncreaseValue");
-        price = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}price");
-        increaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}increaseValue");
+        price = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}price", (int)costCurve.Evaluate(buysCount));
+        increaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}increaseValue", increaseValue);
         buysCount = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}buysCount");
         currentState = newState;
         ItemsManager.Instance.CheckConditions(this);

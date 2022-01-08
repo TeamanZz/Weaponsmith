@@ -13603,6 +13603,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: FTUEManager, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &680148253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21767,6 +21779,7 @@ GameObject:
   - component: {fileID: 1084979094}
   - component: {fileID: 1084979095}
   - component: {fileID: 1084979096}
+  - component: {fileID: 1084979097}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -22104,6 +22117,18 @@ MonoBehaviour:
   craftArrows:
   - {fileID: 2032626227}
   - {fileID: 151882982}
+--- !u!114 &1084979097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084979085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ca93a335cb4da439a89f82d543f210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1095656864 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4131383746968209237, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}

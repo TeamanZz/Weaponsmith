@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FTUEManager : MonoBehaviour
@@ -28,17 +29,36 @@ public class FTUEManager : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.GetString("FTUEEnabled") == "false")
+        string state = PlayerPrefs.GetString("WorkshopGameobject" + 0);
+        if (state == "")
         {
-            FTUEEnabled = false;
+            if (PlayerPrefs.GetString("needLaunch") == "true")
+            {
+                Debug.Log("need lounch");
+                FTUEEnabled = true;
+            }
+            if (PlayerPrefs.GetString("needLaunch") == "" || ((PlayerPrefs.GetString("needLaunch") == "true") && (PlayerPrefs.GetInt("laststate") > 0)))
+            {
+                Debug.Log("need lounch empty");
+
+                settingsManager.DeleteAllProgress();
+            }
         }
-        if (PlayerPrefs.GetString("FTUEEnabled") == "")
+        else
         {
-            if (PlayerPrefs.GetInt("MoneyPerSecond") > 1)
+            if (PlayerPrefs.GetString("needLaunch") == "true")
             {
                 settingsManager.DeleteAllProgress();
             }
-            FTUEEnabled = true;
+
+            if (PlayerPrefs.GetString("needLaunch") == "")
+            {
+                settingsManager.DeleteAllProgress();
+            }
+            if (PlayerPrefs.GetString("needLaunch") == "stop")
+            {
+                FTUEEnabled = false;
+            }
         }
 
         if (!FTUEEnabled)
@@ -49,11 +69,17 @@ public class FTUEManager : MonoBehaviour
         ChangeFTUEState(0);
     }
 
-    public void ChangeFTUEState(int stateIndex)
+    public void MarkFTUEAsStarted()
     {
-
         if (!FTUEEnabled)
             return;
+    }
+
+    public void ChangeFTUEState(int stateIndex)
+    {
+        if (!FTUEEnabled)
+            return;
+        PlayerPrefs.SetInt("laststate", stateIndex);
         currentFTUEState = stateIndex;
 
         //click buy upgrade buttonc
@@ -163,9 +189,8 @@ public class FTUEManager : MonoBehaviour
 
             EnableBottomButtons();
             FTUEPanels[0].SetActive(false);
-
+            PlayerPrefs.SetString("needLaunch", "stop");
             FTUEEnabled = false;
-            PlayerPrefs.SetString("FTUEEnabled", "false");
         }
     }
 
