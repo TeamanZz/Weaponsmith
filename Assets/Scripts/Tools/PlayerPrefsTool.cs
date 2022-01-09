@@ -21,12 +21,11 @@ public class PlayerPrefsTool : MonoBehaviour
     //     PlayerPrefs.SetInt("PopulationPoints", oldValue);
     // }
 
-    [MenuItem("PlayerPrefs/temp")]
+    [MenuItem("PlayerPrefs/Disable FTUE")]
     static void Temp()
     {
-        PlayerPrefs.SetString("needLaunch", "");
-        // PlayerPrefs.SetString("FTUECompleted", "");
-        // PlayerPrefs.SetInt("LastFTUEState", 0);
+        PlayerPrefs.SetString("WorkshopGameobject" + 0, "heh");
+        PlayerPrefs.SetString("needLaunch", "stop");
     }
 #endif
 }
