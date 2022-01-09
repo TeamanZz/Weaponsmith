@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class FTUEManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class FTUEManager : MonoBehaviour
 
     public List<GameObject> FTUEHands = new List<GameObject>();
     public List<GameObject> FTUETextPanels = new List<GameObject>();
+    public List<TextMeshProUGUI> FTUETextComponents = new List<TextMeshProUGUI>();
 
     public int lastCraftItemIndex;
 
@@ -58,7 +60,7 @@ public class FTUEManager : MonoBehaviour
         PlayerPrefs.SetInt("laststate", stateIndex);
         currentFTUEState = stateIndex;
 
-        //click buy upgrade buttonc
+        //click buy upgrade button
         if (stateIndex == 0)
         {
             ActivateFtuePanel(0);
@@ -67,7 +69,9 @@ public class FTUEManager : MonoBehaviour
 
             FTUEHands[0].SetActive(true);
             FTUEHands[0].GetComponent<Animator>().Play("Hand Down Up2");
-            // FTUEContentBlockCraft.SetActive(true);
+
+            FTUETextPanels[0].SetActive(true);
+            FTUETextComponents[0].text = "Buy upgrades to increase the flow of money";
         }
 
         //click craft panel button
@@ -79,6 +83,8 @@ public class FTUEManager : MonoBehaviour
             FTUEHands[0].SetActive(false);
             FTUEHands[1].SetActive(true);
             FTUEHands[1].GetComponent<Animator>().Play("Hand Down Up");
+            FTUETextComponents[0].text = "Open craft panel";
+
         }
 
         //click wooden sword body button
@@ -87,6 +93,8 @@ public class FTUEManager : MonoBehaviour
             FTUEHands[1].SetActive(false);
             FTUEHands[2].SetActive(true);
             FTUEHands[2].GetComponent<Animator>().Play("Hand Down Up2");
+            FTUETextComponents[0].text = "Click on wooden sword body";
+
 
             ActivateFtuePanel(2);
             FTUEContentBlock.SetActive(false);
@@ -101,7 +109,7 @@ public class FTUEManager : MonoBehaviour
             FTUEHands[2].SetActive(false);
             FTUEHands[0].SetActive(true);
             FTUEHands[0].GetComponent<Animator>().Play("Hand Down Up2");
-
+            FTUETextComponents[0].text = "Switch sub panel to tips";
 
             ActivateFtuePanel(3);
             craftArrows[1].enabled = true;
@@ -115,6 +123,8 @@ public class FTUEManager : MonoBehaviour
             FTUEHands[0].SetActive(false);
             FTUEHands[2].SetActive(true);
             FTUEHands[2].GetComponent<Animator>().Play("Hand Down Up2");
+            FTUETextComponents[0].text = "Click on wooden sword tip";
+
             ActivateFtuePanel(2);
             craftArrows[1].enabled = false;
             FTUEContentBlockCraft.SetActive(false);
@@ -124,8 +134,13 @@ public class FTUEManager : MonoBehaviour
         //merge items
         if (stateIndex == 5)
         {
+            FTUETextPanels[0].SetActive(false);
+            FTUETextPanels[1].SetActive(true);
+
             FTUEHands[2].SetActive(false);
             FTUEHands[3].SetActive(true);
+            FTUETextComponents[1].text = "Merge parts!";
+
             FTUEHands[3].GetComponent<Animator>().Play("Hand Merge");
             ActivateFtuePanel(4);
             // ActivateBottomButton(3);
@@ -136,14 +151,20 @@ public class FTUEManager : MonoBehaviour
         if (stateIndex == 6)
         {
             FTUEHands[3].GetComponent<Animator>().Play("Hand Sell");
+            FTUETextComponents[1].text = "Now sell your first crafted weapon";
         }
 
         //click blueprints panel
         if (stateIndex == 7)
         {
+            FTUETextPanels[1].SetActive(false);
+            FTUETextPanels[0].SetActive(true);
+            FTUETextComponents[0].text = "Open blueprints panel";
+
             FTUEHands[3].SetActive(false);
             FTUEHands[4].SetActive(true);
             FTUEHands[4].GetComponent<Animator>().Play("Hand Down Up");
+
 
             ActivateFtuePanel(5);
             ActivateBottomButton(3);
@@ -155,6 +176,8 @@ public class FTUEManager : MonoBehaviour
             FTUEHands[4].SetActive(false);
             FTUEHands[0].SetActive(true);
             FTUEHands[0].GetComponent<Animator>().Play("Hand Down Up2");
+            FTUETextComponents[0].text = "Buy axe blueprint. After purchase, the weapon becomes available for craft on the crafting panel";
+
             ActivateFtuePanel(0);
             FTUEContentBlock.SetActive(false);
             blueprintsScrollRect.enabled = false;
@@ -169,6 +192,8 @@ public class FTUEManager : MonoBehaviour
             FTUEHands[0].SetActive(false);
             FTUEHands[5].SetActive(true);
             FTUEHands[5].GetComponent<Animator>().Play("Hand Down Up");
+            FTUETextComponents[0].text = "Open workshop panel";
+
             ActivateFtuePanel(6);
             FTUEContentBlock.SetActive(true);
             ActivateBottomButton(0);
@@ -180,6 +205,8 @@ public class FTUEManager : MonoBehaviour
             FTUEHands[5].SetActive(false);
             FTUEHands[0].SetActive(true);
             FTUEHands[0].GetComponent<Animator>().Play("Hand Down Up2");
+            FTUETextComponents[0].text = "Buy chest. After purchase, the character will be able to interact with object";
+
             ActivateFtuePanel(0);
             FTUEContentBlock.SetActive(false);
             workshopScrollRect.enabled = false;
@@ -188,6 +215,8 @@ public class FTUEManager : MonoBehaviour
 
         if (stateIndex == 11)
         {
+            FTUETextPanels[0].SetActive(false);
+            FTUETextPanels[2].SetActive(true);
             FTUEHands[0].SetActive(false);
 
             settingsButton.enabled = true;
@@ -204,6 +233,12 @@ public class FTUEManager : MonoBehaviour
             PlayerPrefs.SetString("needLaunch", "stop");
             FTUEEnabled = false;
         }
+    }
+
+    public void CloseFinishPanel()
+    {
+        FTUETextPanels[2].SetActive(false);
+
     }
 
     private void ActivateFtuePanel(int index)
