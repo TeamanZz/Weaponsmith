@@ -12,7 +12,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     private Image buyButtonImage;
     public Color buttonDefaultColor;
     [SerializeField] private int index;
-    public int price;
+    public long price;
     [SerializeField] private GameObject itemIcon;
     [SerializeField] private Animator iconAnimator;
 

@@ -307,13 +307,10 @@ public class FTUEManager : MonoBehaviour
         {
             if (PlayerPrefs.GetString("needLaunch") == "true")
             {
-                Debug.Log("need lounch");
                 FTUEEnabled = true;
             }
             if (PlayerPrefs.GetString("needLaunch") == "" || ((PlayerPrefs.GetString("needLaunch") == "true") && (PlayerPrefs.GetInt("laststate") > 0)))
             {
-                Debug.Log("need lounch empty");
-
                 settingsManager.DeleteAllProgress();
             }
         }

@@ -14,7 +14,6 @@ public class SettingsManager : MonoBehaviour
 
     public void DeleteAllProgress()
     {
-        Debug.Log("progres deleted");
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetString("needLaunch", "true");
         PlayerPrefs.Save();
