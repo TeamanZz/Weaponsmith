@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class DragObject : MonoBehaviour
 {
-    private Vector3 mOffset;
-
-    private float mZCoord;
-
-    private float yPos = 2;
     public int index;
     public ItemType itemType;
     public bool isWholeItem;
-    private float offsetedY;
-    // private void Awake()
-    // {
-    //     var offsetedY = 
-    // }
 
+    private float mZCoord;
+    private Vector3 mOffset;
+    private float offsetedY;
     private bool offsetedYWas;
+
+    private void Start()
+    {
+        if (isWholeItem)
+            StartCoroutine(IESellItemAfterDelay());
+    }
+
+    private IEnumerator IESellItemAfterDelay()
+    {
+        yield return new WaitForSeconds(2.5f);
+        ItemSellBorder.Instance.SellItem(this);
+    }
 
     void OnMouseDown()
     {
@@ -35,7 +40,6 @@ public class DragObject : MonoBehaviour
             ItemSellBorder.Instance.MakeBorderWhite();
 
         offsetedYWas = false;
-
     }
 
     private Vector3 GetMouseAsWorldPoint()
@@ -58,7 +62,6 @@ public class DragObject : MonoBehaviour
         }
         transform.position = GetMouseAsWorldPoint() + mOffset;
         transform.position = new Vector3(transform.position.x, offsetedY, transform.position.z);
-
     }
 
     private void OnCollisionEnter(Collision other)

@@ -7,22 +7,54 @@ public class CustomerController : MonoBehaviour
     public static CustomerController Instance;
     private Animator animator;
     public GameObject chest;
+    public GameObject anvil;
+    private bool isAnvilPlaying;
+    public ParticleSystem particles;
+    public Animator swordAnvilAnimator;
+    public GameObject hammer;
     private void Awake()
     {
         Instance = this;
         animator = GetComponent<Animator>();
     }
 
-    // private void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Mouse0))
-    //     {
-    //         ChangeAnimation();
-    //     }
-    // }
+    private void Start()
+    {
+        if (CheckAnvil())
+            return;
+    }
+
+    public void PlayAnvilParticles()
+    {
+        particles.Play();
+        swordAnvilAnimator.Play("Jump Scale2", 0, 0);
+    }
+
+    private bool CheckAnvil()
+    {
+        if (anvil.activeSelf == true && !isAnvilPlaying)
+        {
+            transform.position = new Vector3(-1.93f, 0f, 4.9f);
+            transform.rotation = Quaternion.Euler(0, -130, 0);
+            hammer.SetActive(true);
+            animator.Play("Anvil");
+            isAnvilPlaying = true;
+            return true;
+        }
+
+        if (anvil.activeSelf == true && isAnvilPlaying)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     public void ChangeAnimation()
     {
+        if (CheckAnvil())
+            return;
+
         int val = Random.Range(0, 5);
         if (val == 0)
         {

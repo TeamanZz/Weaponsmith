@@ -23,15 +23,20 @@ public class ItemSellBorder : MonoBehaviour
         {
             if (!dragObject.isWholeItem)
                 return;
-            var newParticles = Instantiate(destroyParticles, dragObject.transform.position + new Vector3(0, 0.1f, 0), Quaternion.Euler(-90, 0, 0));
-            MakeBorderWhite();
-            Destroy(other.gameObject);
-            int reward = MoneyHandler.Instance.GetRewardForCraft(dragObject.index);
-            SpawnRewardText(reward);
-            SFX.Instance.PlaySell();
 
-            FTUEManager.Instance.ChangeFTUEState(7);
+            SellItem(dragObject);
+            MakeBorderWhite();
         }
+    }
+
+    public void SellItem(DragObject dragObject)
+    {
+        var newParticles = Instantiate(destroyParticles, dragObject.transform.position + new Vector3(0, 0.1f, 0), Quaternion.Euler(-90, 0, 0));
+        Destroy(dragObject.gameObject);
+        int reward = MoneyHandler.Instance.GetRewardForCraft(dragObject.index);
+        SpawnRewardText(reward);
+        SFX.Instance.PlaySell();
+        FTUEManager.Instance.ChangeFTUEState(7);
     }
 
     private void SpawnRewardText(int reward)

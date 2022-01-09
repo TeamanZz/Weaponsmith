@@ -124,7 +124,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (metedConditions == itemConditionsList.Count)
         {
             itemConditionsList.Clear();
-            Debug.Log("create new" + gameObject.name);
             ItemsManager.Instance.MakeNextUnknownItemAsUnavailable();
             ChangeState(PanelItemState.Available);
         }

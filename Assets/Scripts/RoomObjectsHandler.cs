@@ -19,6 +19,11 @@ public class RoomObjectsHandler : MonoBehaviour
     {
         roomObjects[index].SetActive(true);
         Instantiate(appearParticles, roomObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
+
+        if (index == 3)
+        {
+            CustomerController.Instance.ChangeAnimation();
+        }
     }
 
     public void UnlockObjectWithoutParticles(int index)

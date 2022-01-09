@@ -9,14 +9,14 @@ public class MoneyHandler : MonoBehaviour
     public static MoneyHandler Instance;
 
     public long moneyCount;
+
     [SerializeField] private int moneyPerSecond;
     [SerializeField] private GameObject currencyPopupPrefab;
-
     [SerializeField] private TextMeshProUGUI moneyPerSecondText;
     [SerializeField] private TextMeshProUGUI moneyCountText;
+    [SerializeField] private Transform canvasTransform;
 
     private float timeBetweenMoneyIncrease = 0.5f;
-    public Transform canvasTransform;
 
     private void Awake()
     {
@@ -24,11 +24,6 @@ public class MoneyHandler : MonoBehaviour
         moneyPerSecond = PlayerPrefs.GetInt("MoneyPerSecond");
         if (moneyPerSecond == 0)
             moneyPerSecond = 1;
-    }
-
-    private void OnDestroy()
-    {
-        // SaveMoneyPerSec();
     }
 
     private void SaveMoneyPerSec()
@@ -50,7 +45,7 @@ public class MoneyHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moneyPerSecondText.text = "$ " + FormatNumsHelper.FormatNum((float)moneyPerSecond) + "/s";
+        moneyPerSecondText.text = FormatNumsHelper.FormatNum((float)moneyPerSecond) + "/s";
     }
 
     public int GetRewardForCraft(int weaponCoefficient)
