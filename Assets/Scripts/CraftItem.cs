@@ -17,9 +17,34 @@ public class CraftItem : MonoBehaviour
     public void SpawnItem()
     {
         iconAnimator.Play("Jump", 0, 0);
-        Vector3 spawnPosition = new Vector3(Random.Range(-2.4f, 1.6f), 4.3f, -1.188f);
+        Vector3 spawnPosition = new Vector3();
+        if (FTUEManager.Instance.FTUEEnabled)
+        {
+            if (FTUEManager.Instance.lastCraftItemIndex == 0)
+            {
+                spawnPosition = new Vector3(-1.8f, 4.3f, -1.188f);
+                FTUEManager.Instance.lastCraftItemIndex++;
+            }
+            else
+            {
+                spawnPosition = new Vector3(1.3f, 4.3f, -1.188f);
+            }
+        }
+        else
+        {
+            spawnPosition = new Vector3(Random.Range(-2.4f, 1.6f), 4.3f, -1.188f);
+        }
         var newItemPiece = CraftManager.Instance.GetCraftItemPiece(itemType, itemPiece);
-        Instantiate(newItemPiece, spawnPosition, Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Quaternion.identity.z));
+
+        if (FTUEManager.Instance.FTUEEnabled)
+        {
+            Instantiate(newItemPiece, spawnPosition, Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Quaternion.identity.z));
+
+        }
+        else
+        {
+            Instantiate(newItemPiece, spawnPosition, Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Quaternion.identity.z));
+        }
     }
 }
 
