@@ -8,26 +8,24 @@ using TMPro;
 public class FTUEManager : MonoBehaviour
 {
     public static FTUEManager Instance;
-    public bool FTUEEnabled;
+    [HideInInspector] public bool FTUEEnabled;
     public ScrollRect upgradesScrollRect;
     public ScrollRect blueprintsScrollRect;
     public ScrollRect workshopScrollRect;
     public Button settingsButton;
-    public List<GameObject> FTUEPanels = new List<GameObject>();
-    public List<Button> bottomButtons = new List<Button>();
     public GameObject FTUEContentBlock;
     public GameObject FTUEContentBlockCraft;
+    public SettingsManager settingsManager;
     public int currentFTUEState;
 
-    public SettingsManager settingsManager;
-
+    public List<GameObject> FTUEPanels = new List<GameObject>();
+    public List<Button> bottomButtons = new List<Button>();
     public List<Button> craftArrows = new List<Button>();
-
     public List<GameObject> FTUEHands = new List<GameObject>();
     public List<GameObject> FTUETextPanels = new List<GameObject>();
     public List<TextMeshProUGUI> FTUETextComponents = new List<TextMeshProUGUI>();
 
-    public int lastCraftItemIndex;
+    [HideInInspector] public int lastCraftItemIndex;
 
     private void Awake()
     {

@@ -14,10 +14,7 @@ public class CraftManager : MonoBehaviour
     public List<CraftItem> craftPanelTips = new List<CraftItem>();
     public GameObject spawnParticles;
 
-    public float radius = 5F;
-    public float power = 10.0F;
-
-    public bool isSpawned;
+    [HideInInspector] public bool isSpawned;
 
     private void Awake()
     {
