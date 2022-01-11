@@ -18,6 +18,8 @@ public class MoneyHandler : MonoBehaviour
 
     private float timeBetweenMoneyIncrease = 0.5f;
 
+    private Coroutine currencyCoroutine;
+
     private void Awake()
     {
         Instance = this;
@@ -35,7 +37,17 @@ public class MoneyHandler : MonoBehaviour
     {
         InvokeRepeating("SaveMoneyPerSec", 1, 3);
         StartCoroutine(IEIncreaseMoneyCount());
-        StartCoroutine(IESpawnCurrency());
+
+        string state = PlayerPrefs.GetString("WorkshopGameobject3");
+        if (state != "unlocked")
+        {
+            currencyCoroutine = StartCoroutine(IESpawnCurrency());
+        }
+    }
+
+    public void StopCurrencyCoroutine()
+    {
+        StopCoroutine(currencyCoroutine);
     }
 
     public void IncreaseMoneyPerSecondValue(int value)
@@ -70,9 +82,14 @@ public class MoneyHandler : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(3);
-            var newPopup = Instantiate(currencyPopupPrefab, canvasTransform);
-            newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3) + "$";
-            newPopup.transform.SetAsFirstSibling();
+            SpawnCurrencyPopUp();
         }
+    }
+
+    public void SpawnCurrencyPopUp()
+    {
+        var newPopup = Instantiate(currencyPopupPrefab, canvasTransform);
+        newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3) + "$";
+        newPopup.transform.SetAsFirstSibling();
     }
 }

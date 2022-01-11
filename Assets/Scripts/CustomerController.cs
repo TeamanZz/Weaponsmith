@@ -12,6 +12,9 @@ public class CustomerController : MonoBehaviour
     public ParticleSystem particles;
     public Animator swordAnvilAnimator;
     public GameObject hammer;
+
+    int popusCounter;
+
     private void Awake()
     {
         Instance = this;
@@ -22,6 +25,11 @@ public class CustomerController : MonoBehaviour
     {
         if (CheckAnvil())
             return;
+    }
+
+    public void SpawnCurrencyPopUp()
+    {
+        MoneyHandler.Instance.SpawnCurrencyPopUp();
     }
 
     public void PlayAnvilParticles()
