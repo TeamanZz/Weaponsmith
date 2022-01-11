@@ -92,7 +92,7 @@ public class CustomerController : MonoBehaviour
         }
         else if (val == 4)
         {
-            transform.position = new Vector3(-2.8f, -0.3f, 6.55f);
+            transform.position = new Vector3(-5.55f, -0.3f, 6.55f);
             transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
             animator.Play("Inspect");
         }
