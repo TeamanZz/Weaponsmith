@@ -17,6 +17,7 @@ public class RoomObjectsHandler : MonoBehaviour
 
     public void UnlockObject(int index)
     {
+        Debug.Log(index);
         roomObjects[index].SetActive(true);
         Instantiate(appearParticles, roomObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
 

@@ -24,10 +24,6 @@ public class PrefsHandler : MonoBehaviour
         InvokeRepeating("SaveMoney", 1, 3);
     }
 
-    private void OnDestroy()
-    {
-        // SaveMoney();
-    }
 
     private void SaveMoney()
     {
@@ -36,7 +32,7 @@ public class PrefsHandler : MonoBehaviour
 
     private void LoadMoney()
     {
-        MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount", "5000000000"));
+        MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount", "119070000000000"));
     }
 
     private void LoadWorkshopItems()
