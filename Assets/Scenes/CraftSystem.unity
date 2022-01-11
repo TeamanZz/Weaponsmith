@@ -10721,7 +10721,7 @@ GameObject:
   - component: {fileID: 500686312}
   - component: {fileID: 500686313}
   m_Layer: 5
-  m_Name: Achievement Panel
+  m_Name: Achievement PopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10821,6 +10821,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 4433679445784581093}
+  titleText: {fileID: 2032182276}
+  descriptionText: {fileID: 52114135}
 --- !u!224 &509621754 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4131383746968209237, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}
@@ -12645,7 +12647,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 339.5083, y: 0}
   m_SizeDelta: {x: 680, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &576430379
@@ -13747,7 +13749,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $ 500b
+  m_text: $ 500T
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a3ae66b4fa67a44eadb8fd176943f0e, type: 2}
   m_sharedMaterial: {fileID: -8775230164189864463, guid: 5a3ae66b4fa67a44eadb8fd176943f0e, type: 2}
@@ -25229,7 +25231,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d324c78853920044d87d6888d0195164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalAchievementsList: []
+  achievementPopUp: {fileID: 500686313}
+  weaponCountAchievements:
+  - index: 0
+    title: First steps
+    description: Craft 3 wooden swords
+    achieved: 0
+    weaponIndex: 0
+    requiredCount: 3
+    currentCount: 0
+  - index: 1
+    title: Axes? Axes!
+    description: Craft 10 axes
+    achieved: 0
+    weaponIndex: 1
+    requiredCount: 10
+    currentCount: 0
 --- !u!224 &1095656864 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4131383746968209237, guid: 2a0511c83a5eeae4285d98d94edfe862, type: 3}

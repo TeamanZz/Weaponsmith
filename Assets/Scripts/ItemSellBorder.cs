@@ -21,7 +21,7 @@ public class ItemSellBorder : MonoBehaviour
         DragObject dragObject;
         if (other.TryGetComponent<DragObject>(out dragObject))
         {
-            if (!dragObject.isWholeItem)
+            if (dragObject.itemType != ItemType.Whole)
                 return;
 
             SellItem(dragObject);
@@ -43,7 +43,7 @@ public class ItemSellBorder : MonoBehaviour
     {
         GameObject newRewardText = Instantiate(rewardTextPrefab, tableCanvas.transform);
         newRewardText.transform.localRotation = Quaternion.Euler(0, 51, -90);
-        newRewardText.GetComponent<TextMeshProUGUI>().text = "+ " + FormatNumsHelper.FormatNum((float)reward) + " $";
+        newRewardText.GetComponent<TextMeshProUGUI>().text = "+ " + FormatNumsHelper.FormatNum((double)reward) + " $";
     }
 
     public void MakeBorderGreen()

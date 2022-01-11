@@ -131,8 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 15
-  itemType: 0
-  isWholeItem: 1
+  itemType: 2
 --- !u!1 &1572608734466638212
 GameObject:
   m_ObjectHideFlags: 0

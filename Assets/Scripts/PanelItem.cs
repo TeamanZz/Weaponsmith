@@ -328,8 +328,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void UpdateView()
     {
-        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((float)generalIncreaseValue) + "/s";
-        priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
+        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
+        priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
 
         buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
         progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);

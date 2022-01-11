@@ -37,7 +37,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         buyButtonComponent = buyButton.GetComponent<Button>();
         buyButtonImage = buyButton.GetComponent<Image>();
         iconAnimator = itemIcon.GetComponent<Animator>();
-        priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
+        priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
     }
 
     public void BuyItem()

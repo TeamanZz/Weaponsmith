@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class AchievementPanel : MonoBehaviour
 {
     private Animator animator;
     public ParticleSystem particles;
+
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI descriptionText;
+
+    public void InitializeViewAsWeaponCount(WeaponCountAchievement achievement)
+    {
+        titleText.text = "Achievement unlocked: " + achievement.title;
+        descriptionText.text = achievement.description;
+    }
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
-    }
-
-    void Start()
-    {
-
     }
 
     private void OnEnable()
@@ -35,7 +41,6 @@ public class AchievementPanel : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         particles.gameObject.SetActive(true);
-        SFX.Instance.PlaySell();
-        // particles.Play();
+        SFX.Instance.PlayBuy();
     }
 }

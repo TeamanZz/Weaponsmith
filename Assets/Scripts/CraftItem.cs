@@ -51,7 +51,8 @@ public class CraftItem : MonoBehaviour
 public enum ItemType
 {
     Body,
-    Tip
+    Tip,
+    Whole
 }
 
 public enum CraftItemPiece

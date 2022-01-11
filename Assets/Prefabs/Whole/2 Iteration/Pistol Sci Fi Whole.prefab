@@ -101,8 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 14
-  itemType: 0
-  isWholeItem: 1
+  itemType: 2
 --- !u!54 &-6991725859879898873
 Rigidbody:
   m_ObjectHideFlags: 0

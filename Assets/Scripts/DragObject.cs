@@ -6,7 +6,6 @@ public class DragObject : MonoBehaviour
 {
     public int index;
     public ItemType itemType;
-    public bool isWholeItem;
 
     private float mZCoord;
     private Vector3 mOffset;
@@ -15,7 +14,7 @@ public class DragObject : MonoBehaviour
 
     private void Start()
     {
-        if (isWholeItem)
+        if (itemType == ItemType.Whole)
             StartCoroutine(IESellItemAfterDelay());
     }
 
@@ -30,13 +29,13 @@ public class DragObject : MonoBehaviour
         mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         // Store offset = gameobject world pos - mouse world pos
         mOffset = gameObject.transform.position - GetMouseAsWorldPoint();
-        if (isWholeItem)
+        if (itemType == ItemType.Whole)
             ItemSellBorder.Instance.MakeBorderGreen();
     }
 
     private void OnMouseUp()
     {
-        if (isWholeItem)
+        if (itemType == ItemType.Whole)
             ItemSellBorder.Instance.MakeBorderWhite();
 
         offsetedYWas = false;
@@ -69,7 +68,7 @@ public class DragObject : MonoBehaviour
         DragObject dragObject;
         if (other.gameObject.TryGetComponent<DragObject>(out dragObject))
         {
-            if (isWholeItem || dragObject.isWholeItem)
+            if (itemType == ItemType.Whole || dragObject.itemType == ItemType.Whole)
                 return;
 
             if (CraftManager.Instance.isSpawned)

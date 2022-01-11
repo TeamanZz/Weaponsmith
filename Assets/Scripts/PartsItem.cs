@@ -44,7 +44,7 @@ public class PartsItem : MonoBehaviour
     {
         buyButtonComponent = buyButton.GetComponent<Button>();
         buyButtonImage = buyButton.GetComponent<Image>();
-        priceText.text = "$" + FormatNumsHelper.FormatNum((float)price);
+        priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
         iconAnimator = itemIcon.GetComponent<Animator>();
     }
 

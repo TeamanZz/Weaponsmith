@@ -373,5 +373,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 11
-  itemType: 0
-  isWholeItem: 1
+  itemType: 2

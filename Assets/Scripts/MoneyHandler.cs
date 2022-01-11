@@ -45,7 +45,7 @@ public class MoneyHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moneyPerSecondText.text = FormatNumsHelper.FormatNum((float)moneyPerSecond) + "/s";
+        moneyPerSecondText.text = FormatNumsHelper.FormatNum((double)moneyPerSecond) + "/s";
     }
 
     public int GetRewardForCraft(int weaponCoefficient)
@@ -61,7 +61,7 @@ public class MoneyHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(timeBetweenMoneyIncrease);
             moneyCount += moneyPerSecond;
-            moneyCountText.text = FormatNumsHelper.FormatNum((float)moneyCount);
+            moneyCountText.text = FormatNumsHelper.FormatNum((double)moneyCount);
         }
     }
 
@@ -71,7 +71,7 @@ public class MoneyHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(3);
             var newPopup = Instantiate(currencyPopupPrefab, canvasTransform);
-            newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((float)moneyPerSecond * 3) + "$";
+            newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3) + "$";
             newPopup.transform.SetAsFirstSibling();
         }
     }

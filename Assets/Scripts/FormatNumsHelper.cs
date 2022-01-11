@@ -10,7 +10,8 @@ public static class FormatNumsHelper
             "K",
             "M",
             "B",
-            "T"
+            "T",
+            "Q"
     };
 
     public static string FormatNum(double num)
@@ -41,7 +42,6 @@ public static class FormatNumsHelper
             num /= 1000f;
             i++;
         }
-
         return num.ToString("#.##") + names[i];
     }
 

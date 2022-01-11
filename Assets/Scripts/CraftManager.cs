@@ -51,6 +51,7 @@ public class CraftManager : MonoBehaviour
             StartCoroutine(SpawnDelayCoroutine());
 
             FTUEManager.Instance.ChangeFTUEState(6);
+            AchievementsManager.Instance.CheckOnWeaponCountAchievement(newItem.GetComponent<DragObject>());
         }
     }
 
