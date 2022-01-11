@@ -23222,7 +23222,7 @@ Transform:
   - {fileID: 320335860}
   - {fileID: 1910578439}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1046457005
 PrefabInstance:
@@ -47189,7 +47189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2125588771}
   m_Layer: 0
-  m_Name: Unlockable Items
+  m_Name: Unlockable Items Act 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47215,7 +47215,7 @@ Transform:
   - {fileID: 786597375}
   - {fileID: 462804614}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2126942787
 GameObject:
@@ -48321,7 +48321,7 @@ Transform:
   - {fileID: 6281961106307144138}
   - {fileID: 6308300353752736222}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1063503643929464607
 GameObject:
@@ -50080,7 +50080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2226455377798015868}
   m_Layer: 0
-  m_Name: Environment
+  m_Name: Act 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
