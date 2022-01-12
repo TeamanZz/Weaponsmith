@@ -19,6 +19,7 @@ public class RoomObjectsHandler : MonoBehaviour
     {
         roomObjects[index].SetActive(true);
         Instantiate(appearParticles, roomObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
+        workshopPanelItems[index].ReplaceOldObjects();
 
         if (index == 3)
         {

@@ -61,6 +61,7 @@ public class PartsItem : MonoBehaviour
 
     public void BuyItem()
     {
+        MoneyHandler.Instance.moneyCount -= price;
         UnlockItem();
         PlayerPrefs.SetString("BlueprintPanelItem" + (index), "unlocked");
     }
