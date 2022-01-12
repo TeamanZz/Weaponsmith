@@ -30,5 +30,6 @@ public class RoomObjectsHandler : MonoBehaviour
     public void UnlockObjectWithoutParticles(int index)
     {
         roomObjects[index].SetActive(true);
+        workshopPanelItems[index].ReplaceOldObjects();
     }
 }

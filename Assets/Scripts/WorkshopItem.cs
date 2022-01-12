@@ -16,6 +16,8 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     [SerializeField] private GameObject itemIcon;
     [SerializeField] private Animator iconAnimator;
 
+    public List<GameObject> objectsToReplace = new List<GameObject>();
+
     [HideInInspector] public bool wasBoughted;
 
     private void Update()
@@ -47,6 +49,14 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         CollapseItemView();
         iconAnimator.Play("Jump", 0, 0);
         PlayerPrefs.SetString("WorkshopGameobject" + index, "unlocked");
+    }
+
+    public void ReplaceOldObjects()
+    {
+        for (int i = 0; i < objectsToReplace.Count; i++)
+        {
+            objectsToReplace[i].SetActive(false);
+        }
     }
 
     public void CollapseItemView()

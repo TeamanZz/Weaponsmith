@@ -29,7 +29,7 @@ public class CustomerController : MonoBehaviour
 
     public void SpawnCurrencyPopUp()
     {
-        MoneyHandler.Instance.SpawnCurrencyPopUp();
+        // MoneyHandler.Instance.SpawnCurrencyPopUp();
     }
 
     public void PlayAnvilParticles()
