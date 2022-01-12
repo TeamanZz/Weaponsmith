@@ -26824,6 +26824,125 @@ MonoBehaviour:
     weaponIndex: 16
     requiredCount: 1
     currentCount: 0
+  - index: 19
+    title: Wooden madness
+    description: Craft 50 wooden swords
+    achieved: 0
+    weaponIndex: 0
+    requiredCount: 50
+    currentCount: 0
+  - index: 20
+    title: Stone madness
+    description: Craft 50 axes
+    achieved: 0
+    weaponIndex: 1
+    requiredCount: 50
+    currentCount: 0
+  - index: 21
+    title: Hook'em all!
+    description: Craft 50 hook swords
+    achieved: 0
+    weaponIndex: 2
+    requiredCount: 50
+    currentCount: 0
+  - index: 22
+    title: BONK BONK BONK
+    description: Craft 50 wooden maces
+    achieved: 0
+    weaponIndex: 3
+    requiredCount: 50
+    currentCount: 0
+  - index: 23
+    title: Have you watched the "Lord of War"?
+    description: Craft 50 golden axes
+    achieved: 0
+    weaponIndex: 4
+    requiredCount: 50
+    currentCount: 0
+  - index: 24
+    title: Don't touch the red "egg"
+    description: Craft 50 black swords
+    achieved: 0
+    weaponIndex: 5
+    requiredCount: 50
+    currentCount: 0
+  - index: 25
+    title: Big and blue
+    description: Craft 50 great axes
+    achieved: 0
+    weaponIndex: 6
+    requiredCount: 50
+    currentCount: 0
+  - index: 26
+    title: Thorns of gold!
+    description: Craft 50 golden maces
+    achieved: 0
+    weaponIndex: 7
+    requiredCount: 50
+    currentCount: 0
+  - index: 27
+    title: My favorite gun
+    description: Craft 50 M1911
+    achieved: 0
+    weaponIndex: 8
+    requiredCount: 50
+    currentCount: 0
+  - index: 28
+    title: Chekhov's rifle
+    description: Craft 50 G3A4
+    achieved: 0
+    weaponIndex: 9
+    requiredCount: 50
+    currentCount: 0
+  - index: 29
+    title: Hold your breath
+    description: Craft 50 SKS
+    achieved: 0
+    weaponIndex: 10
+    requiredCount: 50
+    currentCount: 0
+  - index: 30
+    title: Can you spin bullets?
+    description: Craft 50 Deagles
+    achieved: 0
+    weaponIndex: 11
+    requiredCount: 50
+    currentCount: 0
+  - index: 31
+    title: I hope it won't ricochet
+    description: Craft 50 AK-74
+    achieved: 0
+    weaponIndex: 12
+    requiredCount: 50
+    currentCount: 0
+  - index: 32
+    title: You forgot to remove the scope cover
+    description: Craft 50 SVD
+    achieved: 0
+    weaponIndex: 13
+    requiredCount: 50
+    currentCount: 0
+  - index: 33
+    title: Stand with a gun
+    description: Craft 50 SCI FI pistols
+    achieved: 0
+    weaponIndex: 14
+    requiredCount: 50
+    currentCount: 0
+  - index: 34
+    title: The early bird
+    description: Craft 50 SCI FI rifles
+    achieved: 0
+    weaponIndex: 15
+    requiredCount: 50
+    currentCount: 0
+  - index: 35
+    title: "If you can\u2019t be good, be careful"
+    description: Craft 50 SCI FI sniper rifles
+    achieved: 0
+    weaponIndex: 16
+    requiredCount: 50
+    currentCount: 0
 --- !u!1 &1086363075
 GameObject:
   m_ObjectHideFlags: 0
