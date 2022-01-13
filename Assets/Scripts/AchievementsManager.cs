@@ -47,6 +47,7 @@ public class AchievementsManager : MonoBehaviour
     public void ShowAchievement(int index)
     {
         achievementPopUp.InitializeViewAsWeaponCount(weaponCountAchievements[index]);
+        achievementPopUp.GetAchievementReward(weaponCountAchievements[index].reward);
         achievementPopUp.gameObject.SetActive(true);
     }
 }
@@ -55,6 +56,7 @@ public class AchievementsManager : MonoBehaviour
 public class Achievement
 {
     public int index;
+    public long reward;
     public string title;
     public string description;
     public bool achieved;

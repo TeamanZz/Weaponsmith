@@ -1222,8 +1222,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52.823, y: -19.989002}
-  m_SizeDelta: {x: 614.354, y: 60.021}
+  m_AnchoredPosition: {x: -15.102, y: -19.989002}
+  m_SizeDelta: {x: 447.71, y: 60.021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &52114135
 MonoBehaviour:
@@ -2613,6 +2613,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126262306}
+  m_CullTransparentMesh: 1
+--- !u!1 &130334402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 130334403}
+  - component: {fileID: 130334405}
+  - component: {fileID: 130334404}
+  m_Layer: 5
+  m_Name: Currency Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &130334403
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130334402}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.5823042, y: 2.5823042, z: 2.5823042}
+  m_Children: []
+  m_Father: {fileID: 500686309}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -9.409973, y: 0}
+  m_SizeDelta: {x: 17.151001, y: 17.151001}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &130334404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130334402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: df5309bdac27340c8beee1587ae47bec, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &130334405
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130334402}
   m_CullTransparentMesh: 1
 --- !u!1 &139833116
 GameObject:
@@ -12233,12 +12308,14 @@ RectTransform:
   - {fileID: 877126330}
   - {fileID: 430069808}
   - {fileID: 4433679445766482824}
+  - {fileID: 2074718110}
+  - {fileID: 130334403}
   m_Father: {fileID: 1857392865}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000030518, y: -124.90015}
+  m_AnchoredPosition: {x: 0.000030518, y: 119.56}
   m_SizeDelta: {x: 720, y: 119.561}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &500686310
@@ -12313,6 +12390,7 @@ MonoBehaviour:
   particles: {fileID: 4433679445784581093}
   titleText: {fileID: 2032182276}
   descriptionText: {fileID: 52114135}
+  currencyText: {fileID: 2074718111}
 --- !u!1 &509198071
 GameObject:
   m_ObjectHideFlags: 0
@@ -12538,7 +12616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 236.23407
+      value: 236.23401
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -15570,7 +15648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 165288, guid: a9d27d37bab3c447b8eb7a2a6756e952, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 465288, guid: a9d27d37bab3c447b8eb7a2a6756e952, type: 3}
       propertyPath: m_RootOrder
@@ -22177,7 +22255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 236.23407
+      value: 236.23401
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -24108,7 +24186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 236.23407
+      value: 236.23401
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -24562,6 +24640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 953273383}
   - component: {fileID: 953273382}
+  - component: {fileID: 953273384}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -24579,11 +24658,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a08001f72d7d4db4981b5707f1726e18, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -24679,6 +24758,22 @@ Transform:
   m_Father: {fileID: 1891176619}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &953273384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953273381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acd8098f48ea3c488973dd773c8a89d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songs:
+  - {fileID: 8300000, guid: dc29775d85c84e14da5e8c735da335de, type: 3}
+  - {fileID: 8300000, guid: 00261e75365a3b74fb07fc1005505451, type: 3}
+  - {fileID: 8300000, guid: cb02a4eedd6c4ce4c983f485d923d689, type: 3}
 --- !u!1001 &961091563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27758,6 +27853,7 @@ MonoBehaviour:
   achievementPopUp: {fileID: 500686313}
   weaponCountAchievements:
   - index: 0
+    reward: 500
     title: First steps
     description: Craft 3 wooden swords
     achieved: 0
@@ -27765,6 +27861,7 @@ MonoBehaviour:
     requiredCount: 3
     currentCount: 0
   - index: 1
+    reward: 2000
     title: Axes? Axes!
     description: Craft 10 axes
     achieved: 0
@@ -27772,13 +27869,15 @@ MonoBehaviour:
     requiredCount: 10
     currentCount: 0
   - index: 2
+    reward: 5000
     title: Lumberman
-    description: Craft 50 axes
+    description: Craft 20 axes
     achieved: 0
     weaponIndex: 1
-    requiredCount: 50
+    requiredCount: 20
     currentCount: 0
   - index: 3
+    reward: 11250
     title: Why do you need two sides?
     description: Craft hook sword
     achieved: 0
@@ -27786,6 +27885,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 4
+    reward: 25000
     title: Double benefit
     description: Craft 50 hook swords
     achieved: 0
@@ -27793,6 +27893,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 5
+    reward: 25000
     title: Bonk
     description: Craft wooden mace
     achieved: 0
@@ -27800,6 +27901,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 6
+    reward: 125000
     title: Greedy
     description: Craft golden axe
     achieved: 0
@@ -27807,6 +27909,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 7
+    reward: 750000
     title: Serious weapon
     description: Craft black sword
     achieved: 0
@@ -27814,6 +27917,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 8
+    reward: 5250000
     title: It's so big
     description: Craft great axe
     achieved: 0
@@ -27821,6 +27925,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 9
+    reward: 31500000
     title: Greedy
     description: Craft golden mace
     achieved: 0
@@ -27828,6 +27933,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 10
+    reward: 157333333
     title: New era
     description: Craft M1911
     achieved: 0
@@ -27835,6 +27941,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 11
+    reward: 945000000
     title: Pew pew!
     description: Craft G3A4
     achieved: 0
@@ -27842,6 +27949,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 12
+    reward: 378000000
     title: 3,75 kg
     description: Craft SKS
     achieved: 0
@@ -27849,6 +27957,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 13
+    reward: 5670000000
     title: Deglet deseagle
     description: Craft deagle
     achieved: 0
@@ -27856,6 +27965,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 14
+    reward: 17010000000
     title: Vodka, balalayka, matreshka
     description: Craft AK-74
     achieved: 0
@@ -27863,6 +27973,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 15
+    reward: 85000000000
     title: 3 letters
     description: Craft SVD
     achieved: 0
@@ -27870,6 +27981,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 16
+    reward: 595350000000
     title: Pew, pew, but SCI FI
     description: Craft SCI FI pistol
     achieved: 0
@@ -27877,6 +27989,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 17
+    reward: 2976750000000
     title: What year is it now?
     description: Craft SCI FI rifle
     achieved: 0
@@ -27884,6 +27997,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 18
+    reward: 20470000000000
     title: 2047!
     description: Craft SCI FI sniper rifle
     achieved: 0
@@ -27891,6 +28005,7 @@ MonoBehaviour:
     requiredCount: 1
     currentCount: 0
   - index: 19
+    reward: 10000
     title: Wooden madness
     description: Craft 50 wooden swords
     achieved: 0
@@ -27898,6 +28013,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 20
+    reward: 15000
     title: Stone madness
     description: Craft 50 axes
     achieved: 0
@@ -27905,6 +28021,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 21
+    reward: 30000
     title: Hook'em all!
     description: Craft 50 hook swords
     achieved: 0
@@ -27912,6 +28029,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 22
+    reward: 50000
     title: BONK BONK BONK
     description: Craft 50 wooden maces
     achieved: 0
@@ -27919,6 +28037,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 23
+    reward: 77777
     title: Have you watched the "Lord of War"?
     description: Craft 50 golden axes
     achieved: 0
@@ -27926,6 +28045,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 24
+    reward: 66666
     title: Don't touch the red "egg"
     description: Craft 50 black swords
     achieved: 0
@@ -27933,6 +28053,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 25
+    reward: 90000
     title: Big and blue
     description: Craft 50 great axes
     achieved: 0
@@ -27940,6 +28061,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 26
+    reward: 150000
     title: Thorns of gold!
     description: Craft 50 golden maces
     achieved: 0
@@ -27947,6 +28069,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 27
+    reward: 200000
     title: My favorite gun
     description: Craft 50 M1911
     achieved: 0
@@ -27954,6 +28077,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 28
+    reward: 350000
     title: Chekhov's rifle
     description: Craft 50 G3A4
     achieved: 0
@@ -27961,6 +28085,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 29
+    reward: 400000
     title: Hold your breath
     description: Craft 50 SKS
     achieved: 0
@@ -27968,6 +28093,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 30
+    reward: 500000
     title: Can you spin bullets?
     description: Craft 50 Deagles
     achieved: 0
@@ -27975,6 +28101,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 31
+    reward: 1000000
     title: I hope it won't ricochet
     description: Craft 50 AK-74
     achieved: 0
@@ -27982,6 +28109,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 32
+    reward: 1500000
     title: You forgot to remove the scope cover
     description: Craft 50 SVD
     achieved: 0
@@ -27989,6 +28117,7 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 33
+    reward: 2000000
     title: Stand with a gun
     description: Craft 50 SCI FI pistols
     achieved: 0
@@ -27996,14 +28125,16 @@ MonoBehaviour:
     requiredCount: 50
     currentCount: 0
   - index: 34
-    title: The early bird
+    reward: 3000000
+    title: "If you can\u2019t be good, be careful"
     description: Craft 50 SCI FI rifles
     achieved: 0
     weaponIndex: 15
     requiredCount: 50
     currentCount: 0
   - index: 35
-    title: "If you can\u2019t be good, be careful"
+    reward: 5000000
+    title: End?
     description: Craft 50 SCI FI sniper rifles
     achieved: 0
     weaponIndex: 16
@@ -30031,7 +30162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 236.23401
+      value: 236.23395
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -36464,7 +36595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1394620489
 Transform:
   m_ObjectHideFlags: 0
@@ -41103,7 +41234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 236.23407
+      value: 236.23401
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -52451,8 +52582,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52.822998, y: 34.901}
-  m_SizeDelta: {x: 614.354, y: 49.759}
+  m_AnchoredPosition: {x: -15.101, y: 34.901}
+  m_SizeDelta: {x: 447.7, y: 49.759}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2032182276
 MonoBehaviour:
@@ -53140,6 +53271,140 @@ RectTransform:
   m_AnchoredPosition: {x: -130.6, y: -37.4}
   m_SizeDelta: {x: 230, y: 19}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2074718109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2074718110}
+  - component: {fileID: 2074718112}
+  - component: {fileID: 2074718111}
+  m_Layer: 5
+  m_Name: Currency Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2074718110
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074718109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 500686309}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 253.3, y: 0}
+  m_SizeDelta: {x: 101.32, y: 73.508}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2074718111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074718109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: + 500K
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 5a3ae66b4fa67a44eadb8fd176943f0e, type: 2}
+  m_sharedMaterial: {fileID: -8775230164189864463, guid: 5a3ae66b4fa67a44eadb8fd176943f0e, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4283039645
+  m_fontColor: {r: 0.6156863, g: 1, b: 0.28627452, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 35.75
+  m_fontSizeBase: 32.8
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &2074718112
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074718109}
+  m_CullTransparentMesh: 1
 --- !u!1 &2082746832
 GameObject:
   m_ObjectHideFlags: 0
@@ -53832,7 +54097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 236.23401
+      value: 236.23395
       objectReference: {fileID: 0}
     - target: {fileID: 7424872879631637271, guid: e1f227dde0dbd394187870364464e855, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -82331,7 +82596,7 @@ GameObject:
   - component: {fileID: 4433679445784581093}
   - component: {fileID: 4433679445784412797}
   m_Layer: 9
-  m_Name: HealBig 1
+  m_Name: Green Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

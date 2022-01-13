@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +11,18 @@ public class AchievementPanel : MonoBehaviour
 
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI currencyText;
 
     public void InitializeViewAsWeaponCount(WeaponCountAchievement achievement)
     {
         titleText.text = "Achievement unlocked: " + achievement.title;
         descriptionText.text = achievement.description;
+        currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)achievement.reward);
+    }
+
+    public void GetAchievementReward(long reward)
+    {
+        MoneyHandler.Instance.moneyCount += reward;
     }
 
     private void Awake()
