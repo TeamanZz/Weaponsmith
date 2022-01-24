@@ -12,15 +12,13 @@ public class MarkNotificationHandler : MonoBehaviour
     }
 
     public GameObject workshopMark;
-    public GameObject blueprintsMark;
+   
 
     public GameObject workshopPanel;
-    public GameObject blueprintsPanel;
 
     private void Start()
     {
         InvokeRepeating("CheckRoomObjects", 1, 1);
-        InvokeRepeating("CheckBlueprintsObjects", 1, 1);
     }
 
     private void CheckRoomObjects()
@@ -35,15 +33,4 @@ public class MarkNotificationHandler : MonoBehaviour
         }
     }
 
-    private void CheckBlueprintsObjects()
-    {
-        for (int i = 0; i < PrefsHandler.Instance.blueprintsList.Count; i++)
-        {
-            var item = PrefsHandler.Instance.blueprintsList[i];
-            if (item.price <= MoneyHandler.Instance.moneyCount && item.wasBoughted == false && blueprintsPanel.activeSelf == false)
-            {
-                blueprintsMark.SetActive(true);
-            }
-        }
-    }
 }

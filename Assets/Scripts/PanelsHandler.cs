@@ -29,10 +29,14 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private Vector3 cameraRoomPosition;
     [SerializeField] private Vector3 cameraRoomRotation;
 
+    public void Start()
+    {
+        OpenPanel(1);
+    }
     public void OpenPanel(int panelIndex)
     {
         //Enchant panel
-        if (panelIndex == 4)
+        if (panelIndex == 3)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -45,7 +49,7 @@ public class PanelsHandler : MonoBehaviour
             }
 
             commonElement.SetActive(false);
-            panels[4].SetActive(true);
+            panels[3].SetActive(true);
             return;
         }
 
@@ -61,26 +65,6 @@ public class PanelsHandler : MonoBehaviour
                     MarkNotificationHandler.Instance.workshopMark.SetActive(false);
                 }
 
-                //disable blueprints notification
-                if (i == 3)
-                {
-                    MarkNotificationHandler.Instance.blueprintsMark.SetActive(false);
-                }
-
-                if (i == 2 || i == 3)
-                {
-                    Camera.main.transform.localPosition = cameraTablePosition;
-                    Camera.main.transform.localRotation = Quaternion.Euler(cameraTableRotation.x, cameraTableRotation.y, cameraTableRotation.z);
-                    FurnaceLightController.Instance.lightCoefficient = 5;
-                }
-                else
-                {
-                    Camera.main.transform.localPosition = cameraRoomPosition;
-                    Camera.main.transform.localRotation = Quaternion.Euler(cameraRoomRotation.x, cameraRoomRotation.y, cameraRoomRotation.z);
-                    FurnaceLightController.Instance.lightCoefficient = 1;
-                    CustomerController.Instance.ChangeAnimation();
-
-                }
             }
             else
             {
