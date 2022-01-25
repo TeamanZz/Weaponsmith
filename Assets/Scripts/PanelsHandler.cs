@@ -6,7 +6,7 @@ using TMPro;
 public class PanelsHandler : MonoBehaviour
 {
     public static PanelsHandler Instance;
-
+    public int dungeonNumber;
     private void Awake()
     {
         Instance = this;
@@ -17,7 +17,6 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
     [SerializeField] private TextMeshProUGUI panelName;
     [SerializeField] private GameObject commonElement;
-    [SerializeField] private List<GameObject> enchantPanelEffects = new List<GameObject>();
 
     [Header("Sub panels in craft panel")]
     [SerializeField] private GameObject bodyContent;
@@ -35,21 +34,17 @@ public class PanelsHandler : MonoBehaviour
     }
     public void OpenPanel(int panelIndex)
     {
-        //Enchant panel
-        if (panelIndex == 3)
+        //dungeon panel
+        if (panelIndex == dungeonNumber)
         {
-            for (int i = 0; i < 4; i++)
+
+            for (int i = 0; i < panels.Count; i++)
             {
                 panels[i].SetActive(false);
             }
 
-            for (int i = 0; i < enchantPanelEffects.Count; i++)
-            {
-                enchantPanelEffects[i].SetActive(true);
-            }
-
             commonElement.SetActive(false);
-            panels[3].SetActive(true);
+            panels[panelIndex].SetActive(true);
             return;
         }
 
@@ -58,13 +53,6 @@ public class PanelsHandler : MonoBehaviour
             if (i == panelIndex)
             {
                 panels[i].SetActive(true);
-
-                //disable workshop notification
-                if (i == 0)
-                {
-                    MarkNotificationHandler.Instance.workshopMark.SetActive(false);
-                }
-
             }
             else
             {
@@ -72,12 +60,8 @@ public class PanelsHandler : MonoBehaviour
             }
         }
 
-
+        
         commonElement.SetActive(true);
-        for (int i = 0; i < enchantPanelEffects.Count; i++)
-        {
-            enchantPanelEffects[i].SetActive(false);
-        }
     }
 
     public void ResetButtonColorOnDeselect()
