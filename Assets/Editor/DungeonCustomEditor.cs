@@ -26,6 +26,7 @@ public class DungeonCustomEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        DrawDefaultInspector();
 
         if (GUILayout.Button("Open Editor"))
         {

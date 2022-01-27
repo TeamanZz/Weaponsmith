@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class DungeonObjectData: MonoBehaviour
 {
- 
+    public int currentNumber;
+    public string currentName;
+    public List<PiecesDungeon> currentPieces = new List<PiecesDungeon>();
+
 }

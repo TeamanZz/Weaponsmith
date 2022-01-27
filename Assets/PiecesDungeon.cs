@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class PiecesDungeon : MonoBehaviour
 {
     public Transform lastPoint;
@@ -13,7 +17,7 @@ public class PiecesDungeon : MonoBehaviour
     [ContextMenu("Show props")]
     public void ShowInInspector()
     {
-        if (number != null || number >= 0 && number < propsInPieces.Count)
+        if (number != null && number >= 0 && number < propsInPieces.Count)
             ShowProps(number);
         else
             Debug.Log("Enter the number of pieces");
@@ -45,3 +49,25 @@ public class PiecesDungeon : MonoBehaviour
     }
 
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(PiecesDungeon))]
+class PiecesEditor : Editor
+{
+    public override void OnInspectorGUI()//Rect position, GUIContent label)
+    {
+        var pieces = (PiecesDungeon)target;
+
+        if (pieces == null)
+            return;
+
+        DrawDefaultInspector();
+
+        if (GUILayout.Button("Create Environment By Number"))
+        {
+            pieces.ShowInInspector();
+        }
+
+    }
+}
+#endif

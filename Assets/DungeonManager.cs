@@ -13,6 +13,7 @@ public class DungeonManager : MonoBehaviour
     [Header("Basic settings")]
     public NavMeshSurface navMesh;
     public PiecesDungeon piecesObject;
+    public DungeonObjectData currentDungeon;
 
     public Transform firstPoint;
     public Transform lastPoint;
@@ -116,7 +117,7 @@ public class DungeonManager : MonoBehaviour
     }
 
     [ContextMenu("Saved")]
-    public void SavedDungeon()
+    public void SaveDungeon()
     {
         if (savedName == "" || savedName == null || pieces.Count <= 0 || pieces.Count > 500)
         {
@@ -250,7 +251,7 @@ class DungeonManagerEditor : Editor
         if (dungeonManager == null)
             return;
 
-        //DrawDefaultInspector();
+        DrawDefaultInspector();
 
         //  saved
         GUILayout.Space(10);
@@ -320,6 +321,18 @@ class DungeonManagerEditor : Editor
         if (GUILayout.Button("Clear Current Dungeon"))
         {
             dungeonManager.ClearDungeon();
+        }
+
+        GUILayout.Space(7.5f);
+        EditorGUILayout.BeginHorizontal();
+
+        dungeonManager.savedName = EditorGUILayout.TextField("Enter the title", dungeonManager.savedName);
+        GUILayout.Label("Name of the dungeon - " + dungeonManager.savedName);
+        EditorGUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Save Current Dungeon"))
+        {
+            dungeonManager.SaveDungeon();
         }
 
 

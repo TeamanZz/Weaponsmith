@@ -7,13 +7,13 @@ public class DungeonEditorWindow : ExtendedEditorWindow
 {
     public static void Open(DungeonObjectData dungeonData)
     {
-        DungeonEditorWindow window = GetWindow<DungeonEditorWindow>("Dungeon Data Editor");
+        Debug.Log(dungeonData);
+        DungeonEditorWindow window = GetWindow<DungeonEditorWindow>("Dungeon Enviroments Editor");
         window.serializedObject = new SerializedObject(dungeonData);
     }
 
     private void OnGUI()
     {
-        currentProperty = serializedObject.FindProperty("DungeonObjectData");
-        DrawProperties(currentProperty, true);
+
     }
 }
