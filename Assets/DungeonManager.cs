@@ -11,15 +11,19 @@ using UnityEditor;
 public class DungeonManager : MonoBehaviour
 {
     [Header("Basic settings")]
+    public static DungeonManager dungeonManager;
     public NavMeshSurface navMesh;
     public PiecesDungeon piecesObject;
     public DungeonObjectData currentDungeon;
+
+    public DungeonObjectData currentObjectData;
 
     public Transform firstPoint;
     public Transform lastPoint;
 
     [Header("Instatiate settings")]
-    [HideInInspector]public int number;
+    [HideInInspector] public int number;
+    public int deletedNumber = -1;
     public List<PiecesDungeon> pieces = new List<PiecesDungeon>();
     public List<DungeonItem> dungeonsItems = new List<DungeonItem>();
 
@@ -31,15 +35,21 @@ public class DungeonManager : MonoBehaviour
     public void Awake()
     {
         numberOfSaves = PlayerPrefs.GetInt("allNumberOfSaves");
+
+        dungeonManager = this;
     }
 
     public void ReadSaveData()
     {
+        dungeonManager = this;
+        dungeonsItems.Clear();
         int saveCount = PlayerPrefs.GetInt("allNumberOfSaves");
         Debug.Log(saveCount);
-        dungeonsItems.Clear();
 
-        for (int i = 0; i < numberOfSaves; i++)
+        if (currentObjectData != null)
+            currentObjectData.dungeonManager = this;
+
+        for (int i = 0; i < saveCount; i++)
         {
             DungeonItem item = new DungeonItem();
 
@@ -59,6 +69,8 @@ public class DungeonManager : MonoBehaviour
             dungeonsItems.Add(item);
             Debug.Log("Saved number - " + PlayerPrefs.GetInt("numberOfRows" + i) + " | Name - " + PlayerPrefs.GetString("Dungeon" + i) + " | Pieces count - " + PlayerPrefs.GetInt("piecesDungeonCount" + i) + " | Code - " + code);
         }
+
+        numberOfSaves = dungeonsItems.Count;
     }
 
     [ContextMenu("Create Dungeon")]
@@ -151,6 +163,10 @@ public class DungeonManager : MonoBehaviour
 
         numberOfSaves += 1;
         PlayerPrefs.SetInt("allNumberOfSaves", numberOfSaves);
+#if UNITY_EDITOR
+        currentObjectData.inRealTimeEditor = false;
+        currentDungeon.UpdateCurrentData();
+#endif
     }
 
     [ContextMenu("Show all saved")]
@@ -238,11 +254,161 @@ public class DungeonManager : MonoBehaviour
         }
 
     }
+
+    public void DeleteDungeonByNumber(int deletedNumber)
+    {
+        if (deletedNumber < 0 || deletedNumber >= dungeonsItems.Count)
+        {
+            Debug.Log("Enter correct deleted number");
+            return;
+        }
+        Debug.Log("Delete start");
+        Debug.Log(deletedNumber);
+
+        //for (int y = 0; y < PlayerPrefs.GetInt("piecesDungeonCount" + deletedNumber); y++)
+        //{
+        //    PlayerPrefs.DeleteKey(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + deletedNumber) + y));
+        //    Debug.Log(PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + deletedNumber) + y).ToString()));
+        //}
+
+        //string code = "N";
+        //for (int y = 0; y < PlayerPrefs.GetInt("piecesDungeonCount" + deletedNumber); y++)
+        //{
+        //    PlayerPrefs.DeleteKey(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + deletedNumber) + y));
+        //    code += PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + deletedNumber) + y).ToString());
+        //}
+
+        //PlayerPrefs.DeleteKey("numberOfRows" + deletedNumber);
+        //PlayerPrefs.DeleteKey("Dungeon" + deletedNumber);
+        //PlayerPrefs.DeleteKey("piecesDungeonCount" + deletedNumber);
+
+        dungeonsItems[deletedNumber].dungeonName = "";
+        dungeonsItems[deletedNumber].piecesDungeonCount = 0;
+        dungeonsItems[deletedNumber].rowState.Clear();
+
+        //Debug.Log("Saved number - " + PlayerPrefs.GetInt("numberOfRows" + deletedNumber) + " | Name - " + PlayerPrefs.GetString("Dungeon" + deletedNumber) + " | Pieces count - " + PlayerPrefs.GetInt("piecesDungeonCount" + deletedNumber) + " | Code - ");
+
+        //dungeonsItems.Remove(dungeonsItems[deletedNumber]);
+#if UNITY_EDITOR
+        currentObjectData.inRealTimeEditor = true;
+        currentDungeon.UpdateCurrentData();
+#endif
+        ListCleaning();
+    }
+
+    //  удаление с возможностью сохранения
+
+    public void ListCleaning()
+    {
+        int difference = 0;
+
+        Debug.Log("Cleaning start");
+        for (int i = 0; i < dungeonsItems.Count; i++)
+        {
+            bool norm = false;
+            Debug.Log(i);
+            Debug.Log(dungeonsItems.Count);
+
+            if (dungeonsItems[i].dungeonName == "" || dungeonsItems[i].rowState.Count == 0 || dungeonsItems[i].piecesDungeonCount == 0 || dungeonsItems[i] == null)
+            {
+                norm = true;
+                difference += 1;
+                Debug.Log(i + " = null");
+                //break;
+                dungeonsItems.Remove(dungeonsItems[i]);
+            }
+
+            if (difference > 0 && norm == false)
+            {
+                dungeonsItems[i - difference] = dungeonsItems[i];
+                dungeonsItems[i] = null;
+            }
+        }
+    }
+
+    public void ResaveData()
+    {
+        int saveCount = PlayerPrefs.GetInt("allNumberOfSaves");
+        Debug.Log(saveCount);
+
+        int difference = 0;
+
+        if (currentObjectData != null)
+            currentObjectData.dungeonManager = this;
+
+        ////  сортиров очка
+        //for (int i = 0; i < dungeonsItems.Count; i++)
+        //{
+        //    bool norm = false;
+        //    Debug.Log(i);
+        //    Debug.Log(dungeonsItems.Count);
+
+        //    if (dungeonsItems[i].dungeonName == "" || dungeonsItems[i].rowState.Count == 0 || dungeonsItems[i].piecesDungeonCount == 0 || dungeonsItems[i] == null)
+        //    {
+        //        norm = true;
+        //        difference += 1;
+        //        Debug.Log(i + " = null");
+        //        //break;
+        //        dungeonsItems.Remove(dungeonsItems[i]);
+        //    }
+
+        //    if (difference > 0 && norm == false)
+        //    {
+        //        dungeonsItems[i - difference] = dungeonsItems[i];
+        //        dungeonsItems[i] = null;
+        //    }
+        //}
+
+
+        //  cleaning prefs data
+        //for (int i = 0; i < saveCount; i++)
+        //{
+        //    Debug.Log(i);
+        //    PlayerPrefs.DeleteKey("Dungeon" + i);
+
+        //    string code = "";
+
+        //    for (int y = 0; y < PlayerPrefs.GetInt("piecesDungeonCount" + i); y++)
+        //    {
+        //        PlayerPrefs.DeleteKey(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y));
+        //        PlayerPrefs.DeleteKey(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y));
+        //    }
+
+        //    PlayerPrefs.DeleteKey("numberOfRows" + i);
+        //    PlayerPrefs.DeleteKey("piecesDungeonCount" + i);
+
+
+        //    Debug.Log("Saved number - " + i + " | Number Of Rows" + PlayerPrefs.GetInt("numberOfRows" + i) + " | Name - " + PlayerPrefs.GetString("Dungeon" + i) + " | Pieces count - " + PlayerPrefs.GetInt("piecesDungeonCount" + i) + " | Code - " + code);
+        //}
+        PlayerPrefs.DeleteAll();
+
+        //for (int i = 0; i < dungeonsItems.Count; i++)
+        //{
+        //    DungeonItem item = dungeonsItems[i];
+
+        //    PlayerPrefs.SetInt("numberOfRows" + i, item.dungeonNumber);
+        //    PlayerPrefs.SetString("Dungeon" + i, item.dungeonName);
+        //    PlayerPrefs.SetInt("piecesDungeonCount" + i, item.piecesDungeonCount);
+
+        //    string code = "";
+
+        //    for (int y = 0; y < PlayerPrefs.GetInt("piecesDungeonCount" + i); y++)
+        //    {
+        //        PlayerPrefs.SetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y), item.rowState[i]);
+        //        code += PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y).ToString());
+        //    }
+
+        //    Debug.Log("Saved number - " + PlayerPrefs.GetInt("numberOfRows" + i) + " | Name - " + PlayerPrefs.GetString("Dungeon" + i) + " | Pieces count - " + PlayerPrefs.GetInt("piecesDungeonCount" + i) + " | Code - " + code);
+
+        //}
+
+        difference = 0;
+    }
 }
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(DungeonManager))]
-class DungeonManagerEditor : Editor  
+class DungeonManagerEditor : Editor
 {
     public override void OnInspectorGUI()//Rect position, GUIContent label)
     {
@@ -260,12 +426,11 @@ class DungeonManagerEditor : Editor
             dungeonManager.ReadSaveData();
         }
 
-        if (GUILayout.Button("Shov Save Data"))
+        if (GUILayout.Button("Show Save Data"))
         {
-            dungeonManager.OutputSave ();
+            dungeonManager.OutputSave();
         }
 
-       
         //  create/clear
         GUILayout.Space(7.5f);
         EditorGUILayout.BeginHorizontal();
@@ -273,6 +438,8 @@ class DungeonManagerEditor : Editor
         if (GUILayout.Button("Shov Dungeon To Number"))
         {
             dungeonManager.ShowDungeon();
+            dungeonManager.currentObjectData.inRealTimeEditor = false;
+            dungeonManager.currentDungeon.UpdateCurrentData();
         }
 
         int shovLenght = EditorGUILayout.IntField(dungeonManager.showSavedNumber);
@@ -292,6 +459,8 @@ class DungeonManagerEditor : Editor
         if (GUILayout.Button("Clear Current Dungeon"))
         {
             dungeonManager.ClearDungeon();
+            dungeonManager.currentObjectData.inRealTimeEditor = true;
+            dungeonManager.currentDungeon.UpdateCurrentData();
         }
 
 
@@ -302,6 +471,8 @@ class DungeonManagerEditor : Editor
         if (GUILayout.Button("Create Dungeon"))
         {
             dungeonManager.CreateDungeon();
+            dungeonManager.currentObjectData.inRealTimeEditor = true;
+            dungeonManager.currentDungeon.UpdateCurrentData();
         }
 
         int newLenght = EditorGUILayout.IntField(dungeonManager.number);
@@ -313,7 +484,7 @@ class DungeonManagerEditor : Editor
         }
         else
             dungeonManager.number = 0;
-            
+
         GUILayout.Label(labelText);
 
         EditorGUILayout.EndHorizontal();
@@ -321,6 +492,8 @@ class DungeonManagerEditor : Editor
         if (GUILayout.Button("Clear Current Dungeon"))
         {
             dungeonManager.ClearDungeon();
+            dungeonManager.currentObjectData.inRealTimeEditor = true;
+            dungeonManager.currentDungeon.UpdateCurrentData();
         }
 
         GUILayout.Space(7.5f);
@@ -333,8 +506,45 @@ class DungeonManagerEditor : Editor
         if (GUILayout.Button("Save Current Dungeon"))
         {
             dungeonManager.SaveDungeon();
+            //dungeonManager.currentObjectData.inRealTimeEditor = false;
+            //dungeonManager.currentDungeon.UpdateCurrentData();
+
         }
 
+        EditorGUILayout.Space(7.5f);
+        EditorGUILayout.BeginHorizontal();
+        int deletedNumber;
+        string deletedLabelText = "";
+        if (GUILayout.Button("Delete Dungeon By Number"))
+        {
+            dungeonManager.DeleteDungeonByNumber(dungeonManager.deletedNumber);
+            dungeonManager.deletedNumber = -1;
+            //dungeonManager.currentObjectData.inRealTimeEditor = true;
+            //dungeonManager.currentDungeon.UpdateCurrentData();
+        }
+
+        dungeonManager.deletedNumber = EditorGUILayout.IntField(dungeonManager.deletedNumber);
+
+        string deleteText = "Maximum value = " + dungeonManager.dungeonsItems.Count;
+        GUILayout.Label(deleteText);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.Space(7.5f);
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Apply removal"))
+        {
+            dungeonManager.ResaveData();
+            //dungeonManager.currentObjectData.inRealTimeEditor = true;
+            //dungeonManager.currentDungeon.UpdateCurrentData();
+        }
+
+        if (GUILayout.Button("Cancel changes"))
+        {
+            dungeonManager.ReadSaveData();
+            //dungeonManager.currentObjectData.inRealTimeEditor = true;
+            //dungeonManager.currentDungeon.UpdateCurrentData();
+        }
+        EditorGUILayout.EndHorizontal();
 
         GUILayout.Space(15);
         EditorGUILayout.BeginHorizontal();
@@ -352,5 +562,9 @@ class DungeonManagerEditor : Editor
         CreateEditor(target);
     }
 
+    public void OpenWindow()
+    {
+
+    }
 }
 #endif

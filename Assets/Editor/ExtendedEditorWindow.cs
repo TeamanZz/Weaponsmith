@@ -6,7 +6,6 @@ public class ExtendedEditorWindow : EditorWindow
 {
     protected SerializedObject serializedObject;
     protected SerializedProperty currentProperty;
-
     protected void DrawProperties(SerializedProperty prop, bool drawChildren)
     {
         string lastPropPath = string.Empty;

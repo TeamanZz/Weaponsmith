@@ -16,7 +16,7 @@ public class AssetsHandler
             DungeonEditorWindow.Open(obj);
             return true;
         }
-
+        
         return false;
     }
 }
@@ -26,7 +26,7 @@ public class DungeonCustomEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector();
+        //DrawDefaultInspector();
 
         if (GUILayout.Button("Open Editor"))
         {
@@ -34,4 +34,6 @@ public class DungeonCustomEditor : Editor
         }
 
     }
+
+
 }
