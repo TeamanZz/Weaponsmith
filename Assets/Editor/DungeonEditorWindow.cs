@@ -66,13 +66,14 @@ public class DungeonEditorWindow : ExtendedEditorWindow
         {
             dungeonData.SaveUpdatedDungeon();
         }
+        dungeonData.currentName = EditorGUILayout.TextField("Enter the title", dungeonData.currentName);
 
+        GUILayout.EndHorizontal();
         if (GUILayout.Button("Clear"))
         {
             dungeonData.RemoveChangesRedoSave();
         }
 
-        GUILayout.EndHorizontal();
 
         piececesScroll = EditorGUILayout.BeginScrollView(piececesScroll, GUILayout.Height(200));
         for (int i = 0; i < dungeonData.currentPieces.Count; i++)

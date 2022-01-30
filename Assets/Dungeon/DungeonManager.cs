@@ -7,7 +7,6 @@ using UnityEngine.AI;
 using UnityEditor;
 #endif
 
-[ExecuteAlways]
 public class DungeonManager : MonoBehaviour
 {
     [Header("Basic settings")]
@@ -21,11 +20,14 @@ public class DungeonManager : MonoBehaviour
     public Transform firstPoint;
     public Transform lastPoint;
 
+    public bool startGame = false;
+
     [Header("Instatiate settings")]
     [HideInInspector] public int number;
     public int deletedNumber = -1;
     public List<PiecesDungeon> pieces = new List<PiecesDungeon>();
     public List<DungeonItem> dungeonsItems = new List<DungeonItem>();
+
 
     [Header("Show settings")]
     public int numberOfSaves = 0;
@@ -37,6 +39,7 @@ public class DungeonManager : MonoBehaviour
         numberOfSaves = PlayerPrefs.GetInt("allNumberOfSaves");
 
         dungeonManager = this;
+        startGame = true;
     }
 
     public void ReadSaveData()
@@ -100,8 +103,13 @@ public class DungeonManager : MonoBehaviour
     {
         foreach (PiecesDungeon piec in pieces)
         {
+            if(startGame == false)
             DestroyImmediate(piec.gameObject);
+            else
+                Destroy(piec.gameObject);
         }
+
+
 
         pieces.Clear();
         lastPoint = firstPoint;
@@ -109,7 +117,6 @@ public class DungeonManager : MonoBehaviour
 
         NavMeshRebaking();
     }
-
     public void ShovPieceProps(int piecesNumber, int propsNumber)
     {
         if (pieces.Count < 0 || piecesNumber > pieces.Count || propsNumber > pieces[piecesNumber].propsInPieces.Count || propsNumber < 0)
@@ -118,14 +125,14 @@ public class DungeonManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Show number - " + piecesNumber + " | " + "Props number - " + propsNumber);
+        //Debug.Log("Show number - " + piecesNumber + " | " + "Props number - " + propsNumber);
         pieces[piecesNumber].ShowProps(propsNumber);
         NavMeshRebaking();
     }
 
     public void NavMeshRebaking()
     {
-        navMesh.BuildNavMesh();
+        //navMesh.BuildNavMesh();
     }
 
     [ContextMenu("Saved")]
@@ -250,11 +257,65 @@ public class DungeonManager : MonoBehaviour
         for (int y = 0; y < PlayerPrefs.GetInt("piecesDungeonCount" + showSavedNumber); y++)
         {
             ShovPieceProps(y, PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + showSavedNumber) + y).ToString()));
-            Debug.Log(y + " | " + PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + showSavedNumber) + y).ToString()));
+            //Debug.Log(y + " | " + PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + showSavedNumber) + y).ToString()));
         }
 
     }
 
+    public void SaveAllDungeon()
+    {
+        List<int> badNumber = new List<int>();
+        for(int i = 0; i < dungeonsItems.Count; i ++)
+        {
+            DungeonItem item = dungeonsItems[i];
+
+            if (item.dungeonName == "" || item.dungeonName == null || item.rowState.Count <= 0 || item.rowState.Count > 500)
+            {
+                Debug.Log("Enter saved name");
+                badNumber.Add(i);
+                continue;
+                
+            }
+
+
+        }
+        //  clearing    
+        for(int i = 0; i < badNumber.Count;i++  )
+        { 
+            int num = badNumber[i];
+            Debug.Log(badNumber[i]);
+            dungeonsItems.Remove(dungeonsItems[num]);
+        }
+
+        numberOfSaves = 0;
+        for (int i = 0; i < dungeonsItems.Count; i ++)
+        {
+            PlayerPrefs.SetString("Dungeon" + i, dungeonsItems[i].dungeonName);
+
+            PlayerPrefs.SetInt("numberOfRows" + i, i);
+
+            PlayerPrefs.SetInt("piecesDungeonCount" + i, dungeonsItems[i].rowState.Count);
+
+            Debug.Log(PlayerPrefs.GetInt("numberOfRows" + i) + "." + PlayerPrefs.GetString("Dungeon" + i) + "." + PlayerPrefs.GetInt("piecesDungeonCount" + i));
+
+            for (int y = 0; y < dungeonsItems[i].rowState.Count; y++)
+            {
+                //Debug.Log(dungeonManager.pieces[y].number);
+                PlayerPrefs.SetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y), dungeonsItems[i].rowState[y]);
+                //Debug.Log(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + numberOfSaves) + y).ToString() + " - " + PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + numberOfSaves) + y).ToString()));
+            }
+
+            string code = "";
+            for (int y = 0; y < PlayerPrefs.GetInt("piecesDungeonCount" + i); y++)
+            {
+                code += PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y).ToString());
+            }
+            Debug.Log("Saved number - " + PlayerPrefs.GetInt("numberOfRows" + i) + " | Name - " + PlayerPrefs.GetString("Dungeon" + i) + " | Pieces count - " + PlayerPrefs.GetInt("piecesDungeonCount" + i) + " | Code - " + code);
+
+            numberOfSaves += 1;
+            PlayerPrefs.SetInt("allNumberOfSaves", numberOfSaves);
+        }
+    }
     public void DeleteDungeonByNumber(int deletedNumber)
     {
         if (deletedNumber < 0 || deletedNumber >= dungeonsItems.Count)
@@ -336,73 +397,29 @@ public class DungeonManager : MonoBehaviour
         if (currentObjectData != null)
             currentObjectData.dungeonManager = this;
 
-        ////  сортиров очка
-        //for (int i = 0; i < dungeonsItems.Count; i++)
-        //{
-        //    bool norm = false;
-        //    Debug.Log(i);
-        //    Debug.Log(dungeonsItems.Count);
+        for (int i = 0; i < dungeonsItems.Count; i++)
+        {
+            DungeonItem item = dungeonsItems[i];
 
-        //    if (dungeonsItems[i].dungeonName == "" || dungeonsItems[i].rowState.Count == 0 || dungeonsItems[i].piecesDungeonCount == 0 || dungeonsItems[i] == null)
-        //    {
-        //        norm = true;
-        //        difference += 1;
-        //        Debug.Log(i + " = null");
-        //        //break;
-        //        dungeonsItems.Remove(dungeonsItems[i]);
-        //    }
+            Debug.Log("Item = " + item);
 
-        //    if (difference > 0 && norm == false)
-        //    {
-        //        dungeonsItems[i - difference] = dungeonsItems[i];
-        //        dungeonsItems[i] = null;
-        //    }
-        //}
+            PlayerPrefs.SetInt("numberOfRows" + i, item.dungeonNumber);
+            PlayerPrefs.SetString("Dungeon" + i, item.dungeonName);
+            PlayerPrefs.SetInt("piecesDungeonCount" + i, item.piecesDungeonCount);
 
+            string code = "";
 
-        //  cleaning prefs data
-        //for (int i = 0; i < saveCount; i++)
-        //{
-        //    Debug.Log(i);
-        //    PlayerPrefs.DeleteKey("Dungeon" + i);
+            for (int y = 0; y < PlayerPrefs.GetInt("piecesDungeonCount" + i); y++)
+            {
+                PlayerPrefs.SetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y), item.rowState[y]);
+                code += PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y).ToString());
+            }
 
-        //    string code = "";
+            Debug.Log("Saved number - " + PlayerPrefs.GetInt("numberOfRows" + i) + " | Name - " + PlayerPrefs.GetString("Dungeon" + i) + " | Pieces count - " + PlayerPrefs.GetInt("piecesDungeonCount" + i) + " | Code - " + code);
 
-        //    for (int y = 0; y < PlayerPrefs.GetInt("piecesDungeonCount" + i); y++)
-        //    {
-        //        PlayerPrefs.DeleteKey(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y));
-        //        PlayerPrefs.DeleteKey(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y));
-        //    }
+            }
 
-        //    PlayerPrefs.DeleteKey("numberOfRows" + i);
-        //    PlayerPrefs.DeleteKey("piecesDungeonCount" + i);
-
-
-        //    Debug.Log("Saved number - " + i + " | Number Of Rows" + PlayerPrefs.GetInt("numberOfRows" + i) + " | Name - " + PlayerPrefs.GetString("Dungeon" + i) + " | Pieces count - " + PlayerPrefs.GetInt("piecesDungeonCount" + i) + " | Code - " + code);
-        //}
-        PlayerPrefs.DeleteAll();
-
-        //for (int i = 0; i < dungeonsItems.Count; i++)
-        //{
-        //    DungeonItem item = dungeonsItems[i];
-
-        //    PlayerPrefs.SetInt("numberOfRows" + i, item.dungeonNumber);
-        //    PlayerPrefs.SetString("Dungeon" + i, item.dungeonName);
-        //    PlayerPrefs.SetInt("piecesDungeonCount" + i, item.piecesDungeonCount);
-
-        //    string code = "";
-
-        //    for (int y = 0; y < PlayerPrefs.GetInt("piecesDungeonCount" + i); y++)
-        //    {
-        //        PlayerPrefs.SetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y), item.rowState[i]);
-        //        code += PlayerPrefs.GetInt(("dungeonProps" + PlayerPrefs.GetInt("numberOfRows" + i) + y).ToString());
-        //    }
-
-        //    Debug.Log("Saved number - " + PlayerPrefs.GetInt("numberOfRows" + i) + " | Name - " + PlayerPrefs.GetString("Dungeon" + i) + " | Pieces count - " + PlayerPrefs.GetInt("piecesDungeonCount" + i) + " | Code - " + code);
-
-        //}
-
-        difference = 0;
+            difference = 0;
     }
 }
 
@@ -533,7 +550,7 @@ class DungeonManagerEditor : Editor
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Apply removal"))
         {
-            dungeonManager.ResaveData();
+            dungeonManager.SaveAllDungeon();
             //dungeonManager.currentObjectData.inRealTimeEditor = true;
             //dungeonManager.currentDungeon.UpdateCurrentData();
         }

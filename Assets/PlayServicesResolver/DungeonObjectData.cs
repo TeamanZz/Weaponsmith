@@ -40,6 +40,7 @@ public class DungeonObjectData: MonoBehaviour
             Debug.Log(PlayerPrefs.GetInt("piecesDungeonCount" + setNumber));
 
             currentNumber = setNumber;
+            currentName = PlayerPrefs.GetString("Dungeon" + setNumber);
             PlayerPrefs.GetInt("piecesDungeonCount" + setNumber);
 
 
@@ -58,8 +59,6 @@ public class DungeonObjectData: MonoBehaviour
     public void SaveUpdatedDungeon()
     {
         PlayerPrefs.SetString("Dungeon" + currentNumber, currentName);
-
-        //currentName = "";
 
         PlayerPrefs.SetInt("numberOfRows" + currentNumber, currentNumber);
 
@@ -81,7 +80,7 @@ public class DungeonObjectData: MonoBehaviour
         //}
         Debug.Log("Saved number - " + PlayerPrefs.GetInt("numberOfRows" + currentNumber) + " | Name - " + PlayerPrefs.GetString("Dungeon" + currentNumber) + " | Pieces count - " + PlayerPrefs.GetInt("piecesDungeonCount" + currentNumber) + " | Code - " + code);
 
-        dungeonManager.ResaveData();
+        //dungeonManager.ResaveData();
     }
 
     public void RemoveChangesRedoSave()
