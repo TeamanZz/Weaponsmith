@@ -68,7 +68,7 @@ public class Character : MonoBehaviour
 
         animator.SetFloat(walkVelocityHash, walkVelocity);
 
-        Debug.Log(distance);
+        //Debug.Log(distance);
     }
     public void MoveToPoint(Vector3 point)
     {
@@ -99,7 +99,7 @@ public class Character : MonoBehaviour
         
         //agent.stoppingDistance = agentStopDistance;
 
-        Debug.Log(agent.stoppingDistance);
+        //Debug.Log(agent.stoppingDistance);
         // Debug.Log(point);
         cursor.LookAt(point);
         float rot = cursor.transform.eulerAngles.y;

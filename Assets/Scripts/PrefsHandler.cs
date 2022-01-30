@@ -72,9 +72,10 @@ public class PrefsHandler : MonoBehaviour
             {
                 ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
             }
-            if (value == "unavailable")
+            //WaitingForDrawing
+            if (value == "WaitingForDrawing")
             {
-                ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unavailable);
+                ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.WaitingForDrawing);
             }
             if (value == "available")
             {

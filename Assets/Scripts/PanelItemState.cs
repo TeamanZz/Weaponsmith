@@ -1,7 +1,7 @@
 public enum PanelItemState
 {
     Unknown,
-    Unavailable,
+    WaitingForDrawing,
     Available,
     Collapsed
 }

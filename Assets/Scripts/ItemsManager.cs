@@ -24,8 +24,10 @@ public class ItemsManager : MonoBehaviour
 
     public void MakeNextUnknownItemAsUnavailable()
     {
+        //WaitingForDrawing
         var nextItem = panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (nextItem != null)
-            nextItem.ChangeState(PanelItemState.Unavailable);
+            nextItem.ChangeState(PanelItemState.WaitingForDrawing);
+
     }
 }

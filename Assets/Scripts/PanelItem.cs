@@ -7,6 +7,16 @@ using TMPro;
 public class PanelItem : MonoBehaviour, IBuyableItem
 {
     public PanelItemState currentState;
+    public enum CurrentPanel
+    {
+        parent,
+        childObject
+    }
+    public CurrentPanel currentPanelState;
+    public PanelItem childPanel;
+
+    public int currentWeaponNumber;
+
     public int index;
     public int buysCount;
     [SerializeField] private TextMeshProUGUI itemNameText;
@@ -64,6 +74,12 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         InvokeRepeating("SaveData", 3, 3);
     }
 
+    //show weapon
+    public void ShowWeaponsByNumber()
+    {
+        if(currentPanelState == CurrentPanel.parent)
+            EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWeaponNumber);
+    }
     private void SaveData()
     {
         SaveState();
@@ -172,10 +188,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
         }
 
-        if (currentState == PanelItemState.Unavailable)
+        //WaitingForDrawing
+        if (currentState == PanelItemState.WaitingForDrawing)
         {
             SetUnavailableItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "unavailable");
+            PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
         }
 
         if (currentState == PanelItemState.Available)
@@ -203,9 +220,10 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
         }
 
-        if (currentState == PanelItemState.Unavailable)
+        //WaitingForDrawing
+        if (currentState == PanelItemState.WaitingForDrawing)
         {
-            PlayerPrefs.SetString("UpgradeItem" + index, "unavailable");
+            PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
         }
 
         if (currentState == PanelItemState.Available)
@@ -236,22 +254,25 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
         }
 
-        if (currentState == PanelItemState.Unavailable)
-        {
-            SetUnavailableItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "unavailable");
-        }
-
         if (currentState == PanelItemState.Available)
         {
             SetAvailableItemView();
             PlayerPrefs.SetString("UpgradeItem" + index, "available");
         }
+
+        //WaitingForDrawing
+        if (currentState == PanelItemState.WaitingForDrawing)
+        {
+            SetUnavailableItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
+        }
+
         UpdateView();
     }
 
+    //open panel
     public void SetAvailableItemView()
-    {
+    { 
         itemConditionsGO.SetActive(false);
         blurPanel.SetActive(false);
         generalIncreaseValueText.gameObject.SetActive(true);
@@ -262,6 +283,14 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         itemIcon.SetActive(true);
         itemNameText.text = itemName;
 
+        if (currentPanelState == CurrentPanel.parent)
+        {
+            if (childPanel != null)
+                childPanel.ChangeStateViaLoader(PanelItemState.Available);
+            else
+                Debug.Log("Child panel = null " + childPanel);
+        }
+
         for (int i = 0; i < itemConditionsList.Count; i++)
         {
             //200 Fire power
@@ -271,27 +300,35 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         }
     }
 
+    //WaitingForDrawing
     public void SetUnavailableItemView()
     {
-        itemConditionsGO.SetActive(true);
+        //itemConditionsGO.SetActive(true);
+        itemConditionsGO.SetActive(false);
+
         blurPanel.SetActive(true);
         generalIncreaseValueText.gameObject.SetActive(false);
         unknownSign.SetActive(false);
         progressBar.SetActive(false);
         buyButton.SetActive(false);
         completedSign.SetActive(false);
-        itemNameText.text = itemName;
-        itemIcon.SetActive(true);
+        itemNameText.text = "Waiting For Drawing";
 
-        for (int i = 0; i < itemConditionsList.Count; i++)
-        {
-            //200 Fire power
-            itemConditionsGO.transform.GetChild(i).gameObject.SetActive(true);
-            string conditionText = $"{itemConditionsList[i].count} {itemConditionsList[i].itemName}";
-            itemConditionsGO.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = conditionText;
-        }
+        itemIcon.SetActive(false);
+        unknownSign.SetActive(true);
+
+        //for (int i = 0; i < itemConditionsList.Count; i++)
+        //{
+        //    //200 Fire power
+        //    itemConditionsGO.transform.GetChild(i).gameObject.SetActive(true);
+        //    string conditionText = $"{itemConditionsList[i].count} {itemConditionsList[i].itemName}";
+        //    itemConditionsGO.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = conditionText;
+        //}
     }
 
+
+
+    //Unknown
     public void SetUnknownItemView()
     {
         itemIcon.SetActive(false);
@@ -304,6 +341,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         blurPanel.SetActive(true);
     }
 
+    //collapse
     public void CollapseItemView()
     {
         progressBar.SetActive(false);
@@ -311,6 +349,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         buyButton.SetActive(false);
         completedSign.SetActive(true);
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
+
+        if (currentPanelState == CurrentPanel.childObject)
+        {
+
+        }
     }
 
     private void UpdateItemValues()
