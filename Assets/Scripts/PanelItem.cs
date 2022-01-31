@@ -13,7 +13,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         childObject
     }
     public CurrentPanel currentPanelState;
-    public PanelItem childPanel;
+    public PanelItem connectPanel;
+
+    public PanelItem nextUpgradeItem;
 
     public int currentWeaponNumber;
 
@@ -103,7 +105,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         price = (int)costCurve.Evaluate(buysCount);
         UpdateView();
         if (itemName == "Hammer power")
-            SetUnavailableItemView();
+            SetWaitingForDrawingItemView();
     }
 
     private void PlayJumpAnimation()
@@ -114,36 +116,37 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         buysCountTextAnimator.Play("Jump", 0, 0);
     }
 
-    public void CheckConditions(PanelItem checkedItem)
-    {
-        var findedCondition = itemConditionsList.Find(x => x.itemName == checkedItem.itemName);
-        if (findedCondition != null)
-        {
-            if (findedCondition.count <= checkedItem.buysCount)
-            {
-                int conditionIndex = itemConditionsList.IndexOf(findedCondition);
-                findedCondition.conditionIsMet = true;
-                itemConditionsGO.transform.GetChild(conditionIndex).GetComponent<TextMeshProUGUI>().color = Color.green;
-                CheckAllConditionsIsMet();
-            }
-        }
-    }
+    //public void CheckConditions(PanelItem checkedItem)
+    //{
+    //    var findedCondition = itemConditionsList.Find(x => x.itemName == checkedItem.itemName);
+    //    if (findedCondition != null)
+    //    {
+    //        if (findedCondition.count <= checkedItem.buysCount)
+    //        {
+    //            int conditionIndex = itemConditionsList.IndexOf(findedCondition);
+    //            findedCondition.conditionIsMet = true;
+    //            itemConditionsGO.transform.GetChild(conditionIndex).GetComponent<TextMeshProUGUI>().color = Color.green;
+                
+    //            //CheckAllConditionsIsMet();
+    //        }
+    //    }
+    //}
 
-    private void CheckAllConditionsIsMet()
-    {
-        int metedConditions = 0;
-        for (int i = 0; i < itemConditionsList.Count; i++)
-        {
-            if (itemConditionsList[i].conditionIsMet)
-                metedConditions++;
-        }
-        if (metedConditions == itemConditionsList.Count)
-        {
-            itemConditionsList.Clear();
-            ItemsManager.Instance.MakeNextUnknownItemAsUnavailable();
-            ChangeState(PanelItemState.Available);
-        }
-    }
+    //private void CheckAllConditionsIsMet()
+    //{
+    //    int metedConditions = 0;
+    //    for (int i = 0; i < itemConditionsList.Count; i++)
+    //    {
+    //        if (itemConditionsList[i].conditionIsMet)
+    //            metedConditions++;
+    //    }
+    //    if (metedConditions == itemConditionsList.Count)
+    //    {
+    //        itemConditionsList.Clear();
+    //        ItemsManager.Instance.MakeNextUnknownItemAsUnavailable();
+    //        ChangeState(PanelItemState.Available);
+    //    }
+    //}
 
     private void SetItemName()
     {
@@ -158,20 +161,34 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         UpdateItemValues();
         UpdateView();
         PlayJumpAnimation();
-        ItemsManager.Instance.CheckConditions(this);
+        //nen
+        //ItemsManager.Instance.CheckConditions(this);
         CheckOnCollapse();
         // SetUnknownItemView();
         // CollapseItemView();
         // SetUnavailableItemView();
     }
 
+
     private void CheckOnCollapse()
     {
         if (buysCount >= buysEdgeCount)
         {
             ChangeState(PanelItemState.Collapsed);
+
+            if(connectPanel.currentState == PanelItemState.Collapsed)
+            {
+                if(nextUpgradeItem == null)
+                {
+                    Debug.Log("Next upgrade is null");
+                    return;
+                }
+
+                nextUpgradeItem.ChangeState(PanelItemState.WaitingForDrawing);
+            }
         }
     }
+
 
     public void ChangeState(PanelItemState newState)
     {
@@ -192,7 +209,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         //WaitingForDrawing
         if (currentState == PanelItemState.WaitingForDrawing)
         {
-            SetUnavailableItemView();
+            SetWaitingForDrawingItemView();
             PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
         }
 
@@ -249,7 +266,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         increaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}increaseValue", increaseValue);
         buysCount = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}buysCount");
         currentState = newState;
-        ItemsManager.Instance.CheckConditions(this);
+        //ItemsManager.Instance.CheckConditions(this);
 
         if (currentState == PanelItemState.Collapsed)
         {
@@ -272,7 +289,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         //WaitingForDrawing
         if (currentState == PanelItemState.WaitingForDrawing)
         {
-            SetUnavailableItemView();
+            SetWaitingForDrawingItemView();
             PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
         }
 
@@ -294,11 +311,13 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
         if (currentPanelState == CurrentPanel.parent)
         {
-            if (childPanel != null)
-                childPanel.ChangeStateViaLoader(PanelItemState.Available);
+            if (connectPanel != null)
+                connectPanel.ChangeStateViaLoader(PanelItemState.Available);
             else
-                Debug.Log("Child panel = null " + childPanel);
+                Debug.Log("Child panel = null " + connectPanel);
         }
+
+
 
         for (int i = 0; i < itemConditionsList.Count; i++)
         {
@@ -310,8 +329,10 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     }
 
     //WaitingForDrawing
-    public void SetUnavailableItemView()
+    public void SetWaitingForDrawingItemView()
     {
+        ItemsManager.Instance.currentWaitingPanel = this;
+
         //itemConditionsGO.SetActive(true);
         itemConditionsGO.SetActive(false);
 

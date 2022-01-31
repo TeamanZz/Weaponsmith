@@ -8,19 +8,21 @@ public class ItemsManager : MonoBehaviour
 
     public List<PanelItem> panelItemsList = new List<PanelItem>();
 
+    public PanelItem currentWaitingPanel;
+
     private void Awake()
     {
         Instance = this;
     }
 
-    public void CheckConditions(PanelItem panelItem)
-    {
-        for (int i = 0; i < panelItemsList.Count; i++)
-        {
-            if (panelItemsList[i] != panelItem)
-                panelItemsList[i].CheckConditions(panelItem);
-        }
-    }
+    //public void CheckConditions(PanelItem panelItem)
+    //{
+    //    for (int i = 0; i < panelItemsList.Count; i++)
+    //    {
+    //        if (panelItemsList[i] != panelItem)
+    //            panelItemsList[i].CheckConditions(panelItem);
+    //    }
+    //}
 
     public void MakeNextUnknownItemAsUnavailable()
     {
@@ -30,4 +32,22 @@ public class ItemsManager : MonoBehaviour
             nextItem.ChangeState(PanelItemState.WaitingForDrawing);
 
     }
+
+    public GameObject panel;
+    // dungeon
+   [ContextMenu("Test")]
+    public void OpenWaitingPanel()
+    {
+        currentWaitingPanel.ChangeState(PanelItemState.Available);
+        if(panel!= null)
+            panel.SetActive(true);
+    }
+
+
+    //ui
+    public void ClosedPanel()
+    {
+        panel.SetActive(false);
+    }
+
 }
