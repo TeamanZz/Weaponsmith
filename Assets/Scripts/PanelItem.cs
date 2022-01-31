@@ -150,6 +150,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         itemNameText.text = itemName;
     }
 
+    //  тут
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
@@ -182,11 +183,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
         }
 
-        if (currentState == PanelItemState.Unknown)
-        {
-            SetUnknownItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
-        }
+        //if (currentState == PanelItemState.Unknown)
+        //{
+        //    SetUnknownItemView();
+        //    PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
+        //}
 
         //WaitingForDrawing
         if (currentState == PanelItemState.WaitingForDrawing)
@@ -200,6 +201,14 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             SetAvailableItemView();
             PlayerPrefs.SetString("UpgradeItem" + index, "available");
         }
+    }
+
+    //  unkown
+    [ContextMenu("UnkownPanel")]
+    public void UnkownPanel()
+    {
+        SetUnknownItemView();
+        PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
     }
 
     private void OnDestroy()

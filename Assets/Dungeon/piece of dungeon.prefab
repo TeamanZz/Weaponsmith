@@ -594,6 +594,18 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5933997815584323967, guid: c38218b7d59ce344e811900272cc499c, type: 3}
+      propertyPath: m_Extents.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933997815584323967, guid: c38218b7d59ce344e811900272cc499c, type: 3}
+      propertyPath: m_Extents.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933997815584323967, guid: c38218b7d59ce344e811900272cc499c, type: 3}
+      propertyPath: m_Extents.z
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c38218b7d59ce344e811900272cc499c, type: 3}
 --- !u!4 &931325459838994723 stripped
@@ -1564,7 +1576,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 2.5, y: 2.5, z: 0.00001}
+  m_Extents: {x: 3, y: 3, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -2677,7 +2689,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 2.5, y: 2.5, z: 0.00001}
+  m_Extents: {x: 3, y: 3, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -3385,6 +3397,18 @@ PrefabInstance:
     - target: {fileID: 2349722, guid: c38218b7d59ce344e811900272cc499c, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933997815584323967, guid: c38218b7d59ce344e811900272cc499c, type: 3}
+      propertyPath: m_Extents.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933997815584323967, guid: c38218b7d59ce344e811900272cc499c, type: 3}
+      propertyPath: m_Extents.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933997815584323967, guid: c38218b7d59ce344e811900272cc499c, type: 3}
+      propertyPath: m_Extents.z
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c38218b7d59ce344e811900272cc499c, type: 3}
