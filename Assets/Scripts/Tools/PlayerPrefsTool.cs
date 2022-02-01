@@ -9,7 +9,19 @@ public class PlayerPrefsTool : MonoBehaviour
     [MenuItem("PlayerPrefs/Clear Player Prefs")]
     static void ClearPlayerPrefs()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
+        if (ItemsManager.Instance == null)
+            return;
+
+        MoneyHandler.Instance.moneyCount = 0;
+        PlayerPrefs.DeleteKey("MoneyPerSecond");
+        PlayerPrefs.DeleteKey("currentWaitingPanelNumber");
+        for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
+        {
+            PlayerPrefs.DeleteKey("UpgradeItem" + i);
+        }
+
+        Debug.Log("Delete all");
     }
     // [MenuItem("PlayerPrefs/Add10000PP")]
 

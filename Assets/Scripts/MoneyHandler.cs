@@ -20,6 +20,7 @@ public class MoneyHandler : MonoBehaviour
 
     private Coroutine currencyCoroutine;
 
+    [ContextMenu("Awake")]
     private void Awake()
     {
         Instance = this;

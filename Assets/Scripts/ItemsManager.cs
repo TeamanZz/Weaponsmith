@@ -10,9 +10,16 @@ public class ItemsManager : MonoBehaviour
 
     public PanelItem currentWaitingPanel;
 
+    public GameObject newWeaponUnlockPanel;
+    private WeaponUnlockPanel weaponPanel;
+
+    [ContextMenu("Awake")]
     private void Awake()
     {
         Instance = this;
+        weaponPanel = newWeaponUnlockPanel.GetComponent<WeaponUnlockPanel>();
+        newWeaponUnlockPanel.SetActive(false);
+        currentWaitingPanel = panelItemsList[PlayerPrefs.GetInt("currentWaitingPanelNumber")];
     }
 
     //public void CheckConditions(PanelItem panelItem)
@@ -33,21 +40,29 @@ public class ItemsManager : MonoBehaviour
 
     }
 
-    public GameObject panel;
-    // dungeon
-   [ContextMenu("Test")]
+    //  dungeon
+    [ContextMenu("Test")]
     public void OpenWaitingPanel()
     {
-        currentWaitingPanel.ChangeState(PanelItemState.Available);
-        if(panel!= null)
-            panel.SetActive(true);
+        if(currentWaitingPanel != null)
+            currentWaitingPanel.ChangeState(PanelItemState.Available);
+
+        if (newWeaponUnlockPanel != null && currentWaitingPanel != null)
+        {
+            newWeaponUnlockPanel.SetActive(true);
+            weaponPanel.InitializationPanel(currentWaitingPanel.weaponSprite, currentWaitingPanel.itemName);
+            
+            if(currentWaitingPanel.currentWeaponNumber < EquipmentManager.equipmentManager.weaponList.Count)
+                EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWaitingPanel.currentWeaponNumber);
+        }
+
+
     }
 
-
-    //ui
+    //  ui
     public void ClosedPanel()
     {
-        panel.SetActive(false);
+        newWeaponUnlockPanel.SetActive(false);
     }
 
 }

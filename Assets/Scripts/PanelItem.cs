@@ -41,7 +41,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [SerializeField] private Animator generalIncreaseValueTextAnimator;
     [SerializeField] private Animator buysCountTextAnimator;
 
-    [SerializeField] private string itemName;
+    public string itemName;
     [SerializeField] private int generalIncreaseValue;
     [SerializeField] private int increaseValue;
     [SerializeField] private int price;
@@ -50,7 +50,14 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     public AnimationCurve costCurve;
     public Color buttonDefaultColor;
+    public Image weaponSprite;
 
+    private void Awake()
+    {
+        // PlayerPrefs.DeleteAll();
+        weaponSprite = itemIcon.GetComponent<Image>();
+        Initialize();
+    }
     private void FixedUpdate()
     {
         if (price <= MoneyHandler.Instance.moneyCount)
@@ -63,12 +70,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             buyButtonComponent.enabled = false;
             buyButtonImage.color = Color.gray;
         }
-    }
-
-    private void Awake()
-    {
-        // PlayerPrefs.DeleteAll();
-        Initialize();
     }
 
     private void Start()
@@ -104,8 +105,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             SetItemName();
         price = (int)costCurve.Evaluate(buysCount);
         UpdateView();
-        if (itemName == "Hammer power")
-            SetWaitingForDrawingItemView();
+        //if (itemName == "Wooden sword")
+        //    SetWaitingForDrawingItemView();
     }
 
     private void PlayJumpAnimation()
@@ -189,7 +190,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         }
     }
 
-
     public void ChangeState(PanelItemState newState)
     {
         currentState = newState;
@@ -200,11 +200,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
         }
 
-        //if (currentState == PanelItemState.Unknown)
-        //{
-        //    SetUnknownItemView();
-        //    PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
-        //}
+        if (currentState == PanelItemState.Unknown)
+        {
+            SetUnknownItemView();
+            PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
+        }
 
         //WaitingForDrawing
         if (currentState == PanelItemState.WaitingForDrawing)
@@ -346,6 +346,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
         itemIcon.SetActive(false);
         unknownSign.SetActive(true);
+
+        PlayerPrefs.SetInt("currentWaitingPanelNumber", index);
 
         //for (int i = 0; i < itemConditionsList.Count; i++)
         //{

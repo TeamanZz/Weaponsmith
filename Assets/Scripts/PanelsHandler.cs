@@ -7,11 +7,7 @@ public class PanelsHandler : MonoBehaviour
 {
     public static PanelsHandler Instance;
     public int dungeonNumber;
-    private void Awake()
-    {
-        Instance = this;
-    }
-
+    
     [SerializeField] private List<string> panelNames = new List<string>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
@@ -28,6 +24,18 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private Vector3 cameraRoomPosition;
     [SerializeField] private Vector3 cameraRoomRotation;
 
+    public GameObject mainCamera;
+    public GameObject dungeonCamera;
+    public static bool currentLocationInTheDungeon = false;
+
+    public void Awake()
+    {
+        Instance = this;
+
+        currentLocationInTheDungeon = false;
+        mainCamera.SetActive(true);
+        dungeonCamera.SetActive(false);
+    }
     public void Start()
     {
         OpenPanel(1);
@@ -37,15 +45,24 @@ public class PanelsHandler : MonoBehaviour
         //dungeon panel
         if (panelIndex == dungeonNumber)
         {
+            currentLocationInTheDungeon = true;
+            mainCamera.SetActive(false);
+            dungeonCamera.SetActive(true);
 
             for (int i = 0; i < panels.Count; i++)
             {
                 panels[i].SetActive(false);
             }
 
-            commonElement.SetActive(false);
+            commonElement.SetActive(true);
             panels[panelIndex].SetActive(true);
             return;
+        }
+        else
+        {
+            currentLocationInTheDungeon = false;
+            mainCamera.SetActive(true);
+            dungeonCamera.SetActive(false);
         }
 
         for (int i = 0; i < panels.Count; i++)
