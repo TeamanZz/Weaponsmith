@@ -9,9 +9,11 @@ public class ItemsManager : MonoBehaviour
     public List<PanelItem> panelItemsList = new List<PanelItem>();
 
     public PanelItem currentWaitingPanel;
+    public int awardPanelState = 0;
 
     public GameObject newWeaponUnlockPanel;
     private WeaponUnlockPanel weaponPanel;
+    public GameObject awardPanel;
 
     [ContextMenu("Awake")]
     private void Awake()
@@ -20,6 +22,11 @@ public class ItemsManager : MonoBehaviour
         weaponPanel = newWeaponUnlockPanel.GetComponent<WeaponUnlockPanel>();
         newWeaponUnlockPanel.SetActive(false);
         currentWaitingPanel = panelItemsList[PlayerPrefs.GetInt("currentWaitingPanelNumber")];
+        awardPanelState = PlayerPrefs.GetInt("AwardPanel");
+        if (awardPanelState == 1)
+            awardPanel.SetActive(true);
+        else
+            awardPanel.SetActive(false);
     }
 
     //public void CheckConditions(PanelItem panelItem)
@@ -54,6 +61,9 @@ public class ItemsManager : MonoBehaviour
             
             if(currentWaitingPanel.currentWeaponNumber < EquipmentManager.equipmentManager.weaponList.Count)
                 EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWaitingPanel.currentWeaponNumber);
+
+            awardPanel.SetActive(false); 
+            PlayerPrefs.SetInt("AwardPanel", 0);
         }
 
 

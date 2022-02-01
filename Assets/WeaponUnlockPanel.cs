@@ -11,6 +11,6 @@ public class WeaponUnlockPanel : MonoBehaviour
     public void InitializationPanel(Image weaponPicture, string weaponTitle)
     {
         title.text = weaponTitle;
-        weaponImage = weaponImage;
+        weaponImage.sprite = weaponImage.sprite;
     }
 }

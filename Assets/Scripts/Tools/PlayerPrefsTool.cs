@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerPrefsTool : MonoBehaviour
 {
+    static int numberCount;
 #if UNITY_EDITOR
     [MenuItem("PlayerPrefs/Clear Player Prefs")]
     static void ClearPlayerPrefs()
@@ -16,10 +17,12 @@ public class PlayerPrefsTool : MonoBehaviour
         MoneyHandler.Instance.moneyCount = 0;
         PlayerPrefs.DeleteKey("MoneyPerSecond");
         PlayerPrefs.DeleteKey("currentWaitingPanelNumber");
-        for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
-        {
-            PlayerPrefs.DeleteKey("UpgradeItem" + i);
-        }
+
+            for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
+            {
+                PlayerPrefs.DeleteKey("UpgradeItem" + i);
+            }
+        
 
         Debug.Log("Delete all");
     }

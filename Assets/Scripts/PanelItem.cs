@@ -346,6 +346,12 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
         itemIcon.SetActive(false);
         unknownSign.SetActive(true);
+        
+        if (ItemsManager.Instance != null)
+        {
+            ItemsManager.Instance.awardPanel.SetActive(true);
+            PlayerPrefs.SetInt("AwardPanel", 1);
+        }
 
         PlayerPrefs.SetInt("currentWaitingPanelNumber", index);
 
