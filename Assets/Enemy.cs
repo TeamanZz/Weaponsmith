@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 {
     public int numberOfHitsToDeath = 3;
 
+    public Transform healthPanel;
+
     public float receivingTime = 3f;
 
     public Slider healthBar;
@@ -14,42 +16,21 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float amountOfDamage;
 
     public int numberOfHits = 0;
-    public void Awake()
+
+    public BoxCollider triggerObject;
+    public void Start()
     {
         amountOfDamage = 100 / numberOfHitsToDeath;
         numberOfHits = numberOfHitsToDeath;
+
+        triggerObject.enabled = true;
     }
 
     [ContextMenu("Damage")]
     public void TakingDamage()
     {
-        float currentValue;
-
-        //if (healthBar.value - amountOfDamage < 10)
-        //{
-        //    for (int i = 0; i < healthBar.value * Time.deltaTime; i++)
-        //    {
-        //        healthBar.value -= 1;
-        //    }
-        //    //currentValue = 0;
-        //}
-        //else
-        //{
-        //    for (int i = 0; i < amountOfDamage * Time.deltaTime; i++)
-        //    {
-        //        healthBar.value -= 1;
-        //    }
-        //}
-            //currentValue = healthBar.value - amountOfDamage;
-
-        //healthBar.value = Mathf.MoveTowards(healthBar.value, currentValue, receivingTime);
-
         StartCoroutine(TakeDamage());
        
-        //for(int i = 0; i < amountOfDamage; i ++)
-        //{
-        //    healthBar.value -= 1;
-        //}
         Debug.Log(healthBar.value);
     }
 
@@ -90,6 +71,8 @@ public class Enemy : MonoBehaviour
     }
     public void KillingEnemy()
     {
+        triggerObject.enabled = false;
+
         Character.character.enemies.Remove(this);
         Character.character.inAttack = false;
     }

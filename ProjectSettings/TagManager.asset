@@ -12,6 +12,8 @@ TagManager:
   - DropReward
   - PinPoint
   - clawInside
+  - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX
