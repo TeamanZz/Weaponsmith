@@ -5,26 +5,32 @@ using UnityEngine;
 
 public class PlayerPrefsTool : MonoBehaviour
 {
-    static int numberCount;
 #if UNITY_EDITOR
     [MenuItem("PlayerPrefs/Clear Player Prefs")]
     static void ClearPlayerPrefs()
     {
-        //PlayerPrefs.DeleteAll();
-        if (ItemsManager.Instance == null)
-            return;
+        Debug.Log("Start Clear");
+        if (MoneyHandler.Instance != null)
+            MoneyHandler.Instance.moneyCount = 0;
 
-        MoneyHandler.Instance.moneyCount = 0;
         PlayerPrefs.DeleteKey("MoneyPerSecond");
         PlayerPrefs.DeleteKey("currentWaitingPanelNumber");
 
+        if (ItemsManager.Instance != null)
             for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
             {
                 PlayerPrefs.DeleteKey("UpgradeItem" + i);
             }
-        
 
-        Debug.Log("Delete all");
+        if (RoomObjectsHandler.Instance != null)
+            for (int i = 0; i < RoomObjectsHandler.Instance.roomObjects.Count; i++)
+            {
+                PlayerPrefs.DeleteKey("WorkshopGameobject" + i);
+            }
+
+        PlayerPrefs.DeleteKey("MoneyCount");
+
+        Debug.Log("End all clear");
     }
     // [MenuItem("PlayerPrefs/Add10000PP")]
 

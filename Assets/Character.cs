@@ -57,10 +57,11 @@ public class Character : MonoBehaviour
         }
 
         float distance = Vector3.Distance(transform.position, targetPosition);
-        if (distance < stopDistance)
+        if (distance < stopDistance && animator.GetBool("Fight") == true)
         {
             animator.SetBool("Fight", false);
-            Debug.Log("Stoping " + stopDistance);
+            //Debug.Log(animator.GetBool("Fight"));
+            //Debug.Log("Stoping " + stopDistance);
         }
 
         //Debug.Log(distance);

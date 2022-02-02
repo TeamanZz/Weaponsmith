@@ -16,7 +16,7 @@ public class ItemsManager : MonoBehaviour
     public GameObject awardPanel;
 
     [ContextMenu("Awake")]
-    private void Awake()
+    public void Awake()
     {
         Instance = this;
         weaponPanel = newWeaponUnlockPanel.GetComponent<WeaponUnlockPanel>();

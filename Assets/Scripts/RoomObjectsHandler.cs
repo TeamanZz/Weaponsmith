@@ -10,7 +10,8 @@ public class RoomObjectsHandler : MonoBehaviour
     public List<WorkshopItem> workshopPanelItems = new List<WorkshopItem>();
     public GameObject appearParticles;
 
-    private void Awake()
+    [ContextMenu("Awake")]
+    public void Awake()
     {
         Instance = this;
     }

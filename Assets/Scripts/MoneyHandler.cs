@@ -19,14 +19,32 @@ public class MoneyHandler : MonoBehaviour
     private float timeBetweenMoneyIncrease = 0.5f;
 
     private Coroutine currencyCoroutine;
+    [Header("All connect initialization")]
+    public PanelsHandler panelsHandler;
+    public ItemsManager itemsManager;
+    public RoomObjectsHandler objectsHandler;
 
-    [ContextMenu("Awake")]
     private void Awake()
     {
         Instance = this;
         moneyPerSecond = PlayerPrefs.GetInt("MoneyPerSecond");
         if (moneyPerSecond == 0)
             moneyPerSecond = 1;
+
+    }
+
+    [ContextMenu("All Awake")]
+    public void AllAwakeInitialization()
+    {
+        if (panelsHandler == null || itemsManager == null || objectsHandler == null)
+            return;
+
+        panelsHandler.Awake();
+        itemsManager.Awake();
+        objectsHandler.Awake();
+        Awake();
+
+        Debug.Log("All awake");
     }
 
     private void SaveMoneyPerSec()
