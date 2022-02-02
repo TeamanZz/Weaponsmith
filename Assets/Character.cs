@@ -22,19 +22,25 @@ public class Character : MonoBehaviour
     public float acceleratingSpeed = 1f;
     public float stopSpeed = 0.5f;
 
-    public float stopDistance = 1f;
+    public float stopingDistance = 2f;
     public float agentStopDistance = 3f;
     public Transform cursor;
 
     public Vector3 targetPosition;
+    [Header("Battl settings")]
+    public List<Enemy> enemies = new List<Enemy>();
+    public bool inAttack = false;
+    public float hitReload = 0.4f;
     public enum characterState
     {
         moveToPoint,
         attack
     }
 
-    public void Awake()
+    public Vector3 enemyPosition;
+        void Awake()
     {
+
         rigidbody = GetComponent<Rigidbody>();
         character = this;
         agent = GetComponent<NavMeshAgent>();
@@ -46,7 +52,23 @@ public class Character : MonoBehaviour
     {
         Ray ray = dungeonCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit) && Input.GetMouseButton(0) && PanelsHandler.currentLocationInTheDungeon == true)
+
+        if(enemies.Count > 0 && inAttack == false)
+        {
+            AttackEnemy(enemies[0]);
+            inAttack = true;
+        }
+
+        if (inAttack == true && enemyPosition != null)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemyPosition);
+            if(distanceToEnemy <= stopingDistance)
+            {
+                animator.SetBool("Fight", false);
+            }
+        }
+
+        if (Physics.Raycast(ray, out hit) && Input.GetMouseButton(0) && PanelsHandler.currentLocationInTheDungeon == true && inAttack == false)
         {
             GameObject target = Instantiate(debugSphere, hit.point, Quaternion.identity);
             Destroy(target, timeToTargetRemoval);
@@ -57,7 +79,8 @@ public class Character : MonoBehaviour
         }
 
         float distance = Vector3.Distance(transform.position, targetPosition);
-        if (distance < stopDistance && animator.GetBool("Fight") == true)
+
+        if (distance < stopingDistance && animator.GetBool("Fight") == true)
         {
             animator.SetBool("Fight", false);
             //Debug.Log(animator.GetBool("Fight"));
@@ -66,32 +89,44 @@ public class Character : MonoBehaviour
 
         //Debug.Log(distance);
     }
+
+    public void AttackEnemy(Enemy enemy)
+    {
+        animator.SetBool("Fight", true);
+
+        agent.SetDestination(enemy.transform.position);
+        agent.stoppingDistance = stopingDistance;
+    }
     public void MoveToPoint(Vector3 point)
     {
         float distance = Vector3.Distance(transform.position, point);
         //Debug.Log(distance);
 
-        agent.SetDestination(point);
-        targetPosition = point;
-        animator.SetBool("Fight", true);
+        var path = new NavMeshPath();
+        agent.CalculatePath(point, path);
 
-        cursor.LookAt(point);
-        float rot = cursor.transform.eulerAngles.y;
-        transform.rotation = Quaternion.Euler(transform.rotation.x, rot, transform.rotation.z);
-
-        Debug.DrawLine(transform.position, point, Color.red);
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other.transform.tag == "Enemy" && other.GetComponent<EnemyController>())
+        if (path.status == NavMeshPathStatus.PathComplete)
         {
+            agent.SetDestination(point);
+            targetPosition = point;
+            cursor.LookAt(point);
 
+            animator.SetBool("Fight", true);
+
+            float rot = cursor.transform.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(transform.rotation.x, rot, transform.rotation.z);
+
+            Debug.DrawLine(transform.position, point, Color.red);
+            agent.Resume();
+        }
+        else
+        {
+            animator.SetBool("Fight", false);
+
+            Debug.Log("Path false");
+            agent.Stop();
         }
     }
 
-    public void OnTriggerExit(Collider other)
-    {
-        
-    }
+    
 }
