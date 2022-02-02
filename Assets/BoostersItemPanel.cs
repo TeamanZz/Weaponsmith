@@ -9,8 +9,6 @@ public class BoostersItemPanel : MonoBehaviour
 
     public BoostersItemPanel nextUpgradeItem;
 
-    public int currentWeaponNumber;
-
     public int index;
     public int buysCount;
     [SerializeField] private TextMeshProUGUI itemNameText;
