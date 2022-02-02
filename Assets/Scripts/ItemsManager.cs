@@ -29,15 +29,6 @@ public class ItemsManager : MonoBehaviour
             awardPanel.SetActive(false);
     }
 
-    //public void CheckConditions(PanelItem panelItem)
-    //{
-    //    for (int i = 0; i < panelItemsList.Count; i++)
-    //    {
-    //        if (panelItemsList[i] != panelItem)
-    //            panelItemsList[i].CheckConditions(panelItem);
-    //    }
-    //}
-
     public void MakeNextUnknownItemAsUnavailable()
     {
         //WaitingForDrawing

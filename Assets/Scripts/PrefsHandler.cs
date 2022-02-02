@@ -6,7 +6,7 @@ using System;
 public class PrefsHandler : MonoBehaviour
 {
     public static PrefsHandler Instance;
-    public List<PartsItem> blueprintsList = new List<PartsItem>();
+    //public List<PartsItem> blueprintsList = new List<PartsItem>();
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class PrefsHandler : MonoBehaviour
         // PlayerPrefs.DeleteAll();
         LoadMoney();
         LoadWorkshopItems();
-        LoadBlueprints();
+        //LoadBlueprints();
         LoadUpgrades();
 
         InvokeRepeating("SaveMoney", 1, 3);
@@ -48,16 +48,16 @@ public class PrefsHandler : MonoBehaviour
         }
     }
 
-    private void LoadBlueprints()
-    {
-        for (int i = 0; i < blueprintsList.Count; i++)
-        {
-            if (PlayerPrefs.GetString("BlueprintPanelItem" + i) == "unlocked")
-            {
-                blueprintsList[i].UnlockItem();
-            }
-        }
-    }
+    //private void LoadBlueprints()
+    //{
+    //    for (int i = 0; i < blueprintsList.Count; i++)
+    //    {
+    //        if (PlayerPrefs.GetString("BlueprintPanelItem" + i) == "unlocked")
+    //        {
+    //            blueprintsList[i].UnlockItem();
+    //        }
+    //    }
+    //}
 
     private void LoadUpgrades()
     {

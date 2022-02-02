@@ -23,6 +23,8 @@ public class MoneyHandler : MonoBehaviour
     public PanelsHandler panelsHandler;
     public ItemsManager itemsManager;
     public RoomObjectsHandler objectsHandler;
+    public DungeonItemManager dungeonItemManager;
+    public BoostersManager boostersManager;
 
     private void Awake()
     {
@@ -36,12 +38,14 @@ public class MoneyHandler : MonoBehaviour
     [ContextMenu("All Awake")]
     public void AllAwakeInitialization()
     {
-        if (panelsHandler == null || itemsManager == null || objectsHandler == null)
+        if (panelsHandler == null || itemsManager == null || objectsHandler == null || dungeonItemManager == null || boostersManager == null)
             return;
 
         panelsHandler.Awake();
         itemsManager.Awake();
         objectsHandler.Awake();
+        dungeonItemManager.Awake();
+        boostersManager.Awake();
         Awake();
 
         Debug.Log("All awake");

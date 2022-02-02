@@ -347,7 +347,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         itemIcon.SetActive(false);
         unknownSign.SetActive(true);
         
-        if (ItemsManager.Instance != null)
+        if (ItemsManager.Instance != null && ItemsManager.Instance.awardPanel != null)
         {
             ItemsManager.Instance.awardPanel.SetActive(true);
             PlayerPrefs.SetInt("AwardPanel", 1);
@@ -382,10 +382,15 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     //collapse
     public void CollapseItemView()
     {
+        unknownSign.SetActive(false);
+        blurPanel.SetActive(false);
+        itemNameText.text = itemName;
         progressBar.SetActive(false);
         generalIncreaseValueText.gameObject.SetActive(false);
         buyButton.SetActive(false);
         completedSign.SetActive(true);
+        itemIcon.SetActive(true);
+
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
 
         if (currentPanelState == CurrentPanel.childObject)

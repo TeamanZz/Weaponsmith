@@ -14,12 +14,24 @@ public class PlayerPrefsTool : MonoBehaviour
             MoneyHandler.Instance.moneyCount = 0;
 
         PlayerPrefs.DeleteKey("MoneyPerSecond");
-        PlayerPrefs.DeleteKey("currentWaitingPanelNumber");
+        PlayerPrefs.SetInt("currentWaitingPanelNumber", 0);
 
         if (ItemsManager.Instance != null)
             for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
             {
                 PlayerPrefs.DeleteKey("UpgradeItem" + i);
+            }
+
+        if (DungeonItemManager.Instance != null)
+            for (int i = 0; i < DungeonItemManager.Instance.panelItemsList.Count; i++)
+            {
+                PlayerPrefs.DeleteKey("DungeonUpgradeItem" + i);
+            }
+
+        if (BoostersManager.Instance != null)
+            for (int i = 0; i < DungeonItemManager.Instance.panelItemsList.Count; i++)
+            {
+                PlayerPrefs.DeleteKey("BoostersUpgradeItem" + i);
             }
 
         if (RoomObjectsHandler.Instance != null)
@@ -28,6 +40,7 @@ public class PlayerPrefsTool : MonoBehaviour
                 PlayerPrefs.DeleteKey("WorkshopGameobject" + i);
             }
 
+        PlayerPrefs.SetInt("AwardPanel", 0);
         PlayerPrefs.DeleteKey("MoneyCount");
 
         Debug.Log("End all clear");
