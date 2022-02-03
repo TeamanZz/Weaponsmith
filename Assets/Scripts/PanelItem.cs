@@ -7,18 +7,10 @@ using TMPro;
 public class PanelItem : MonoBehaviour, IBuyableItem
 {
     public PanelItemState currentState;
-    public enum CurrentPanel
-    {
-        parent,
-        childObject
-    }
     public CurrentPanel currentPanelState;
     public PanelItem connectPanel;
-
     public PanelItem nextUpgradeItem;
-
     public int currentWeaponNumber;
-
     public int index;
     public int buysCount;
     [SerializeField] private TextMeshProUGUI itemNameText;
@@ -46,7 +38,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [SerializeField] private int increaseValue;
     [SerializeField] private int price;
     [SerializeField] private int buysEdgeCount;
-    [SerializeField] private List<ItemCondition> itemConditionsList = new List<ItemCondition>();
 
     public AnimationCurve costCurve;
     public Color buttonDefaultColor;
@@ -281,16 +272,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             else
                 Debug.Log("Child panel = null " + connectPanel);
         }
-
-
-
-        for (int i = 0; i < itemConditionsList.Count; i++)
-        {
-            //200 Fire power
-            itemConditionsGO.transform.GetChild(i).gameObject.SetActive(true);
-            string conditionText = $"{itemConditionsList[i].count} {itemConditionsList[i].itemName}";
-            itemConditionsGO.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = conditionText;
-        }
     }
 
     //WaitingForDrawing
@@ -368,5 +349,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
         buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
         progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);
+    }
+
+    public enum CurrentPanel
+    {
+        parent,
+        childObject
     }
 }

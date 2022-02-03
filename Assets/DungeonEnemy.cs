@@ -12,22 +12,16 @@ public class DungeonEnemy : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent<DungeonCharacter>(out dungeonCharacter))
-        {
-            StartCoroutine(IEDeath());
-        }
-    }
-
     public void InvokeDeathAnimation()
     {
+        if (ItemsManager.Instance.currentWaitingPanel != null && ItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
+        {
+            int val = Random.Range(0, 11);
+            if (val == 0)
+            {
+                ItemsManager.Instance.OpenWaitingPanel();
+            }
+        }
         animator.SetTrigger("Death");
-    }
-
-    private IEnumerator IEDeath()
-    {
-        yield return new WaitForSeconds(0.7f);
-
     }
 }

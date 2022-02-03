@@ -35,35 +35,32 @@ public class ItemsManager : MonoBehaviour
         var nextItem = panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (nextItem != null)
             nextItem.ChangeState(PanelItemState.WaitingForDrawing);
-
     }
 
     //  dungeon
     [ContextMenu("Test")]
     public void OpenWaitingPanel()
     {
-        if(currentWaitingPanel != null)
+        if (currentWaitingPanel != null)
             currentWaitingPanel.ChangeState(PanelItemState.Available);
 
         if (newWeaponUnlockPanel != null && currentWaitingPanel != null)
         {
             newWeaponUnlockPanel.SetActive(true);
             weaponPanel.InitializationPanel(currentWaitingPanel.weaponSprite, currentWaitingPanel.itemName);
-            
-            if(currentWaitingPanel.currentWeaponNumber < EquipmentManager.equipmentManager.weaponList.Count)
+
+            if (currentWaitingPanel.currentWeaponNumber < EquipmentManager.equipmentManager.weaponList.Count)
                 EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWaitingPanel.currentWeaponNumber);
 
-            awardPanel.SetActive(false); 
+            awardPanel.SetActive(false);
             PlayerPrefs.SetInt("AwardPanel", 0);
+
+            SkinsManager.Instance.ChangeSkin();
         }
-
-
     }
 
-    //  ui
     public void ClosedPanel()
     {
         newWeaponUnlockPanel.SetActive(false);
     }
-
 }

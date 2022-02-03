@@ -89,7 +89,6 @@ public class DungeonPanelItem : MonoBehaviour
         PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}price", price);
         PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}increaseValue", increaseValue);
         PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}buysCount", buysCount);
-        Debug.Log("PREEEEFS" + PlayerPrefs.GetFloat($"DungeonUpgradeItem{index}buysCount"));
     }
 
     private void Initialize()
