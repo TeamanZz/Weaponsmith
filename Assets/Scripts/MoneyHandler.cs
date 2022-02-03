@@ -115,4 +115,9 @@ public class MoneyHandler : MonoBehaviour
         newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3) + "$";
         newPopup.transform.SetAsFirstSibling();
     }
+
+    public void IncreaseIncomeByTap()
+    {
+        moneyCount += moneyPerSecond / 2;
+    }
 }
