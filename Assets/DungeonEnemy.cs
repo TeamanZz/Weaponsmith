@@ -16,7 +16,7 @@ public class DungeonEnemy : MonoBehaviour
     {
         if (ItemsManager.Instance.currentWaitingPanel != null && ItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
         {
-            int val = Random.Range(0, 11);
+            int val = Random.Range(0, 7);
             if (val == 0)
             {
                 ItemsManager.Instance.OpenWaitingPanel();

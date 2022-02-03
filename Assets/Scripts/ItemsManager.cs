@@ -50,8 +50,8 @@ public class ItemsManager : MonoBehaviour
             Debug.Log(currentWaitingPanel.itemName);
             weaponPanel.InitializePanel(currentWaitingPanel.weaponSprite, currentWaitingPanel.itemName);
 
-            if (currentWaitingPanel.currentWeaponNumber < EquipmentManager.equipmentManager.weaponList.Count)
-                EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWaitingPanel.currentWeaponNumber);
+            // if (currentWaitingPanel.currentWeaponNumber < EquipmentManager.equipmentManager.weaponList.Count)
+            //     EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWaitingPanel.currentWeaponNumber);
 
             awardPanel.SetActive(false);
             PlayerPrefs.SetInt("AwardPanel", 0);

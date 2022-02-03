@@ -335,7 +335,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         increaseValue += (2 * index);
         if (index == 0)
         {
-            increaseValue = (int)(increaseValue * 1.1f);
+            increaseValue += 2;
         }
         buysCount++;
         price = (int)costCurve.Evaluate(buysCount);
