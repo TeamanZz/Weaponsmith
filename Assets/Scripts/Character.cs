@@ -36,7 +36,7 @@ public class Character : MonoBehaviour
     public bool inAttack = false;
 
     public float hitReload = 0.4f;
-    
+
     void Awake()
     {
         character = this;
@@ -90,7 +90,7 @@ public class Character : MonoBehaviour
                 Debug.Log("Add enemy");
                 return;
             }
-                
+
 
             GameObject target = Instantiate(debugSphere, hit.point, Quaternion.identity);
             Destroy(target, timeToTargetRemoval);
