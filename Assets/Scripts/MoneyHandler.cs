@@ -118,6 +118,12 @@ public class MoneyHandler : MonoBehaviour
 
     public void IncreaseIncomeByTap()
     {
-        moneyCount += moneyPerSecond / 2;
+        var increaseValue = moneyPerSecond / 10;
+        if (increaseValue == 0)
+            moneyCount++;
+        else
+            moneyCount += increaseValue;
+        moneyCountText.text = FormatNumsHelper.FormatNum((double)moneyCount);
+
     }
 }
