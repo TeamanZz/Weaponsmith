@@ -75,12 +75,15 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void Start()
     {
         InvokeRepeating("SaveData", 3, 3);
+
+        if (buysCount >= buysEdgeCount)
+            ChangeState(PanelItemState.Collapsed);
     }
 
     //show weapon
     public void ShowWeaponsByNumber()
     {
-        if(currentPanelState == CurrentPanel.parent)
+        if (currentPanelState == CurrentPanel.parent)
             EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWeaponNumber);
     }
     private void SaveData()
@@ -127,7 +130,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     //            int conditionIndex = itemConditionsList.IndexOf(findedCondition);
     //            findedCondition.conditionIsMet = true;
     //            itemConditionsGO.transform.GetChild(conditionIndex).GetComponent<TextMeshProUGUI>().color = Color.green;
-                
+
     //            //CheckAllConditionsIsMet();
     //        }
     //    }
@@ -154,7 +157,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         itemNameText.text = itemName;
     }
 
-    //  тут
+    //  пїЅпїЅпїЅ
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
@@ -177,9 +180,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         {
             ChangeState(PanelItemState.Collapsed);
 
-            if(connectPanel.currentState == PanelItemState.Collapsed)
+            if (connectPanel.currentState == PanelItemState.Collapsed)
             {
-                if(nextUpgradeItem == null)
+                if (nextUpgradeItem == null)
                 {
                     Debug.Log("Next upgrade is null");
                     return;
@@ -298,7 +301,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     //open panel
     public void SetAvailableItemView()
-    { 
+    {
         itemConditionsGO.SetActive(false);
         blurPanel.SetActive(false);
         generalIncreaseValueText.gameObject.SetActive(true);
@@ -346,7 +349,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
         itemIcon.SetActive(false);
         unknownSign.SetActive(true);
-        
+
         if (ItemsManager.Instance != null && ItemsManager.Instance.awardPanel != null)
         {
             ItemsManager.Instance.awardPanel.SetActive(true);

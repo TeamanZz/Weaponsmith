@@ -71,6 +71,9 @@ public class DungeonPanelItem : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("SaveData", 3, 3);
+
+        if (buysCount >= buysEdgeCount)
+            ChangeState(PanelItemState.Collapsed);
     }
 
     //show weapon
@@ -86,6 +89,7 @@ public class DungeonPanelItem : MonoBehaviour
         PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}price", price);
         PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}increaseValue", increaseValue);
         PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}buysCount", buysCount);
+        Debug.Log("PREEEEFS" + PlayerPrefs.GetFloat($"DungeonUpgradeItem{index}buysCount"));
     }
 
     private void Initialize()
@@ -150,7 +154,7 @@ public class DungeonPanelItem : MonoBehaviour
         itemNameText.text = itemName;
     }
 
-    //  тут
+    //  пїЅпїЅпїЅ
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
@@ -164,7 +168,7 @@ public class DungeonPanelItem : MonoBehaviour
         // SetUnknownItemView();
         // CollapseItemView();
         // SetUnavailableItemView();
-        SaveData();
+        // SaveData();
     }
 
 
@@ -329,7 +333,7 @@ public class DungeonPanelItem : MonoBehaviour
     //WaitingForDrawing
     //public void SetWaitingForDrawingItemView()
     //{
-        
+
     //    //itemConditionsGO.SetActive(true);
     //    itemConditionsGO.SetActive(false);
 

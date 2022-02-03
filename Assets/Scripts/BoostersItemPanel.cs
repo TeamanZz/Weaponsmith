@@ -62,6 +62,9 @@ public class BoostersItemPanel : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("SaveData", 3, 3);
+
+        if (buysCount >= buysEdgeCount)
+            ChangeState(PanelItemState.Collapsed);
     }
 
 
@@ -102,7 +105,7 @@ public class BoostersItemPanel : MonoBehaviour
         itemNameText.text = itemName;
     }
 
-    //  тут
+    //  пїЅпїЅпїЅ
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;

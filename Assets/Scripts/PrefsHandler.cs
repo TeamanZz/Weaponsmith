@@ -82,5 +82,49 @@ public class PrefsHandler : MonoBehaviour
                 ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
             }
         }
+
+        for (int i = 0; i < DungeonItemManager.Instance.panelItemsList.Count; i++)
+        {
+            string value = PlayerPrefs.GetString("UpgradeItem" + i);
+            if (value == "collapsed")
+            {
+                DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
+            }
+            if (value == "unknown")
+            {
+                DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
+            }
+            //WaitingForDrawing
+            // if (value == "WaitingForDrawing")
+            // {
+            //     DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.WaitingForDrawing);
+            // }
+            if (value == "available")
+            {
+                DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
+            }
+        }
+
+        for (int i = 0; i < BoostersManager.Instance.panelItemsList.Count; i++)
+        {
+            string value = PlayerPrefs.GetString("UpgradeItem" + i);
+            if (value == "collapsed")
+            {
+                BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
+            }
+            if (value == "unknown")
+            {
+                BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
+            }
+            //WaitingForDrawing
+            // if (value == "WaitingForDrawing")
+            // {
+            //     DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.WaitingForDrawing);
+            // }
+            if (value == "available")
+            {
+                BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
+            }
+        }
     }
 }
