@@ -54,7 +54,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void Awake()
     {
-        // PlayerPrefs.DeleteAll();
         weaponSprite = itemIcon.GetComponent<Image>();
         Initialize();
     }
@@ -75,7 +74,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void Start()
     {
         InvokeRepeating("SaveData", 3, 3);
-
+        Debug.Log(buysCount);
         if (buysCount >= buysEdgeCount)
             ChangeState(PanelItemState.Collapsed);
     }
@@ -108,8 +107,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             SetItemName();
         price = (int)costCurve.Evaluate(buysCount);
         UpdateView();
-        //if (itemName == "Wooden sword")
-        //    SetWaitingForDrawingItemView();
     }
 
     private void PlayJumpAnimation()
@@ -119,38 +116,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
         buysCountTextAnimator.Play("Jump", 0, 0);
     }
-
-    //public void CheckConditions(PanelItem checkedItem)
-    //{
-    //    var findedCondition = itemConditionsList.Find(x => x.itemName == checkedItem.itemName);
-    //    if (findedCondition != null)
-    //    {
-    //        if (findedCondition.count <= checkedItem.buysCount)
-    //        {
-    //            int conditionIndex = itemConditionsList.IndexOf(findedCondition);
-    //            findedCondition.conditionIsMet = true;
-    //            itemConditionsGO.transform.GetChild(conditionIndex).GetComponent<TextMeshProUGUI>().color = Color.green;
-
-    //            //CheckAllConditionsIsMet();
-    //        }
-    //    }
-    //}
-
-    //private void CheckAllConditionsIsMet()
-    //{
-    //    int metedConditions = 0;
-    //    for (int i = 0; i < itemConditionsList.Count; i++)
-    //    {
-    //        if (itemConditionsList[i].conditionIsMet)
-    //            metedConditions++;
-    //    }
-    //    if (metedConditions == itemConditionsList.Count)
-    //    {
-    //        itemConditionsList.Clear();
-    //        ItemsManager.Instance.MakeNextUnknownItemAsUnavailable();
-    //        ChangeState(PanelItemState.Available);
-    //    }
-    //}
 
     private void SetItemName()
     {
@@ -165,12 +130,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         UpdateItemValues();
         UpdateView();
         PlayJumpAnimation();
-        //nen
-        //ItemsManager.Instance.CheckConditions(this);
         CheckOnCollapse();
-        // SetUnknownItemView();
-        // CollapseItemView();
-        // SetUnavailableItemView();
     }
 
 
@@ -233,7 +193,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void OnDestroy()
     {
-        ChangeState(currentState);
+        // ChangeState(currentState);
         // SaveData();
     }
 
@@ -269,6 +229,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         increaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}increaseValue", increaseValue);
         buysCount = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}buysCount");
         currentState = newState;
+        if (newState == PanelItemState.Collapsed)
+            Debug.Log(gameObject);
         //ItemsManager.Instance.CheckConditions(this);
 
         if (currentState == PanelItemState.Collapsed)
@@ -357,17 +319,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         }
 
         PlayerPrefs.SetInt("currentWaitingPanelNumber", index);
-
-        //for (int i = 0; i < itemConditionsList.Count; i++)
-        //{
-        //    //200 Fire power
-        //    itemConditionsGO.transform.GetChild(i).gameObject.SetActive(true);
-        //    string conditionText = $"{itemConditionsList[i].count} {itemConditionsList[i].itemName}";
-        //    itemConditionsGO.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = conditionText;
-        //}
     }
-
-
 
     //Unknown
     public void SetUnknownItemView()
@@ -395,11 +347,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         itemIcon.SetActive(true);
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
-
-        if (currentPanelState == CurrentPanel.childObject)
-        {
-
-        }
     }
 
     private void UpdateItemValues()
@@ -412,7 +359,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         }
         buysCount++;
         price = (int)costCurve.Evaluate(buysCount);
-        // price = (int)(price * 1.4f);
     }
 
     private void UpdateView()

@@ -34,15 +34,15 @@ public class FTUEManager : MonoBehaviour
 
     private void Start()
     {
-        HandleFTUEOnStart();
+        // HandleFTUEOnStart();
 
-        if (!FTUEEnabled)
-            return;
+        // if (!FTUEEnabled)
+        //     return;
 
-        settingsButton.enabled = false;
-        DisableBottomButtons();
+        // settingsButton.enabled = false;
+        // DisableBottomButtons();
 
-        ChangeFTUEState(0);
+        // ChangeFTUEState(0);
     }
 
     public void MarkFTUEAsStarted()

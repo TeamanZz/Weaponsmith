@@ -231,7 +231,7 @@ public class DungeonPanelItem : MonoBehaviour
 
     private void OnDestroy()
     {
-        ChangeState(currentState);
+        // ChangeState(currentState);
         // SaveData();
     }
 

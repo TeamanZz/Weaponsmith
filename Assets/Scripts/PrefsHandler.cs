@@ -85,7 +85,7 @@ public class PrefsHandler : MonoBehaviour
 
         for (int i = 0; i < DungeonItemManager.Instance.panelItemsList.Count; i++)
         {
-            string value = PlayerPrefs.GetString("UpgradeItem" + i);
+            string value = PlayerPrefs.GetString("DungeonUpgradeItem" + i);
             if (value == "collapsed")
             {
                 DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
@@ -107,7 +107,7 @@ public class PrefsHandler : MonoBehaviour
 
         for (int i = 0; i < BoostersManager.Instance.panelItemsList.Count; i++)
         {
-            string value = PlayerPrefs.GetString("UpgradeItem" + i);
+            string value = PlayerPrefs.GetString("BoostersUpgradeItem" + i);
             if (value == "collapsed")
             {
                 BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
