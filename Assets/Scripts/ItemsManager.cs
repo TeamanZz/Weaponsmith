@@ -47,7 +47,8 @@ public class ItemsManager : MonoBehaviour
         if (newWeaponUnlockPanel != null && currentWaitingPanel != null)
         {
             newWeaponUnlockPanel.SetActive(true);
-            weaponPanel.InitializationPanel(currentWaitingPanel.weaponSprite, currentWaitingPanel.itemName);
+            Debug.Log(currentWaitingPanel.itemName);
+            weaponPanel.InitializePanel(currentWaitingPanel.weaponSprite, currentWaitingPanel.itemName);
 
             if (currentWaitingPanel.currentWeaponNumber < EquipmentManager.equipmentManager.weaponList.Count)
                 EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWaitingPanel.currentWeaponNumber);

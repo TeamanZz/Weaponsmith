@@ -10,15 +10,15 @@ public class EquipmentManager : MonoBehaviour
     public int weaponNumber;
     public void Awake()
     {
-        equipmentManager = this;
-        weaponNumber = PlayerPrefs.GetInt("WeaponNumber");
-        
-        foreach(GameObject wepon in weaponList)
-        {
-            wepon.SetActive(false);
-        }
+        // equipmentManager = this;
+        // weaponNumber = PlayerPrefs.GetInt("WeaponNumber");
 
-        weaponList[weaponNumber].SetActive(true);
+        // foreach(GameObject wepon in weaponList)
+        // {
+        //     wepon.SetActive(false);
+        // }
+
+        // weaponList[weaponNumber].SetActive(true);
     }
 
     public void SaveWeaponNumber()

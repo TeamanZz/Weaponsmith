@@ -65,7 +65,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void Start()
     {
         InvokeRepeating("SaveData", 3, 3);
-        Debug.Log(buysCount);
         if (buysCount >= buysEdgeCount)
             ChangeState(PanelItemState.Collapsed);
     }

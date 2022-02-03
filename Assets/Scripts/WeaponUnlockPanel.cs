@@ -8,9 +8,9 @@ public class WeaponUnlockPanel : MonoBehaviour
     public Image weaponImage;
     public TextMeshProUGUI title;
 
-    public void InitializationPanel(Image weaponPicture, string weaponTitle)
+    public void InitializePanel(Image weaponPicture, string weaponTitle)
     {
         title.text = weaponTitle;
-        weaponImage.sprite = weaponImage.sprite;
+        // weaponImage.sprite = weaponImage.sprite;
     }
 }

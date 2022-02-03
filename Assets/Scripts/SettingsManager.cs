@@ -26,7 +26,6 @@ public class SettingsManager : MonoBehaviour
             for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
             {
                 PlayerPrefs.DeleteKey("UpgradeItem" + i);
-                Debug.Log(PlayerPrefs.GetString("UpgradeItem" + i));
                 PlayerPrefs.DeleteKey($"UpgradeItem{i}generalIncreaseValue");
                 PlayerPrefs.DeleteKey($"UpgradeItem{i}price");
                 PlayerPrefs.DeleteKey($"UpgradeItem{i}increaseValue");
