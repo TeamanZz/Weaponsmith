@@ -12,6 +12,7 @@ public class MoneyHandler : MonoBehaviour
 
     [SerializeField] private int moneyPerSecond;
     [SerializeField] private GameObject currencyPopupPrefab;
+    [SerializeField] private Transform currencyPopupContainer;
     [SerializeField] private TextMeshProUGUI moneyPerSecondText;
     [SerializeField] private TextMeshProUGUI moneyCountText;
     [SerializeField] private Transform canvasTransform;
@@ -111,7 +112,7 @@ public class MoneyHandler : MonoBehaviour
 
     public void SpawnCurrencyPopUp()
     {
-        var newPopup = Instantiate(currencyPopupPrefab, canvasTransform);
+        var newPopup = Instantiate(currencyPopupPrefab, currencyPopupContainer);
         newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3) + "$";
         newPopup.transform.SetAsFirstSibling();
     }

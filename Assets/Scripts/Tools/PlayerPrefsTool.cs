@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerPrefsTool : MonoBehaviour
 {
 #if UNITY_EDITOR
-    [MenuItem("PlayerPrefs/Clear Player Prefs")]
+    // [MenuItem("PlayerPrefs/Clear Player Prefs")]
     static void ClearPlayerPrefs()
     {
         Debug.Log("Start Clear");
@@ -55,7 +55,7 @@ public class PlayerPrefsTool : MonoBehaviour
     //     PlayerPrefs.SetInt("PopulationPoints", oldValue);
     // }
 
-    [MenuItem("PlayerPrefs/Disable FTUE")]
+    // [MenuItem("PlayerPrefs/Disable FTUE")]
     static void Temp()
     {
         PlayerPrefs.SetString("WorkshopGameobject" + 0, "heh");

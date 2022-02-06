@@ -19,6 +19,7 @@ public class SettingsManager : MonoBehaviour
         if (MoneyHandler.Instance != null)
             MoneyHandler.Instance.moneyCount = 0;
 
+        PlayerPrefs.DeleteKey("skinIndex");
         PlayerPrefs.DeleteKey("MoneyPerSecond");
         PlayerPrefs.SetInt("currentWaitingPanelNumber", 0);
 

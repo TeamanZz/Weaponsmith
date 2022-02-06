@@ -13,20 +13,27 @@ public class DungeonPanelItem : MonoBehaviour
     }
     public CurrentPanel currentPanelState;
     public DungeonPanelItem connectPanel;
-
     public DungeonPanelItem nextUpgradeItem;
-
-    public int currentWeaponNumber;
-
     public int index;
+    public string itemName;
+    [SerializeField] private int increaseValue;
+    [SerializeField] private int buysEdgeCount;
+    public AnimationCurve costCurve;
+
+    [Space]
     public int buysCount;
+    [SerializeField] private int generalIncreaseValue;
+
+    private int price;
+    [HideInInspector] public int currentWeaponNumber;
+    [Space]
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private TextMeshProUGUI buysCountText;
     [SerializeField] private GameObject buyButton;
-    [SerializeField] private Button buyButtonComponent;
-    [SerializeField] private Image buyButtonImage;
+    private Button buyButtonComponent;
+    private Image buyButtonImage;
     [SerializeField] private GameObject progressBar;
     [SerializeField] private GameObject completedSign;
     [SerializeField] private GameObject itemIcon;
@@ -35,19 +42,12 @@ public class DungeonPanelItem : MonoBehaviour
     [SerializeField] private GameObject itemConditionsGO;
     [SerializeField] private Image progressBarFilled;
 
-    [SerializeField] private Animator buyButtonAnimator;
-    [SerializeField] private Animator iconAnimator;
-    [SerializeField] private Animator generalIncreaseValueTextAnimator;
-    [SerializeField] private Animator buysCountTextAnimator;
+    private Animator buyButtonAnimator;
+    private Animator iconAnimator;
+    private Animator generalIncreaseValueTextAnimator;
+    private Animator buysCountTextAnimator;
 
-    public string itemName;
-    [SerializeField] private int generalIncreaseValue;
-    [SerializeField] private int increaseValue;
-    [SerializeField] private int price;
-    [SerializeField] private int buysEdgeCount;
-    [SerializeField] private List<ItemCondition> itemConditionsList = new List<ItemCondition>();
 
-    public AnimationCurve costCurve;
     public Color buttonDefaultColor;
 
     private void Awake()
@@ -104,8 +104,6 @@ public class DungeonPanelItem : MonoBehaviour
             SetItemName();
         price = (int)costCurve.Evaluate(buysCount);
         UpdateView();
-        //if (itemName == "Wooden sword")
-        //    SetWaitingForDrawingItemView();
     }
 
     private void PlayJumpAnimation()
@@ -116,44 +114,11 @@ public class DungeonPanelItem : MonoBehaviour
         buysCountTextAnimator.Play("Jump", 0, 0);
     }
 
-    //public void CheckConditions(PanelItem checkedItem)
-    //{
-    //    var findedCondition = itemConditionsList.Find(x => x.itemName == checkedItem.itemName);
-    //    if (findedCondition != null)
-    //    {
-    //        if (findedCondition.count <= checkedItem.buysCount)
-    //        {
-    //            int conditionIndex = itemConditionsList.IndexOf(findedCondition);
-    //            findedCondition.conditionIsMet = true;
-    //            itemConditionsGO.transform.GetChild(conditionIndex).GetComponent<TextMeshProUGUI>().color = Color.green;
-
-    //            //CheckAllConditionsIsMet();
-    //        }
-    //    }
-    //}
-
-    //private void CheckAllConditionsIsMet()
-    //{
-    //    int metedConditions = 0;
-    //    for (int i = 0; i < itemConditionsList.Count; i++)
-    //    {
-    //        if (itemConditionsList[i].conditionIsMet)
-    //            metedConditions++;
-    //    }
-    //    if (metedConditions == itemConditionsList.Count)
-    //    {
-    //        itemConditionsList.Clear();
-    //        ItemsManager.Instance.MakeNextUnknownItemAsUnavailable();
-    //        ChangeState(PanelItemState.Available);
-    //    }
-    //}
-
     private void SetItemName()
     {
         itemNameText.text = itemName;
     }
 
-    //  ���
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
@@ -161,13 +126,7 @@ public class DungeonPanelItem : MonoBehaviour
         UpdateItemValues();
         UpdateView();
         PlayJumpAnimation();
-        //nen
-        //ItemsManager.Instance.CheckConditions(this);
         CheckOnCollapse();
-        // SetUnknownItemView();
-        // CollapseItemView();
-        // SetUnavailableItemView();
-        // SaveData();
     }
 
 
@@ -206,13 +165,6 @@ public class DungeonPanelItem : MonoBehaviour
             PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
         }
 
-        ////WaitingForDrawing
-        //if (currentState == PanelItemState.WaitingForDrawing)
-        //{
-        //    SetWaitingForDrawingItemView();
-        //    PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
-        //}
-
         if (currentState == PanelItemState.Available)
         {
             SetAvailableItemView();
@@ -228,12 +180,6 @@ public class DungeonPanelItem : MonoBehaviour
         PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
     }
 
-    private void OnDestroy()
-    {
-        // ChangeState(currentState);
-        // SaveData();
-    }
-
     private void SaveState()
     {
         if (currentState == PanelItemState.Collapsed)
@@ -245,12 +191,6 @@ public class DungeonPanelItem : MonoBehaviour
         {
             PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
         }
-
-        ////WaitingForDrawing
-        //if (currentState == PanelItemState.WaitingForDrawing)
-        //{
-        //    PlayerPrefs.SetString("DungeonUpgradeItem" + index, "WaitingForDrawing");
-        //}
 
         if (currentState == PanelItemState.Available)
         {
@@ -266,7 +206,6 @@ public class DungeonPanelItem : MonoBehaviour
         increaseValue = (int)PlayerPrefs.GetFloat($"DungeonUpgradeItem{index}increaseValue", increaseValue);
         buysCount = (int)PlayerPrefs.GetFloat($"DungeonUpgradeItem{index}buysCount");
         currentState = newState;
-        //ItemsManager.Instance.CheckConditions(this);
 
         if (currentState == PanelItemState.Collapsed)
         {
@@ -285,14 +224,6 @@ public class DungeonPanelItem : MonoBehaviour
             SetAvailableItemView();
             PlayerPrefs.SetString("DungeonUpgradeItem" + index, "available");
         }
-
-        ////WaitingForDrawing
-        //if (currentState == PanelItemState.WaitingForDrawing)
-        //{
-        //    SetWaitingForDrawingItemView();
-        //    PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
-        //}
-
         UpdateView();
     }
 
@@ -318,53 +249,7 @@ public class DungeonPanelItem : MonoBehaviour
                 Debug.Log("Child panel = null " + connectPanel);
         }
 
-
-
-        for (int i = 0; i < itemConditionsList.Count; i++)
-        {
-            //200 Fire power
-            itemConditionsGO.transform.GetChild(i).gameObject.SetActive(true);
-            string conditionText = $"{itemConditionsList[i].count} {itemConditionsList[i].itemName}";
-            itemConditionsGO.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = conditionText;
-        }
     }
-
-    //WaitingForDrawing
-    //public void SetWaitingForDrawingItemView()
-    //{
-
-    //    //itemConditionsGO.SetActive(true);
-    //    itemConditionsGO.SetActive(false);
-
-    //    blurPanel.SetActive(true);
-    //    generalIncreaseValueText.gameObject.SetActive(false);
-    //    unknownSign.SetActive(false);
-    //    progressBar.SetActive(false);
-    //    buyButton.SetActive(false);
-    //    completedSign.SetActive(false);
-    //    itemNameText.text = "Waiting For Drawing";
-
-    //    itemIcon.SetActive(false);
-    //    unknownSign.SetActive(true);
-
-    //    if (ItemsManager.Instance != null)
-    //    {
-    //        ItemsManager.Instance.awardPanel.SetActive(true);
-    //        PlayerPrefs.SetInt("AwardPanel", 1);
-    //    }
-
-    //    PlayerPrefs.SetInt("currentWaitingPanelNumber", index);
-
-    //    //for (int i = 0; i < itemConditionsList.Count; i++)
-    //    //{
-    //    //    //200 Fire power
-    //    //    itemConditionsGO.transform.GetChild(i).gameObject.SetActive(true);
-    //    //    string conditionText = $"{itemConditionsList[i].count} {itemConditionsList[i].itemName}";
-    //    //    itemConditionsGO.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = conditionText;
-    //    //}
-    //}
-
-
 
     //Unknown
     public void SetUnknownItemView()
