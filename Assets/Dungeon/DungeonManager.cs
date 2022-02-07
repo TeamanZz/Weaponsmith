@@ -11,7 +11,7 @@ public class DungeonManager : MonoBehaviour
 {
     [Header("Basic settings")]
     public static DungeonManager dungeonManager;
-    public NavMeshSurface navMesh;
+    //public NavMeshSurface navMesh;
     public PiecesDungeon piecesObject;
     public DungeonObjectData currentDungeon;
 

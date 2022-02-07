@@ -13,47 +13,65 @@ public class EquipmentManager : MonoBehaviour
     {
         equipmentManager = this;
         weaponNumber = PlayerPrefs.GetInt("WeaponNumber");
+    }
 
-        if (weaponList.Count <= 0)
+    [ContextMenu("Start")]
+    public void Start()
+    {
+        if (weaponList.Count < 0)
             return;
+
+        weaponList[weaponNumber].gameObject.SetActive(true);
+        weaponOnAnwil[weaponNumber].gameObject.SetActive(true);
 
         foreach (GameObject wepon in weaponList)
         {
             wepon.SetActive(false);
         }
 
-        foreach (GameObject weaponOn in weaponList)
+        foreach (GameObject weaponOn in weaponOnAnwil)
         {
             weaponOn.SetActive(false);
         }
 
-        weaponList[weaponNumber].SetActive(true);
-        weaponOnAnwil[weaponNumber].SetActive(true);
-    }
+        weaponList[weaponNumber].gameObject.SetActive(true);
+        weaponOnAnwil[weaponNumber].gameObject.SetActive(true);
 
+        Debug.Log(weaponNumber);
+        Debug.Log(weaponList[weaponNumber].gameObject + " -> First object" + " | " + weaponOnAnwil[weaponNumber] + " -> Two object");
+        SaveWeaponNumber();
+    }
     public void SaveWeaponNumber()
     {
         PlayerPrefs.SetInt("WeaponNumber", weaponNumber);
     }
-    public void ShowWeaponsByNumber(int number)
+
+    public void ShowWeaponsByNumber()
     {
-        if(number < 0 || number >= weaponList.Count)
+        weaponNumber += 1;
+
+        if(weaponNumber < 0 || weaponNumber >= weaponList.Count)
         {
             Debug.Log("Show weapon number incorrect");
             return;
         }
 
+
         foreach (GameObject wepon in weaponList)
         {
             wepon.SetActive(false);
         }
 
-        foreach (GameObject weaponOn in weaponList)
+        foreach (GameObject weaponOn in weaponOnAnwil)
         {
             weaponOn.SetActive(false);
         }
 
-        weaponList[weaponNumber].SetActive(true);
-        weaponOnAnwil[weaponNumber].SetActive(true);
+        weaponList[weaponNumber].gameObject.SetActive(true);
+        weaponOnAnwil[weaponNumber].gameObject.SetActive(true);
+
+        Debug.Log(weaponNumber);
+        Debug.Log(weaponList[weaponNumber].gameObject + " -> First object" + " | " + weaponOnAnwil[weaponNumber] + " -> Two object");
+        SaveWeaponNumber();
     }
 }

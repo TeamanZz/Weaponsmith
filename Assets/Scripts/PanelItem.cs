@@ -42,7 +42,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public Color buttonDefaultColor;
     public Image weaponSprite;
 
-    public int currentWeaponNumber;
+    public int currentWeaponNumber = 0;
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();
@@ -73,7 +73,10 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public void ShowWeaponsByNumber()
     {
         if (currentPanelState == CurrentPanel.parent)
-            EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWeaponNumber);
+        {
+            Debug.Log("\n" + "Current weapon number - " + currentWeaponNumber);
+            //EquipmentManager.equipmentManager.ShowWeaponsByNumber();
+        }
     }
     private void SaveData()
     {

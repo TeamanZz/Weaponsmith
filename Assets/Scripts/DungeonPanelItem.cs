@@ -25,7 +25,7 @@ public class DungeonPanelItem : MonoBehaviour
     [SerializeField] private int generalIncreaseValue;
 
     private int price;
-    [HideInInspector] public int currentWeaponNumber;
+    //[HideInInspector] public int currentWeaponNumber;
     [Space]
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
@@ -77,11 +77,11 @@ public class DungeonPanelItem : MonoBehaviour
     }
 
     //show weapon
-    public void ShowWeaponsByNumber()
-    {
-        if (currentPanelState == CurrentPanel.parent)
-            EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWeaponNumber);
-    }
+    //public void ShowWeaponsByNumber()
+    //{
+    // //   if (currentPanelState == CurrentPanel.parent)
+    //        //EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWeaponNumber);
+    //}
     private void SaveData()
     {
         SaveState();
@@ -138,13 +138,11 @@ public class DungeonPanelItem : MonoBehaviour
 
             if (connectPanel.currentState == PanelItemState.Collapsed)
             {
-                if (nextUpgradeItem == null)
-                {
+                if(nextUpgradeItem != null)
+                    nextUpgradeItem.ChangeState(PanelItemState.Available);
+                else
                     Debug.Log("Next upgrade is null");
-                    return;
-                }
-
-                nextUpgradeItem.ChangeState(PanelItemState.Available);
+                return;
             }
         }
     }

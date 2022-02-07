@@ -7,7 +7,8 @@ public class PanelsHandler : MonoBehaviour
 {
     public static PanelsHandler Instance;
     public int dungeonNumber;
-    
+    public int dropChanceImprovements = 7;
+
     [SerializeField] private List<string> panelNames = new List<string>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
@@ -31,6 +32,7 @@ public class PanelsHandler : MonoBehaviour
     public void Awake()
     {
         Instance = this;
+        dropChanceImprovements = 7;
 
         currentLocationInTheDungeon = false;
         mainCamera.SetActive(true);

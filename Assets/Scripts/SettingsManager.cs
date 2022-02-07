@@ -61,6 +61,7 @@ public class SettingsManager : MonoBehaviour
 
         PlayerPrefs.SetInt("AwardPanel", 0);
         PlayerPrefs.DeleteKey("MoneyCount");
+        PlayerPrefs.SetInt("WeaponNumber", 0);
 
         Debug.Log("End all clear");
         PlayerPrefs.SetString("needLaunch", "true");
