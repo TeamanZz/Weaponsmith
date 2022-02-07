@@ -6,6 +6,7 @@ public class EquipmentManager : MonoBehaviour
 {
     public static EquipmentManager equipmentManager;
     public List<GameObject> weaponList = new List<GameObject>();
+    public List<GameObject> weaponOnAnwil = new List<GameObject>();
 
     public int weaponNumber;
     public void Awake()
@@ -21,7 +22,13 @@ public class EquipmentManager : MonoBehaviour
             wepon.SetActive(false);
         }
 
+        foreach (GameObject weaponOn in weaponList)
+        {
+            weaponOn.SetActive(false);
+        }
+
         weaponList[weaponNumber].SetActive(true);
+        weaponOnAnwil[weaponNumber].SetActive(true);
     }
 
     public void SaveWeaponNumber()
@@ -40,6 +47,13 @@ public class EquipmentManager : MonoBehaviour
         {
             wepon.SetActive(false);
         }
-        weaponList[number].SetActive(true);
+
+        foreach (GameObject weaponOn in weaponList)
+        {
+            weaponOn.SetActive(false);
+        }
+
+        weaponList[weaponNumber].SetActive(true);
+        weaponOnAnwil[weaponNumber].SetActive(true);
     }
 }
