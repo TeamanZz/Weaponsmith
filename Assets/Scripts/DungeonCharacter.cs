@@ -15,7 +15,8 @@ public class DungeonCharacter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position += new Vector3(0, 0, runSpeed);
+        if(PanelsHandler.currentLocationInTheDungeon == true)
+            transform.position += new Vector3(0, 0, runSpeed);
     }
 
     private void OnTriggerEnter(Collider other)

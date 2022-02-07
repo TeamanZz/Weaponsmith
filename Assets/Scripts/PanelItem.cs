@@ -10,7 +10,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public CurrentPanel currentPanelState;
     public PanelItem connectPanel;
     public PanelItem nextUpgradeItem;
-    public int currentWeaponNumber;
     public int index;
     public int buysCount;
     [SerializeField] private TextMeshProUGUI itemNameText;
@@ -43,6 +42,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public Color buttonDefaultColor;
     public Image weaponSprite;
 
+    public int currentWeaponNumber;
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();

@@ -10,15 +10,18 @@ public class EquipmentManager : MonoBehaviour
     public int weaponNumber;
     public void Awake()
     {
-        // equipmentManager = this;
-        // weaponNumber = PlayerPrefs.GetInt("WeaponNumber");
+        equipmentManager = this;
+        weaponNumber = PlayerPrefs.GetInt("WeaponNumber");
 
-        // foreach(GameObject wepon in weaponList)
-        // {
-        //     wepon.SetActive(false);
-        // }
+        if (weaponList.Count <= 0)
+            return;
 
-        // weaponList[weaponNumber].SetActive(true);
+        foreach (GameObject wepon in weaponList)
+        {
+            wepon.SetActive(false);
+        }
+
+        weaponList[weaponNumber].SetActive(true);
     }
 
     public void SaveWeaponNumber()
@@ -27,6 +30,16 @@ public class EquipmentManager : MonoBehaviour
     }
     public void ShowWeaponsByNumber(int number)
     {
+        if(number < 0 || number >= weaponList.Count)
+        {
+            Debug.Log("Show weapon number incorrect");
+            return;
+        }
 
+        foreach (GameObject wepon in weaponList)
+        {
+            wepon.SetActive(false);
+        }
+        weaponList[number].SetActive(true);
     }
 }
