@@ -12,6 +12,15 @@ public class DungeonPanelItem : MonoBehaviour
         childObject
     }
     public CurrentPanel currentPanelState;
+
+    public enum ArmorOrEnemy
+    {
+        none,
+        armor,
+        enemy
+    }
+    public ArmorOrEnemy currentObject;
+
     public DungeonPanelItem connectPanel;
     public DungeonPanelItem nextUpgradeItem;
     public int index;
@@ -276,9 +285,19 @@ public class DungeonPanelItem : MonoBehaviour
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
 
-        if (currentPanelState == CurrentPanel.childObject)
+        if (currentPanelState == CurrentPanel.parent)
         {
-
+            if (currentObject == ArmorOrEnemy.armor)
+            {
+                SkinsManager.Instance.skinCount += 1;
+                Debug.Log("Enemy");
+            }
+            else
+            {
+                SkinsManager.Instance.currentSkinIndex +=1;
+                SkinsManager.Instance.ChangeSkin();
+                Debug.Log("Armor");
+            }
         }
     }
 

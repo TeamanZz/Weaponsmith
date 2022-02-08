@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class SkinsManager : MonoBehaviour
 {
-    public int currentSkinIndex;
 
     public List<GameObject> skins = new List<GameObject>();
     public List<GameObject> dungeonSkins = new List<GameObject>();
     public static SkinsManager Instance;
     public TrackingCamera trackingCamera;
 
+    public int currentSkinIndex;
+    public int skinCount = 0;
     private void Awake()
     {
         Instance = this;
@@ -39,5 +40,6 @@ public class SkinsManager : MonoBehaviour
         dungeonSkins[currentSkinIndex].SetActive(true);
 
         PlayerPrefs.SetInt("skinIndex", currentSkinIndex);
+        PlayerPrefs.SetInt("EnemySkinCount", skinCount);
     }
 }
