@@ -18,11 +18,11 @@ public class DungeonEnemy : MonoBehaviour
 
         dropRate = PanelsHandler.Instance.dropChanceImprovements;
 
-        skinCount = SkinsManager.Instance.skinCount;
+        skinCount = SkinsManager.Instance.dungeonEnemySkinCount;
 
         if (skinCount > 0)
         {
-            int random = Random.Range(0, SkinsManager.Instance.skinCount);
+            int random = Random.Range(0, SkinsManager.Instance.dungeonEnemySkinCount);
             random = Mathf.Clamp(random, 0, currentEnemySkin.Count);
 
             Debug.Log(random);

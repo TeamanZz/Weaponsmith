@@ -15,14 +15,14 @@ public class SkinsManager : MonoBehaviour
 
     public int currentSkinIndex;
 
-    public int skinCount = 0;
+    public int dungeonEnemySkinCount = 0;
     private void Awake()
     {
         Instance = this;
         currentSkinIndex = 0;
 
         currentSkinIndex = PlayerPrefs.GetInt("skinIndex");
-        skinCount = PlayerPrefs.GetInt("EnemySkinCount");
+        dungeonEnemySkinCount = PlayerPrefs.GetInt("EnemySkinCount");
 
         ChangeSkin();
     }
@@ -63,6 +63,6 @@ public class SkinsManager : MonoBehaviour
         dungeonSkins[currentNumber].SetActive(true);
 
         PlayerPrefs.SetInt("skinIndex", currentSkinIndex);
-        PlayerPrefs.SetInt("EnemySkinCount", skinCount);
+        PlayerPrefs.SetInt("EnemySkinCount", dungeonEnemySkinCount);
     }
 }

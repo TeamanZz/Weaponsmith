@@ -289,7 +289,7 @@ public class DungeonPanelItem : MonoBehaviour
         {
             if (currentObject == ArmorOrEnemy.enemy)
             {
-                SkinsManager.Instance.skinCount += 1;
+                SkinsManager.Instance.dungeonEnemySkinCount += 1;
                 Debug.Log("Enemy");
             }
 
