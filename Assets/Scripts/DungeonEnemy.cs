@@ -11,6 +11,8 @@ public class DungeonEnemy : MonoBehaviour
 
     private DungeonCharacter dungeonCharacter;
     [HideInInspector] public int dropRate = 0;
+
+    public GameObject blueprintPrefab;
     private void Awake()
     {
         animators.Add(GetComponent<Animator>());
@@ -64,7 +66,7 @@ public class DungeonEnemy : MonoBehaviour
 
             if (val == 0)
             {
-                ItemsManager.Instance.OpenWaitingPanel();
+                Instantiate(blueprintPrefab, transform.position + new Vector3(0, 0.325f, 0), Quaternion.identity, transform.parent);
                 PanelsHandler.Instance.dropChanceImprovements = 7;
             }
         }
@@ -74,6 +76,5 @@ public class DungeonEnemy : MonoBehaviour
 
         Destroy(gameObject, 10f);
 
-        // Instantiate()
     }
 }

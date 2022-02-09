@@ -463,7 +463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2418610554651481554
 Transform:
   m_ObjectHideFlags: 0
@@ -2382,6 +2382,7 @@ MonoBehaviour:
   - {fileID: 2421569553009797130}
   skinCount: 0
   dropRate: 0
+  blueprintPrefab: {fileID: 8550988676938562279, guid: ad31a4a27d46c914cad3af90476c1289, type: 3}
 --- !u!65 &1170730928378077
 BoxCollider:
   m_ObjectHideFlags: 0
