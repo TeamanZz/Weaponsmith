@@ -473,7 +473,7 @@ Transform:
   m_GameObject: {fileID: 2421047781830366064}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2418422836702572392}
   m_RootOrder: 1
@@ -2375,6 +2375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a02446ccc869a41be83eaa753d6613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animators: []
   currentEnemySkin:
   - {fileID: 2421047781830366064}
   - {fileID: 734316264275037642}
@@ -3077,7 +3078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1611041093240470, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4063878554536376, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
       propertyPath: m_RootOrder

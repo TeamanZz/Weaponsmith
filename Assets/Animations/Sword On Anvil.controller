@@ -29,7 +29,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sword And Shield Slash
+  m_Name: Jump Scale2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -42,7 +42,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: dbf05ed40598054459c313daa762de33, type: 2}
+  m_Motion: {fileID: 7400000, guid: 9a118813222d18c4588af3f58f7b9551, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

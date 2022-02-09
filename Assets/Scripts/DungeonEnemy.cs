@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class DungeonEnemy : MonoBehaviour
 {
-    private DungeonCharacter dungeonCharacter;
+
     [SerializeField] private List<Animator> animators = new List<Animator>();
-
     public List<GameObject> currentEnemySkin = new List<GameObject>();
-
     public int skinCount;
+
+    private DungeonCharacter dungeonCharacter;
     [HideInInspector] public int dropRate = 0;
     private void Awake()
     {
@@ -27,15 +27,28 @@ public class DungeonEnemy : MonoBehaviour
 
             Debug.Log(random);
 
-            foreach(GameObject obj in currentEnemySkin)
+            foreach (GameObject obj in currentEnemySkin)
             {
                 obj.SetActive(false);
             }
 
             currentEnemySkin[random].SetActive(true);
+            if (random == 0)
+            {
+                Debug.Log("AHAHAHA");
+                transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                GetComponent<BoxCollider>().center += new Vector3(0, 0, 1.3f);
+            }
         }
         else
+        {
+
+            Debug.Log("AHAHAHA");
+            transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            GetComponent<BoxCollider>().center += new Vector3(0, 0, 1.3f);
             currentEnemySkin[0].SetActive(true);
+
+        }
 
         PanelsHandler.Instance.dropChanceImprovements -= 1;
         if (PanelsHandler.Instance.dropChanceImprovements <= 0)
@@ -56,9 +69,11 @@ public class DungeonEnemy : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < animators.Count; i++)
+        for (int i = 0; i < animators.Count; i++)
             animators[i].SetTrigger("Death");
 
         Destroy(gameObject, 10f);
+
+        // Instantiate()
     }
 }
