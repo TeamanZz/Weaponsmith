@@ -287,12 +287,13 @@ public class DungeonPanelItem : MonoBehaviour
 
         if (currentPanelState == CurrentPanel.parent)
         {
-            if (currentObject == ArmorOrEnemy.armor)
+            if (currentObject == ArmorOrEnemy.enemy)
             {
                 SkinsManager.Instance.skinCount += 1;
                 Debug.Log("Enemy");
             }
-            else
+
+            if(currentObject == ArmorOrEnemy.armor)
             {
                 SkinsManager.Instance.currentSkinIndex +=1;
                 SkinsManager.Instance.ChangeSkin();

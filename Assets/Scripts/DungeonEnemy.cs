@@ -5,21 +5,32 @@ using UnityEngine;
 public class DungeonEnemy : MonoBehaviour
 {
     private DungeonCharacter dungeonCharacter;
-    private Animator animator;
+    [SerializeField] private List<Animator> animators = new List<Animator>();
 
     public List<GameObject> currentEnemySkin = new List<GameObject>();
-    
 
-    public int dropRate = 0;
+    public int skinCount;
+    [HideInInspector] public int dropRate = 0;
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animators.Add(GetComponent<Animator>());
+        animators.AddRange(GetComponentsInChildren<Animator>());
+
         dropRate = PanelsHandler.Instance.dropChanceImprovements;
 
-        if (SkinsManager.Instance.skinCount > 0)
+        skinCount = SkinsManager.Instance.skinCount;
+
+        if (skinCount > 0)
         {
             int random = Random.Range(0, SkinsManager.Instance.skinCount);
-            random = Mathf.Clamp(random, 0, currentEnemySkin.Count - 1);
+            random = Mathf.Clamp(random, 0, currentEnemySkin.Count);
+
+            Debug.Log(random);
+
+            foreach(GameObject obj in currentEnemySkin)
+            {
+                obj.SetActive(false);
+            }
 
             currentEnemySkin[random].SetActive(true);
         }
@@ -44,6 +55,10 @@ public class DungeonEnemy : MonoBehaviour
                 PanelsHandler.Instance.dropChanceImprovements = 7;
             }
         }
-        animator.SetTrigger("Death");
+
+        for(int i = 0; i < animators.Count; i++)
+            animators[i].SetTrigger("Death");
+
+        Destroy(gameObject, 10f);
     }
 }

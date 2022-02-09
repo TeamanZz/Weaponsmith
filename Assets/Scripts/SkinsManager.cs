@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class SkinsManager : MonoBehaviour
 {
+    public static SkinsManager Instance;
+
+    public List<ParticleSystem> particles = new List<ParticleSystem>();
 
     public List<GameObject> skins = new List<GameObject>();
     public List<GameObject> dungeonSkins = new List<GameObject>();
-    public static SkinsManager Instance;
+
     public TrackingCamera trackingCamera;
 
     public int currentSkinIndex;
+
     public int skinCount = 0;
     private void Awake()
     {
         Instance = this;
+        currentSkinIndex = 0;
+
+        currentSkinIndex = PlayerPrefs.GetInt("skinIndex");
+        skinCount = PlayerPrefs.GetInt("EnemySkinCount");
+
+        ChangeSkin();
     }
 
     private void Start()
@@ -27,17 +37,30 @@ public class SkinsManager : MonoBehaviour
     [ContextMenu("Change Skin")]
     public void ChangeSkin()
     {
-        if (currentSkinIndex >= skins.Count - 1)
-            return;
+        Debug.Log("New skin count - " + currentSkinIndex);
+       
+        int currentNumber = Mathf.Clamp(currentSkinIndex, 0, dungeonSkins.Count - 1);
 
-        skins[currentSkinIndex].SetActive(false);
-        dungeonSkins[currentSkinIndex].SetActive(false);
-        trackingCamera.target = dungeonSkins[currentSkinIndex + 1].transform;
-        dungeonSkins[currentSkinIndex + 1].transform.position = dungeonSkins[currentSkinIndex].transform.position;
+        Debug.Log("Current number - " + currentSkinIndex + " | " + " Entered value - " + currentSkinIndex);
+        Debug.Log("Contue");
 
-        currentSkinIndex++;
-        skins[currentSkinIndex].SetActive(true);
-        dungeonSkins[currentSkinIndex].SetActive(true);
+        foreach(GameObject dungeSkin in dungeonSkins)
+        {
+            dungeSkin.SetActive(false);
+        }
+
+        foreach (GameObject skin in skins)
+        {
+            skin.SetActive(false);
+        }
+
+        foreach(var part in particles)
+        {
+            part.Play();
+        }
+
+        skins[currentNumber].SetActive(true);
+        dungeonSkins[currentNumber].SetActive(true);
 
         PlayerPrefs.SetInt("skinIndex", currentSkinIndex);
         PlayerPrefs.SetInt("EnemySkinCount", skinCount);

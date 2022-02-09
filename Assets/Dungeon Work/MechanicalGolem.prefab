@@ -2379,6 +2379,7 @@ MonoBehaviour:
   - {fileID: 2421047781830366064}
   - {fileID: 734316264275037642}
   - {fileID: 2421569553009797130}
+  skinCount: 0
   dropRate: 0
 --- !u!65 &1170730928378077
 BoxCollider:
@@ -3076,7 +3077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1611041093240470, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4063878554536376, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
       propertyPath: m_RootOrder
