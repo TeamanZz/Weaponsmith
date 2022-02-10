@@ -37,19 +37,15 @@ public class DungeonEnemy : MonoBehaviour
             currentEnemySkin[random].SetActive(true);
             if (random == 0)
             {
-                Debug.Log("AHAHAHA");
                 transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                GetComponent<BoxCollider>().center += new Vector3(0, 0, 1.3f);
+                GetComponent<BoxCollider>().center += new Vector3(0, 0, 2.5f);
             }
         }
         else
         {
-
-            Debug.Log("AHAHAHA");
             transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            GetComponent<BoxCollider>().center += new Vector3(0, 0, 1.3f);
+            GetComponent<BoxCollider>().center += new Vector3(0, 0, 2.5f);
             currentEnemySkin[0].SetActive(true);
-
         }
 
         PanelsHandler.Instance.dropChanceImprovements -= 1;
@@ -59,6 +55,8 @@ public class DungeonEnemy : MonoBehaviour
 
     public void InvokeDeathAnimation()
     {
+        // Instantiate(blueprintPrefab, transform.position + new Vector3(0, 0.325f, 0), Quaternion.identity, transform.parent);
+
         if (ItemsManager.Instance.currentWaitingPanel != null && ItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
         {
             int val = Random.Range(0, dropRate);
