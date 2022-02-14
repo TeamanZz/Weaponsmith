@@ -28,25 +28,30 @@ public class DungeonEnemy : MonoBehaviour
             random = Mathf.Clamp(random, 0, currentEnemySkin.Count);
 
             Debug.Log(random);
+            Debug.Log("heh1");
 
             foreach (GameObject obj in currentEnemySkin)
             {
                 obj.SetActive(false);
             }
-
             currentEnemySkin[random].SetActive(true);
+            Debug.Log("heh2");
             if (random == 0)
             {
+
                 transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
                 GetComponent<BoxCollider>().center += new Vector3(0, 0, 2.5f);
             }
         }
         else
         {
+            Debug.Log("heh3");
+
             transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             GetComponent<BoxCollider>().center += new Vector3(0, 0, 2.5f);
             currentEnemySkin[0].SetActive(true);
         }
+        Debug.Log("heh4");
 
         PanelsHandler.Instance.dropChanceImprovements -= 1;
         if (PanelsHandler.Instance.dropChanceImprovements <= 0)

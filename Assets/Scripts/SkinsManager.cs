@@ -38,13 +38,12 @@ public class SkinsManager : MonoBehaviour
     public void ChangeSkin()
     {
         Debug.Log("New skin count - " + currentSkinIndex);
-       
+
         int currentNumber = Mathf.Clamp(currentSkinIndex, 0, dungeonSkins.Count - 1);
 
         Debug.Log("Current number - " + currentSkinIndex + " | " + " Entered value - " + currentSkinIndex);
-        Debug.Log("Contue");
 
-        foreach(GameObject dungeSkin in dungeonSkins)
+        foreach (GameObject dungeSkin in dungeonSkins)
         {
             dungeSkin.SetActive(false);
         }
@@ -54,7 +53,7 @@ public class SkinsManager : MonoBehaviour
             skin.SetActive(false);
         }
 
-        foreach(var part in particles)
+        foreach (var part in particles)
         {
             part.Play();
         }

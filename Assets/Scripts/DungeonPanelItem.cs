@@ -147,7 +147,7 @@ public class DungeonPanelItem : MonoBehaviour
 
             if (connectPanel.currentState == PanelItemState.Collapsed)
             {
-                if(nextUpgradeItem != null)
+                if (nextUpgradeItem != null)
                     nextUpgradeItem.ChangeState(PanelItemState.Available);
                 else
                     Debug.Log("Next upgrade is null");
@@ -163,6 +163,22 @@ public class DungeonPanelItem : MonoBehaviour
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
+
+            if (currentPanelState == CurrentPanel.parent)
+            {
+                if (currentObject == ArmorOrEnemy.enemy)
+                {
+                    SkinsManager.Instance.dungeonEnemySkinCount += 1;
+                    Debug.Log("Enemy");
+                }
+
+                if (currentObject == ArmorOrEnemy.armor)
+                {
+                    SkinsManager.Instance.currentSkinIndex += 1;
+                    SkinsManager.Instance.ChangeSkin();
+                    Debug.Log("Armor");
+                }
+            }
             PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
         }
 
@@ -285,21 +301,6 @@ public class DungeonPanelItem : MonoBehaviour
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
 
-        if (currentPanelState == CurrentPanel.parent)
-        {
-            if (currentObject == ArmorOrEnemy.enemy)
-            {
-                SkinsManager.Instance.dungeonEnemySkinCount += 1;
-                Debug.Log("Enemy");
-            }
-
-            if(currentObject == ArmorOrEnemy.armor)
-            {
-                SkinsManager.Instance.currentSkinIndex +=1;
-                SkinsManager.Instance.ChangeSkin();
-                Debug.Log("Armor");
-            }
-        }
     }
 
     private void UpdateItemValues()
