@@ -67,6 +67,70 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         InvokeRepeating("SaveData", 3, 3);
         if (buysCount >= buysEdgeCount)
             ChangeState(PanelItemState.Collapsed);
+
+        PanelsHandler.Instance.updatingUiPanelsEvent += UpdateCurrentUI;
+        //PanelsHandler.Instance.updatingUiPanelsEvent += UpdateCurrentUI(); 
+    }
+
+    public void UpdateCurrentUI()
+    {
+        int totalPrice = 0;
+        int theNumberOfCycles = 0;
+        switch (PanelsHandler.Instance.numberOfPurchases)
+        {
+            case 1:
+                price = (int)costCurve.Evaluate(buysCount);
+                break;
+
+            case 10:
+                totalPrice = 0;
+                if (buysCount + 10 > buysEdgeCount)
+                    theNumberOfCycles = buysEdgeCount - buysCount;
+                else
+                    theNumberOfCycles = 10;
+
+                Debug.Log("The Number Of Cycles" + theNumberOfCycles);
+
+                for (int i = 0; i < theNumberOfCycles; i++)
+                    {
+                        int currentPrice = (int)costCurve.Evaluate(buysCount + i);
+                        totalPrice += currentPrice;
+
+                        Debug.Log("Price = " + currentPrice + " | Total = " + totalPrice);
+                    }
+                price = totalPrice;
+                Debug.Log( "Total price = " + price);
+
+                break;
+
+            case 25:
+                totalPrice = 0;
+                if (buysCount + 25 > buysEdgeCount)
+                    theNumberOfCycles = buysEdgeCount - buysCount;
+                else
+                    theNumberOfCycles = 25;
+
+                Debug.Log("The Number Of Cycles" + theNumberOfCycles);
+
+                for (int i = 0; i < theNumberOfCycles; i++)
+                {
+                    int currentPrice = (int)costCurve.Evaluate(buysCount + i);
+                    totalPrice += currentPrice;
+
+                    Debug.Log("Price = " + currentPrice + " | Total = " + totalPrice);
+                }
+                price = totalPrice;
+                Debug.Log("Total price = " + price);
+
+                break;
+        }
+       // price = (int)costCurve.Evaluate(buysCount + PanelsHandler.Instance.numberOfPurchases);
+        UpdateView(); 
+        //generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
+        //priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
+
+        //buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
+        //progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);
     }
 
     //show weapon
@@ -125,7 +189,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         PlayJumpAnimation();
         CheckOnCollapse();
     }
-
 
     private void CheckOnCollapse()
     {
@@ -340,8 +403,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         {
             increaseValue += 2;
         }
-        buysCount++;
-        price = (int)costCurve.Evaluate(buysCount);
+
+        buysCount += PanelsHandler.Instance.numberOfPurchases;
+        price = (int)costCurve.Evaluate(buysCount + PanelsHandler.Instance.numberOfPurchases);
     }
 
     private void UpdateView()

@@ -37,8 +37,8 @@ public class EquipmentManager : MonoBehaviour
         weaponList[weaponNumber].gameObject.SetActive(true);
         weaponOnAnwil[weaponNumber].gameObject.SetActive(true);
 
-        Debug.Log(weaponNumber);
-        Debug.Log(weaponList[weaponNumber].gameObject + " -> First object" + " | " + weaponOnAnwil[weaponNumber] + " -> Two object");
+        //Debug.Log(weaponNumber);
+        //Debug.Log(weaponList[weaponNumber].gameObject + " -> First object" + " | " + weaponOnAnwil[weaponNumber] + " -> Two object");
         SaveWeaponNumber();
     }
     public void SaveWeaponNumber()

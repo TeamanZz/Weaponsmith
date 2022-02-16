@@ -29,18 +29,69 @@ public class PanelsHandler : MonoBehaviour
     public GameObject dungeonCamera;
     public static bool currentLocationInTheDungeon = false;
 
+    [Header("Purchase setup")]
+    public int purchaseCount;
+    public List<int> purchaseReference = new List<int>();
+    public int numberOfPurchases = 1;
+    public TextMeshProUGUI purchaseText;
+
+    public delegate void UpdatingAction();
+     
+    public event UpdatingAction updatingUiPanelsEvent;
     public void Awake()
     {
         Instance = this;
         dropChanceImprovements = 7;
 
+        if (purchaseCount == 0)
+            purchaseCount = 1;
+        else
+            purchaseCount = PlayerPrefs.GetInt("purchaseCount");
+
+        Debug.Log(purchaseCount);
+
+        if (purchaseReference.Count > 0)
+        {
+            numberOfPurchases = purchaseReference[purchaseCount - 1];
+            purchaseText.text = purchaseReference[purchaseCount - 1].ToString();
+        }
         currentLocationInTheDungeon = false;
         mainCamera.SetActive(true);
         dungeonCamera.SetActive(false);
+
+        InitializationPurchase();
     }
     public void Start()
     {
         OpenPanel(1);
+    }
+
+    public void PurchaseQuantityRatio()
+    {
+        purchaseCount += 1;
+        if(purchaseCount > purchaseReference.Count)
+        {
+            purchaseCount = 1;
+        }
+        PlayerPrefs.SetInt("purchaseCount", purchaseCount);
+
+        if(purchaseReference.Count <= 0)
+        {
+            Debug.Log("purchaseReference == null");
+            Debug.LogError("");
+            return;
+        }
+
+        InitializationPurchase();
+    }
+
+    public void InitializationPurchase()
+    {
+        numberOfPurchases = purchaseReference[purchaseCount - 1];
+        purchaseText.text = purchaseReference[purchaseCount - 1].ToString();
+
+        updatingUiPanelsEvent?.Invoke();
+
     }
     public void OpenPanel(int panelIndex)
     {
