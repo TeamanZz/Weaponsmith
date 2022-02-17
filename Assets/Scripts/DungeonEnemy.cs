@@ -13,8 +13,12 @@ public class DungeonEnemy : MonoBehaviour
     [HideInInspector] public int dropRate = 0;
 
     public GameObject blueprintPrefab;
-    private void Awake()
+
+    public float scale = 1.5f;
+    public float distanceToCollider = 1.5f;
+    private void Start()
     {
+       
         animators.Add(GetComponent<Animator>());
         animators.AddRange(GetComponentsInChildren<Animator>());
 
@@ -39,16 +43,16 @@ public class DungeonEnemy : MonoBehaviour
             if (random == 0)
             {
 
-                transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                GetComponent<BoxCollider>().center += new Vector3(0, 0, 2.5f);
+                //transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                //GetComponent<BoxCollider>().center += new Vector3(0, 0, 2.5f);
             }
         }
         else
         {
             Debug.Log("heh3");
 
-            transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            GetComponent<BoxCollider>().center += new Vector3(0, 0, 2.5f);
+            //transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            //GetComponent<BoxCollider>().center += new Vector3(0, 0, 2.5f);
             currentEnemySkin[0].SetActive(true);
         }
         Debug.Log("heh4");
@@ -56,6 +60,15 @@ public class DungeonEnemy : MonoBehaviour
         PanelsHandler.Instance.dropChanceImprovements -= 1;
         if (PanelsHandler.Instance.dropChanceImprovements <= 0)
             PanelsHandler.Instance.dropChanceImprovements = 7;
+
+        transform.localScale = Vector3.one * scale;
+        
+        BoxCollider collider;
+        if (GetComponent<BoxCollider>())
+        {
+            collider = GetComponent<BoxCollider>();
+            collider.center = new Vector3(collider.center.x, collider.center.y, distanceToCollider);
+        }
     }
 
     public void InvokeDeathAnimation()

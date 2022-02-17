@@ -19,6 +19,7 @@ public class DungeonBuilder : MonoBehaviour
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
 
+    public Vector3 enemyScale;
     private void Awake()
     {
         Instance = this;
@@ -52,9 +53,10 @@ public class DungeonBuilder : MonoBehaviour
 
         if (Random.Range(0, enemyChance) == 0)
         {
-            var enemy = Instantiate(enemyPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), transform);
+            GameObject enemy = Instantiate(enemyPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), transform);
             enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
-            lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
+            enemy.transform.localScale = Vector3.one * 1.5f;
+            lastSpawnedEnemyZPos = lastSpawnedPieceZPos; 
         }
     }
 }

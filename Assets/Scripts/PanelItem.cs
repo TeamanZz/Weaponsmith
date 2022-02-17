@@ -398,7 +398,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void UpdateItemValues()
     {
         generalIncreaseValue += increaseValue;
-        increaseValue += (2 * index);
+        increaseValue += (int)(1.5f * index);
         if (index == 0)
         {
             increaseValue += 2;

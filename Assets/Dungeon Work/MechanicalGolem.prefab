@@ -2326,7 +2326,7 @@ Transform:
   m_GameObject: {fileID: 2421752204643170890}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 50.001186, y: 0, z: 13.27}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2417963095256799566}
   - {fileID: 2418610554651481554}
@@ -2383,6 +2383,7 @@ MonoBehaviour:
   skinCount: 0
   dropRate: 0
   blueprintPrefab: {fileID: 8550988676938562279, guid: ad31a4a27d46c914cad3af90476c1289, type: 3}
+  scale: 1.5
 --- !u!65 &1170730928378077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2395,7 +2396,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1.93, z: 1}
-  m_Center: {x: 0, y: 0.52, z: 4.13}
+  m_Center: {x: 0, y: 0.52, z: 1}
 --- !u!1 &2421763077394964854
 GameObject:
   m_ObjectHideFlags: 0
