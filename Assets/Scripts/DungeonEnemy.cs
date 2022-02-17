@@ -16,6 +16,8 @@ public class DungeonEnemy : MonoBehaviour
 
     public float scale = 1.5f;
     public float distanceToCollider = 1.5f;
+    [Header("Battle settings")]
+    public int numberOfHits = 5;
     private void Start()
     {
        
@@ -32,14 +34,14 @@ public class DungeonEnemy : MonoBehaviour
             random = Mathf.Clamp(random, 0, currentEnemySkin.Count);
 
             Debug.Log(random);
-            Debug.Log("heh1");
+           // Debug.Log("heh1");
 
             foreach (GameObject obj in currentEnemySkin)
             {
                 obj.SetActive(false);
             }
             currentEnemySkin[random].SetActive(true);
-            Debug.Log("heh2");
+            //Debug.Log("heh2");
             if (random == 0)
             {
 
@@ -49,13 +51,13 @@ public class DungeonEnemy : MonoBehaviour
         }
         else
         {
-            Debug.Log("heh3");
+            //Debug.Log("heh3");
 
             //transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             //GetComponent<BoxCollider>().center += new Vector3(0, 0, 2.5f);
             currentEnemySkin[0].SetActive(true);
         }
-        Debug.Log("heh4");
+        //Debug.Log("heh4");
 
         PanelsHandler.Instance.dropChanceImprovements -= 1;
         if (PanelsHandler.Instance.dropChanceImprovements <= 0)

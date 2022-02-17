@@ -99,6 +99,9 @@ public class PanelsHandler : MonoBehaviour
         //dungeon panel
         if (panelIndex == dungeonNumber)
         {
+            if(EnemyHealthBar.enemyHealthBarController.isInitialization == true)
+                EnemyHealthBar.enemyHealthBarController.OpenHealthBar();
+                
             currentLocationInTheDungeon = true;
             mainCamera.SetActive(false);
             dungeonCamera.SetActive(true);
@@ -114,6 +117,8 @@ public class PanelsHandler : MonoBehaviour
         }
         else
         {
+            EnemyHealthBar.enemyHealthBarController.ClosedHealthBar(); 
+
             currentLocationInTheDungeon = false;
             mainCamera.SetActive(true);
             dungeonCamera.SetActive(false);
