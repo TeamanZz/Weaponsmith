@@ -16,6 +16,7 @@ public class DungeonEnemy : MonoBehaviour
 
     public float scale = 1.5f;
     public float distanceToCollider = 1.5f;
+
     [Header("Battle settings")]
     public int numberOfHits = 5;
     private void Start()

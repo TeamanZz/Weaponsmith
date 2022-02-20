@@ -9,7 +9,7 @@ public class DungeonCharacter : MonoBehaviour
     public static DungeonCharacter dungeonCharacter;
     public float runSpeed;
     public DungeonEnemy currentEnemy;
-    private Animator animator;
+    public Animator animator;
 
     public float scale = 1.5f;
     [Header("Battle settings")]
@@ -33,17 +33,6 @@ public class DungeonCharacter : MonoBehaviour
     {
         if (PanelsHandler.currentLocationInTheDungeon == true)
         {
-            //if (currentEnemy != null)
-            //{
-            //    float distance = Vector2.Distance(transform.position, currentEnemy.transform.position);
-            //    if (distance < distanceToTheEnemyToAttack)
-            //    {
-            //        inBattle = true;
-            //        Debug.Log("Distance = " + distance);
-            //    }
-            //}
-
-
             if (inBattle == false)
             {
                 if (EnemyHealthBar.enemyHealthBarController.isInitialization == true || EnemyHealthBar.enemyHealthBarController.isOpen == true)
@@ -109,6 +98,8 @@ public class DungeonCharacter : MonoBehaviour
 
     public void KillEnemy()
     {
+        EnemyHealthBar.enemyHealthBarController.Deinitialization();
+
         currentEnemy.InvokeDeathAnimation();
         Invoke("EnemyHealthBar.enemyHealthBarController.ClosedHealthBar", 0.35f);
         inBattle = false;

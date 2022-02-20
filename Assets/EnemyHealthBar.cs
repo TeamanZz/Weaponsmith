@@ -10,128 +10,78 @@ public class EnemyHealthBar : MonoBehaviour
 
     [Header("Enemy health bar settings")]
     public bool isOpen = true;
-    public Coroutine currentCorrutine;
 
     public GameObject enemyHealthBar;
     public Slider healthBar;
-    public Slider backHealthBar;
     [SerializeField] private float amountOfDamage;
 
     public bool isInitialization = false;
-    public DungeonEnemy targetEnemyController;
+    public DungeonEnemy targetEnemy;
 
-    public bool endCoroutine = false;
     public void Awake()
     {
         enemyHealthBarController = this;
         healthBar.maxValue = 100;
-        backHealthBar.maxValue = 100;
 
         enemyHealthBar.SetActive(false);
     }
     public void Initialization(DungeonEnemy enemy)
     {
         dungeonCharacter = DungeonCharacter.dungeonCharacter;
-        targetEnemyController = enemy;
+        targetEnemy = enemy;
+
+        healthBar.value = 100;
         amountOfDamage = 100 / enemy.numberOfHits;
 
         Debug.Log("Amount of damage " + amountOfDamage);
 
-        healthBar.value = 100;
-        backHealthBar.value = 100;
 
         isInitialization = true;
     }
 
-    public void Deinitialization()
-    {
-        targetEnemyController = null;
-        isInitialization = false;
-        ClosedHealthBar();
-    }
-
     public void OpenHealthBar()
     {
-        isOpen = true;
-        if(currentCorrutine != null)
-             currentCorrutine = StartCoroutine(TakeDamage());
-
         enemyHealthBar.SetActive(true);
-    }
-
-    public void ClosedHealthBar()
-    {
-        isOpen = false;
-        if(currentCorrutine != null)
-           StopCoroutine(currentCorrutine);
-        
-        enemyHealthBar.SetActive(false);
+        isOpen = true;
     }
 
     [ContextMenu("Take damage")]
     public void TakeDamageControll()
     {
-        if (endCoroutine == true)
+        if (targetEnemy == null)
+        {
+            dungeonCharacter.inBattle = false;
+            dungeonCharacter.animator.SetTrigger("EnemyIsNear");
             return;
+        }
 
-        endCoroutine = true;
-        Debug.Log("Take damage");
-        if(currentCorrutine == null)
-            currentCorrutine = StartCoroutine(TakeDamage());
-        return;
-    }
-    public IEnumerator TakeDamage()
-    {
-        Debug.Log("Take \nOst value = " + healthBar.value);
-        if(healthBar.value <= 0)
+        Debug.Log("Damage");
+        
+        targetEnemy.numberOfHits -= 1;
+
+        if (targetEnemy.numberOfHits <= 0)
         {
             dungeonCharacter.KillEnemy();
-            Deinitialization();
-            ClosedHealthBar();
-            yield break;
+            return;
         }
 
-        float time = 0.025f;
-        if (healthBar.value - amountOfDamage < amountOfDamage)
-        {
-            float value = healthBar.value;
-            if (targetEnemyController != null)
-                targetEnemyController.numberOfHits -= 1;
+        healthBar.value -= amountOfDamage;
 
-            for (int i = 0; i < value; i++)
-            {
-                healthBar.value -= 1;
-                yield return new WaitForSeconds(time);
-            }
-
-            for (int i = 0; i < value; i++)
-            {
-                backHealthBar.value -= 1;
-                yield return new WaitForSeconds(time);
-            }
-
-            if (dungeonCharacter.currentEnemy != null) { 
-
-            endCoroutine = false; dungeonCharacter.KillEnemy();
-        }
-            currentCorrutine = null;
-        }
-        else
-        {
-            for (int i = 0; i < amountOfDamage; i++)
-            {
-                healthBar.value -= 1;
-                yield return new WaitForSeconds(time);
-            }
-
-            for (int i = 0; i < amountOfDamage; i++)
-            {
-                backHealthBar.value -= 1;
-                yield return new WaitForSeconds(time);
-            }
-        }
-
-        endCoroutine = false;
+        Debug.Log(targetEnemy.numberOfHits);
     }
+
+    public void Deinitialization()
+    {
+        targetEnemy = null;
+        isInitialization = false;
+        ClosedHealthBar();
+    }
+
+    public void ClosedHealthBar()
+    {
+        enemyHealthBar.SetActive(false);
+        isOpen = false;
+    }
+
 
 }
