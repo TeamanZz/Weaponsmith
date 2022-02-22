@@ -9818,7 +9818,7 @@ GameObject:
   - component: {fileID: 8550988676938562277}
   - component: {fileID: 8550988676938562273}
   m_Layer: 0
-  m_Name: Dungeon Blueprint
+  m_Name: Dungeon Blueprint Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
