@@ -136,14 +136,15 @@ public class Character : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.rotation.x, rot, transform.rotation.z);
 
             Debug.DrawLine(transform.position, point, Color.red);
-            agent.Resume();
+            agent.isStopped = false;
         }
         else
         {
             animator.SetBool("Fight", false);
 
             Debug.Log("Path false");
-            agent.Stop();
+            agent.isStopped = true;
+
         }
     }
 

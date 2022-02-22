@@ -10,7 +10,6 @@ public class DungeonBuilder : MonoBehaviour
     public Transform piecesParent;
     public GameObject enemyPrefab;
     public List<GameObject> dungeonPieces = new List<GameObject>();
-    public List<GameObject> dungeonPiecesPrefabs = new List<GameObject>();
 
     [SerializeField] private GameObject piecePrefab;
     [SerializeField] private GameObject piecesContainer;
@@ -56,7 +55,7 @@ public class DungeonBuilder : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), transform);
             enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
             enemy.transform.localScale = Vector3.one * 1.5f;
-            lastSpawnedEnemyZPos = lastSpawnedPieceZPos; 
+            lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
         }
     }
 }
