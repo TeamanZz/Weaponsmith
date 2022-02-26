@@ -2383,7 +2383,9 @@ MonoBehaviour:
   skinCount: 0
   dropRate: 0
   blueprintPrefab: {fileID: 8550988676938562279, guid: ad31a4a27d46c914cad3af90476c1289, type: 3}
-  scale: 1.5
+  scale: 1.75
+  distanceToCollider: 1.25
+  numberOfHits: 5
 --- !u!65 &1170730928378077
 BoxCollider:
   m_ObjectHideFlags: 0

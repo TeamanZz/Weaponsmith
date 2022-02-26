@@ -64,5 +64,6 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         buyButton.SetActive(false);
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
         wasBoughted = true;
+        RoomObjectsHandler.Instance.CheckBeforeTransition();
     }
 }

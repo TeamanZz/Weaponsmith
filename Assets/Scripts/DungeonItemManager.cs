@@ -22,4 +22,9 @@ public class DungeonItemManager : MonoBehaviour
 
     }
 
+    public void Initialization(List<DungeonPanelItem> newPanels)
+    {
+        panelItemsList.Clear();
+        panelItemsList.AddRange(newPanels);
+    }
 }

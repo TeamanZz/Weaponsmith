@@ -13,6 +13,12 @@ public class BoostersManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    public void Initialization(List<BoostersItemPanel> boostersItems)
+    {
+        panelItemsList.Clear();
+        panelItemsList.AddRange(boostersItems);
+    }
     public void MakeNextUnknownItemAsUnavailable()
     {
         //WaitingForDrawing

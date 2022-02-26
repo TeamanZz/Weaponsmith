@@ -5,6 +5,7 @@ using TMPro;
 
 public class PanelsHandler : MonoBehaviour
 {
+    public EnemyHealthBar enemyHealthBar;
     public static PanelsHandler Instance;
     public int dungeonNumber;
     public int dropChanceImprovements = 7;
@@ -25,82 +26,42 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private Vector3 cameraRoomPosition;
     [SerializeField] private Vector3 cameraRoomRotation;
 
+
     public GameObject mainCamera;
     public GameObject dungeonCamera;
     public static bool currentLocationInTheDungeon = false;
 
-    //[Header("Purchase setup")]
-    //public int purchaseCount;
-    //public List<int> purchaseReference = new List<int>();
-    //public int numberOfPurchases = 1;
-    //public TextMeshProUGUI purchaseText;
 
-    //public delegate void UpdatingAction();
-     
-    //public event UpdatingAction updatingUiPanelsEvent;
     public void Awake()
     {
         Instance = this;
         dropChanceImprovements = 7;
 
-        //if (purchaseCount == 0)
-        //    purchaseCount = 1;
-        //else
-        //    purchaseCount = PlayerPrefs.GetInt("purchaseCount");
-
-        //purchaseCount = 1;
-        //Debug.Log(purchaseCount);
-
-        //if (purchaseReference.Count > 0)
-        //{
-        //    numberOfPurchases = purchaseReference[purchaseCount - 1];
-        //    purchaseText.text = purchaseReference[purchaseCount - 1].ToString();
-        //}
         currentLocationInTheDungeon = false;
         mainCamera.SetActive(true);
         dungeonCamera.SetActive(false);
-
-        //InitializationPurchase();
+    
     }
+
     public void Start()
     {
         OpenPanel(1);
     }
+    public void Initialization(PanelsStortage stortage)
+    {
+        panels.Clear();
+        panels.AddRange(stortage.panels);
+        //OpenPanel(1);
+    }
+   
 
-    //public void PurchaseQuantityRatio()
-    //{
-    //    purchaseCount += 1;
-    //    if(purchaseCount > purchaseReference.Count)
-    //    {
-    //        purchaseCount = 1;
-    //    }
-    //    PlayerPrefs.SetInt("purchaseCount", purchaseCount);
-
-    //    if(purchaseReference.Count <= 0)
-    //    {
-    //        Debug.Log("purchaseReference == null");
-    //        Debug.LogError("");
-    //        return;
-    //    }
-
-    //    InitializationPurchase();
-    //}
-
-    //public void InitializationPurchase()
-    //{
-    //    numberOfPurchases = purchaseReference[purchaseCount - 1];
-    //    purchaseText.text = purchaseReference[purchaseCount - 1].ToString();
-
-    //    updatingUiPanelsEvent?.Invoke();
-
-    //}
     public void OpenPanel(int panelIndex)
     {
         //dungeon panel
         if (panelIndex == dungeonNumber)
         {
-            if(EnemyHealthBar.enemyHealthBarController.isInitialization == true)
-                EnemyHealthBar.enemyHealthBarController.OpenHealthBar();
+            if(enemyHealthBar.isInitialization == true)
+                enemyHealthBar.OpenHealthBar();
                 
             currentLocationInTheDungeon = true;
             mainCamera.SetActive(false);
@@ -117,7 +78,7 @@ public class PanelsHandler : MonoBehaviour
         }
         else
         {
-            EnemyHealthBar.enemyHealthBarController.ClosedHealthBar(); 
+            enemyHealthBar.ClosedHealthBar(); 
 
             currentLocationInTheDungeon = false;
             mainCamera.SetActive(true);

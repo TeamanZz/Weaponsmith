@@ -18,8 +18,8 @@ public class MoneyHandler : MonoBehaviour
     [SerializeField] private Transform canvasTransform;
 
     private float timeBetweenMoneyIncrease = 0.5f;
-
     private Coroutine currencyCoroutine;
+
     [Header("All connect initialization")]
     public PanelsHandler panelsHandler;
     public ItemsManager itemsManager;
@@ -34,22 +34,13 @@ public class MoneyHandler : MonoBehaviour
         if (moneyPerSecond == 0)
             moneyPerSecond = 1;
 
+        
     }
 
-    [ContextMenu("All Awake")]
-    public void AllAwakeInitialization()
+    public void InitializationOfTheAct()
     {
-        if (panelsHandler == null || itemsManager == null || objectsHandler == null || dungeonItemManager == null || boostersManager == null)
-            return;
 
-        panelsHandler.Awake();
-        itemsManager.Awake();
-        objectsHandler.Awake();
-        dungeonItemManager.Awake();
-        boostersManager.Awake();
-        Awake();
 
-        Debug.Log("All awake");
     }
 
     private void SaveMoneyPerSec()

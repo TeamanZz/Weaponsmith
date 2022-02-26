@@ -29,6 +29,14 @@ public class ItemsManager : MonoBehaviour
             awardPanel.SetActive(false);
     }
 
+    public void Initialization(List<PanelItem> newPanelItems)
+    {
+        panelItemsList.Clear();
+        panelItemsList.AddRange(newPanelItems);
+
+        currentWaitingPanel = panelItemsList[0];
+    }
+
     public void MakeNextUnknownItemAsUnavailable()
     {
         //WaitingForDrawing
