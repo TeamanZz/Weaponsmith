@@ -6,19 +6,20 @@ public class DungeonBuilder : MonoBehaviour
 {
     public static DungeonBuilder Instance;
 
-    public int enemyChance;
+    [Header("Dungeon Pieces Spawn")]
     public Transform piecesParent;
-    public GameObject enemyPrefab;
-    public List<GameObject> dungeonPieces = new List<GameObject>();
-
     [SerializeField] private GameObject piecePrefab;
     [SerializeField] private GameObject piecesContainer;
+
+    [Header("Enemy Spawn")]
+    public int enemySpawnRate;
+    public Transform enemiesContainer;
+    public GameObject enemyPrefab;
 
     private GameObject lastSpawnedPiece;
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
 
-    public Vector3 enemyScale;
     private void Awake()
     {
         Instance = this;
@@ -50,9 +51,13 @@ public class DungeonBuilder : MonoBehaviour
         if (lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 5 || lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 10)
             return;
 
-        if (Random.Range(0, enemyChance) == 0)
+        if (Random.Range(0, enemySpawnRate) == 0)
         {
-            GameObject enemy = Instantiate(enemyPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), transform);
+            GameObject enemy = Instantiate(enemyPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), enemiesContainer);
+
+            var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
+            enemyHealthComponent.InitializeHP(Random.Range(2, 6));
+
             enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
             enemy.transform.localScale = Vector3.one * 1.5f;
             lastSpawnedEnemyZPos = lastSpawnedPieceZPos;

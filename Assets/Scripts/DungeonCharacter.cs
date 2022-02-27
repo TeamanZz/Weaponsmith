@@ -6,82 +6,49 @@ using UnityEngine.UI;
 
 public class DungeonCharacter : MonoBehaviour
 {
-    public static DungeonCharacter dungeonCharacter;
+    public static DungeonCharacter Instance;
+
     public float runSpeed;
-    public DungeonEnemy currentEnemy;
-    public Animator animator;
 
-    public float scale = 1.5f;
     [Header("Battle settings")]
-    public bool inBattle = false;
-    public float distanceToTheEnemyToAttack = 0.5f;
+    public bool isInBattle = false;
+    public DungeonEnemy currentEnemy;
 
-    public float hitCooldownTime = 0.3f;
-    public float currentCooldowneTime = 0f;
+    [HideInInspector] public Animator animator;
 
     private void Awake()
     {
-           animator = GetComponent<Animator>();
-        transform.localScale = Vector3.one * scale;
-       // enemyHealthBar.SetActive(false);
+        Instance = this;
+        animator = GetComponent<Animator>();
     }
-    public void Start()
-    {
-        dungeonCharacter = this;
-    }
+
     private void FixedUpdate()
     {
-        if (PanelsHandler.currentLocationInTheDungeon == true)
-        {
-            if (inBattle == false)
-            {
-                if (EnemyHealthBar.enemyHealthBarController.isInitialization == true || EnemyHealthBar.enemyHealthBarController.isOpen == true)
-                    EnemyHealthBar.enemyHealthBarController.Deinitialization();
-
-                    transform.position += new Vector3(0, 0, runSpeed);
-            }
-            else
-                BattleControl();
-        }
-    }
-
-    public void BattleControl()
-    {
-        if (currentEnemy == false)
-        {
-            inBattle = false;
-            return;
-        }
-        
-        if (currentCooldowneTime < 0 && inBattle == true)
-        {
-            //Debug.Log("Hit");
-
-            currentCooldowneTime = hitCooldownTime;
-
-            if (EnemyHealthBar.enemyHealthBarController.isInitialization == false)
-                EnemyHealthBar.enemyHealthBarController.Initialization(currentEnemy);
-
-            EnemyHealthBar.enemyHealthBarController.OpenHealthBar();
-
-            animator.SetTrigger("EnemyIsNear");
-            return;
-             
-        }
+        if (!isInBattle)
+            RunForward();
         else
-            currentCooldowneTime -= Time.deltaTime;
-
-    }
-    public void TakeDamageControll()
-    {
-        //Invoke("EnemyHealthBar.enemyHealthBarController.TakeDamageControll", 0.3f);
-        Invoke(() => EnemyHealthBar.enemyHealthBarController.TakeDamageControll(), 0.05f);
-        //EnemyHealthBar.enemyHealthBarController.TakeDamageControll();
+            HandleBattle();
     }
 
-    private void Invoke(Action p, float v)
+    private void RunForward()
     {
-        EnemyHealthBar.enemyHealthBarController.TakeDamageControll();
+        transform.position += new Vector3(0, 0, runSpeed);
+    }
+
+    public void HandleBattle()
+    {
+        if (animator.GetBool("EnemyIsNear") == false)
+        {
+            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, 4));
+            animator.SetBool("EnemyIsNear", true);
+        }
+    }
+
+    public void HitEnemy()
+    {
+        animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, 4));
+        currentEnemy.TakeDamage();
+        currentEnemy.enemyHealthBar.TakeDamageControll();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -89,19 +56,20 @@ public class DungeonCharacter : MonoBehaviour
         DungeonEnemy tempEnemy;
         if (other.TryGetComponent<DungeonEnemy>(out tempEnemy))
         {
-            //animator.SetTrigger("EnemyIsNear");
-            inBattle = true;
+            isInBattle = true;
             currentEnemy = tempEnemy;
             other.enabled = false;
+            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, 4));
         }
     }
 
     public void KillEnemy()
     {
-        EnemyHealthBar.enemyHealthBarController.Deinitialization();
-
         currentEnemy.InvokeDeathAnimation();
-        Invoke("EnemyHealthBar.enemyHealthBarController.ClosedHealthBar", 0.35f);
-        inBattle = false;
+        currentEnemy = null;
+        animator.SetInteger("AttackIndex", -1);
+        animator.SetBool("EnemyIsNear", false);
+        animator.SetTrigger("EnemyDeath");
+        isInBattle = false;
     }
 }

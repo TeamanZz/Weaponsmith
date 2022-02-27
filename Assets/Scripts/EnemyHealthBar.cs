@@ -2,86 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class EnemyHealthBar : MonoBehaviour
 {
-    public static EnemyHealthBar enemyHealthBarController;
-    public DungeonCharacter dungeonCharacter;
-
     [Header("Enemy health bar settings")]
-    public bool isOpen = true;
-
     public GameObject enemyHealthBar;
-    public Slider healthBar;
-    [SerializeField] private float amountOfDamage;
+    public Image healthBarImage;
 
-    public bool isInitialization = false;
-    public DungeonEnemy targetEnemy;
+    private DungeonEnemy enemyComponent;
 
+    public int maxHealth = 5;
+    public int currentHealth = 5;
+    public ParticleSystem hitParticles;
+    public ParticleSystem deathParticles;
     public void Awake()
     {
-        enemyHealthBarController = this;
-        healthBar.maxValue = 100;
-
-        enemyHealthBar.SetActive(false);
-    }
-    public void Initialization(DungeonEnemy enemy)
-    {
-        dungeonCharacter = DungeonCharacter.dungeonCharacter;
-        targetEnemy = enemy;
-
-        healthBar.value = 100;
-        amountOfDamage = 100 / enemy.numberOfHits;
-
-        Debug.Log("Amount of damage " + amountOfDamage);
-
-
-        isInitialization = true;
+        enemyComponent = GetComponent<DungeonEnemy>();
     }
 
-    public void OpenHealthBar()
+    public void InitializeHP(int value)
     {
-        enemyHealthBar.SetActive(true);
-        isOpen = true;
+        maxHealth = value;
+        currentHealth = value;
     }
 
     [ContextMenu("Take damage")]
-    public void TakeDamageControll()
+    public void TakeDamageControll(float damage = 1)
     {
-        if (targetEnemy == null)
+        if (enemyComponent == null)
         {
-            dungeonCharacter.inBattle = false;
-            dungeonCharacter.animator.SetTrigger("EnemyIsNear");
+            DungeonCharacter.Instance.isInBattle = false;
+            // DungeonCharacter.Instance.animator.SetTrigger("EnemyIsNear");
             return;
         }
 
         Debug.Log("Damage");
-        
-        targetEnemy.numberOfHits -= 1;
 
-        if (targetEnemy.numberOfHits <= 0)
+        currentHealth -= 1;
+        var newBarValue = ((float)currentHealth / (float)maxHealth);
+        healthBarImage.DOFillAmount(newBarValue, 0.5f).SetEase(Ease.OutBack);
+
+        hitParticles.Play();
+        if (currentHealth <= 0)
         {
-            dungeonCharacter.KillEnemy();
+            DungeonCharacter.Instance.KillEnemy();
+            enemyHealthBar.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack);
+            deathParticles.Play();
             return;
         }
-
-        healthBar.value -= amountOfDamage;
-
-        Debug.Log(targetEnemy.numberOfHits);
+        Debug.Log(currentHealth);
     }
-
-    public void Deinitialization()
-    {
-        targetEnemy = null;
-        isInitialization = false;
-        ClosedHealthBar();
-    }
-
-    public void ClosedHealthBar()
-    {
-        enemyHealthBar.SetActive(false);
-        isOpen = false;
-    }
-
-
 }
