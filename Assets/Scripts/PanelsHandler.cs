@@ -5,7 +5,6 @@ using TMPro;
 
 public class PanelsHandler : MonoBehaviour
 {
-    public EnemyHealthBar enemyHealthBar;
     public static PanelsHandler Instance;
     public int dungeonNumber;
     public int dropChanceImprovements = 7;
@@ -40,7 +39,7 @@ public class PanelsHandler : MonoBehaviour
         currentLocationInTheDungeon = false;
         mainCamera.SetActive(true);
         dungeonCamera.SetActive(false);
-    
+
     }
 
     public void Start()
@@ -53,16 +52,13 @@ public class PanelsHandler : MonoBehaviour
         panels.AddRange(stortage.panels);
         //OpenPanel(1);
     }
-   
+
 
     public void OpenPanel(int panelIndex)
     {
         //dungeon panel
         if (panelIndex == dungeonNumber)
         {
-            if(enemyHealthBar.isInitialization == true)
-                enemyHealthBar.OpenHealthBar();
-                
             currentLocationInTheDungeon = true;
             mainCamera.SetActive(false);
             dungeonCamera.SetActive(true);
@@ -78,8 +74,6 @@ public class PanelsHandler : MonoBehaviour
         }
         else
         {
-            enemyHealthBar.ClosedHealthBar(); 
-
             currentLocationInTheDungeon = false;
             mainCamera.SetActive(true);
             dungeonCamera.SetActive(false);
@@ -97,7 +91,7 @@ public class PanelsHandler : MonoBehaviour
             }
         }
 
-        
+
         commonElement.SetActive(true);
     }
 
