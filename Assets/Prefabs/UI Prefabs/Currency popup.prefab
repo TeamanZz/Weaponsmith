@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currencyText: {fileID: 7092055385470901809}
+  animator: {fileID: 7092055385622762729}
 --- !u!95 &7092055385622762729
 Animator:
   serializedVersion: 3
