@@ -47,7 +47,7 @@ public class DungeonCharacter : MonoBehaviour
     public void HitEnemy()
     {
         animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, 4));
-        currentEnemy.TakeDamage();
+        currentEnemy.PlayDamageAnimation();
         currentEnemy.enemyHealthBar.TakeDamageControll();
     }
 

@@ -20,6 +20,8 @@ public class DungeonBuilder : MonoBehaviour
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
 
+    public List<GameObject> enemiesSkinsStats = new List<GameObject>();
+
     private void Awake()
     {
         Instance = this;
