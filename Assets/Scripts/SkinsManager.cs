@@ -34,6 +34,17 @@ public class SkinsManager : MonoBehaviour
             ChangeSkin();
     }
 
+    public void Initialization(List<GameObject> newSkins, List<GameObject> newDungeonSkins)
+    {
+        skins.Clear();
+        dungeonSkins.Clear();
+
+        skins = newSkins;
+        dungeonSkins = newDungeonSkins;
+
+        ChangeSkin();
+    }
+
     [ContextMenu("Change Skin")]
     public void ChangeSkin()
     {

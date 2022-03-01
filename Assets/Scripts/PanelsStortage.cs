@@ -7,6 +7,10 @@ public class PanelsStortage : MonoBehaviour
     public List<GameObject> panels = new List<GameObject>();
 
     public GameObject mainRoom;
+    [Header("Persons skin")]
+    //public GameObject skinStortageObject;
+    public List<GameObject> skinsInRoom = new List<GameObject>();
+    public List<GameObject> dungeonSkins = new List<GameObject>();
 
     [Header("Workshop")]
     public List<GameObject> roomObjects = new List<GameObject>();

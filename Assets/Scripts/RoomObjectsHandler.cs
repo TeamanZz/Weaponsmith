@@ -39,7 +39,7 @@ public class RoomObjectsHandler : MonoBehaviour
         roomObjects = objects;
         endOfEra = isEnd;
 
-        if(transitionPanel != null)
+        //if(transitionPanel != null)
         transitionPanel = newTransitionButton;
 
         workshopPanelItems.Clear();

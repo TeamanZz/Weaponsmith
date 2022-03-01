@@ -9,6 +9,8 @@ public class EraController : MonoBehaviour
     public ItemsManager itemsManager;
     public DungeonItemManager dungeonItemManager;
     public BoostersManager boostersManager;
+    public SkinsManager skinsManager;
+
     //  rooms
     public SceneObjectsOptimizeHandler sceneObjectsOptimize;
 
@@ -19,8 +21,12 @@ public class EraController : MonoBehaviour
 
     public List<PanelsStortage> stortages = new List<PanelsStortage>();
 
+    public List<GameObject> skinsRoomStortage = new List<GameObject>();
+    public List<GameObject> skinsDungeonStortage = new List<GameObject>();
+
     [Header("Additional elements settings")]
     public GameObject transitionPanel;
+
     public void Awake()
     {
         currentEraNumber = PlayerPrefs.GetInt("currentEraNumber");
@@ -34,7 +40,21 @@ public class EraController : MonoBehaviour
         }
 
         panelsStortage[currentEraNumber].SetActive(true);
-        //rooms[currentEraNumber].SetActive(true);
+        rooms[currentEraNumber].SetActive(true);
+        
+        //  skins
+        for(int i = 0; i < skinsRoomStortage.Count; i++)
+        {
+            skinsRoomStortage[i].SetActive(false);
+        }
+        skinsRoomStortage[currentEraNumber].SetActive(true);
+
+        //  skins in dungeon
+        for (int i = 0; i < skinsDungeonStortage.Count; i++)
+        {
+            skinsDungeonStortage[i].SetActive(false);
+        }
+        skinsDungeonStortage[currentEraNumber].SetActive(true);
 
         //  ui
         for (int i = 0; i < stortages[currentEraNumber].panels.Count; i++)
@@ -44,11 +64,6 @@ public class EraController : MonoBehaviour
 
         stortages[currentEraNumber].panels[1].SetActive(true);
         InitializationAllPanel();
-    }
-
-    public void InstatiateTransitionPanel()
-    {
-
     }
 
     public void InitializationAllPanel()
@@ -67,6 +82,10 @@ public class EraController : MonoBehaviour
         boostersManager.Initialization(stortages[currentEraNumber].boostersItemPanels);
         //  open panel
         panelsHandler.OpenPanel(1);
+        //  skin stortage
+        //stortages[currentEraNumber].skinStortageObject.SetActive(true);
+        skinsManager.Initialization(stortages[currentEraNumber].skinsInRoom, stortages[currentEraNumber].dungeonSkins);
+
         PlayerPrefs.SetInt("currentEraNumber", currentEraNumber);
         if (SettingsManager.settingsManager != null)
             SettingsManager.settingsManager.RemovingOldEraProgress();
@@ -87,6 +106,20 @@ public class EraController : MonoBehaviour
 
         panelsStortage[currentEraNumber].SetActive(true);
         rooms[currentEraNumber].SetActive(true);
+
+        //  skins in room
+        for (int i = 0; i < skinsRoomStortage.Count; i++)
+        {
+            skinsRoomStortage[i].SetActive(false);
+        }
+        skinsRoomStortage[currentEraNumber].SetActive(true);
+
+        //  skins in dungeon
+        for (int i = 0; i < skinsDungeonStortage.Count; i++)
+        {
+            skinsDungeonStortage[i].SetActive(false);
+        }
+        skinsDungeonStortage[currentEraNumber].SetActive(true);
 
         //  ui
         for (int i = 0; i < stortages[currentEraNumber].panels.Count; i++)

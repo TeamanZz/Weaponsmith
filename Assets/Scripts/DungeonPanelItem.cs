@@ -65,6 +65,9 @@ public class DungeonPanelItem : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (MoneyHandler.Instance == null)
+            return;
+
         if (price <= MoneyHandler.Instance.moneyCount)
         {
             buyButtonComponent.enabled = true;

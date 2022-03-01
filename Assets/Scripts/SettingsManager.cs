@@ -23,7 +23,6 @@ public class SettingsManager : MonoBehaviour
         if (MoneyHandler.Instance != null)
             MoneyHandler.Instance.moneyCount = 0;
 
-        PlayerPrefs.DeleteKey("skinIndex");
         PlayerPrefs.DeleteKey("MoneyPerSecond");
         PlayerPrefs.SetInt("currentWaitingPanelNumber", 0);
 
@@ -66,6 +65,9 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("AwardPanel", 0);
         PlayerPrefs.DeleteKey("MoneyCount");
         PlayerPrefs.SetInt("WeaponNumber", 0);
+        PlayerPrefs.SetInt("EnemySkinCount", 0);
+
+        PlayerPrefs.SetInt("skinIndex", 0);
         PlayerPrefs.SetInt("EnemySkinCount", 0);
 
         Debug.Log("End all clear");
