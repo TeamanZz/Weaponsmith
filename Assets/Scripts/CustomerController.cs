@@ -12,6 +12,10 @@ public class CustomerController : MonoBehaviour, IPointerClickHandler
     public Transform canvasTransform;
     public ParticleSystem particles;
     public GameObject hammer;
+    public Animator characterAnimator;
+
+    public float currentTapTimerValue = 0;
+    public float maxTapTimerValue = 2;
 
     private void Awake()
     {
@@ -22,6 +26,20 @@ public class CustomerController : MonoBehaviour, IPointerClickHandler
     {
         MoneyHandler.Instance.IncreaseIncomeByTap();
         SpawnTapCircle();
+        currentTapTimerValue = maxTapTimerValue;
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentTapTimerValue > 0)
+        {
+            currentTapTimerValue -= Time.deltaTime;
+            characterAnimator.speed = 1.25f;
+        }
+        else
+        {
+            characterAnimator.speed = 1f;
+        }
     }
 
     private void SpawnTapCircle()
