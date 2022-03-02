@@ -165,12 +165,6 @@ public class BoostersItemPanel : MonoBehaviour
         PlayerPrefs.SetString("BoostersUpgradeItem" + index, "unknown");
     }
 
-    private void OnDestroy()
-    {
-        // ChangeState(currentState);
-        // SaveData();
-    }
-
     private void SaveState()
     {
         if (currentState == PanelItemState.Collapsed)

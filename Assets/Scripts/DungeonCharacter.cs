@@ -9,17 +9,19 @@ public class DungeonCharacter : MonoBehaviour
     public static DungeonCharacter Instance;
 
     public float runSpeed;
-
-    [Header("Battle settings")]
     public bool isInBattle = false;
-    public DungeonEnemy currentEnemy;
+    public int allowedAttackAnimationsCount = 2;
 
+    [HideInInspector] public DungeonEnemy currentEnemy;
     [HideInInspector] public Animator animator;
+
+    public int maxAllowedAttackAnimationsCount = 4;
 
     private void Awake()
     {
         Instance = this;
         animator = GetComponent<Animator>();
+        allowedAttackAnimationsCount = PlayerPrefs.GetInt("allowedAttackAnimationsCount", 2);
     }
 
     private void FixedUpdate()
@@ -35,18 +37,34 @@ public class DungeonCharacter : MonoBehaviour
         transform.position += new Vector3(0, 0, runSpeed);
     }
 
+    public void IncreaseAllowedAttackAnimationsCount()
+    {
+        Debug.Log("PIZDEC 11");
+
+        Debug.Log("Pizda" + allowedAttackAnimationsCount + "|" + maxAllowedAttackAnimationsCount);
+        if (allowedAttackAnimationsCount >= maxAllowedAttackAnimationsCount)
+            return;
+        Debug.Log("PIZDEC 22");
+
+        allowedAttackAnimationsCount++;
+        PlayerPrefs.SetInt("allowedAttackAnimationsCount", allowedAttackAnimationsCount);
+        PlayerPrefs.Save();
+
+        Debug.Log("PIZDEC " + PlayerPrefs.GetInt("allowedAttackAnimationsCount"));
+    }
+
     public void HandleBattle()
     {
         if (animator.GetBool("EnemyIsNear") == false)
         {
-            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, 4));
+            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
             animator.SetBool("EnemyIsNear", true);
         }
     }
 
     public void HitEnemy()
     {
-        animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, 4));
+        animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
         currentEnemy.PlayDamageAnimation();
         currentEnemy.enemyHealthBar.TakeDamageControll();
     }
@@ -59,7 +77,7 @@ public class DungeonCharacter : MonoBehaviour
             isInBattle = true;
             currentEnemy = tempEnemy;
             other.enabled = false;
-            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, 4));
+            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
         }
     }
 

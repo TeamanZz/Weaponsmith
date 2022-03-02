@@ -7,7 +7,7 @@ public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager settingsManager;
     public GameObject settingsPanel;
-    
+
     public void Awake()
     {
         settingsManager = this;
@@ -87,6 +87,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.DeleteKey("skinIndex");
         PlayerPrefs.DeleteKey("MoneyPerSecond");
         PlayerPrefs.SetInt("currentWaitingPanelNumber", 0);
+        PlayerPrefs.DeleteKey("allowedAttackAnimationsCount");
 
         if (ItemsManager.Instance != null)
             for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)

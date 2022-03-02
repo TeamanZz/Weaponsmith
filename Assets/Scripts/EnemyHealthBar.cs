@@ -37,8 +37,6 @@ public class EnemyHealthBar : MonoBehaviour
             return;
         }
 
-        Debug.Log("Damage");
-
         currentHealth -= 1;
         var newBarValue = ((float)currentHealth / (float)maxHealth);
         healthBarImage.DOFillAmount(newBarValue, 0.5f).SetEase(Ease.OutBack);
@@ -51,6 +49,5 @@ public class EnemyHealthBar : MonoBehaviour
             deathParticles.Play();
             return;
         }
-        Debug.Log(currentHealth);
     }
 }

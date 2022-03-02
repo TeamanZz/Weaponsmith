@@ -79,7 +79,6 @@ public class PrefsHandler : MonoBehaviour
 
             if (value == "unknown")
             {
-                Debug.Log(DungeonItemManager.Instance.panelItemsList[i] + "HEH");
                 DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
             }
 

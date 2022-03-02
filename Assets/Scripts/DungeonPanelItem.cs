@@ -19,21 +19,21 @@ public class DungeonPanelItem : MonoBehaviour
     public AnimationCurve costCurve;
 
     [FoldoutGroup("Current Runtime Values")] public int buysCount;
-    [FoldoutGroup("Current Runtime Values")] [SerializeField] private int generalIncreaseValue;
+    [FoldoutGroup("Current Runtime Values")][SerializeField] private int generalIncreaseValue;
 
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI itemNameText;
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI priceText;
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI buysCountText;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject buyButton;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
 
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject progressBar;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject completedSign;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemIcon;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject unknownSign;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject blurPanel;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemConditionsGO;
-    [FoldoutGroup("View Components")] [SerializeField] private Image progressBarFilled;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject progressBar;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject completedSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
+    [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
 
     private Animator buyButtonAnimator;
     private Animator iconAnimator;
@@ -108,6 +108,19 @@ public class DungeonPanelItem : MonoBehaviour
         itemNameText.text = itemName;
     }
 
+    public void HandleUpgradeOnBuy()
+    {
+        if (upgradeType == DungeonUpgradeType.WeaponSkills)
+        {
+            Debug.Log("Buys count: " + buysCount + " | Buys edge count: " + buysEdgeCount);
+            if (buysCount == buysEdgeCount / 2 || buysCount == 1)
+            {
+                DungeonCharacter.Instance.IncreaseAllowedAttackAnimationsCount();
+            }
+        }
+    }
+
+    [Button("Buy Upgrade")]
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
@@ -116,6 +129,7 @@ public class DungeonPanelItem : MonoBehaviour
         UpdateView();
         PlayJumpAnimation();
         CheckOnCollapse();
+        HandleUpgradeOnBuy();
     }
 
     private void CheckOnCollapse()

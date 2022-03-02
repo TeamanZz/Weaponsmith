@@ -7,15 +7,15 @@ public class CustomerController : MonoBehaviour, IPointerClickHandler
 {
     public static CustomerController Instance;
 
-    public Animator swordAnvilAnimator;
+    public GameObject hammer;
     public GameObject tapCirclePrefab;
+    public Animator swordAnvilAnimator;
+    public Animator characterAnimator;
     public Transform canvasTransform;
     public ParticleSystem particles;
-    public GameObject hammer;
-    public Animator characterAnimator;
 
-    public float currentTapTimerValue = 0;
-    public float maxTapTimerValue = 2;
+    private float currentTapTimerValue = 0;
+    private float maxTapTimerValue = 2;
 
     private void Awake()
     {

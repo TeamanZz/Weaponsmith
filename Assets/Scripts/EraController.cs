@@ -30,7 +30,7 @@ public class EraController : MonoBehaviour
     public void Awake()
     {
         currentEraNumber = PlayerPrefs.GetInt("currentEraNumber");
-        Debug.Log(currentEraNumber);
+        // Debug.Log(currentEraNumber);
 
         //  objects
         for (int i = 0; i < panelsStortage.Count; i++)
@@ -41,9 +41,9 @@ public class EraController : MonoBehaviour
 
         panelsStortage[currentEraNumber].SetActive(true);
         rooms[currentEraNumber].SetActive(true);
-        
+
         //  skins
-        for(int i = 0; i < skinsRoomStortage.Count; i++)
+        for (int i = 0; i < skinsRoomStortage.Count; i++)
         {
             skinsRoomStortage[i].SetActive(false);
         }
