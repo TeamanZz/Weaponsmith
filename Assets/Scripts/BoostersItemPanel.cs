@@ -3,43 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
+
 public class BoostersItemPanel : MonoBehaviour
 {
     public PanelItemState currentState;
-
     public BoostersItemPanel nextUpgradeItem;
-
-    public int index;
-    public int buysCount;
-    [SerializeField] private TextMeshProUGUI itemNameText;
-    [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
-    [SerializeField] private TextMeshProUGUI priceText;
-    [SerializeField] private TextMeshProUGUI buysCountText;
-    [SerializeField] private GameObject buyButton;
-    [SerializeField] private Button buyButtonComponent;
-    [SerializeField] private Image buyButtonImage;
-    [SerializeField] private GameObject progressBar;
-    [SerializeField] private GameObject completedSign;
-    [SerializeField] private GameObject itemIcon;
-    [SerializeField] private GameObject unknownSign;
-    [SerializeField] private GameObject blurPanel;
-    [SerializeField] private GameObject itemConditionsGO;
-    [SerializeField] private Image progressBarFilled;
-
-    [SerializeField] private Animator buyButtonAnimator;
-    [SerializeField] private Animator iconAnimator;
-    [SerializeField] private Animator generalIncreaseValueTextAnimator;
-    [SerializeField] private Animator buysCountTextAnimator;
-
     public string itemName;
-    [SerializeField] private int generalIncreaseValue;
+    public int index;
     [SerializeField] private int increaseValue;
-    [SerializeField] private int price;
     [SerializeField] private int buysEdgeCount;
-    [SerializeField] private List<ItemCondition> itemConditionsList = new List<ItemCondition>();
-
     public AnimationCurve costCurve;
-    public Color buttonDefaultColor;
+
+    private int price;
+    private Color buttonDefaultColor = new Color(105, 185, 255);
+
+    [FoldoutGroup("Current Runtime Values")] public int buysCount;
+    [FoldoutGroup("Current Runtime Values")][SerializeField] private int generalIncreaseValue;
+    [FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
+    [FoldoutGroup("View Components")][SerializeField] private Image buyButtonImage;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject progressBar;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject completedSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
+    [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
+    [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
 
     private void Awake()
     {
@@ -235,14 +233,6 @@ public class BoostersItemPanel : MonoBehaviour
         completedSign.SetActive(false);
         itemIcon.SetActive(true);
         itemNameText.text = itemName;
-
-        for (int i = 0; i < itemConditionsList.Count; i++)
-        {
-            //200 Fire power
-            itemConditionsGO.transform.GetChild(i).gameObject.SetActive(true);
-            string conditionText = $"{itemConditionsList[i].count} {itemConditionsList[i].itemName}";
-            itemConditionsGO.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = conditionText;
-        }
     }
 
     //Unknown
