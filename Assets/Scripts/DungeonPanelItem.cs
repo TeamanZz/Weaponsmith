@@ -6,21 +6,7 @@ using TMPro;
 public class DungeonPanelItem : MonoBehaviour
 {
     public PanelItemState currentState;
-    public enum CurrentPanel
-    {
-        parent,
-        childObject
-    }
-    public CurrentPanel currentPanelState;
-
-    public enum ArmorOrEnemy
-    {
-        none,
-        armor,
-        enemy
-    }
-    public ArmorOrEnemy currentObject;
-
+    public DungeonUpgradeType upgradeType;
     public DungeonPanelItem connectPanel;
     public DungeonPanelItem nextUpgradeItem;
     public int index;
@@ -28,21 +14,19 @@ public class DungeonPanelItem : MonoBehaviour
     [SerializeField] private int increaseValue;
     [SerializeField] private int buysEdgeCount;
     public AnimationCurve costCurve;
+    public CurrentPanel currentPanelState;
 
     [Space]
     public int buysCount;
     [SerializeField] private int generalIncreaseValue;
 
-    private int price;
-    //[HideInInspector] public int currentWeaponNumber;
     [Space]
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private TextMeshProUGUI buysCountText;
     [SerializeField] private GameObject buyButton;
-    private Button buyButtonComponent;
-    private Image buyButtonImage;
+
     [SerializeField] private GameObject progressBar;
     [SerializeField] private GameObject completedSign;
     [SerializeField] private GameObject itemIcon;
@@ -55,29 +39,20 @@ public class DungeonPanelItem : MonoBehaviour
     private Animator iconAnimator;
     private Animator generalIncreaseValueTextAnimator;
     private Animator buysCountTextAnimator;
+    private Button buyButtonComponent;
+    private Image buyButtonImage;
+    private int price;
 
-
-    public Color buttonDefaultColor;
+    private Color buttonDefaultColor = new Color(105, 185, 255);
 
     private void Awake()
     {
         Initialize();
     }
+
     private void FixedUpdate()
     {
-        if (MoneyHandler.Instance == null)
-            return;
-
-        if (price <= MoneyHandler.Instance.moneyCount)
-        {
-            buyButtonComponent.enabled = true;
-            buyButtonImage.color = buttonDefaultColor;
-        }
-        else
-        {
-            buyButtonComponent.enabled = false;
-            buyButtonImage.color = Color.gray;
-        }
+        HandleBuyButtonAvailability();
     }
 
     private void Start()
@@ -86,21 +61,6 @@ public class DungeonPanelItem : MonoBehaviour
 
         if (buysCount >= buysEdgeCount)
             ChangeState(PanelItemState.Collapsed);
-    }
-
-    //show weapon
-    //public void ShowWeaponsByNumber()
-    //{
-    // //   if (currentPanelState == CurrentPanel.parent)
-    //        //EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWeaponNumber);
-    //}
-    private void SaveData()
-    {
-        SaveState();
-        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
-        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}price", price);
-        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}increaseValue", increaseValue);
-        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}buysCount", buysCount);
     }
 
     private void Initialize()
@@ -116,6 +76,23 @@ public class DungeonPanelItem : MonoBehaviour
             SetItemName();
         price = (int)costCurve.Evaluate(buysCount);
         UpdateView();
+    }
+
+    private void HandleBuyButtonAvailability()
+    {
+        if (MoneyHandler.Instance == null)
+            return;
+
+        if (price <= MoneyHandler.Instance.moneyCount)
+        {
+            buyButtonComponent.enabled = true;
+            buyButtonImage.color = buttonDefaultColor;
+        }
+        else
+        {
+            buyButtonComponent.enabled = false;
+            buyButtonImage.color = Color.gray;
+        }
     }
 
     private void PlayJumpAnimation()
@@ -140,7 +117,6 @@ public class DungeonPanelItem : MonoBehaviour
         PlayJumpAnimation();
         CheckOnCollapse();
     }
-
 
     private void CheckOnCollapse()
     {
@@ -169,18 +145,18 @@ public class DungeonPanelItem : MonoBehaviour
 
             if (currentPanelState == CurrentPanel.parent)
             {
-                if (currentObject == ArmorOrEnemy.enemy)
-                {
-                    SkinsManager.Instance.dungeonEnemySkinCount += 1;
-                    Debug.Log("Enemy");
-                }
+                // if (upgradeType == DungeonUpgradeType.enemy)
+                // {
+                //     SkinsManager.Instance.dungeonEnemySkinCount += 1;
+                //     Debug.Log("Enemy");
+                // }
 
-                if (currentObject == ArmorOrEnemy.armor)
-                {
-                    SkinsManager.Instance.currentSkinIndex += 1;
-                    SkinsManager.Instance.ChangeSkin();
-                    Debug.Log("Armor");
-                }
+                // if (upgradeType == DungeonUpgradeType.Armor)
+                // {
+                //     SkinsManager.Instance.currentSkinIndex += 1;
+                //     SkinsManager.Instance.ChangeSkin();
+                //     Debug.Log("Armor");
+                // }
             }
             PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
         }
@@ -196,14 +172,6 @@ public class DungeonPanelItem : MonoBehaviour
             SetAvailableItemView();
             PlayerPrefs.SetString("DungeonUpgradeItem" + index, "available");
         }
-    }
-
-    //  unkown
-    [ContextMenu("UnkownPanel")]
-    public void UnkownPanel()
-    {
-        SetUnknownItemView();
-        PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
     }
 
     private void SaveState()
@@ -233,6 +201,12 @@ public class DungeonPanelItem : MonoBehaviour
         buysCount = (int)PlayerPrefs.GetFloat($"DungeonUpgradeItem{index}buysCount");
         currentState = newState;
 
+        HandleStateOnPrefsLoad();
+        UpdateView();
+    }
+
+    private void HandleStateOnPrefsLoad()
+    {
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
@@ -250,31 +224,15 @@ public class DungeonPanelItem : MonoBehaviour
             SetAvailableItemView();
             PlayerPrefs.SetString("DungeonUpgradeItem" + index, "available");
         }
-        UpdateView();
     }
 
-    //open panel
-    [ContextMenu("Available state")]
-    public void SetAvailableItemView()
+    private void SaveData()
     {
-        itemConditionsGO.SetActive(false);
-        blurPanel.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(true);
-        unknownSign.SetActive(false);
-        progressBar.SetActive(true);
-        buyButton.SetActive(true);
-        completedSign.SetActive(false);
-        itemIcon.SetActive(true);
-        itemNameText.text = itemName;
-
-        if (currentPanelState == CurrentPanel.parent)
-        {
-            if (connectPanel != null)
-                connectPanel.ChangeStateViaLoader(PanelItemState.Available);
-            else
-                Debug.Log("Child panel = null " + connectPanel);
-        }
-
+        SaveState();
+        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
+        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}price", price);
+        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}increaseValue", increaseValue);
+        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}buysCount", buysCount);
     }
 
     //Unknown
@@ -303,20 +261,18 @@ public class DungeonPanelItem : MonoBehaviour
         itemIcon.SetActive(true);
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
-
     }
 
     private void UpdateItemValues()
     {
         generalIncreaseValue += increaseValue;
         increaseValue += (2 * index);
+
         if (index == 0)
-        {
             increaseValue = (int)(increaseValue * 1.1f);
-        }
+
         buysCount++;
         price = (int)costCurve.Evaluate(buysCount);
-        // price = (int)(price * 1.4f);
     }
 
     private void UpdateView()
@@ -326,5 +282,54 @@ public class DungeonPanelItem : MonoBehaviour
 
         buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
         progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);
+    }
+
+    [ContextMenu("Available state")]
+    public void SetAvailableItemView()
+    {
+        itemConditionsGO.SetActive(false);
+        blurPanel.SetActive(false);
+        generalIncreaseValueText.gameObject.SetActive(true);
+        unknownSign.SetActive(false);
+        progressBar.SetActive(true);
+        buyButton.SetActive(true);
+        completedSign.SetActive(false);
+        itemIcon.SetActive(true);
+        itemNameText.text = itemName;
+
+        if (currentPanelState == CurrentPanel.parent)
+        {
+            if (connectPanel != null)
+                connectPanel.ChangeStateViaLoader(PanelItemState.Available);
+            else
+                Debug.Log("Child panel = null " + connectPanel);
+        }
+    }
+
+    //  unkown
+    [ContextMenu("UnkownPanel")]
+    public void UnkownPanel()
+    {
+        SetUnknownItemView();
+        PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
+    }
+
+    public enum CurrentPanel
+    {
+        parent,
+        childObject
+    }
+
+    public enum DungeonUpgradeType
+    {
+        None,
+        Goblins,
+        Armor,
+        Agility,
+        Witch,
+        WeaponSkills,
+        CriticalDamage,
+        DungeonDepth,
+        Golems
     }
 }

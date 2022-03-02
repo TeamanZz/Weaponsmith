@@ -19,12 +19,16 @@ public class DungeonItemManager : MonoBehaviour
         var nextItem = panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (nextItem != null)
             nextItem.ChangeState(PanelItemState.WaitingForDrawing);
-
     }
 
     public void Initialization(List<DungeonPanelItem> newPanels)
     {
         panelItemsList.Clear();
         panelItemsList.AddRange(newPanels);
+    }
+
+    public void HandleUpgradeOnBuy()
+    {
+
     }
 }
