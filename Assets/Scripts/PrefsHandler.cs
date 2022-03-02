@@ -6,7 +6,6 @@ using System;
 public class PrefsHandler : MonoBehaviour
 {
     public static PrefsHandler Instance;
-    //public List<PartsItem> blueprintsList = new List<PartsItem>();
 
     private void Awake()
     {
@@ -15,15 +14,11 @@ public class PrefsHandler : MonoBehaviour
 
     private void Start()
     {
-        // PlayerPrefs.DeleteAll();
         LoadMoney();
         LoadWorkshopItems();
-        //LoadBlueprints();
         LoadUpgrades();
-
         InvokeRepeating("SaveMoney", 1, 3);
     }
-
 
     private void SaveMoney()
     {
@@ -48,17 +43,6 @@ public class PrefsHandler : MonoBehaviour
         }
     }
 
-    //private void LoadBlueprints()
-    //{
-    //    for (int i = 0; i < blueprintsList.Count; i++)
-    //    {
-    //        if (PlayerPrefs.GetString("BlueprintPanelItem" + i) == "unlocked")
-    //        {
-    //            blueprintsList[i].UnlockItem();
-    //        }
-    //    }
-    //}
-
     private void LoadUpgrades()
     {
         for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
@@ -68,15 +52,17 @@ public class PrefsHandler : MonoBehaviour
             {
                 ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
             }
+
             if (value == "unknown")
             {
                 ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
             }
-            //WaitingForDrawing
+
             if (value == "WaitingForDrawing")
             {
                 ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.WaitingForDrawing);
             }
+
             if (value == "available")
             {
                 ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
@@ -90,15 +76,13 @@ public class PrefsHandler : MonoBehaviour
             {
                 DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
             }
+
             if (value == "unknown")
             {
+                Debug.Log(DungeonItemManager.Instance.panelItemsList[i] + "HEH");
                 DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
             }
-            //WaitingForDrawing
-            // if (value == "WaitingForDrawing")
-            // {
-            //     DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.WaitingForDrawing);
-            // }
+
             if (value == "available")
             {
                 DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
@@ -112,15 +96,12 @@ public class PrefsHandler : MonoBehaviour
             {
                 BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
             }
+
             if (value == "unknown")
             {
                 BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
             }
-            //WaitingForDrawing
-            // if (value == "WaitingForDrawing")
-            // {
-            //     DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.WaitingForDrawing);
-            // }
+
             if (value == "available")
             {
                 BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);

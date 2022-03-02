@@ -3,37 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
 public class DungeonPanelItem : MonoBehaviour
 {
+    [Header("Initialize parameters")]
     public PanelItemState currentState;
     public DungeonUpgradeType upgradeType;
-    public DungeonPanelItem connectPanel;
-    public DungeonPanelItem nextUpgradeItem;
+    public CurrentPanel currentPanelState;
     public int index;
     public string itemName;
     [SerializeField] private int increaseValue;
     [SerializeField] private int buysEdgeCount;
+    public DungeonPanelItem connectPanel;
+    public DungeonPanelItem nextUpgradeItem;
     public AnimationCurve costCurve;
-    public CurrentPanel currentPanelState;
 
-    [Space]
-    public int buysCount;
-    [SerializeField] private int generalIncreaseValue;
+    [FoldoutGroup("Current Runtime Values")] public int buysCount;
+    [FoldoutGroup("Current Runtime Values")] [SerializeField] private int generalIncreaseValue;
 
-    [Space]
-    [SerializeField] private TextMeshProUGUI itemNameText;
-    [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
-    [SerializeField] private TextMeshProUGUI priceText;
-    [SerializeField] private TextMeshProUGUI buysCountText;
-    [SerializeField] private GameObject buyButton;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI itemNameText;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI buysCountText;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject buyButton;
 
-    [SerializeField] private GameObject progressBar;
-    [SerializeField] private GameObject completedSign;
-    [SerializeField] private GameObject itemIcon;
-    [SerializeField] private GameObject unknownSign;
-    [SerializeField] private GameObject blurPanel;
-    [SerializeField] private GameObject itemConditionsGO;
-    [SerializeField] private Image progressBarFilled;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject progressBar;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject completedSign;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject unknownSign;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject blurPanel;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemConditionsGO;
+    [FoldoutGroup("View Components")] [SerializeField] private Image progressBarFilled;
 
     private Animator buyButtonAnimator;
     private Animator iconAnimator;

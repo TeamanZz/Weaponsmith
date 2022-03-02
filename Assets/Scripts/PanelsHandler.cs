@@ -15,21 +15,9 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI panelName;
     [SerializeField] private GameObject commonElement;
 
-    [Header("Sub panels in craft panel")]
-    [SerializeField] private GameObject bodyContent;
-    [SerializeField] private GameObject tipContent;
-    [SerializeField] private TextMeshProUGUI craftPanelLabel;
-
-    [SerializeField] private Vector3 cameraTablePosition;
-    [SerializeField] private Vector3 cameraTableRotation;
-    [SerializeField] private Vector3 cameraRoomPosition;
-    [SerializeField] private Vector3 cameraRoomRotation;
-
-
     public GameObject mainCamera;
     public GameObject dungeonCamera;
     public static bool currentLocationInTheDungeon = false;
-
 
     public void Awake()
     {
@@ -90,8 +78,6 @@ public class PanelsHandler : MonoBehaviour
                 panels[i].SetActive(false);
             }
         }
-
-
         commonElement.SetActive(true);
     }
 
@@ -106,21 +92,5 @@ public class PanelsHandler : MonoBehaviour
     public void ShowPanelName(int panelIndex)
     {
         panelName.text = panelNames[panelIndex];
-    }
-
-    public void SwitchCraftPanelContent()
-    {
-        if (bodyContent.activeSelf == true)
-        {
-            bodyContent.SetActive(false);
-            tipContent.SetActive(true);
-            craftPanelLabel.text = "Tip";
-        }
-        else
-        {
-            bodyContent.SetActive(true);
-            tipContent.SetActive(false);
-            craftPanelLabel.text = "Body";
-        }
     }
 }
