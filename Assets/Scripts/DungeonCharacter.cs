@@ -11,17 +11,34 @@ public class DungeonCharacter : MonoBehaviour
     public float runSpeed;
     public bool isInBattle = false;
     public int allowedAttackAnimationsCount = 2;
-
     [HideInInspector] public DungeonEnemy currentEnemy;
     [HideInInspector] public Animator animator;
 
     public int maxAllowedAttackAnimationsCount = 4;
+    public MeleeWeaponTrail weaponTrail;
+    private bool weaponTrailEnabled = false;
 
     private void Awake()
     {
         Instance = this;
+        LoadWeaponTrailValue();
         animator = GetComponent<Animator>();
         allowedAttackAnimationsCount = PlayerPrefs.GetInt("allowedAttackAnimationsCount", 2);
+    }
+
+    private void LoadWeaponTrailValue()
+    {
+        string trailEnabled = PlayerPrefs.GetString("weaponTrailEnabled", "false");
+        if (trailEnabled == "true")
+            weaponTrailEnabled = true;
+        else
+            weaponTrailEnabled = false;
+    }
+
+    public void EnableWeaponTrail()
+    {
+        PlayerPrefs.SetString("weaponTrailEnabled", "true");
+        weaponTrailEnabled = true;
     }
 
     private void FixedUpdate()
@@ -78,6 +95,8 @@ public class DungeonCharacter : MonoBehaviour
             currentEnemy = tempEnemy;
             other.enabled = false;
             animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
+            if (weaponTrailEnabled)
+                weaponTrail.Emit = true;
         }
     }
 
@@ -89,5 +108,7 @@ public class DungeonCharacter : MonoBehaviour
         animator.SetBool("EnemyIsNear", false);
         animator.SetTrigger("EnemyDeath");
         isInBattle = false;
+        if (weaponTrailEnabled)
+            weaponTrail.Emit = false;
     }
 }

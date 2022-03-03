@@ -118,6 +118,14 @@ public class DungeonPanelItem : MonoBehaviour
                 DungeonCharacter.Instance.IncreaseAllowedAttackAnimationsCount();
             }
         }
+
+        if (upgradeType == DungeonUpgradeType.Agility)
+        {
+            if (buysCount == 1)
+            {
+                DungeonCharacter.Instance.EnableWeaponTrail();
+            }
+        }
     }
 
     [Button("Buy Upgrade")]

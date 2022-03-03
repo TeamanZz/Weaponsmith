@@ -88,6 +88,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.DeleteKey("MoneyPerSecond");
         PlayerPrefs.SetInt("currentWaitingPanelNumber", 0);
         PlayerPrefs.DeleteKey("allowedAttackAnimationsCount");
+        PlayerPrefs.DeleteKey("weaponTrailEnabled");
 
         if (ItemsManager.Instance != null)
             for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
