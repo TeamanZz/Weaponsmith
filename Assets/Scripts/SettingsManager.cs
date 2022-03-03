@@ -89,6 +89,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("currentWaitingPanelNumber", 0);
         PlayerPrefs.DeleteKey("allowedAttackAnimationsCount");
         PlayerPrefs.DeleteKey("weaponTrailEnabled");
+        PlayerPrefs.DeleteKey("canCriticalHit");
 
         if (ItemsManager.Instance != null)
             for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)

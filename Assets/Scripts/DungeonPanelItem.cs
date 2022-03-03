@@ -43,7 +43,7 @@ public class DungeonPanelItem : MonoBehaviour
     private Image buyButtonImage;
     private int price;
 
-    private Color buttonDefaultColor = new Color(105, 185, 255);
+    [SerializeField] private Color buttonDefaultColor;
 
     private void Awake()
     {
@@ -124,6 +124,14 @@ public class DungeonPanelItem : MonoBehaviour
             if (buysCount == 1)
             {
                 DungeonCharacter.Instance.EnableWeaponTrail();
+            }
+        }
+
+        if (upgradeType == DungeonUpgradeType.CriticalDamage)
+        {
+            if (buysCount == 1)
+            {
+                DungeonCharacter.Instance.EnableCriticalHit();
             }
         }
     }

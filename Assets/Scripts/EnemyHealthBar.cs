@@ -7,7 +7,8 @@ using DG.Tweening;
 public class EnemyHealthBar : MonoBehaviour
 {
     [Header("Enemy health bar settings")]
-    public GameObject enemyHealthBar;
+    public GameObject canvas;
+    public GameObject healthBar;
     public Image healthBarImage;
 
     private DungeonEnemy enemyComponent;
@@ -15,7 +16,9 @@ public class EnemyHealthBar : MonoBehaviour
     public int maxHealth = 5;
     public int currentHealth = 5;
     public ParticleSystem hitParticles;
+    public ParticleSystem doubleHitParticles;
     public ParticleSystem deathParticles;
+
     public void Awake()
     {
         enemyComponent = GetComponent<DungeonEnemy>();
@@ -28,7 +31,7 @@ public class EnemyHealthBar : MonoBehaviour
     }
 
     [ContextMenu("Take damage")]
-    public void TakeDamageControll(float damage = 1)
+    public void TakeDamageControll(float damage = 1, bool isDoubleDamage = false)
     {
         if (enemyComponent == null)
         {
@@ -37,15 +40,26 @@ public class EnemyHealthBar : MonoBehaviour
             return;
         }
 
-        currentHealth -= 1;
+        if (isDoubleDamage)
+        {
+            currentHealth -= 2;
+            hitParticles.Play();
+            doubleHitParticles.Play();
+            healthBar.transform.DOShakePosition(0.5f, randomness: 20, strength: 0.2f);
+        }
+        else
+        {
+            currentHealth -= 1;
+            hitParticles.Play();
+        }
+
         var newBarValue = ((float)currentHealth / (float)maxHealth);
         healthBarImage.DOFillAmount(newBarValue, 0.5f).SetEase(Ease.OutBack);
 
-        hitParticles.Play();
         if (currentHealth <= 0)
         {
             DungeonCharacter.Instance.KillEnemy();
-            enemyHealthBar.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack);
+            canvas.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack);
             deathParticles.Play();
             return;
         }

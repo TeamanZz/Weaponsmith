@@ -17,11 +17,14 @@ public class DungeonCharacter : MonoBehaviour
     public int maxAllowedAttackAnimationsCount = 4;
     public MeleeWeaponTrail weaponTrail;
     private bool weaponTrailEnabled = false;
+    public int criticalHitRate;
+    public bool canCriticalHit = false;
 
     private void Awake()
     {
         Instance = this;
         LoadWeaponTrailValue();
+        LoadCriticalHitValue();
         animator = GetComponent<Animator>();
         allowedAttackAnimationsCount = PlayerPrefs.GetInt("allowedAttackAnimationsCount", 2);
     }
@@ -33,6 +36,21 @@ public class DungeonCharacter : MonoBehaviour
             weaponTrailEnabled = true;
         else
             weaponTrailEnabled = false;
+    }
+
+    private void LoadCriticalHitValue()
+    {
+        string criticalDamage = PlayerPrefs.GetString("canCriticalHit", "false");
+        if (criticalDamage == "true")
+            canCriticalHit = true;
+        else
+            canCriticalHit = false;
+    }
+
+    public void EnableCriticalHit()
+    {
+        canCriticalHit = true;
+        PlayerPrefs.SetString("canCriticalHit", "true");
     }
 
     public void EnableWeaponTrail()
@@ -83,7 +101,11 @@ public class DungeonCharacter : MonoBehaviour
     {
         animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
         currentEnemy.PlayDamageAnimation();
-        currentEnemy.enemyHealthBar.TakeDamageControll();
+        int isCrit = UnityEngine.Random.Range(0, criticalHitRate);
+        if (isCrit == 0 && canCriticalHit)
+            currentEnemy.enemyHealthBar.TakeDamageControll(isDoubleDamage: true);
+        else
+            currentEnemy.enemyHealthBar.TakeDamageControll();
     }
 
     private void OnTriggerEnter(Collider other)

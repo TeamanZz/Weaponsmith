@@ -16,7 +16,7 @@ public class BoostersItemPanel : MonoBehaviour
     public AnimationCurve costCurve;
 
     private int price;
-    private Color buttonDefaultColor = new Color(105, 185, 255);
+    [SerializeField] private Color buttonDefaultColor;
 
     [FoldoutGroup("Current Runtime Values")] public int buysCount;
     [FoldoutGroup("Current Runtime Values")][SerializeField] private int generalIncreaseValue;
