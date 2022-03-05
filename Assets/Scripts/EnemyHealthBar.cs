@@ -31,7 +31,7 @@ public class EnemyHealthBar : MonoBehaviour
     }
 
     [ContextMenu("Take damage")]
-    public void TakeDamageControll(float damage = 1, bool isDoubleDamage = false)
+    public void TakeDamageControll(int damage = 1, bool isDoubleDamage = false)
     {
         if (enemyComponent == null)
         {
@@ -42,14 +42,14 @@ public class EnemyHealthBar : MonoBehaviour
 
         if (isDoubleDamage)
         {
-            currentHealth -= 2;
+            currentHealth -= damage * 2;
             hitParticles.Play();
             doubleHitParticles.Play();
             healthBar.transform.DOShakePosition(0.5f, randomness: 20, strength: 0.2f);
         }
         else
         {
-            currentHealth -= 1;
+            currentHealth -= damage;
             hitParticles.Play();
         }
 

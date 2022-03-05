@@ -69,6 +69,7 @@ public class DungeonBoostersManager : MonoBehaviour
                 strengthBoosterEnabled = false;
                 strengthBoosterRemainingTime = 1;
                 BoostersManager.Instance.panelItemsList[2].HandleUIOnTimerDisable();
+                dungeonCharacter.ChangeCharacterDamageCoefficient(1);
             }
         }
     }
@@ -91,5 +92,6 @@ public class DungeonBoostersManager : MonoBehaviour
     {
         boostersHalos[2].SetActive(true);
         strengthBoosterEnabled = true;
+        dungeonCharacter.ChangeCharacterDamageCoefficient(2);
     }
 }

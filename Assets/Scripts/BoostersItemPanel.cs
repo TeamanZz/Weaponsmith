@@ -21,18 +21,14 @@ public class BoostersItemPanel : MonoBehaviour
     [FoldoutGroup("Current Runtime Values")][SerializeField] private int generalIncreaseValue;
     [FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
-    // [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
-    // [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
     [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
     [FoldoutGroup("View Components")][SerializeField] private Image buyButtonImage;
-    // [FoldoutGroup("View Components")][SerializeField] private GameObject progressBar;
     [FoldoutGroup("View Components")][SerializeField] private GameObject activateButton;
     [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
     [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
     [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
     [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
-    // [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
     [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator activateButtonAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
@@ -118,8 +114,6 @@ public class BoostersItemPanel : MonoBehaviour
         hoverIconAnimator = hoverImageGameObject.GetComponent<Animator>();
         activateButtonAnimator = activateButton.GetComponent<Animator>();
         activateButtonComponent = activateButton.GetComponent<Button>();
-        // generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
-        // buysCountTextAnimator = buysCountText.GetComponent<Animator>();
 
         if (currentState != PanelItemState.Unknown)
             SetItemName();
@@ -131,8 +125,6 @@ public class BoostersItemPanel : MonoBehaviour
     {
         buyButtonAnimator.Play("Jump", 0, 0);
         iconAnimator.Play("Jump", 0, 0);
-        // generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
-        // buysCountTextAnimator.Play("Jump", 0, 0);
     }
 
     public void PlayJumpAnimationOnActivate()
@@ -147,7 +139,6 @@ public class BoostersItemPanel : MonoBehaviour
         itemNameText.text = itemName;
     }
 
-    //  ���
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
@@ -233,8 +224,6 @@ public class BoostersItemPanel : MonoBehaviour
         price = (int)PlayerPrefs.GetFloat($"BoostersUpgradeItem{index}price", (int)costCurve.Evaluate(buysCount));
         buysCount = (int)PlayerPrefs.GetFloat($"BoostersUpgradeItem{index}buysCount");
         currentState = newState;
-        //ItemsManager.Instance.CheckConditions(this);
-
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
@@ -262,9 +251,7 @@ public class BoostersItemPanel : MonoBehaviour
     {
         itemConditionsGO.SetActive(false);
         blurPanel.SetActive(false);
-        // generalIncreaseValueText.gameObject.SetActive(true);
         unknownSign.SetActive(false);
-        // progressBar.SetActive(true);
         buyButton.SetActive(true);
         activateButton.SetActive(true);
         itemIcon.SetActive(true);
@@ -277,8 +264,6 @@ public class BoostersItemPanel : MonoBehaviour
         itemIcon.SetActive(false);
         unknownSign.SetActive(true);
         itemNameText.text = "???";
-        // progressBar.SetActive(false);
-        // generalIncreaseValueText.gameObject.SetActive(false);
         buyButton.SetActive(false);
         activateButton.SetActive(false);
         blurPanel.SetActive(true);
@@ -290,12 +275,9 @@ public class BoostersItemPanel : MonoBehaviour
         unknownSign.SetActive(false);
         blurPanel.SetActive(false);
         itemNameText.text = itemName;
-        // progressBar.SetActive(false);
-        // generalIncreaseValueText.gameObject.SetActive(false);
         buyButton.SetActive(false);
         activateButton.SetActive(true);
         itemIcon.SetActive(true);
-        // GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
     }
 
     private void UpdateItemValues()

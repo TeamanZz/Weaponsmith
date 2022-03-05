@@ -21,6 +21,9 @@ public class DungeonCharacter : MonoBehaviour
     public bool canCriticalHit = false;
     public bool needSpeedUpOnAwake;
     public float lastSpeedUpValue;
+
+    public int boosterDamageCoefficient = 1;
+
     private void Awake()
     {
         Instance = this;
@@ -70,6 +73,11 @@ public class DungeonCharacter : MonoBehaviour
         {
             needSpeedUpOnAwake = needSpeedUp;
         }
+    }
+
+    public void ChangeCharacterDamageCoefficient(int value)
+    {
+        boosterDamageCoefficient = value;
     }
 
     public void EnableCriticalHit()
@@ -122,9 +130,9 @@ public class DungeonCharacter : MonoBehaviour
         currentEnemy.PlayDamageAnimation();
         int isCrit = UnityEngine.Random.Range(0, criticalHitRate);
         if (isCrit == 0 && canCriticalHit)
-            currentEnemy.enemyHealthBar.TakeDamageControll(isDoubleDamage: true);
+            currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient, isDoubleDamage: true);
         else
-            currentEnemy.enemyHealthBar.TakeDamageControll();
+            currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient);
     }
 
     private void OnTriggerEnter(Collider other)
