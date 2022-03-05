@@ -30,7 +30,6 @@ public class BoostersItemPanel : MonoBehaviour
     // [FoldoutGroup("View Components")][SerializeField] private GameObject progressBar;
     [FoldoutGroup("View Components")][SerializeField] private GameObject activateButton;
     [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject hoverItemIcon;
     [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
     [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
     [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
@@ -41,6 +40,25 @@ public class BoostersItemPanel : MonoBehaviour
     [FoldoutGroup("View Components")][SerializeField] private Animator hoverIconAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
+
+    public GameObject hoverImageGameObject;
+    public Color disabledColor;
+    public Color enabledColor;
+    public Button activateButtonComponent;
+    private Image hoverImage;
+
+    private void Update()
+    {
+        if (hoverImageGameObject.activeSelf == true)
+        {
+            if (index == 0)
+                hoverImage.fillAmount = DungeonBoostersManager.Instance.goldBoosterRemainingTime;
+            // if (index == 1)
+            //     hoverImage.fillAmount = DungeonBoostersManager.Instance.speedBoosterRemainingTime;
+            // if (index == 2)
+            //     hoverImage.fillAmount = DungeonBoostersManager.Instance.strengthBoosterRemainingTime;
+        }
+    }
 
     private void Awake()
     {
@@ -62,12 +80,28 @@ public class BoostersItemPanel : MonoBehaviour
 
     private void Start()
     {
+        hoverImage = hoverImageGameObject.GetComponent<Image>();
         InvokeRepeating("SaveData", 3, 3);
 
         if (buysCount >= buysEdgeCount)
             ChangeState(PanelItemState.Collapsed);
     }
 
+    public void StartCooldown()
+    {
+        hoverImage.fillAmount = 1;
+        hoverImageGameObject.SetActive(true);
+        activateButtonComponent.enabled = false;
+        activateButtonComponent.image.color = disabledColor;
+    }
+
+    public void HandleUIOnTimerDisable()
+    {
+        hoverImageGameObject.SetActive(false);
+        activateButtonComponent.enabled = true;
+        activateButtonComponent.image.color = enabledColor;
+        hoverImage.fillAmount = 1;
+    }
 
     private void SaveData()
     {
@@ -84,8 +118,9 @@ public class BoostersItemPanel : MonoBehaviour
         buyButtonImage = buyButton.GetComponent<Image>();
         buyButtonAnimator = buyButton.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
-        hoverIconAnimator = hoverItemIcon.GetComponent<Animator>();
+        hoverIconAnimator = hoverImageGameObject.GetComponent<Animator>();
         activateButtonAnimator = activateButton.GetComponent<Animator>();
+        activateButtonComponent = activateButton.GetComponent<Button>();
         // generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
         // buysCountTextAnimator = buysCountText.GetComponent<Animator>();
 
@@ -287,6 +322,6 @@ public class BoostersItemPanel : MonoBehaviour
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
 
         // buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
-        // progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);
+        // progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);    
     }
 }

@@ -20,8 +20,6 @@ public class DungeonBoostersManager : MonoBehaviour
     [HideInInspector] public float strengthBoosterRemainingTime = 1;
     public float strengthBoosterTotalTime;
 
-    public List<SpellButton> boosters = new List<SpellButton>();
-
     private void Awake()
     {
         Instance = this;
@@ -38,7 +36,7 @@ public class DungeonBoostersManager : MonoBehaviour
                 boostersHalos[0].SetActive(false);
                 goldBoosterEnabled = false;
                 goldBoosterRemainingTime = 1;
-                boosters[0].HandleUIOnTimerDisable();
+                BoostersManager.Instance.panelItemsList[0].HandleUIOnTimerDisable();
             }
         }
 
@@ -51,7 +49,7 @@ public class DungeonBoostersManager : MonoBehaviour
                 boostersHalos[1].SetActive(false);
                 speedBoosterEnabled = false;
                 speedBoosterRemainingTime = 1;
-                boosters[1].HandleUIOnTimerDisable();
+                BoostersManager.Instance.panelItemsList[1].HandleUIOnTimerDisable();
             }
         }
 
@@ -64,7 +62,7 @@ public class DungeonBoostersManager : MonoBehaviour
                 boostersHalos[2].SetActive(false);
                 strengthBoosterEnabled = false;
                 strengthBoosterRemainingTime = 1;
-                boosters[2].HandleUIOnTimerDisable();
+                BoostersManager.Instance.panelItemsList[2].HandleUIOnTimerDisable();
             }
         }
     }
