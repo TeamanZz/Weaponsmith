@@ -12,6 +12,7 @@ public class SpellButton : MonoBehaviour
 
     private Image hoverImage;
     public int index;
+
     public void StartCooldown()
     {
         hoverImage.fillAmount = 1;
@@ -39,8 +40,8 @@ public class SpellButton : MonoBehaviour
         {
             if (index == 0)
                 hoverImage.fillAmount = DungeonBoostersManager.Instance.goldBoosterRemainingTime;
-            // if (index == 1)
-            //     hoverImage.fillAmount = DungeonBoostersManager.Instance.speedBoosterRemainingTime;
+            if (index == 1)
+                hoverImage.fillAmount = DungeonBoostersManager.Instance.speedBoosterRemainingTime;
             // if (index == 2)
             //     hoverImage.fillAmount = DungeonBoostersManager.Instance.strengthBoosterRemainingTime;
         }

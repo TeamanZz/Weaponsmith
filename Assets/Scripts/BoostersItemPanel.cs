@@ -52,10 +52,10 @@ public class BoostersItemPanel : MonoBehaviour
         {
             if (index == 0)
                 hoverImage.fillAmount = DungeonBoostersManager.Instance.goldBoosterRemainingTime;
-            // if (index == 1)
-            //     hoverImage.fillAmount = DungeonBoostersManager.Instance.speedBoosterRemainingTime;
-            // if (index == 2)
-            //     hoverImage.fillAmount = DungeonBoostersManager.Instance.strengthBoosterRemainingTime;
+            if (index == 1)
+                hoverImage.fillAmount = DungeonBoostersManager.Instance.speedBoosterRemainingTime;
+            if (index == 2)
+                hoverImage.fillAmount = DungeonBoostersManager.Instance.strengthBoosterRemainingTime;
         }
     }
 
@@ -105,7 +105,6 @@ public class BoostersItemPanel : MonoBehaviour
     private void SaveData()
     {
         SaveState();
-        PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
         PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}price", price);
         PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}buysCount", buysCount);
     }
@@ -267,7 +266,7 @@ public class BoostersItemPanel : MonoBehaviour
         unknownSign.SetActive(false);
         // progressBar.SetActive(true);
         buyButton.SetActive(true);
-        activateButton.SetActive(false);
+        activateButton.SetActive(true);
         itemIcon.SetActive(true);
         itemNameText.text = itemName;
     }

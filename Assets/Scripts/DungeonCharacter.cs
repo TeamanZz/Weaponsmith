@@ -19,7 +19,8 @@ public class DungeonCharacter : MonoBehaviour
     private bool weaponTrailEnabled = false;
     public int criticalHitRate;
     public bool canCriticalHit = false;
-
+    public bool needSpeedUpOnAwake;
+    public float lastSpeedUpValue;
     private void Awake()
     {
         Instance = this;
@@ -27,6 +28,11 @@ public class DungeonCharacter : MonoBehaviour
         LoadCriticalHitValue();
         animator = GetComponent<Animator>();
         allowedAttackAnimationsCount = PlayerPrefs.GetInt("allowedAttackAnimationsCount", 2);
+
+        if (needSpeedUpOnAwake)
+        {
+            animator.speed = lastSpeedUpValue;
+        }
     }
 
     private void LoadWeaponTrailValue()
@@ -45,6 +51,25 @@ public class DungeonCharacter : MonoBehaviour
             canCriticalHit = true;
         else
             canCriticalHit = false;
+    }
+
+    public void ChangeCharacterRunAndAttackSpeed(float newAnimatorCoefficient, bool needSpeedUp)
+    {
+        if (newAnimatorCoefficient != 1)
+            runSpeed = 0.15f;
+        else
+            runSpeed = 0.1f;
+
+        lastSpeedUpValue = newAnimatorCoefficient;
+
+        if (animator != null)
+        {
+            animator.speed = newAnimatorCoefficient;
+        }
+        else
+        {
+            needSpeedUpOnAwake = needSpeedUp;
+        }
     }
 
     public void EnableCriticalHit()
@@ -74,18 +99,12 @@ public class DungeonCharacter : MonoBehaviour
 
     public void IncreaseAllowedAttackAnimationsCount()
     {
-        Debug.Log("PIZDEC 11");
-
-        Debug.Log("Pizda" + allowedAttackAnimationsCount + "|" + maxAllowedAttackAnimationsCount);
         if (allowedAttackAnimationsCount >= maxAllowedAttackAnimationsCount)
             return;
-        Debug.Log("PIZDEC 22");
 
         allowedAttackAnimationsCount++;
         PlayerPrefs.SetInt("allowedAttackAnimationsCount", allowedAttackAnimationsCount);
         PlayerPrefs.Save();
-
-        Debug.Log("PIZDEC " + PlayerPrefs.GetInt("allowedAttackAnimationsCount"));
     }
 
     public void HandleBattle()

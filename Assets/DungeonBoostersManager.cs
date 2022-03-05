@@ -19,10 +19,14 @@ public class DungeonBoostersManager : MonoBehaviour
 
     [HideInInspector] public float strengthBoosterRemainingTime = 1;
     public float strengthBoosterTotalTime;
+    public DungeonCharacter dungeonCharacter;
 
     private void Awake()
     {
         Instance = this;
+        goldBoosterRemainingTime = 1;
+        speedBoosterRemainingTime = 1;
+        strengthBoosterRemainingTime = 1;
     }
 
     private void Update()
@@ -51,6 +55,7 @@ public class DungeonBoostersManager : MonoBehaviour
                 speedBoosterEnabled = false;
                 speedBoosterRemainingTime = 1;
                 BoostersManager.Instance.panelItemsList[1].HandleUIOnTimerDisable();
+                dungeonCharacter.ChangeCharacterRunAndAttackSpeed(1f, false);
             }
         }
 
@@ -79,6 +84,7 @@ public class DungeonBoostersManager : MonoBehaviour
     {
         boostersHalos[1].SetActive(true);
         speedBoosterEnabled = true;
+        dungeonCharacter.ChangeCharacterRunAndAttackSpeed(1.3f, true);
     }
 
     public void EnableStrengthBooster()
