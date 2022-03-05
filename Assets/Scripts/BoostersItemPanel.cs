@@ -11,7 +11,6 @@ public class BoostersItemPanel : MonoBehaviour
     public BoostersItemPanel nextUpgradeItem;
     public string itemName;
     public int index;
-    [SerializeField] private int increaseValue;
     [SerializeField] private int buysEdgeCount;
     public AnimationCurve costCurve;
 
@@ -108,7 +107,6 @@ public class BoostersItemPanel : MonoBehaviour
         SaveState();
         PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
         PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}price", price);
-        PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}increaseValue", increaseValue);
         PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}buysCount", buysCount);
     }
 
@@ -154,7 +152,6 @@ public class BoostersItemPanel : MonoBehaviour
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
-        MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
         UpdateItemValues();
         UpdateView();
         PlayJumpAnimation();
@@ -235,7 +232,6 @@ public class BoostersItemPanel : MonoBehaviour
         Initialize();
         generalIncreaseValue = (int)PlayerPrefs.GetFloat($"BoostersUpgradeItem{index}generalIncreaseValue");
         price = (int)PlayerPrefs.GetFloat($"BoostersUpgradeItem{index}price", (int)costCurve.Evaluate(buysCount));
-        increaseValue = (int)PlayerPrefs.GetFloat($"BoostersUpgradeItem{index}increaseValue", increaseValue);
         buysCount = (int)PlayerPrefs.GetFloat($"BoostersUpgradeItem{index}buysCount");
         currentState = newState;
         //ItemsManager.Instance.CheckConditions(this);
@@ -305,23 +301,11 @@ public class BoostersItemPanel : MonoBehaviour
 
     private void UpdateItemValues()
     {
-        generalIncreaseValue += increaseValue;
-        increaseValue += (2 * index);
-        if (index == 0)
-        {
-            increaseValue = (int)(increaseValue * 1.1f);
-        }
         buysCount++;
-        price = (int)costCurve.Evaluate(buysCount);
-        // price = (int)(price * 1.4f);
     }
 
     private void UpdateView()
     {
-        // generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
-
-        // buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
-        // progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);    
     }
 }

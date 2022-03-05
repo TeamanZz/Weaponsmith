@@ -27,20 +27,19 @@ public class MoneyHandler : MonoBehaviour
     public DungeonItemManager dungeonItemManager;
     public BoostersManager boostersManager;
 
+    public float boosterCoefficient = 1;
+
     private void Awake()
     {
         Instance = this;
         moneyPerSecond = PlayerPrefs.GetInt("MoneyPerSecond");
         if (moneyPerSecond == 0)
             moneyPerSecond = 1;
-
-        
     }
 
-    public void InitializationOfTheAct()
+    public void ChangeBoosterCoefficient(float value)
     {
-
-
+        boosterCoefficient = value;
     }
 
     private void SaveMoneyPerSec()
@@ -72,14 +71,7 @@ public class MoneyHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moneyPerSecondText.text = FormatNumsHelper.FormatNum((double)moneyPerSecond) + "/s";
-    }
-
-    public int GetRewardForCraft(int weaponCoefficient)
-    {
-        int reward = moneyPerSecond * 10;
-        moneyCount += reward;
-        return reward;
+        moneyPerSecondText.text = FormatNumsHelper.FormatNum((double)moneyPerSecond * (double)boosterCoefficient) + "/s";
     }
 
     private IEnumerator IEIncreaseMoneyCount()
@@ -87,7 +79,7 @@ public class MoneyHandler : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(timeBetweenMoneyIncrease);
-            moneyCount += moneyPerSecond;
+            moneyCount += moneyPerSecond * (long)boosterCoefficient;
             moneyCountText.text = FormatNumsHelper.FormatNum((double)moneyCount);
         }
     }
@@ -104,7 +96,7 @@ public class MoneyHandler : MonoBehaviour
     public void SpawnCurrencyPopUp()
     {
         var newPopup = Instantiate(currencyPopupPrefab, currencyPopupContainer);
-        newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3) + "$";
+        newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3 * (double)boosterCoefficient) + "$";
         newPopup.transform.SetAsFirstSibling();
     }
 

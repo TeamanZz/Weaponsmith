@@ -33,8 +33,8 @@ public class ItemSellBorder : MonoBehaviour
     {
         var newParticles = Instantiate(destroyParticles, dragObject.transform.position + new Vector3(0, 0.1f, 0), Quaternion.Euler(-90, 0, 0));
         Destroy(dragObject.gameObject);
-        int reward = MoneyHandler.Instance.GetRewardForCraft(dragObject.index);
-        SpawnRewardText(reward);
+        // int reward = MoneyHandler.Instance.GetRewardForCraft(dragObject.index);
+        // SpawnRewardText(reward);
         SFX.Instance.PlaySell();
         FTUEManager.Instance.ChangeFTUEState(7);
     }

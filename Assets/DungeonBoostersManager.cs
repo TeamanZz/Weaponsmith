@@ -36,6 +36,7 @@ public class DungeonBoostersManager : MonoBehaviour
                 boostersHalos[0].SetActive(false);
                 goldBoosterEnabled = false;
                 goldBoosterRemainingTime = 1;
+                MoneyHandler.Instance.ChangeBoosterCoefficient(1f);
                 BoostersManager.Instance.panelItemsList[0].HandleUIOnTimerDisable();
             }
         }
@@ -71,6 +72,7 @@ public class DungeonBoostersManager : MonoBehaviour
     {
         boostersHalos[0].SetActive(true);
         goldBoosterEnabled = true;
+        MoneyHandler.Instance.ChangeBoosterCoefficient(1.3f);
     }
 
     public void EnableSpeedBooster()
