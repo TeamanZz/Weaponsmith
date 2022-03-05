@@ -6,15 +6,18 @@ using UnityEngine.UI;
 public class SpellButton : MonoBehaviour
 {
     public GameObject hoverImageGameObject;
-    public GameObject sparkle;
-    public float cooldownTime;
+    public Button activateButton;
+    public Color disabledColor;
+    public Color enabledColor;
 
     private Image hoverImage;
-
+    public int index;
     public void StartCooldown()
     {
         hoverImage.fillAmount = 1;
         hoverImageGameObject.SetActive(true);
+        activateButton.enabled = false;
+        activateButton.image.color = disabledColor;
     }
 
     private void Start()
@@ -22,31 +25,24 @@ public class SpellButton : MonoBehaviour
         hoverImage = hoverImageGameObject.GetComponent<Image>();
     }
 
+    public void HandleUIOnTimerDisable()
+    {
+        hoverImageGameObject.SetActive(false);
+        activateButton.enabled = true;
+        activateButton.image.color = enabledColor;
+        hoverImage.fillAmount = 1;
+    }
+
     private void Update()
     {
         if (hoverImageGameObject.activeSelf == true)
         {
-            hoverImage.fillAmount -= Time.deltaTime / cooldownTime;
-            if (hoverImage.fillAmount <= 0)
-            {
-                hoverImageGameObject.SetActive(false);
-                sparkle.SetActive(true);
-            }
+            if (index == 0)
+                hoverImage.fillAmount = DungeonBoostersManager.Instance.goldBoosterRemainingTime;
+            // if (index == 1)
+            //     hoverImage.fillAmount = DungeonBoostersManager.Instance.speedBoosterRemainingTime;
+            // if (index == 2)
+            //     hoverImage.fillAmount = DungeonBoostersManager.Instance.strengthBoosterRemainingTime;
         }
     }
-
-    // public void HandleGoldButton()
-    // {
-
-    // }
-
-    // public void HandleSpeedButton()
-    // {
-
-    // }
-
-    // public void HandleStrengthButton()
-    // {
-
-    // }
 }

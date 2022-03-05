@@ -22,20 +22,23 @@ public class BoostersItemPanel : MonoBehaviour
     [FoldoutGroup("Current Runtime Values")][SerializeField] private int generalIncreaseValue;
     [FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    // [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
+    // [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
     [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
     [FoldoutGroup("View Components")][SerializeField] private Image buyButtonImage;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject progressBar;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject completedSign;
+    // [FoldoutGroup("View Components")][SerializeField] private GameObject progressBar;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject activateButton;
     [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject hoverItemIcon;
     [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
     [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
     [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
-    [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
+    // [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
     [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator activateButtonAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator hoverIconAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
 
@@ -81,8 +84,10 @@ public class BoostersItemPanel : MonoBehaviour
         buyButtonImage = buyButton.GetComponent<Image>();
         buyButtonAnimator = buyButton.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
-        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
-        buysCountTextAnimator = buysCountText.GetComponent<Animator>();
+        hoverIconAnimator = hoverItemIcon.GetComponent<Animator>();
+        activateButtonAnimator = activateButton.GetComponent<Animator>();
+        // generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
+        // buysCountTextAnimator = buysCountText.GetComponent<Animator>();
 
         if (currentState != PanelItemState.Unknown)
             SetItemName();
@@ -94,8 +99,15 @@ public class BoostersItemPanel : MonoBehaviour
     {
         buyButtonAnimator.Play("Jump", 0, 0);
         iconAnimator.Play("Jump", 0, 0);
-        generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
-        buysCountTextAnimator.Play("Jump", 0, 0);
+        // generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
+        // buysCountTextAnimator.Play("Jump", 0, 0);
+    }
+
+    public void PlayJumpAnimationOnActivate()
+    {
+        iconAnimator.Play("Jump", 0, 0);
+        hoverIconAnimator.Play("Jump", 0, 0);
+        activateButtonAnimator.Play("Jump", 0, 0);
     }
 
     private void SetItemName()
@@ -220,11 +232,11 @@ public class BoostersItemPanel : MonoBehaviour
     {
         itemConditionsGO.SetActive(false);
         blurPanel.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(true);
+        // generalIncreaseValueText.gameObject.SetActive(true);
         unknownSign.SetActive(false);
-        progressBar.SetActive(true);
+        // progressBar.SetActive(true);
         buyButton.SetActive(true);
-        completedSign.SetActive(false);
+        activateButton.SetActive(false);
         itemIcon.SetActive(true);
         itemNameText.text = itemName;
     }
@@ -235,10 +247,10 @@ public class BoostersItemPanel : MonoBehaviour
         itemIcon.SetActive(false);
         unknownSign.SetActive(true);
         itemNameText.text = "???";
-        progressBar.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(false);
+        // progressBar.SetActive(false);
+        // generalIncreaseValueText.gameObject.SetActive(false);
         buyButton.SetActive(false);
-        completedSign.SetActive(false);
+        activateButton.SetActive(false);
         blurPanel.SetActive(true);
     }
 
@@ -248,14 +260,12 @@ public class BoostersItemPanel : MonoBehaviour
         unknownSign.SetActive(false);
         blurPanel.SetActive(false);
         itemNameText.text = itemName;
-        progressBar.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(false);
+        // progressBar.SetActive(false);
+        // generalIncreaseValueText.gameObject.SetActive(false);
         buyButton.SetActive(false);
-        completedSign.SetActive(true);
+        activateButton.SetActive(true);
         itemIcon.SetActive(true);
-
-        GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
-
+        // GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
     }
 
     private void UpdateItemValues()
@@ -273,10 +283,10 @@ public class BoostersItemPanel : MonoBehaviour
 
     private void UpdateView()
     {
-        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
+        // generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
 
-        buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
-        progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);
+        // buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
+        // progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);
     }
 }
