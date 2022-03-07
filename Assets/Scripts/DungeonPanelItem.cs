@@ -173,21 +173,13 @@ public class DungeonPanelItem : MonoBehaviour
         {
             CollapseItemView();
 
-            if (currentPanelState == CurrentPanel.parent)
+            if (upgradeType == DungeonUpgradeType.Armor)
             {
-                // if (upgradeType == DungeonUpgradeType.enemy)
-                // {
-                //     SkinsManager.Instance.dungeonEnemySkinCount += 1;
-                //     Debug.Log("Enemy");
-                // }
-
-                // if (upgradeType == DungeonUpgradeType.Armor)
-                // {
-                //     SkinsManager.Instance.currentSkinIndex += 1;
-                //     SkinsManager.Instance.ChangeSkin();
-                //     Debug.Log("Armor");
-                // }
+                SkinsManager.Instance.currentSkinIndex += 1;
+                SkinsManager.Instance.ChangeSkin();
+                Debug.Log("Armor");
             }
+
             PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
         }
 

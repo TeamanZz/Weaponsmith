@@ -10,10 +10,10 @@ public class RoomObjectsHandler : MonoBehaviour
     public List<WorkshopItem> workshopPanelItems = new List<WorkshopItem>();
     public GameObject appearParticles;
 
-    public GameObject transitionPanel;
-    public Button transitionButton;
-    public int numberOfOpenPanels = 0;
-    public bool endOfEra = false;
+    [HideInInspector] public GameObject transitionPanel;
+    [HideInInspector] public Button transitionButton;
+    [HideInInspector] public int numberOfOpenPanels = 0;
+    [HideInInspector] public bool endOfEra = false;
 
     public EraController eraController;
     [ContextMenu("Awake")]
@@ -52,7 +52,7 @@ public class RoomObjectsHandler : MonoBehaviour
         if (numberOfOpenPanels < workshopPanelItems.Count || transitionPanel == null)
             return;
 
-        if(endOfEra == true)
+        if (endOfEra == true)
         {
             Debug.Log("End era");
             return;
@@ -61,6 +61,7 @@ public class RoomObjectsHandler : MonoBehaviour
         Debug.Log("Open transition");
         transitionPanel.SetActive(true);
     }
+
     public void UnlockObject(int index)
     {
         roomObjects[index].SetActive(true);
