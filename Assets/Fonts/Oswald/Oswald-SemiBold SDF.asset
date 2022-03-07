@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Oswald-SemiBold Atlas Material
-  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_Shader: {fileID: 4800000, guid: f076651a4be8130488951673959ec112, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -887,6 +887,20 @@ MonoBehaviour:
       m_Height: 75
     m_Scale: 1
     m_AtlasIndex: 0
+  - m_Index: 470
+    m_Metrics:
+      m_Width: 44.90625
+      m_Height: 86.671875
+      m_HorizontalBearingX: 1.890625
+      m_HorizontalBearingY: 72.90625
+      m_HorizontalAdvance: 47.875
+    m_GlyphRect:
+      m_X: 464
+      m_Y: 523
+      m_Width: 46
+      m_Height: 87
+    m_Scale: 1
+    m_AtlasIndex: 0
   - m_Index: 472
     m_Metrics:
       m_Width: 58.046875
@@ -968,6 +982,34 @@ MonoBehaviour:
       m_X: 252
       m_Y: 730
       m_Width: 37
+      m_Height: 53
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 533
+    m_Metrics:
+      m_Width: 53.46875
+      m_Height: 88.65625
+      m_HorizontalBearingX: 3.6875
+      m_HorizontalBearingY: 72.8125
+      m_HorizontalAdvance: 61.015625
+    m_GlyphRect:
+      m_X: 449
+      m_Y: 641
+      m_Width: 55
+      m_Height: 89
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 542
+    m_Metrics:
+      m_Width: 54.984375
+      m_Height: 52.015625
+      m_HorizontalBearingX: 4.6875
+      m_HorizontalBearingY: 52.015625
+      m_HorizontalAdvance: 64.34375
+    m_GlyphRect:
+      m_X: 451
+      m_Y: 451
+      m_Width: 56
       m_Height: 53
     m_Scale: 1
     m_AtlasIndex: 0
@@ -1447,48 +1489,6 @@ MonoBehaviour:
       m_Height: 76
     m_Scale: 1
     m_AtlasIndex: 0
-  - m_Index: 542
-    m_Metrics:
-      m_Width: 54.984375
-      m_Height: 52.015625
-      m_HorizontalBearingX: 4.6875
-      m_HorizontalBearingY: 52.015625
-      m_HorizontalAdvance: 64.34375
-    m_GlyphRect:
-      m_X: 451
-      m_Y: 451
-      m_Width: 56
-      m_Height: 53
-    m_Scale: 1
-    m_AtlasIndex: 0
-  - m_Index: 533
-    m_Metrics:
-      m_Width: 53.46875
-      m_Height: 88.65625
-      m_HorizontalBearingX: 3.6875
-      m_HorizontalBearingY: 72.8125
-      m_HorizontalAdvance: 61.015625
-    m_GlyphRect:
-      m_X: 449
-      m_Y: 641
-      m_Width: 55
-      m_Height: 89
-    m_Scale: 1
-    m_AtlasIndex: 0
-  - m_Index: 470
-    m_Metrics:
-      m_Width: 44.90625
-      m_Height: 86.671875
-      m_HorizontalBearingX: 1.890625
-      m_HorizontalBearingY: 72.90625
-      m_HorizontalAdvance: 47.875
-    m_GlyphRect:
-      m_X: 464
-      m_Y: 523
-      m_Width: 46
-      m_Height: 87
-    m_Scale: 1
-    m_AtlasIndex: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 13
@@ -1835,6 +1835,10 @@ MonoBehaviour:
     m_GlyphIndex: 468
     m_Scale: 1
   - m_ElementType: 1
+    m_Unicode: 1059
+    m_GlyphIndex: 470
+    m_Scale: 1
+  - m_ElementType: 1
     m_Unicode: 1060
     m_GlyphIndex: 472
     m_Scale: 1
@@ -1859,20 +1863,16 @@ MonoBehaviour:
     m_GlyphIndex: 518
     m_Scale: 1
   - m_ElementType: 1
-    m_Unicode: 8230
-    m_GlyphIndex: 593
+    m_Unicode: 1092
+    m_GlyphIndex: 533
     m_Scale: 1
   - m_ElementType: 1
     m_Unicode: 1099
     m_GlyphIndex: 542
     m_Scale: 1
   - m_ElementType: 1
-    m_Unicode: 1092
-    m_GlyphIndex: 533
-    m_Scale: 1
-  - m_ElementType: 1
-    m_Unicode: 1059
-    m_GlyphIndex: 470
+    m_Unicode: 8230
+    m_GlyphIndex: 593
     m_Scale: 1
   m_AtlasTextures:
   - {fileID: 7670559796508594237}

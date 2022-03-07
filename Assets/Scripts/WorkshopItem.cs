@@ -20,6 +20,26 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
 
     [HideInInspector] public bool wasBoughted;
 
+    [Header("Dungeon settings")]
+    public static int dungeoonIsOpen = 0;
+    public static int enchantmentIsOpen = 0;
+    public PanelType currentType;
+    public enum PanelType
+    {
+        anOrdinaryItem,
+        anDungeonItem,
+        anEnchantmentTableItem
+    }
+
+    private void Awake()
+    {
+        buyButtonComponent = buyButton.GetComponent<Button>();
+        buyButtonImage = buyButton.GetComponent<Image>();
+        iconAnimator = itemIcon.GetComponent<Animator>();
+        priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
+        dungeoonIsOpen = PlayerPrefs.GetInt("dungeoonIsOpen");
+        enchantmentIsOpen = PlayerPrefs.GetInt("enchantmentIsOpen");
+    }
     private void Update()
     {
         if (price <= MoneyHandler.Instance.moneyCount)
@@ -34,18 +54,26 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         }
     }
 
-    private void Awake()
-    {
-        buyButtonComponent = buyButton.GetComponent<Button>();
-        buyButtonImage = buyButton.GetComponent<Image>();
-        iconAnimator = itemIcon.GetComponent<Animator>();
-        priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
-    }
-
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
-        RoomObjectsHandler.Instance.UnlockObject(index);
+        switch (currentType)
+        {
+            case PanelType.anOrdinaryItem:
+                RoomObjectsHandler.Instance.UnlockObject(index);
+                break;
+
+            case PanelType.anDungeonItem:
+                PlayerPrefs.SetInt("dungeoonIsOpen", 1);
+                PanelsHandler.Instance.EnabledDungeonButton();
+                break;
+
+            case PanelType.anEnchantmentTableItem:
+                PlayerPrefs.SetInt("enchantmentIsOpen", 1);
+                PanelsHandler.Instance.EnabledEnchantmentButton();
+                break;
+        }
+
         CollapseItemView();
         iconAnimator.Play("Jump", 0, 0);
         PlayerPrefs.SetString("WorkshopGameobject" + index, "unlocked");

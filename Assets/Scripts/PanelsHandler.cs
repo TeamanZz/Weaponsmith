@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PanelsHandler : MonoBehaviour
 {
+    public DungeonBuilder dungeonBuilder;
     public static PanelsHandler Instance;
     public int dungeonNumber;
     public int dropChanceImprovements = 7;
@@ -19,6 +21,12 @@ public class PanelsHandler : MonoBehaviour
     public GameObject dungeonCamera;
     public static bool currentLocationInTheDungeon = false;
 
+    [Header("Dungeon panel")]
+    public Button dungeonBlockButton;
+    public Button enchantmentBlockButton;
+
+    public Image dungeonBlockButtonIcon;
+    public Image enchantmentBlockButtonIcon;
     public void Awake()
     {
         Instance = this;
@@ -27,11 +35,12 @@ public class PanelsHandler : MonoBehaviour
         currentLocationInTheDungeon = false;
         mainCamera.SetActive(true);
         dungeonCamera.SetActive(false);
-
     }
 
     public void Start()
     {
+        EnabledDungeonButton();
+        EnabledEnchantmentButton();
         OpenPanel(1);
     }
     public void Initialization(PanelsStortage stortage)
@@ -41,12 +50,26 @@ public class PanelsHandler : MonoBehaviour
         //OpenPanel(1);
     }
 
-
     public void OpenPanel(int panelIndex)
     {
         //dungeon panel
         if (panelIndex == dungeonNumber)
         {
+            if (WorkshopItem.dungeoonIsOpen == 0)
+            {
+                dungeonBlockButton.interactable = false;
+
+                currentLocationInTheDungeon = true;
+                mainCamera.SetActive(false);
+                dungeonCamera.SetActive(true);
+
+                commonElement.SetActive(false);
+                panels[panelIndex].SetActive(false);
+                return;
+            }
+            else
+                dungeonBlockButton.interactable = true;
+
             currentLocationInTheDungeon = true;
             mainCamera.SetActive(false);
             dungeonCamera.SetActive(true);
@@ -62,6 +85,7 @@ public class PanelsHandler : MonoBehaviour
         }
         else
         {
+
             currentLocationInTheDungeon = false;
             mainCamera.SetActive(true);
             dungeonCamera.SetActive(false);
@@ -81,6 +105,32 @@ public class PanelsHandler : MonoBehaviour
         commonElement.SetActive(true);
     }
 
+    public void EnabledDungeonButton()
+    {
+        if (PlayerPrefs.GetInt("dungeoonIsOpen") == 0)
+        {
+            dungeonBlockButton.interactable = false;
+            dungeonBlockButtonIcon.color = Color.grey;
+        }
+        else
+        {
+            dungeonBlockButton.interactable = true;
+            dungeonBlockButtonIcon.color = Color.white;
+        }
+    }
+    public void EnabledEnchantmentButton()
+    {
+        if (PlayerPrefs.GetInt("enchantmentIsOpen") == 0)
+        {
+            enchantmentBlockButton.interactable = false;
+            enchantmentBlockButtonIcon.color = Color.gray;
+        }
+        else
+        {
+            enchantmentBlockButton.interactable = true;
+            enchantmentBlockButtonIcon.color = Color.white;
+        }
+    }
     public void ResetButtonColorOnDeselect()
     {
         for (int i = 0; i < bottomButtons.Count; i++)
