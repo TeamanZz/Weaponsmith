@@ -61,12 +61,14 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         if (currentType == PanelType.anDungeonItem)
         {
             PlayerPrefs.SetInt("dungeoonIsOpen", 1);
+            dungeoonIsOpen = 1;
             PanelsHandler.Instance.EnableDungeonButton();
         }
 
         if (currentType == PanelType.anEnchantmentTableItem)
         {
             PlayerPrefs.SetInt("enchantmentIsOpen", 1);
+            enchantmentIsOpen = 1;
             PanelsHandler.Instance.EnableEnchantmentButton();
         }
 

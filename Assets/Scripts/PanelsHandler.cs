@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PanelsHandler : MonoBehaviour
 {
-    public DungeonBuilder dungeonBuilder;
     public static PanelsHandler Instance;
     public int dungeonNumber;
     public int dropChanceImprovements = 7;
@@ -57,6 +56,7 @@ public class PanelsHandler : MonoBehaviour
         {
             if (WorkshopItem.dungeoonIsOpen == 0)
             {
+                Debug.Log("ISOPEN 0");
                 currentLocationInTheDungeon = true;
                 mainCamera.SetActive(false);
                 dungeonCamera.SetActive(true);
