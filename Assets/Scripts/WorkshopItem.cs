@@ -57,21 +57,17 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
-        switch (currentType)
+        RoomObjectsHandler.Instance.UnlockObject(index);
+        if (currentType == PanelType.anDungeonItem)
         {
-            case PanelType.anOrdinaryItem:
-                RoomObjectsHandler.Instance.UnlockObject(index);
-                break;
+            PlayerPrefs.SetInt("dungeoonIsOpen", 1);
+            PanelsHandler.Instance.EnableDungeonButton();
+        }
 
-            case PanelType.anDungeonItem:
-                PlayerPrefs.SetInt("dungeoonIsOpen", 1);
-                PanelsHandler.Instance.EnabledDungeonButton();
-                break;
-
-            case PanelType.anEnchantmentTableItem:
-                PlayerPrefs.SetInt("enchantmentIsOpen", 1);
-                PanelsHandler.Instance.EnabledEnchantmentButton();
-                break;
+        if (currentType == PanelType.anEnchantmentTableItem)
+        {
+            PlayerPrefs.SetInt("enchantmentIsOpen", 1);
+            PanelsHandler.Instance.EnableEnchantmentButton();
         }
 
         CollapseItemView();

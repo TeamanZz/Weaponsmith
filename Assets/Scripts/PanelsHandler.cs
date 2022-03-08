@@ -39,8 +39,8 @@ public class PanelsHandler : MonoBehaviour
 
     public void Start()
     {
-        EnabledDungeonButton();
-        EnabledEnchantmentButton();
+        EnableDungeonButton();
+        EnableEnchantmentButton();
         OpenPanel(1);
     }
     public void Initialization(PanelsStortage stortage)
@@ -105,20 +105,25 @@ public class PanelsHandler : MonoBehaviour
         commonElement.SetActive(true);
     }
 
-    public void EnabledDungeonButton()
+    public void EnableDungeonButton()
     {
+
         if (PlayerPrefs.GetInt("dungeoonIsOpen") == 0)
         {
+            Debug.Log("DUNGEON == 0");
+
             dungeonBlockButton.interactable = false;
             dungeonBlockButtonIcon.color = Color.grey;
         }
         else
         {
+            Debug.Log("DUNGEON == 1");
+
             dungeonBlockButton.interactable = true;
             dungeonBlockButtonIcon.color = Color.white;
         }
     }
-    public void EnabledEnchantmentButton()
+    public void EnableEnchantmentButton()
     {
         if (PlayerPrefs.GetInt("enchantmentIsOpen") == 0)
         {

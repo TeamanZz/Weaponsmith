@@ -64,20 +64,14 @@ public class RoomObjectsHandler : MonoBehaviour
 
     public void UnlockObject(int index)
     {
-        roomObjects[index].SetActive(true);
+        roomObjects[index].SetActive(!roomObjects[index].activeSelf);
         Instantiate(appearParticles, roomObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
         workshopPanelItems[index].ReplaceOldObjects();
-
-        // if (index == 3)
-        // {
-        //     CustomerController.Instance.ChangeAnimation();
-        //     MoneyHandler.Instance.StopCurrencyCoroutine();
-        // }
     }
 
     public void UnlockObjectWithoutParticles(int index)
     {
-        roomObjects[index].SetActive(true);
+        roomObjects[index].SetActive(!roomObjects[index].activeSelf);
         workshopPanelItems[index].ReplaceOldObjects();
     }
 }

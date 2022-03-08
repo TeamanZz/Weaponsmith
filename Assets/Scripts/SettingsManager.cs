@@ -122,13 +122,15 @@ public class SettingsManager : MonoBehaviour
             }
 
         if (RoomObjectsHandler.Instance != null)
-            for (int i = 0; i < RoomObjectsHandler.Instance.roomObjects.Count; i++)
+            for (int i = 0; i < 30; i++)
             {
                 PlayerPrefs.DeleteKey("WorkshopGameobject" + i);
             }
 
         PlayerPrefs.SetInt("AwardPanel", 0);
         PlayerPrefs.DeleteKey("MoneyCount");
+        PlayerPrefs.DeleteKey("dungeoonIsOpen");
+        PlayerPrefs.DeleteKey("enchantmentIsOpen");
         PlayerPrefs.SetInt("WeaponNumber", 0);
         PlayerPrefs.SetInt("EnemySkinCount", 0);
         PlayerPrefs.SetInt("currentEraNumber", 0);
