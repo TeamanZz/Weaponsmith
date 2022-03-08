@@ -57,8 +57,6 @@ public class PanelsHandler : MonoBehaviour
         {
             if (WorkshopItem.dungeoonIsOpen == 0)
             {
-                dungeonBlockButton.interactable = false;
-
                 currentLocationInTheDungeon = true;
                 mainCamera.SetActive(false);
                 dungeonCamera.SetActive(true);
@@ -85,7 +83,6 @@ public class PanelsHandler : MonoBehaviour
         }
         else
         {
-
             currentLocationInTheDungeon = false;
             mainCamera.SetActive(true);
             dungeonCamera.SetActive(false);
@@ -107,7 +104,6 @@ public class PanelsHandler : MonoBehaviour
 
     public void EnableDungeonButton()
     {
-
         if (PlayerPrefs.GetInt("dungeoonIsOpen") == 0)
         {
             Debug.Log("DUNGEON == 0");
