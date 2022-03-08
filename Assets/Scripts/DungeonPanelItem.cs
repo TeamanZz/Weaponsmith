@@ -110,6 +110,24 @@ public class DungeonPanelItem : MonoBehaviour
 
     public void HandleUpgradeOnBuy()
     {
+        if (upgradeType == DungeonUpgradeType.Witch)
+        {
+            if (buysCount == 1)
+            {
+                SkinsManager.Instance.dungeonEnemySkinCount++;
+                PlayerPrefs.SetInt("EnemySkinCount", SkinsManager.Instance.dungeonEnemySkinCount);
+            }
+        }
+
+        if (upgradeType == DungeonUpgradeType.Golems)
+        {
+            if (buysCount == 1)
+            {
+                SkinsManager.Instance.dungeonEnemySkinCount++;
+                PlayerPrefs.SetInt("EnemySkinCount", SkinsManager.Instance.dungeonEnemySkinCount);
+            }
+        }
+
         if (upgradeType == DungeonUpgradeType.WeaponSkills)
         {
             if (buysCount == 1 || buysCount == buysEdgeCount / 2)

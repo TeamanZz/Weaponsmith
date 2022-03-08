@@ -8,7 +8,6 @@ public class DungeonEnemy : MonoBehaviour
 {
     [SerializeField] private List<Animator> animators = new List<Animator>();
     public List<GameObject> currentEnemySkin = new List<GameObject>();
-    public int skinCount;
     public GameObject blueprintPrefab;
     public float scale = 1.5f;
     public float distanceToCollider = 1.5f;
@@ -46,7 +45,6 @@ public class DungeonEnemy : MonoBehaviour
     private void InitializeVariables()
     {
         dropRate = PanelsHandler.Instance.dropChanceImprovements;
-        skinCount = SkinsManager.Instance.dungeonEnemySkinCount;
     }
 
     private void SetScale()
@@ -75,10 +73,9 @@ public class DungeonEnemy : MonoBehaviour
 
     private void SetEnemySkin()
     {
-        if (skinCount > 0)
+        if (SkinsManager.Instance.dungeonEnemySkinCount > 0)
         {
-            int random = Random.Range(0, SkinsManager.Instance.dungeonEnemySkinCount);
-            random = Mathf.Clamp(random, 0, currentEnemySkin.Count);
+            int random = Random.Range(0, SkinsManager.Instance.dungeonEnemySkinCount + 1);
 
             Debug.Log("Enemy skin index: " + random);
 

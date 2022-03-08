@@ -65,7 +65,6 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("AwardPanel", 0);
         PlayerPrefs.DeleteKey("MoneyCount");
         PlayerPrefs.SetInt("WeaponNumber", 0);
-        PlayerPrefs.SetInt("EnemySkinCount", 0);
         PlayerPrefs.DeleteKey("dungeoonIsOpen");
         PlayerPrefs.DeleteKey("enchantmentIsOpen");
         PlayerPrefs.SetInt("skinIndex", 0);

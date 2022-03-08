@@ -73,6 +73,5 @@ public class SkinsManager : MonoBehaviour
         dungeonSkins[currentNumber].SetActive(true);
 
         PlayerPrefs.SetInt("skinIndex", currentSkinIndex);
-        PlayerPrefs.SetInt("EnemySkinCount", dungeonEnemySkinCount);
     }
 }
