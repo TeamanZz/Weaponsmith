@@ -9,9 +9,9 @@ public class CustomerController : MonoBehaviour, IPointerClickHandler
 
     public GameObject hammer;
     public GameObject tapCirclePrefab;
+    public Transform canvasTransform;
     public Animator swordAnvilAnimator;
     public Animator characterAnimator;
-    public Transform canvasTransform;
     public ParticleSystem particles;
 
     private float currentTapTimerValue = 0;

@@ -67,6 +67,10 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("WeaponNumber", 0);
         PlayerPrefs.DeleteKey("dungeoonIsOpen");
         PlayerPrefs.DeleteKey("enchantmentIsOpen");
+        PlayerPrefs.DeleteKey("allowedAttackAnimationsCount");
+        PlayerPrefs.DeleteKey("weaponTrailEnabled");
+        PlayerPrefs.DeleteKey("canCriticalHit");
+
         PlayerPrefs.SetInt("skinIndex", 0);
         PlayerPrefs.SetInt("EnemySkinCount", 0);
 
