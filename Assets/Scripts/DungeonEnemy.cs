@@ -36,7 +36,11 @@ public class DungeonEnemy : MonoBehaviour
     {
         DungeonPanelItem enemyStats = DungeonBuilder.Instance.enemiesSkinsStats[cuurentSkinIndex].GetComponent<DungeonPanelItem>();
         enemyLVL = enemyStats.buysCount;
-        enemyLvlText.text = enemyLVL.ToString() + " LVL";
+
+        if (enemyLVL == 0)
+            enemyLvlText.text = (enemyLVL + 1).ToString() + " LVL";
+        else
+            enemyLvlText.text = enemyLVL.ToString() + " LVL";
     }
 
     private void InitializeVariables()
