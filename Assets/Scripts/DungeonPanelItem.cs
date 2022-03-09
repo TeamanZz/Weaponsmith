@@ -151,6 +151,16 @@ public class DungeonPanelItem : MonoBehaviour
                 DungeonCharacter.Instance.EnableCriticalHit();
             }
         }
+
+        if (upgradeType == DungeonUpgradeType.Armor)
+        {
+            if (buysCount == 1)
+            {
+                SkinsManager.Instance.currentSkinIndex += 1;
+                PlayerPrefs.SetInt("skinIndex", SkinsManager.Instance.currentSkinIndex);
+                SkinsManager.Instance.ChangeSkin();
+            }
+        }
     }
 
     [Button("Buy Upgrade")]
@@ -189,15 +199,6 @@ public class DungeonPanelItem : MonoBehaviour
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
-
-            if (upgradeType == DungeonUpgradeType.Armor)
-            {
-                SkinsManager.Instance.currentSkinIndex += 1;
-                PlayerPrefs.SetInt("skinIndex", SkinsManager.Instance.currentSkinIndex);
-                SkinsManager.Instance.ChangeSkin();
-
-                Debug.Log("Armor");
-            }
 
             PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
         }

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Oswald-SemiBold Atlas Material
-  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_Shader: {fileID: 4800000, guid: f076651a4be8130488951673959ec112, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -845,6 +845,20 @@ MonoBehaviour:
       m_Height: 68
     m_Scale: 1
     m_AtlasIndex: 0
+  - m_Index: 445
+    m_Metrics:
+      m_Width: 44.640625
+      m_Height: 72.90625
+      m_HorizontalBearingX: 1.890625
+      m_HorizontalBearingY: 72.90625
+      m_HorizontalAdvance: 48.421875
+    m_GlyphRect:
+      m_X: 462
+      m_Y: 356
+      m_Width: 46
+      m_Height: 73
+    m_Scale: 1
+    m_AtlasIndex: 0
   - m_Index: 451
     m_Metrics:
       m_Width: 57.875
@@ -1489,20 +1503,6 @@ MonoBehaviour:
       m_Height: 76
     m_Scale: 1
     m_AtlasIndex: 0
-  - m_Index: 445
-    m_Metrics:
-      m_Width: 44.640625
-      m_Height: 72.90625
-      m_HorizontalBearingX: 1.890625
-      m_HorizontalBearingY: 72.90625
-      m_HorizontalAdvance: 48.421875
-    m_GlyphRect:
-      m_X: 462
-      m_Y: 356
-      m_Width: 46
-      m_Height: 73
-    m_Scale: 1
-    m_AtlasIndex: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 13
@@ -1837,6 +1837,10 @@ MonoBehaviour:
     m_GlyphIndex: 423
     m_Scale: 1
   - m_ElementType: 1
+    m_Unicode: 1040
+    m_GlyphIndex: 445
+    m_Scale: 1
+  - m_ElementType: 1
     m_Unicode: 1044
     m_GlyphIndex: 451
     m_Scale: 1
@@ -1887,10 +1891,6 @@ MonoBehaviour:
   - m_ElementType: 1
     m_Unicode: 8230
     m_GlyphIndex: 593
-    m_Scale: 1
-  - m_ElementType: 1
-    m_Unicode: 1040
-    m_GlyphIndex: 445
     m_Scale: 1
   m_AtlasTextures:
   - {fileID: 7670559796508594237}
