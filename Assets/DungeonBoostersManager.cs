@@ -52,6 +52,7 @@ public class DungeonBoostersManager : MonoBehaviour
             if (goldBoosterRemainingTimeCooldown <= 0)
             {
                 boostersHalos[0].SetActive(false);
+                boostersHalos[3].SetActive(false);
                 MoneyHandler.Instance.ChangeBoosterCoefficient(1f);
             }
 
@@ -71,6 +72,7 @@ public class DungeonBoostersManager : MonoBehaviour
             if (speedBoosterRemainingTimeCooldown <= 0)
             {
                 boostersHalos[1].SetActive(false);
+                boostersHalos[4].SetActive(false);
                 dungeonCharacter.ChangeCharacterRunAndAttackSpeed(1f, false);
             }
 
@@ -90,6 +92,7 @@ public class DungeonBoostersManager : MonoBehaviour
             if (strengthBoosterRemainingTimeCooldown <= 0)
             {
                 boostersHalos[2].SetActive(false);
+                boostersHalos[5].SetActive(false);
                 dungeonCharacter.ChangeCharacterDamageCoefficient(1);
             }
 
@@ -106,6 +109,7 @@ public class DungeonBoostersManager : MonoBehaviour
     {
         goldBoosterRemainingTimeCooldown = 1;
         boostersHalos[0].SetActive(true);
+        boostersHalos[3].SetActive(true);
         goldBoosterEnabled = true;
         MoneyHandler.Instance.ChangeBoosterCoefficient(1.3f);
     }
@@ -114,6 +118,7 @@ public class DungeonBoostersManager : MonoBehaviour
     {
         speedBoosterRemainingTimeCooldown = 1;
         boostersHalos[1].SetActive(true);
+        boostersHalos[4].SetActive(true);
         speedBoosterEnabled = true;
         dungeonCharacter.ChangeCharacterRunAndAttackSpeed(1.3f, true);
     }
@@ -122,6 +127,7 @@ public class DungeonBoostersManager : MonoBehaviour
     {
         strengthBoosterRemainingTimeCooldown = 1;
         boostersHalos[2].SetActive(true);
+        boostersHalos[5].SetActive(true);
         strengthBoosterEnabled = true;
         dungeonCharacter.ChangeCharacterDamageCoefficient(2);
     }
