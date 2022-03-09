@@ -10,7 +10,6 @@ public class TapDungeon : MonoBehaviour, IPointerClickHandler
     // public Camera dungeonCamera;
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("hjeheheh");
         MoneyHandler.Instance.IncreaseIncomeByTap();
         SpawnTapCircle();
     }

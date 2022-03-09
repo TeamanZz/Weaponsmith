@@ -613,7 +613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2418610554651481554
 Transform:
   m_ObjectHideFlags: 0
@@ -2549,7 +2549,6 @@ MonoBehaviour:
   - {fileID: 2421047781830366064}
   - {fileID: 734316264275037642}
   - {fileID: 2421569553009797130}
-  skinCount: 0
   blueprintPrefab: {fileID: 8550988676938562279, guid: ad31a4a27d46c914cad3af90476c1289, type: 3}
   scale: 1.5
   distanceToCollider: 1.5
@@ -22930,7 +22929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1611041093240470, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4063878554536376, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
       propertyPath: m_RootOrder
@@ -22975,6 +22974,14 @@ PrefabInstance:
     - target: {fileID: 4063878554536376, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95635807359224054, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: a50cd06a0668d1a418d586a2944e3ed5, type: 3}
+    - target: {fileID: 95635807359224054, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 95635807359224054, guid: c6817eb5530563147aad2cfd830512b9, type: 3}
       propertyPath: m_Controller
