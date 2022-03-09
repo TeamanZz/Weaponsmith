@@ -56,7 +56,7 @@ public class DungeonEnemy : MonoBehaviour
     {
         PanelsHandler.Instance.dropChanceImprovements -= 1;
         if (PanelsHandler.Instance.dropChanceImprovements <= 0)
-            PanelsHandler.Instance.dropChanceImprovements = 7;
+            PanelsHandler.Instance.dropChanceImprovements = 12;
     }
 
     private void AddAnimatorToAnimatorsList()

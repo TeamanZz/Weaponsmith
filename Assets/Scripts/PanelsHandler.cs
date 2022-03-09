@@ -29,7 +29,6 @@ public class PanelsHandler : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-        dropChanceImprovements = 7;
 
         currentLocationInTheDungeon = false;
         mainCamera.SetActive(true);
@@ -106,8 +105,6 @@ public class PanelsHandler : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("dungeoonIsOpen") == 0)
         {
-            Debug.Log("DUNGEON == 0");
-
             dungeonBlockButton.interactable = false;
             dungeonBlockButtonIcon.color = Color.grey;
         }
