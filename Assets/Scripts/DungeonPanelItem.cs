@@ -130,7 +130,7 @@ public class DungeonPanelItem : MonoBehaviour
 
         if (upgradeType == DungeonUpgradeType.WeaponSkills)
         {
-            if (buysCount == 1 || buysCount == buysEdgeCount / 2)
+            if (buysCount == buysEdgeCount || buysCount == buysEdgeCount / 2)
             {
                 DungeonCharacter.Instance.IncreaseAllowedAttackAnimationsCount();
             }
