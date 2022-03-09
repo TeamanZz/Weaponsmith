@@ -52,16 +52,7 @@ public class MoneyHandler : MonoBehaviour
         InvokeRepeating("SaveMoneyPerSec", 1, 3);
         StartCoroutine(IEIncreaseMoneyCount());
 
-        string state = PlayerPrefs.GetString("WorkshopGameobject3");
-        if (state != "unlocked")
-        {
-            currencyCoroutine = StartCoroutine(IESpawnCurrency());
-        }
-    }
-
-    public void StopCurrencyCoroutine()
-    {
-        StopCoroutine(currencyCoroutine);
+        currencyCoroutine = StartCoroutine(IESpawnCurrency());
     }
 
     public void IncreaseMoneyPerSecondValue(int value)
