@@ -32,7 +32,7 @@ public class BoostersItemPanel : MonoBehaviour
     [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator activateButtonAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
-    [FoldoutGroup("View Components")][SerializeField] private Animator hoverIconAnimator;
+    // [FoldoutGroup("View Components")][SerializeField] private Animator hoverIconAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
 
@@ -111,7 +111,7 @@ public class BoostersItemPanel : MonoBehaviour
         buyButtonImage = buyButton.GetComponent<Image>();
         buyButtonAnimator = buyButton.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
-        hoverIconAnimator = hoverImageGameObject.GetComponent<Animator>();
+        // hoverIconAnimator = hoverImageGameObject.GetComponent<Animator>();
         activateButtonAnimator = activateButton.GetComponent<Animator>();
         activateButtonComponent = activateButton.GetComponent<Button>();
 
@@ -130,7 +130,7 @@ public class BoostersItemPanel : MonoBehaviour
     public void PlayJumpAnimationOnActivate()
     {
         iconAnimator.Play("Jump", 0, 0);
-        hoverIconAnimator.Play("Jump", 0, 0);
+        // hoverIconAnimator.Play("Jump", 0, 0);
         activateButtonAnimator.Play("Jump", 0, 0);
     }
 

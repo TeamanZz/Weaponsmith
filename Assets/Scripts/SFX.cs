@@ -39,4 +39,19 @@ public class SFX : MonoBehaviour
     {
         source.PlayOneShot(soundsList[5]);
     }
+
+    public void PlayEnemyHit()
+    {
+
+    }
+
+    public void PlayEnemyDeath()
+    {
+
+    }
+
+    public void PlayAnvilHit()
+    {
+        // source.PlayOneShot(soundsList[6]);
+    }
 }
