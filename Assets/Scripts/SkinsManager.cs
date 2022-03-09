@@ -19,8 +19,6 @@ public class SkinsManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        currentSkinIndex = 0;
-
         currentSkinIndex = PlayerPrefs.GetInt("skinIndex");
         dungeonEnemySkinCount = PlayerPrefs.GetInt("EnemySkinCount");
 
@@ -48,11 +46,7 @@ public class SkinsManager : MonoBehaviour
     [ContextMenu("Change Skin")]
     public void ChangeSkin()
     {
-        Debug.Log("New skin count - " + currentSkinIndex);
-
         int currentNumber = Mathf.Clamp(currentSkinIndex, 0, dungeonSkins.Count - 1);
-
-        Debug.Log("Current number - " + currentSkinIndex + " | " + " Entered value - " + currentSkinIndex);
 
         foreach (GameObject dungeSkin in dungeonSkins)
         {
@@ -71,7 +65,5 @@ public class SkinsManager : MonoBehaviour
 
         skins[currentNumber].SetActive(true);
         dungeonSkins[currentNumber].SetActive(true);
-
-        PlayerPrefs.SetInt("skinIndex", currentSkinIndex);
     }
 }

@@ -193,7 +193,9 @@ public class DungeonPanelItem : MonoBehaviour
             if (upgradeType == DungeonUpgradeType.Armor)
             {
                 SkinsManager.Instance.currentSkinIndex += 1;
+                PlayerPrefs.SetInt("skinIndex", SkinsManager.Instance.currentSkinIndex);
                 SkinsManager.Instance.ChangeSkin();
+
                 Debug.Log("Armor");
             }
 

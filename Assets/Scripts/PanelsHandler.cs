@@ -113,8 +113,6 @@ public class PanelsHandler : MonoBehaviour
         }
         else
         {
-            Debug.Log("DUNGEON == 1");
-
             dungeonBlockButton.interactable = true;
             dungeonBlockButtonIcon.color = Color.white;
         }
