@@ -13,7 +13,7 @@ public class ItemsManager : MonoBehaviour
 
     public GameObject newWeaponUnlockPanel;
     private WeaponUnlockPanel weaponPanel;
-    public GameObject awardPanel;
+    public List<GameObject> awardPanel = new List<GameObject>();
 
     [ContextMenu("Awake")]
     public void Awake()
@@ -24,9 +24,9 @@ public class ItemsManager : MonoBehaviour
         currentWaitingPanel = panelItemsList[PlayerPrefs.GetInt("currentWaitingPanelNumber")];
         awardPanelState = PlayerPrefs.GetInt("AwardPanel");
         if (awardPanelState == 1)
-            awardPanel.SetActive(true);
+            awardPanel[EraController.Instance.currentEraNumber].SetActive(true);
         else
-            awardPanel.SetActive(false);
+            awardPanel[EraController.Instance.currentEraNumber].SetActive(false);
     }
 
     public void Initialization(List<PanelItem> newPanelItems)
@@ -45,7 +45,6 @@ public class ItemsManager : MonoBehaviour
             nextItem.ChangeState(PanelItemState.WaitingForDrawing);
     }
 
-    //  dungeon
     [ContextMenu("Test")]
     public void OpenWaitingPanel()
     {
@@ -59,14 +58,8 @@ public class ItemsManager : MonoBehaviour
             weaponPanel.InitializePanel(currentWaitingPanel.weaponSprite, currentWaitingPanel.itemName);
 
             EquipmentManager.equipmentManager.ShowWeaponsByNumber();
-
-            // if (currentWaitingPanel.currentWeaponNumber < EquipmentManager.equipmentManager.weaponList.Count)
-            //     EquipmentManager.equipmentManager.ShowWeaponsByNumber(currentWaitingPanel.currentWeaponNumber);
-
-            awardPanel.SetActive(false);
+            awardPanel[EraController.Instance.currentEraNumber].SetActive(false);
             PlayerPrefs.SetInt("AwardPanel", 0);
-
-            //SkinsManager.Instance.ChangeSkin();
         }
     }
 

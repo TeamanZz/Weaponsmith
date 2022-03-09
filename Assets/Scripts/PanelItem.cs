@@ -360,7 +360,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
         if (ItemsManager.Instance != null && ItemsManager.Instance.awardPanel != null)
         {
-            ItemsManager.Instance.awardPanel.SetActive(true);
+            ItemsManager.Instance.awardPanel[EraController.Instance.currentEraNumber].SetActive(true);
             PlayerPrefs.SetInt("AwardPanel", 1);
         }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EraController : MonoBehaviour
 {
+    public static EraController Instance;
+
     public PanelsHandler panelsHandler;
     public RoomObjectsHandler roomObjectsHandler;
     public ItemsManager itemsManager;
@@ -29,6 +31,8 @@ public class EraController : MonoBehaviour
 
     public void Awake()
     {
+        Instance = this;
+
         currentEraNumber = PlayerPrefs.GetInt("currentEraNumber");
         // Debug.Log(currentEraNumber);
 
