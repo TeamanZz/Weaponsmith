@@ -20,6 +20,19 @@ public class DungeonEnemy : MonoBehaviour
     private int dropRate = 0;
     private int cuurentSkinIndex;
 
+    public List<AudioClip> sounds = new List<AudioClip>();
+    public AudioSource audioSource;
+
+    public void PlayEnemyDeathSound()
+    {
+        audioSource.PlayOneShot(sounds[Random.Range(3, 5)]);
+    }
+
+    public void PlayEnemyDamageSound()
+    {
+        audioSource.PlayOneShot(sounds[Random.Range(0, 3)]);
+    }
+
     private void Start()
     {
         AddAnimatorToAnimatorsList();
@@ -94,6 +107,8 @@ public class DungeonEnemy : MonoBehaviour
 
     public void PlayDamageAnimation()
     {
+        PlayEnemyDamageSound();
+
         for (int i = 0; i < animators.Count; i++)
             animators[i].Play("Take Damage", 0, 0);
     }
@@ -114,7 +129,7 @@ public class DungeonEnemy : MonoBehaviour
 
         for (int i = 0; i < animators.Count; i++)
             animators[i].SetTrigger("Death");
-
+        PlayEnemyDeathSound();
         Destroy(gameObject, 10f);
     }
 }

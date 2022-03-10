@@ -25,6 +25,10 @@ public class DungeonCharacter : MonoBehaviour
 
     public int boosterDamageCoefficient = 1;
 
+    public AudioSource audioSource;
+
+    public List<AudioClip> sounds = new List<AudioClip>();
+
     private void Awake()
     {
         Instance = this;
@@ -37,6 +41,16 @@ public class DungeonCharacter : MonoBehaviour
         {
             animator.speed = lastSpeedUpValue;
         }
+    }
+
+    public void PlayRoundHitSound()
+    {
+        audioSource.PlayOneShot(sounds[UnityEngine.Random.Range(0, 2)]);
+    }
+
+    public void PlayHitSound()
+    {
+        audioSource.PlayOneShot(sounds[2]);
     }
 
     private void LoadWeaponTrailValue()

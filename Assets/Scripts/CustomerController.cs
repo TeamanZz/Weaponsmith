@@ -55,6 +55,6 @@ public class CustomerController : MonoBehaviour, IPointerClickHandler
     {
         particles.Play();
         swordAnvilAnimator.Play("Jump Scale2", 0, 0);
-        SFX.Instance.PlayAnvilHit();
+        QuietSFX.Instance.PlayAnvilHit();
     }
 }

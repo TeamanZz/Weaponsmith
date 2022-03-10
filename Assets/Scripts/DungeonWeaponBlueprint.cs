@@ -11,6 +11,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
     {
         transform.DOLocalJump(transform.localPosition + new Vector3(0, 0, 10), 4, 1, 1f).SetEase(Ease.OutBounce);
         Invoke("EnableInteract", 0.3f);
+        GetComponent<AudioSource>().Play();
     }
 
     private void OnTriggerEnter(Collider other)

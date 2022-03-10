@@ -194,6 +194,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         if (buysCount >= buysEdgeCount)
         {
+            SFX.Instance.PlayQuestComplete();
             ChangeState(PanelItemState.Collapsed);
 
             if (connectPanel.currentState == PanelItemState.Collapsed)
