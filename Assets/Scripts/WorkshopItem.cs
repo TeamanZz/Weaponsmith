@@ -69,7 +69,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         {
             PlayerPrefs.SetInt("enchantmentIsOpen", 1);
             enchantmentIsOpen = 1;
-            PanelsHandler.Instance.EnableEnchantmentButton();
+            PanelsHandler.Instance.EnableBoostersButton();
         }
 
         CollapseItemView();

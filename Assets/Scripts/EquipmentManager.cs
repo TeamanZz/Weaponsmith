@@ -4,41 +4,41 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    public static EquipmentManager equipmentManager;
-    public List<GameObject> weaponList = new List<GameObject>();
-    public List<GameObject> weaponOnAnwil = new List<GameObject>();
+    public static EquipmentManager Singleton;
 
-    public int weaponNumber;
+    public List<GameObject> dungeonCharacterWeaponsList = new List<GameObject>();
+    public List<GameObject> weaponsOnAnvil = new List<GameObject>();
+
+    [HideInInspector] public int weaponNumber;
+
     public void Awake()
     {
-        equipmentManager = this;
+        Singleton = this;
         weaponNumber = PlayerPrefs.GetInt("WeaponNumber");
     }
 
     [ContextMenu("Start")]
     public void Start()
     {
-        if (weaponList.Count < 0)
+        if (dungeonCharacterWeaponsList.Count < 0)
             return;
 
-        weaponList[weaponNumber].gameObject.SetActive(true);
-        weaponOnAnwil[weaponNumber].gameObject.SetActive(true);
+        dungeonCharacterWeaponsList[weaponNumber].gameObject.SetActive(true);
+        weaponsOnAnvil[weaponNumber].gameObject.SetActive(true);
 
-        foreach (GameObject wepon in weaponList)
+        foreach (GameObject wepon in dungeonCharacterWeaponsList)
         {
             wepon.SetActive(false);
         }
 
-        foreach (GameObject weaponOn in weaponOnAnwil)
+        foreach (GameObject weaponOn in weaponsOnAnvil)
         {
             weaponOn.SetActive(false);
         }
 
-        weaponList[weaponNumber].gameObject.SetActive(true);
-        weaponOnAnwil[weaponNumber].gameObject.SetActive(true);
+        dungeonCharacterWeaponsList[weaponNumber].gameObject.SetActive(true);
+        weaponsOnAnvil[weaponNumber].gameObject.SetActive(true);
 
-        //Debug.Log(weaponNumber);
-        //Debug.Log(weaponList[weaponNumber].gameObject + " -> First object" + " | " + weaponOnAnwil[weaponNumber] + " -> Two object");
         SaveWeaponNumber();
     }
     public void SaveWeaponNumber()
@@ -50,28 +50,27 @@ public class EquipmentManager : MonoBehaviour
     {
         weaponNumber += 1;
 
-        if(weaponNumber < 0 || weaponNumber >= weaponList.Count)
+        if (weaponNumber < 0 || weaponNumber >= dungeonCharacterWeaponsList.Count)
         {
             Debug.Log("Show weapon number incorrect");
             return;
         }
 
-
-        foreach (GameObject wepon in weaponList)
+        foreach (GameObject wepon in dungeonCharacterWeaponsList)
         {
             wepon.SetActive(false);
         }
 
-        foreach (GameObject weaponOn in weaponOnAnwil)
+        foreach (GameObject weaponOn in weaponsOnAnvil)
         {
             weaponOn.SetActive(false);
         }
 
-        weaponList[weaponNumber].gameObject.SetActive(true);
-        weaponOnAnwil[weaponNumber].gameObject.SetActive(true);
+        dungeonCharacterWeaponsList[weaponNumber].gameObject.SetActive(true);
+        weaponsOnAnvil[weaponNumber].gameObject.SetActive(true);
 
         Debug.Log(weaponNumber);
-        Debug.Log(weaponList[weaponNumber].gameObject + " -> First object" + " | " + weaponOnAnwil[weaponNumber] + " -> Two object");
+        Debug.Log(dungeonCharacterWeaponsList[weaponNumber].gameObject + " -> First object" + " | " + weaponsOnAnvil[weaponNumber] + " -> Two object");
         SaveWeaponNumber();
     }
 }

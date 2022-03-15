@@ -7,25 +7,30 @@ using UnityEngine.UI;
 public class PanelsHandler : MonoBehaviour
 {
     public static PanelsHandler Instance;
-    public int dungeonNumber;
+
     public int dropChanceImprovements = 7;
 
+    [Header("Panel Label")]
+    [SerializeField] private TextMeshProUGUI panelNameLabel;
+    [SerializeField] private GameObject panelLabelObject;
+
+    [Header("Unlockable Buttons")]
+    public Button dungeonButtonComponent;
+    public Button boostersButtonComponent;
+    public Image dungeonButtonImageComponent;
+    public Image boostersButtonImageComponent;
+
+    [Header("Camera's")]
+    public GameObject mainCamera;
+    public GameObject dungeonCamera;
+
+    [Space]
     [SerializeField] private List<string> panelNames = new List<string>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
-    [SerializeField] private TextMeshProUGUI panelName;
-    [SerializeField] private GameObject commonElement;
 
-    public GameObject mainCamera;
-    public GameObject dungeonCamera;
     public static bool currentLocationInTheDungeon = false;
 
-    [Header("Dungeon panel")]
-    public Button dungeonBlockButton;
-    public Button enchantmentBlockButton;
-
-    public Image dungeonBlockButtonIcon;
-    public Image enchantmentBlockButtonIcon;
     public void Awake()
     {
         Instance = this;
@@ -38,20 +43,20 @@ public class PanelsHandler : MonoBehaviour
     public void Start()
     {
         EnableDungeonButton();
-        EnableEnchantmentButton();
+        EnableBoostersButton();
         OpenPanel(1);
     }
+
     public void Initialization(PanelsStortage stortage)
     {
         panels.Clear();
         panels.AddRange(stortage.panels);
-        //OpenPanel(1);
     }
 
     public void OpenPanel(int panelIndex)
     {
         //dungeon panel
-        if (panelIndex == dungeonNumber)
+        if (panelIndex == 2)
         {
             if (WorkshopItem.dungeoonIsOpen == 0)
             {
@@ -60,12 +65,12 @@ public class PanelsHandler : MonoBehaviour
                 mainCamera.SetActive(false);
                 dungeonCamera.SetActive(true);
 
-                commonElement.SetActive(false);
+                panelLabelObject.SetActive(false);
                 panels[panelIndex].SetActive(false);
                 return;
             }
             else
-                dungeonBlockButton.interactable = true;
+                dungeonButtonComponent.interactable = true;
 
             currentLocationInTheDungeon = true;
             mainCamera.SetActive(false);
@@ -76,7 +81,7 @@ public class PanelsHandler : MonoBehaviour
                 panels[i].SetActive(false);
             }
 
-            commonElement.SetActive(true);
+            panelLabelObject.SetActive(true);
             panels[panelIndex].SetActive(true);
             return;
         }
@@ -98,35 +103,37 @@ public class PanelsHandler : MonoBehaviour
                 panels[i].SetActive(false);
             }
         }
-        commonElement.SetActive(true);
+        panelLabelObject.SetActive(true);
     }
 
     public void EnableDungeonButton()
     {
         if (PlayerPrefs.GetInt("dungeoonIsOpen") == 0)
         {
-            dungeonBlockButton.interactable = false;
-            dungeonBlockButtonIcon.color = Color.grey;
+            dungeonButtonComponent.interactable = false;
+            dungeonButtonImageComponent.color = Color.grey;
         }
         else
         {
-            dungeonBlockButton.interactable = true;
-            dungeonBlockButtonIcon.color = Color.white;
+            dungeonButtonComponent.interactable = true;
+            dungeonButtonImageComponent.color = Color.white;
         }
     }
-    public void EnableEnchantmentButton()
+
+    public void EnableBoostersButton()
     {
         if (PlayerPrefs.GetInt("enchantmentIsOpen") == 0)
         {
-            enchantmentBlockButton.interactable = false;
-            enchantmentBlockButtonIcon.color = Color.gray;
+            boostersButtonComponent.interactable = false;
+            boostersButtonImageComponent.color = Color.gray;
         }
         else
         {
-            enchantmentBlockButton.interactable = true;
-            enchantmentBlockButtonIcon.color = Color.white;
+            boostersButtonComponent.interactable = true;
+            boostersButtonImageComponent.color = Color.white;
         }
     }
+
     public void ResetButtonColorOnDeselect()
     {
         for (int i = 0; i < bottomButtons.Count; i++)
@@ -137,6 +144,6 @@ public class PanelsHandler : MonoBehaviour
 
     public void ShowPanelName(int panelIndex)
     {
-        panelName.text = panelNames[panelIndex];
+        panelNameLabel.text = panelNames[panelIndex];
     }
 }

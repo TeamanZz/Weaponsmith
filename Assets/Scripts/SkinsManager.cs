@@ -6,16 +6,13 @@ public class SkinsManager : MonoBehaviour
 {
     public static SkinsManager Instance;
 
-    public List<ParticleSystem> particles = new List<ParticleSystem>();
+    [HideInInspector] public int currentSkinIndex;
+    [HideInInspector] public int dungeonEnemySkinCount = 0;
 
+    public List<ParticleSystem> particles = new List<ParticleSystem>();
     public List<GameObject> skins = new List<GameObject>();
     public List<GameObject> dungeonSkins = new List<GameObject>();
 
-    public TrackingCamera trackingCamera;
-
-    public int currentSkinIndex;
-
-    public int dungeonEnemySkinCount = 0;
     private void Awake()
     {
         Instance = this;

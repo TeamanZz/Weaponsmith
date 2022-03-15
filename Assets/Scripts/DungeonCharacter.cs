@@ -1,31 +1,25 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class DungeonCharacter : MonoBehaviour
 {
     public static DungeonCharacter Instance;
 
     public float runSpeed;
-    public bool isInBattle = false;
-    public int allowedAttackAnimationsCount = 2;
+    public int criticalHitRate;
+    public int maxAllowedAttackAnimationsCount = 4;
+    public int boosterDamageCoefficient = 1;
+    public MeleeWeaponTrail weaponTrail;
+    public AudioSource audioSource;
+
+    [HideInInspector] public float lastSpeedUpValue;
+    [HideInInspector] public int allowedAttackAnimationsCount = 2;
+    [HideInInspector] public bool isInBattle = false;
+    [HideInInspector] public bool canCriticalHit = false;
+    [HideInInspector] private bool weaponTrailEnabled = false;
+    [HideInInspector] public bool needSpeedUpOnAwake;
     [HideInInspector] public DungeonEnemy currentEnemy;
     [HideInInspector] public Animator animator;
-
-    public int maxAllowedAttackAnimationsCount = 4;
-    public MeleeWeaponTrail weaponTrail;
-    private bool weaponTrailEnabled = false;
-    public int criticalHitRate;
-    public bool canCriticalHit = false;
-    public bool needSpeedUpOnAwake;
-    public float lastSpeedUpValue;
-
-    public int boosterDamageCoefficient = 1;
-
-    public AudioSource audioSource;
 
     public List<AudioClip> sounds = new List<AudioClip>();
 
