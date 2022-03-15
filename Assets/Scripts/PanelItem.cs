@@ -67,7 +67,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void Start()
     {
         InvokeRepeating("SaveData", 3, 3);
-        if (buysCount >= costCurve.length)
+        if (buysCount >= costCurve.keys[costCurve.length - 1].time)
             ChangeState(PanelItemState.Collapsed);
     }
 
@@ -128,7 +128,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void CheckOnCollapse()
     {
-        if (buysCount >= costCurve.length)
+        if (buysCount >= costCurve.keys[costCurve.length - 1].time)
         {
 
             SFX.Instance.PlayQuestComplete();
@@ -345,8 +345,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
 
-        buysCountText.text = buysCount.ToString() + "/" + costCurve.length.ToString();
-        progressBarFilled.fillAmount = ((float)buysCount / (float)costCurve.length);
+        buysCountText.text = buysCount.ToString() + "/" + costCurve.keys[costCurve.length - 1].time.ToString();
+        progressBarFilled.fillAmount = ((float)buysCount / (float)costCurve.keys[costCurve.length - 1].time);
     }
 
     public enum CurrentPanel

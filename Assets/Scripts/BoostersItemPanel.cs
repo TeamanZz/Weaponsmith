@@ -11,7 +11,6 @@ public class BoostersItemPanel : MonoBehaviour
     public BoostersItemPanel nextUpgradeItem;
     public string itemName;
     public int index;
-    [SerializeField] private int buysEdgeCount;
     public AnimationCurve costCurve;
 
     [FoldoutGroup("Current Runtime Values")] public int buysCount;
@@ -50,7 +49,7 @@ public class BoostersItemPanel : MonoBehaviour
         hoverImage = hoverImageGameObject.GetComponent<Image>();
         InvokeRepeating("SaveData", 3, 3);
 
-        if (buysCount >= buysEdgeCount)
+        if (buysCount >= costCurve.keys[costCurve.length - 1].time)
             ChangeState(PanelItemState.Collapsed);
     }
 
@@ -152,7 +151,7 @@ public class BoostersItemPanel : MonoBehaviour
 
     private void CheckOnCollapse()
     {
-        if (buysCount >= buysEdgeCount)
+        if (buysCount >= costCurve.keys[costCurve.length - 1].time)
         {
             ChangeState(PanelItemState.Collapsed);
 

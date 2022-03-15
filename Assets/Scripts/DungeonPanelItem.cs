@@ -13,7 +13,6 @@ public class DungeonPanelItem : MonoBehaviour
     public int index;
     public string itemName;
     [SerializeField] private int increaseValue;
-    [SerializeField] private int buysEdgeCount;
     public DungeonPanelItem connectPanel;
     public DungeonPanelItem nextUpgradeItem;
     public AnimationCurve costCurve;
@@ -59,7 +58,7 @@ public class DungeonPanelItem : MonoBehaviour
     {
         InvokeRepeating("SaveData", 3, 3);
 
-        if (buysCount >= buysEdgeCount)
+        if (buysCount >= costCurve.keys[costCurve.length - 1].time)
             ChangeState(PanelItemState.Collapsed);
     }
 
@@ -130,7 +129,7 @@ public class DungeonPanelItem : MonoBehaviour
 
         if (upgradeType == DungeonUpgradeType.WeaponSkills)
         {
-            if (buysCount == buysEdgeCount || buysCount == buysEdgeCount / 2)
+            if (buysCount == costCurve.keys[costCurve.length - 1].time || buysCount == costCurve.keys[costCurve.length - 1].time / 2)
             {
                 DungeonCharacter.Instance.IncreaseAllowedAttackAnimationsCount();
             }
@@ -177,7 +176,7 @@ public class DungeonPanelItem : MonoBehaviour
 
     private void CheckOnCollapse()
     {
-        if (buysCount >= buysEdgeCount)
+        if (buysCount >= costCurve.keys[costCurve.length - 1].time)
         {
             SFX.Instance.PlayQuestComplete();
             ChangeState(PanelItemState.Collapsed);
@@ -323,8 +322,8 @@ public class DungeonPanelItem : MonoBehaviour
         generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
 
-        buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
-        progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);
+        buysCountText.text = buysCount.ToString() + "/" + costCurve.keys[costCurve.length - 1].time.ToString();
+        progressBarFilled.fillAmount = ((float)buysCount / (float)costCurve.keys[costCurve.length - 1].time);
     }
 
     [ContextMenu("Available state")]
