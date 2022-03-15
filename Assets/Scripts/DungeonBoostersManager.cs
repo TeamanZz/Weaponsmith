@@ -60,7 +60,7 @@ public class DungeonBoostersManager : MonoBehaviour
             {
                 goldBoosterEnabled = false;
                 goldBoosterRemainingTime = 1;
-                BoostersManager.Instance.panelItemsList[0].HandleUIOnTimerDisable();
+                BoostersPanelItemsManager.Instance.panelItemsList[0].HandleUIOnTimerDisable();
             }
         }
 
@@ -80,7 +80,7 @@ public class DungeonBoostersManager : MonoBehaviour
             {
                 speedBoosterEnabled = false;
                 speedBoosterRemainingTime = 1;
-                BoostersManager.Instance.panelItemsList[1].HandleUIOnTimerDisable();
+                BoostersPanelItemsManager.Instance.panelItemsList[1].HandleUIOnTimerDisable();
             }
         }
 
@@ -100,7 +100,7 @@ public class DungeonBoostersManager : MonoBehaviour
             {
                 strengthBoosterEnabled = false;
                 strengthBoosterRemainingTime = 1;
-                BoostersManager.Instance.panelItemsList[2].HandleUIOnTimerDisable();
+                BoostersPanelItemsManager.Instance.panelItemsList[2].HandleUIOnTimerDisable();
             }
         }
     }

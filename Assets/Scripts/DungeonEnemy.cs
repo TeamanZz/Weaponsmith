@@ -115,7 +115,7 @@ public class DungeonEnemy : MonoBehaviour
 
     public void InvokeDeathAnimation()
     {
-        if (ItemsManager.Instance.currentWaitingPanel != null && ItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
+        if (CraftPanelItemsManager.Instance.currentWaitingPanel != null && CraftPanelItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
         {
             int val = Random.Range(0, dropRate);
             Debug.Log("Value - " + val + " | " + "Drop rate - " + dropRate);

@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungeonItemManager : MonoBehaviour
+public class BoostersPanelItemsManager : MonoBehaviour
 {
-    public static DungeonItemManager Instance;
+    public static BoostersPanelItemsManager Instance;
 
-    public List<DungeonPanelItem> panelItemsList = new List<DungeonPanelItem>();
+    [HideInInspector] public List<BoostersItemPanel> panelItemsList = new List<BoostersItemPanel>();
 
     [ContextMenu("Awake")]
     public void Awake()
     {
         Instance = this;
+    }
+
+    public void Initialization(List<BoostersItemPanel> boostersItems)
+    {
+        panelItemsList.Clear();
+        panelItemsList.AddRange(boostersItems);
     }
     public void MakeNextUnknownItemAsUnavailable()
     {
@@ -19,16 +25,5 @@ public class DungeonItemManager : MonoBehaviour
         var nextItem = panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (nextItem != null)
             nextItem.ChangeState(PanelItemState.WaitingForDrawing);
-    }
-
-    public void Initialization(List<DungeonPanelItem> newPanels)
-    {
-        panelItemsList.Clear();
-        panelItemsList.AddRange(newPanels);
-    }
-
-    public void HandleUpgradeOnBuy()
-    {
-
     }
 }

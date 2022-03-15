@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class RoomObjectsHandler : MonoBehaviour
+public class WorkshopPanelItemsManager : MonoBehaviour
 {
-    public static RoomObjectsHandler Instance;
+    public static WorkshopPanelItemsManager Instance;
 
-    public List<GameObject> roomObjects = new List<GameObject>();
-    public List<WorkshopItem> workshopPanelItems = new List<WorkshopItem>();
     public GameObject appearParticles;
+    public EraController eraController;
 
+    [HideInInspector] public List<GameObject> currentEraWorkshopObjects = new List<GameObject>();
+    [HideInInspector] public List<WorkshopItem> workshopPanelItems = new List<WorkshopItem>();
     [HideInInspector] public GameObject transitionPanel;
     [HideInInspector] public Button transitionButton;
     [HideInInspector] public int numberOfOpenPanels = 0;
     [HideInInspector] public bool endOfEra = false;
 
-    public EraController eraController;
     [ContextMenu("Awake")]
     public void Awake()
     {
@@ -23,7 +23,7 @@ public class RoomObjectsHandler : MonoBehaviour
 
         if (transitionPanel == null)
         {
-            Debug.Log("Transition panel in stortage is null");
+            Debug.Log("Transition panel in storage is null");
             return;
         }
         transitionPanel.SetActive(false);
@@ -36,7 +36,7 @@ public class RoomObjectsHandler : MonoBehaviour
 
     public void Initialization(List<GameObject> objects, List<WorkshopItem> newWorkshopPanelItems, GameObject newTransitionButton, bool isEnd)
     {
-        roomObjects = objects;
+        currentEraWorkshopObjects = objects;
         endOfEra = isEnd;
 
         transitionPanel = newTransitionButton;
@@ -63,14 +63,14 @@ public class RoomObjectsHandler : MonoBehaviour
 
     public void UnlockObject(int index)
     {
-        roomObjects[index].SetActive(!roomObjects[index].activeSelf);
-        Instantiate(appearParticles, roomObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
+        currentEraWorkshopObjects[index].SetActive(!currentEraWorkshopObjects[index].activeSelf);
+        Instantiate(appearParticles, currentEraWorkshopObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
         workshopPanelItems[index].ReplaceOldObjects();
     }
 
     public void UnlockObjectWithoutParticles(int index)
     {
-        roomObjects[index].SetActive(!roomObjects[index].activeSelf);
+        currentEraWorkshopObjects[index].SetActive(!currentEraWorkshopObjects[index].activeSelf);
         workshopPanelItems[index].ReplaceOldObjects();
     }
 }

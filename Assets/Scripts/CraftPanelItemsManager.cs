@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsManager : MonoBehaviour
+public class CraftPanelItemsManager : MonoBehaviour
 {
-    public static ItemsManager Instance;
+    public static CraftPanelItemsManager Instance;
 
-    public List<PanelItem> panelItemsList = new List<PanelItem>();
-
-    public PanelItem currentWaitingPanel;
-    public int awardPanelState = 0;
-
-    public GameObject newWeaponUnlockPanel;
-    private WeaponUnlockPanel weaponPanel;
+    public GameObject newWeaponNotificationPanel;
     public List<GameObject> awardPanel = new List<GameObject>();
+
+    [HideInInspector] public List<PanelItem> craftPanelItemsList = new List<PanelItem>();
+    [HideInInspector] public PanelItem currentWaitingPanel;
+
+    private WeaponUnlockPanel weaponPanel;
+    private int awardPanelState = 0;
 
     [ContextMenu("Awake")]
     public void Awake()
     {
         Instance = this;
-        weaponPanel = newWeaponUnlockPanel.GetComponent<WeaponUnlockPanel>();
-        newWeaponUnlockPanel.SetActive(false);
-        currentWaitingPanel = panelItemsList[PlayerPrefs.GetInt("currentWaitingPanelNumber")];
+        weaponPanel = newWeaponNotificationPanel.GetComponent<WeaponUnlockPanel>();
+        newWeaponNotificationPanel.SetActive(false);
+        currentWaitingPanel = craftPanelItemsList[PlayerPrefs.GetInt("currentWaitingPanelNumber")];
         awardPanelState = PlayerPrefs.GetInt("AwardPanel");
         if (awardPanelState == 1)
             awardPanel[EraController.Instance.currentEraNumber].SetActive(true);
@@ -31,16 +31,16 @@ public class ItemsManager : MonoBehaviour
 
     public void Initialization(List<PanelItem> newPanelItems)
     {
-        panelItemsList.Clear();
-        panelItemsList.AddRange(newPanelItems);
+        craftPanelItemsList.Clear();
+        craftPanelItemsList.AddRange(newPanelItems);
 
-        currentWaitingPanel = panelItemsList[0];
+        currentWaitingPanel = craftPanelItemsList[0];
     }
 
     public void MakeNextUnknownItemAsUnavailable()
     {
         //WaitingForDrawing
-        var nextItem = panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
+        var nextItem = craftPanelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (nextItem != null)
             nextItem.ChangeState(PanelItemState.WaitingForDrawing);
     }
@@ -51,9 +51,9 @@ public class ItemsManager : MonoBehaviour
         if (currentWaitingPanel != null)
             currentWaitingPanel.ChangeState(PanelItemState.Available);
 
-        if (newWeaponUnlockPanel != null && currentWaitingPanel != null)
+        if (newWeaponNotificationPanel != null && currentWaitingPanel != null)
         {
-            newWeaponUnlockPanel.SetActive(true);
+            newWeaponNotificationPanel.SetActive(true);
             Debug.Log(currentWaitingPanel.itemName);
             weaponPanel.InitializePanel(currentWaitingPanel.weaponSprite, currentWaitingPanel.itemName);
 
@@ -65,6 +65,6 @@ public class ItemsManager : MonoBehaviour
 
     public void ClosedPanel()
     {
-        newWeaponUnlockPanel.SetActive(false);
+        newWeaponNotificationPanel.SetActive(false);
     }
 }

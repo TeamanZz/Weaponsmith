@@ -33,78 +33,78 @@ public class PrefsHandler : MonoBehaviour
 
     private void LoadWorkshopItems()
     {
-        for (int i = 0; i < RoomObjectsHandler.Instance.roomObjects.Count; i++)
+        for (int i = 0; i < WorkshopPanelItemsManager.Instance.currentEraWorkshopObjects.Count; i++)
         {
             string state = PlayerPrefs.GetString("WorkshopGameobject" + i);
             if (state == "unlocked")
             {
-                RoomObjectsHandler.Instance.workshopPanelItems[i].CollapseItemView();
-                RoomObjectsHandler.Instance.UnlockObjectWithoutParticles(i);
+                WorkshopPanelItemsManager.Instance.workshopPanelItems[i].CollapseItemView();
+                WorkshopPanelItemsManager.Instance.UnlockObjectWithoutParticles(i);
             }
         }
     }
 
     private void LoadUpgrades()
     {
-        for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
+        for (int i = 0; i < CraftPanelItemsManager.Instance.craftPanelItemsList.Count; i++)
         {
             string value = PlayerPrefs.GetString("UpgradeItem" + i);
             if (value == "collapsed")
             {
-                ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
+                CraftPanelItemsManager.Instance.craftPanelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
             }
 
             if (value == "unknown")
             {
-                ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
+                CraftPanelItemsManager.Instance.craftPanelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
             }
 
             if (value == "WaitingForDrawing")
             {
-                ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.WaitingForDrawing);
+                CraftPanelItemsManager.Instance.craftPanelItemsList[i].ChangeStateViaLoader(PanelItemState.WaitingForDrawing);
             }
 
             if (value == "available")
             {
-                ItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
+                CraftPanelItemsManager.Instance.craftPanelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
             }
         }
 
-        for (int i = 0; i < DungeonItemManager.Instance.panelItemsList.Count; i++)
+        for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
         {
             string value = PlayerPrefs.GetString("DungeonUpgradeItem" + i);
             if (value == "collapsed")
             {
-                DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
+                DungeonPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
             }
 
             if (value == "unknown")
             {
-                DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
+                DungeonPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
             }
 
             if (value == "available")
             {
-                DungeonItemManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
+                DungeonPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
             }
         }
 
-        for (int i = 0; i < BoostersManager.Instance.panelItemsList.Count; i++)
+        for (int i = 0; i < BoostersPanelItemsManager.Instance.panelItemsList.Count; i++)
         {
             string value = PlayerPrefs.GetString("BoostersUpgradeItem" + i);
             if (value == "collapsed")
             {
-                BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
+                BoostersPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
             }
 
             if (value == "unknown")
             {
-                BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
+                BoostersPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
             }
 
             if (value == "available")
             {
-                BoostersManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
+                BoostersPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
             }
         }
     }

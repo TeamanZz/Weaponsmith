@@ -22,7 +22,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         DungeonCharacter character;
         if (other.TryGetComponent<DungeonCharacter>(out character))
         {
-            ItemsManager.Instance.OpenWaitingPanel();
+            CraftPanelItemsManager.Instance.OpenWaitingPanel();
             canInteract = false;
         }
     }

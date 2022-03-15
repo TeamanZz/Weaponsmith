@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoostersManager : MonoBehaviour
+public class DungeonPanelItemsManager : MonoBehaviour
 {
-    public static BoostersManager Instance;
+    public static DungeonPanelItemsManager Instance;
 
-    public List<BoostersItemPanel> panelItemsList = new List<BoostersItemPanel>();
+    [HideInInspector] public List<DungeonPanelItem> panelItemsList = new List<DungeonPanelItem>();
 
     [ContextMenu("Awake")]
     public void Awake()
@@ -14,11 +14,12 @@ public class BoostersManager : MonoBehaviour
         Instance = this;
     }
 
-    public void Initialization(List<BoostersItemPanel> boostersItems)
+    public void Initialization(List<DungeonPanelItem> newPanels)
     {
         panelItemsList.Clear();
-        panelItemsList.AddRange(boostersItems);
+        panelItemsList.AddRange(newPanels);
     }
+
     public void MakeNextUnknownItemAsUnavailable()
     {
         //WaitingForDrawing

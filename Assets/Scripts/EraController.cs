@@ -7,10 +7,10 @@ public class EraController : MonoBehaviour
     public static EraController Instance;
 
     public PanelsHandler panelsHandler;
-    public RoomObjectsHandler roomObjectsHandler;
-    public ItemsManager itemsManager;
-    public DungeonItemManager dungeonItemManager;
-    public BoostersManager boostersManager;
+    public WorkshopPanelItemsManager roomObjectsHandler;
+    public CraftPanelItemsManager itemsManager;
+    public DungeonPanelItemsManager dungeonItemManager;
+    public BoostersPanelItemsManager boostersManager;
     public SkinsManager skinsManager;
 
     //  rooms

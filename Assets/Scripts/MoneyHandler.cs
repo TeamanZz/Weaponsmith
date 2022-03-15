@@ -8,26 +8,20 @@ public class MoneyHandler : MonoBehaviour
 {
     public static MoneyHandler Instance;
 
+    [Header("Currency Values")]
     public long moneyCount;
-
     [SerializeField] private int moneyPerSecond;
+
+    [Header("Currency Popup")]
     [SerializeField] private GameObject currencyPopupPrefab;
     [SerializeField] private Transform currencyPopupContainer;
-    [SerializeField] private TextMeshProUGUI moneyPerSecondText;
+
+    [Header("View")]
     [SerializeField] private TextMeshProUGUI moneyCountText;
-    [SerializeField] private Transform canvasTransform;
+    [SerializeField] private TextMeshProUGUI moneyPerSecondText;
 
     private float timeBetweenMoneyIncrease = 0.5f;
-    private Coroutine currencyCoroutine;
-
-    [Header("All connect initialization")]
-    public PanelsHandler panelsHandler;
-    public ItemsManager itemsManager;
-    public RoomObjectsHandler objectsHandler;
-    public DungeonItemManager dungeonItemManager;
-    public BoostersManager boostersManager;
-
-    public float boosterCoefficient = 1;
+    private float boosterCoefficient = 1;
 
     private void Awake()
     {
@@ -35,6 +29,23 @@ public class MoneyHandler : MonoBehaviour
         moneyPerSecond = PlayerPrefs.GetInt("MoneyPerSecond");
         if (moneyPerSecond == 0)
             moneyPerSecond = 1;
+    }
+
+    private void Start()
+    {
+        InvokeRepeating("SaveMoneyPerSec", 1, 3);
+        StartCoroutine(IEIncreaseMoneyCount());
+        StartCoroutine(IESpawnCurrency());
+    }
+
+    private void FixedUpdate()
+    {
+        UpdateMoneyPerSecondView();
+    }
+
+    private void UpdateMoneyPerSecondView()
+    {
+        moneyPerSecondText.text = FormatNumsHelper.FormatNum((double)moneyPerSecond * (double)boosterCoefficient) + "/s";
     }
 
     public void ChangeBoosterCoefficient(float value)
@@ -47,22 +58,9 @@ public class MoneyHandler : MonoBehaviour
         PlayerPrefs.SetInt("MoneyPerSecond", moneyPerSecond);
     }
 
-    private void Start()
-    {
-        InvokeRepeating("SaveMoneyPerSec", 1, 3);
-        StartCoroutine(IEIncreaseMoneyCount());
-
-        currencyCoroutine = StartCoroutine(IESpawnCurrency());
-    }
-
     public void IncreaseMoneyPerSecondValue(int value)
     {
         moneyPerSecond += value;
-    }
-
-    private void FixedUpdate()
-    {
-        moneyPerSecondText.text = FormatNumsHelper.FormatNum((double)moneyPerSecond * (double)boosterCoefficient) + "/s";
     }
 
     private IEnumerator IEIncreaseMoneyCount()

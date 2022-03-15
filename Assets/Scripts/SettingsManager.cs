@@ -26,8 +26,8 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.DeleteKey("MoneyPerSecond");
         PlayerPrefs.SetInt("currentWaitingPanelNumber", 0);
 
-        if (ItemsManager.Instance != null)
-            for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
+        if (CraftPanelItemsManager.Instance != null)
+            for (int i = 0; i < CraftPanelItemsManager.Instance.craftPanelItemsList.Count; i++)
             {
                 PlayerPrefs.DeleteKey("UpgradeItem" + i);
                 PlayerPrefs.DeleteKey($"UpgradeItem{i}generalIncreaseValue");
@@ -36,8 +36,8 @@ public class SettingsManager : MonoBehaviour
                 PlayerPrefs.DeleteKey($"UpgradeItem{i}buysCount");
             }
 
-        if (DungeonItemManager.Instance != null)
-            for (int i = 0; i < DungeonItemManager.Instance.panelItemsList.Count; i++)
+        if (DungeonPanelItemsManager.Instance != null)
+            for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
             {
                 PlayerPrefs.DeleteKey("DungeonUpgradeItem" + i);
                 PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}generalIncreaseValue");
@@ -46,8 +46,8 @@ public class SettingsManager : MonoBehaviour
                 PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}buysCount");
             }
 
-        if (BoostersManager.Instance != null)
-            for (int i = 0; i < DungeonItemManager.Instance.panelItemsList.Count; i++)
+        if (BoostersPanelItemsManager.Instance != null)
+            for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
             {
                 PlayerPrefs.DeleteKey("BoostersUpgradeItem" + i);
                 PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}generalIncreaseValue");
@@ -56,8 +56,8 @@ public class SettingsManager : MonoBehaviour
                 PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}buysCount");
             }
 
-        if (RoomObjectsHandler.Instance != null)
-            for (int i = 0; i < RoomObjectsHandler.Instance.roomObjects.Count; i++)
+        if (WorkshopPanelItemsManager.Instance != null)
+            for (int i = 0; i < WorkshopPanelItemsManager.Instance.currentEraWorkshopObjects.Count; i++)
             {
                 PlayerPrefs.DeleteKey("WorkshopGameobject" + i);
             }
@@ -95,8 +95,8 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.DeleteKey("weaponTrailEnabled");
         PlayerPrefs.DeleteKey("canCriticalHit");
 
-        if (ItemsManager.Instance != null)
-            for (int i = 0; i < ItemsManager.Instance.panelItemsList.Count; i++)
+        if (CraftPanelItemsManager.Instance != null)
+            for (int i = 0; i < CraftPanelItemsManager.Instance.craftPanelItemsList.Count; i++)
             {
                 PlayerPrefs.DeleteKey("UpgradeItem" + i);
                 PlayerPrefs.DeleteKey($"UpgradeItem{i}generalIncreaseValue");
@@ -105,8 +105,8 @@ public class SettingsManager : MonoBehaviour
                 PlayerPrefs.DeleteKey($"UpgradeItem{i}buysCount");
             }
 
-        if (DungeonItemManager.Instance != null)
-            for (int i = 0; i < DungeonItemManager.Instance.panelItemsList.Count; i++)
+        if (DungeonPanelItemsManager.Instance != null)
+            for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
             {
                 PlayerPrefs.DeleteKey("DungeonUpgradeItem" + i);
                 PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}generalIncreaseValue");
@@ -115,8 +115,8 @@ public class SettingsManager : MonoBehaviour
                 PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}buysCount");
             }
 
-        if (BoostersManager.Instance != null)
-            for (int i = 0; i < DungeonItemManager.Instance.panelItemsList.Count; i++)
+        if (BoostersPanelItemsManager.Instance != null)
+            for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
             {
                 PlayerPrefs.DeleteKey("BoostersUpgradeItem" + i);
                 PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}generalIncreaseValue");
@@ -125,7 +125,7 @@ public class SettingsManager : MonoBehaviour
                 PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}buysCount");
             }
 
-        if (RoomObjectsHandler.Instance != null)
+        if (WorkshopPanelItemsManager.Instance != null)
             for (int i = 0; i < 30; i++)
             {
                 PlayerPrefs.DeleteKey("WorkshopGameobject" + i);

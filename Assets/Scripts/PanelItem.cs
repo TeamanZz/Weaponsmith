@@ -343,7 +343,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     //WaitingForDrawing
     public void SetWaitingForDrawingItemView()
     {
-        ItemsManager.Instance.currentWaitingPanel = this;
+        CraftPanelItemsManager.Instance.currentWaitingPanel = this;
 
         //itemConditionsGO.SetActive(true);
         itemConditionsGO.SetActive(false);
@@ -359,9 +359,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         itemIcon.SetActive(false);
         unknownSign.SetActive(true);
 
-        if (ItemsManager.Instance != null && ItemsManager.Instance.awardPanel != null)
+        if (CraftPanelItemsManager.Instance != null && CraftPanelItemsManager.Instance.awardPanel != null)
         {
-            ItemsManager.Instance.awardPanel[EraController.Instance.currentEraNumber].SetActive(true);
+            CraftPanelItemsManager.Instance.awardPanel[EraController.Instance.currentEraNumber].SetActive(true);
             PlayerPrefs.SetInt("AwardPanel", 1);
         }
 
