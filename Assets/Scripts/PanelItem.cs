@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 using TMPro;
 
 public class PanelItem : MonoBehaviour, IBuyableItem
@@ -10,44 +11,45 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public CurrentPanel currentPanelState;
     public PanelItem connectPanel;
     public PanelItem nextUpgradeItem;
-    public int index;
-    public int buysCount;
-    [SerializeField] private TextMeshProUGUI itemNameText;
-    [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
-    [SerializeField] private TextMeshProUGUI priceText;
-    [SerializeField] private TextMeshProUGUI buysCountText;
-    [SerializeField] private GameObject buyButton;
-    [SerializeField] private Button buyButtonComponent;
-    [SerializeField] private Image buyButtonImage;
-    [SerializeField] private GameObject progressBar;
-    [SerializeField] private GameObject completedSign;
-    [SerializeField] private GameObject itemIcon;
-    [SerializeField] private GameObject unknownSign;
-    [SerializeField] private GameObject blurPanel;
-    [SerializeField] private GameObject itemConditionsGO;
-    [SerializeField] private Image progressBarFilled;
-
-    [SerializeField] private Animator buyButtonAnimator;
-    [SerializeField] private Animator iconAnimator;
-    [SerializeField] private Animator generalIncreaseValueTextAnimator;
-    [SerializeField] private Animator buysCountTextAnimator;
-
     public string itemName;
-    [SerializeField] private int generalIncreaseValue;
-    [SerializeField] private int increaseValue;
-    [SerializeField] private int price;
-    [SerializeField] private int buysEdgeCount;
-
-    public AnimationCurve costCurve;
-    public Color buttonDefaultColor;
-    public Image weaponSprite;
-
+    public int index;
     public int currentWeaponNumber = 0;
+    [SerializeField] private int increaseValue;
+    [Space]
+    public int buysCount;
+    [Space]
+    public AnimationCurve costCurve;
+
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
+    [FoldoutGroup("View Components")][FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
+    [FoldoutGroup("View Components")][SerializeField] private Image buyButtonImage;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject progressBar;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject completedSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
+    [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
+    [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
+    [FoldoutGroup("View Components")] public Color buttonDefaultColor;
+    [FoldoutGroup("View Components")] public Image weaponSprite;
+
+    private int generalIncreaseValue;
+    private int price;
+
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();
         Initialize();
     }
+
     private void FixedUpdate()
     {
         if (price <= MoneyHandler.Instance.moneyCount)
@@ -65,73 +67,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void Start()
     {
         InvokeRepeating("SaveData", 3, 3);
-        if (buysCount >= buysEdgeCount)
+        if (buysCount >= costCurve.length)
             ChangeState(PanelItemState.Collapsed);
-
-        //PanelsHandler.Instance.updatingUiPanelsEvent += UpdateCurrentUI;
-        //PanelsHandler.Instance.updatingUiPanelsEvent += UpdateCurrentUI(); 
     }
-
-    //public void UpdateCurrentUI()
-    //{
-    //    int totalPrice = 0;
-    //    int theNumberOfCycles = 0;
-    //    switch (PanelsHandler.Instance.numberOfPurchases)
-    //    {
-    //        case 1:
-    //            price = (int)costCurve.Evaluate(buysCount);
-    //            break;
-
-    //        case 10:
-    //            totalPrice = 0;
-    //            if (buysCount + 10 > buysEdgeCount)
-    //                theNumberOfCycles = buysEdgeCount - buysCount;
-    //            else
-    //                theNumberOfCycles = 10;
-
-    //            Debug.Log("The Number Of Cycles" + theNumberOfCycles);
-
-    //            for (int i = 0; i < theNumberOfCycles; i++)
-    //                {
-    //                    int currentPrice = (int)costCurve.Evaluate(buysCount + i);
-    //                    totalPrice += currentPrice;
-
-    //                    Debug.Log("Price = " + currentPrice + " | Total = " + totalPrice);
-    //                }
-    //            price = totalPrice;
-    //            Debug.Log( "Total price = " + price);
-
-    //            break;
-
-    //        case 25:
-    //            totalPrice = 0;
-    //            if (buysCount + 25 > buysEdgeCount)
-    //                theNumberOfCycles = buysEdgeCount - buysCount;
-    //            else
-    //                theNumberOfCycles = 25;
-
-    //            Debug.Log("The Number Of Cycles" + theNumberOfCycles);
-
-    //            for (int i = 0; i < theNumberOfCycles; i++)
-    //            {
-    //                int currentPrice = (int)costCurve.Evaluate(buysCount + i);
-    //                totalPrice += currentPrice;
-
-    //                Debug.Log("Price = " + currentPrice + " | Total = " + totalPrice);
-    //            }
-    //            price = totalPrice;
-    //            Debug.Log("Total price = " + price);
-
-    //            break;
-    //    }
-    //   // price = (int)costCurve.Evaluate(buysCount + PanelsHandler.Instance.numberOfPurchases);
-    //    UpdateView(); 
-    //    //generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
-    //    //priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
-
-    //    //buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
-    //    //progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);
-    //}
 
     //show weapon
     public void ShowWeaponsByNumber()
@@ -139,7 +77,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (currentPanelState == CurrentPanel.parent)
         {
             Debug.Log("\n" + "Current weapon number - " + currentWeaponNumber);
-            //EquipmentManager.equipmentManager.ShowWeaponsByNumber();
         }
     }
     private void SaveData()
@@ -179,7 +116,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         itemNameText.text = itemName;
     }
 
-    //  ���
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
@@ -192,8 +128,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void CheckOnCollapse()
     {
-        if (buysCount >= buysEdgeCount)
+        if (buysCount >= costCurve.length)
         {
+
             SFX.Instance.PlayQuestComplete();
             ChangeState(PanelItemState.Collapsed);
 
@@ -246,12 +183,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         SetUnknownItemView();
         PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
-    }
-
-    private void OnDestroy()
-    {
-        // ChangeState(currentState);
-        // SaveData();
     }
 
     private void SaveState()
@@ -406,7 +337,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         }
 
         buysCount += 1;
-        //buysCount += PanelsHandler.Instance.numberOfPurchases;
         price = (int)costCurve.Evaluate(buysCount);// + PanelsHandler.Instance.numberOfPurchases);
     }
 
@@ -415,8 +345,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
 
-        buysCountText.text = buysCount.ToString() + "/" + buysEdgeCount.ToString();
-        progressBarFilled.fillAmount = ((float)buysCount / (float)buysEdgeCount);
+        buysCountText.text = buysCount.ToString() + "/" + costCurve.length.ToString();
+        progressBarFilled.fillAmount = ((float)buysCount / (float)costCurve.length);
     }
 
     public enum CurrentPanel

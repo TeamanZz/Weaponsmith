@@ -26,9 +26,6 @@ public class EraController : MonoBehaviour
     public List<GameObject> skinsRoomStortage = new List<GameObject>();
     public List<GameObject> skinsDungeonStortage = new List<GameObject>();
 
-    [Header("Additional elements settings")]
-    public GameObject transitionPanel;
-
     public void Awake()
     {
         Instance = this;

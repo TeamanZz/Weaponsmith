@@ -14,9 +14,6 @@ public class BoostersItemPanel : MonoBehaviour
     [SerializeField] private int buysEdgeCount;
     public AnimationCurve costCurve;
 
-    private int price;
-    [SerializeField] private Color buttonDefaultColor;
-
     [FoldoutGroup("Current Runtime Values")] public int buysCount;
     [FoldoutGroup("Current Runtime Values")][SerializeField] private int generalIncreaseValue;
     [FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
@@ -32,33 +29,31 @@ public class BoostersItemPanel : MonoBehaviour
     [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator activateButtonAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
-    // [FoldoutGroup("View Components")][SerializeField] private Animator hoverIconAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
+    [FoldoutGroup("View Components")] public GameObject hoverImageGameObject;
+    [FoldoutGroup("View Components")] public Color disabledColor;
+    [FoldoutGroup("View Components")] public Color enabledColor;
+    [FoldoutGroup("View Components")] public Button activateButtonComponent;
+    [FoldoutGroup("View Components")][SerializeField] private Color buttonDefaultColor;
 
-    public GameObject hoverImageGameObject;
-    public Color disabledColor;
-    public Color enabledColor;
-    public Button activateButtonComponent;
     private Image hoverImage;
-
-    private void Update()
-    {
-        if (hoverImageGameObject.activeSelf == true)
-        {
-            if (index == 0)
-                hoverImage.fillAmount = DungeonBoostersManager.Instance.goldBoosterRemainingTime;
-            if (index == 1)
-                hoverImage.fillAmount = DungeonBoostersManager.Instance.speedBoosterRemainingTime;
-            if (index == 2)
-                hoverImage.fillAmount = DungeonBoostersManager.Instance.strengthBoosterRemainingTime;
-        }
-    }
+    private int price;
 
     private void Awake()
     {
         Initialize();
     }
+
+    private void Start()
+    {
+        hoverImage = hoverImageGameObject.GetComponent<Image>();
+        InvokeRepeating("SaveData", 3, 3);
+
+        if (buysCount >= buysEdgeCount)
+            ChangeState(PanelItemState.Collapsed);
+    }
+
     private void FixedUpdate()
     {
         if (price <= MoneyHandler.Instance.moneyCount)
@@ -73,13 +68,17 @@ public class BoostersItemPanel : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Update()
     {
-        hoverImage = hoverImageGameObject.GetComponent<Image>();
-        InvokeRepeating("SaveData", 3, 3);
-
-        if (buysCount >= buysEdgeCount)
-            ChangeState(PanelItemState.Collapsed);
+        if (hoverImageGameObject.activeSelf == true)
+        {
+            if (index == 0)
+                hoverImage.fillAmount = DungeonBoostersManager.Instance.goldBoosterRemainingTime;
+            if (index == 1)
+                hoverImage.fillAmount = DungeonBoostersManager.Instance.speedBoosterRemainingTime;
+            if (index == 2)
+                hoverImage.fillAmount = DungeonBoostersManager.Instance.strengthBoosterRemainingTime;
+        }
     }
 
     public void StartCooldown()

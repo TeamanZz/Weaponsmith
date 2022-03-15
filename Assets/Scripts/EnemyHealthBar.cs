@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
 public class EnemyHealthBar : MonoBehaviour
 {
+    public int maxHealth = 5;
+    public int currentHealth = 5;
+
     [Header("Enemy health bar settings")]
     public GameObject canvas;
     public GameObject healthBar;
     public Image healthBarImage;
 
-    private DungeonEnemy enemyComponent;
-
-    public int maxHealth = 5;
-    public int currentHealth = 5;
+    [Header("Particles")]
     public ParticleSystem hitParticles;
     public ParticleSystem doubleHitParticles;
     public ParticleSystem deathParticles;
+
+    private DungeonEnemy enemyComponent;
 
     public void Awake()
     {
@@ -36,7 +36,6 @@ public class EnemyHealthBar : MonoBehaviour
         if (enemyComponent == null)
         {
             DungeonCharacter.Instance.isInBattle = false;
-            // DungeonCharacter.Instance.animator.SetTrigger("EnemyIsNear");
             return;
         }
 

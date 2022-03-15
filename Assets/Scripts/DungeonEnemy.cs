@@ -1,27 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class DungeonEnemy : MonoBehaviour
 {
-    [SerializeField] private List<Animator> animators = new List<Animator>();
-    public List<GameObject> currentEnemySkin = new List<GameObject>();
-    public GameObject blueprintPrefab;
     public float scale = 1.5f;
     public float distanceToCollider = 1.5f;
-    public EnemyHealthBar enemyHealthBar;
-
-    private BoxCollider detectionCollider;
     public float enemyLVL;
+    public GameObject blueprintPrefab;
+    public EnemyHealthBar enemyHealthBar;
     public TextMeshProUGUI enemyLvlText;
+    public AudioSource audioSource;
+    public List<GameObject> currentEnemySkin = new List<GameObject>();
+    public List<AudioClip> sounds = new List<AudioClip>();
 
     private int dropRate = 0;
     private int cuurentSkinIndex;
-
-    public List<AudioClip> sounds = new List<AudioClip>();
-    public AudioSource audioSource;
+    private BoxCollider detectionCollider;
+    private List<Animator> animators = new List<Animator>();
 
     public void PlayEnemyDeathSound()
     {

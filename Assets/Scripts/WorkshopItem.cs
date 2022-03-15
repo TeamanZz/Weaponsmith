@@ -3,33 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class WorkshopItem : MonoBehaviour, IBuyableItem
 {
-    [SerializeField] private TextMeshProUGUI priceText;
-    public GameObject buyButton;
-    private Button buyButtonComponent;
-    private Image buyButtonImage;
-    public Color buttonDefaultColor;
     [SerializeField] private int index;
     public long price;
-    [SerializeField] private GameObject itemIcon;
-    [SerializeField] private Animator iconAnimator;
-
+    public PanelType currentType;
     public List<GameObject> objectsToReplace = new List<GameObject>();
-
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")] public GameObject buyButton;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
+    [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [HideInInspector] public bool wasBoughted;
-
-    [Header("Dungeon settings")]
     public static int dungeoonIsOpen = 0;
     public static int enchantmentIsOpen = 0;
-    public PanelType currentType;
-    public enum PanelType
-    {
-        anOrdinaryItem,
-        anDungeonItem,
-        anEnchantmentTableItem
-    }
+
+    private Button buyButtonComponent;
+    private Image buyButtonImage;
 
     private void Awake()
     {
@@ -40,6 +32,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         dungeoonIsOpen = PlayerPrefs.GetInt("dungeoonIsOpen");
         enchantmentIsOpen = PlayerPrefs.GetInt("enchantmentIsOpen");
     }
+
     private void Update()
     {
         if (price <= MoneyHandler.Instance.moneyCount)
@@ -91,5 +84,12 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
         wasBoughted = true;
         WorkshopPanelItemsManager.Instance.CheckBeforeTransition();
+    }
+
+    public enum PanelType
+    {
+        anOrdinaryItem,
+        anDungeonItem,
+        anEnchantmentTableItem
     }
 }
