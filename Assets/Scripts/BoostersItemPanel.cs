@@ -98,9 +98,9 @@ public class BoostersItemPanel : MonoBehaviour
 
     private void SaveData()
     {
-        SaveState();
-        PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}price", price);
-        PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}buysCount", buysCount);
+        // SaveState();
+        // PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}price", price);
+        // PlayerPrefs.SetFloat($"BoostersUpgradeItem{index}buysCount", buysCount);
     }
 
     private void Initialize()
@@ -173,19 +173,19 @@ public class BoostersItemPanel : MonoBehaviour
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
-            PlayerPrefs.SetString("BoostersUpgradeItem" + index, "collapsed");
+            // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
             SetUnknownItemView();
-            PlayerPrefs.SetString("BoostersUpgradeItem" + index, "unknown");
+            // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "unknown");
         }
 
         if (currentState == PanelItemState.Available)
         {
             SetAvailableItemView();
-            PlayerPrefs.SetString("BoostersUpgradeItem" + index, "available");
+            // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "available");
         }
     }
 
@@ -194,24 +194,24 @@ public class BoostersItemPanel : MonoBehaviour
     public void UnkownPanel()
     {
         SetUnknownItemView();
-        PlayerPrefs.SetString("BoostersUpgradeItem" + index, "unknown");
+        // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "unknown");
     }
 
     private void SaveState()
     {
         if (currentState == PanelItemState.Collapsed)
         {
-            PlayerPrefs.SetString("BoostersUpgradeItem" + index, "collapsed");
+            // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
-            PlayerPrefs.SetString("BoostersUpgradeItem" + index, "unknown");
+            // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "unknown");
         }
 
         if (currentState == PanelItemState.Available)
         {
-            PlayerPrefs.SetString("BoostersUpgradeItem" + index, "available");
+            // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "available");
         }
     }
 
@@ -225,19 +225,19 @@ public class BoostersItemPanel : MonoBehaviour
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
-            PlayerPrefs.SetString("BoostersUpgradeItem" + index, "collapsed");
+            // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
             SetUnknownItemView();
-            PlayerPrefs.SetString("BoostersUpgradeItem" + index, "unknown");
+            // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "unknown");
         }
 
         if (currentState == PanelItemState.Available)
         {
             SetAvailableItemView();
-            PlayerPrefs.SetString("BoostersUpgradeItem" + index, "available");
+            // PlayerPrefs.SetString("BoostersUpgradeItem" + index, "available");
         }
 
         UpdateView();

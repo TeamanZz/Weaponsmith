@@ -114,7 +114,7 @@ public class DungeonPanelItem : MonoBehaviour
             if (buysCount == 1)
             {
                 SkinsManager.Instance.dungeonEnemySkinCount++;
-                PlayerPrefs.SetInt("EnemySkinCount", SkinsManager.Instance.dungeonEnemySkinCount);
+                // PlayerPrefs.SetInt("EnemySkinCount", SkinsManager.Instance.dungeonEnemySkinCount);
             }
         }
 
@@ -123,7 +123,7 @@ public class DungeonPanelItem : MonoBehaviour
             if (buysCount == 1)
             {
                 SkinsManager.Instance.dungeonEnemySkinCount++;
-                PlayerPrefs.SetInt("EnemySkinCount", SkinsManager.Instance.dungeonEnemySkinCount);
+                // PlayerPrefs.SetInt("EnemySkinCount", SkinsManager.Instance.dungeonEnemySkinCount);
             }
         }
 
@@ -156,7 +156,7 @@ public class DungeonPanelItem : MonoBehaviour
             if (buysCount == 1)
             {
                 SkinsManager.Instance.currentSkinIndex += 1;
-                PlayerPrefs.SetInt("skinIndex", SkinsManager.Instance.currentSkinIndex);
+                // PlayerPrefs.SetInt("skinIndex", SkinsManager.Instance.currentSkinIndex);
                 SkinsManager.Instance.ChangeSkin();
             }
         }
@@ -200,19 +200,19 @@ public class DungeonPanelItem : MonoBehaviour
         {
             CollapseItemView();
 
-            PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
+            // PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
             SetUnknownItemView();
-            PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
+            // PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
         }
 
         if (currentState == PanelItemState.Available)
         {
             SetAvailableItemView();
-            PlayerPrefs.SetString("DungeonUpgradeItem" + index, "available");
+            // PlayerPrefs.SetString("DungeonUpgradeItem" + index, "available");
         }
     }
 
@@ -220,17 +220,17 @@ public class DungeonPanelItem : MonoBehaviour
     {
         if (currentState == PanelItemState.Collapsed)
         {
-            PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
+            // PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
-            PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
+            // PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
         }
 
         if (currentState == PanelItemState.Available)
         {
-            PlayerPrefs.SetString("DungeonUpgradeItem" + index, "available");
+            // PlayerPrefs.SetString("DungeonUpgradeItem" + index, "available");
         }
     }
 
@@ -252,29 +252,29 @@ public class DungeonPanelItem : MonoBehaviour
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
-            PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
+            // PlayerPrefs.SetString("DungeonUpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
             SetUnknownItemView();
-            PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
+            // PlayerPrefs.SetString("DungeonUpgradeItem" + index, "unknown");
         }
 
         if (currentState == PanelItemState.Available)
         {
             SetAvailableItemView();
-            PlayerPrefs.SetString("DungeonUpgradeItem" + index, "available");
+            // PlayerPrefs.SetString("DungeonUpgradeItem" + index, "available");
         }
     }
 
     private void SaveData()
     {
-        SaveState();
-        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
-        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}price", price);
-        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}increaseValue", increaseValue);
-        PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}buysCount", buysCount);
+        // SaveState();
+        // PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
+        // PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}price", price);
+        // PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}increaseValue", increaseValue);
+        // PlayerPrefs.SetFloat($"DungeonUpgradeItem{index}buysCount", buysCount);
     }
 
     //Unknown

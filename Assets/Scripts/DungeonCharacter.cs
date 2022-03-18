@@ -92,12 +92,12 @@ public class DungeonCharacter : MonoBehaviour
     public void EnableCriticalHit()
     {
         canCriticalHit = true;
-        PlayerPrefs.SetString("canCriticalHit", "true");
+        // PlayerPrefs.SetString("canCriticalHit", "true");
     }
 
     public void EnableWeaponTrail()
     {
-        PlayerPrefs.SetString("weaponTrailEnabled", "true");
+        // PlayerPrefs.SetString("weaponTrailEnabled", "true");
         weaponTrailEnabled = true;
     }
 
@@ -120,7 +120,7 @@ public class DungeonCharacter : MonoBehaviour
             return;
 
         allowedAttackAnimationsCount++;
-        PlayerPrefs.SetInt("allowedAttackAnimationsCount", allowedAttackAnimationsCount);
+        // PlayerPrefs.SetInt("allowedAttackAnimationsCount", allowedAttackAnimationsCount);
         PlayerPrefs.Save();
     }
 

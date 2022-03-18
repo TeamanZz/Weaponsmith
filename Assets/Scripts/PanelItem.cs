@@ -81,11 +81,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     }
     private void SaveData()
     {
-        SaveState();
-        PlayerPrefs.SetFloat($"UpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
-        PlayerPrefs.SetFloat($"UpgradeItem{index}price", price);
-        PlayerPrefs.SetFloat($"UpgradeItem{index}increaseValue", increaseValue);
-        PlayerPrefs.SetFloat($"UpgradeItem{index}buysCount", buysCount);
+        // SaveState();
+        // PlayerPrefs.SetFloat($"UpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
+        // PlayerPrefs.SetFloat($"UpgradeItem{index}price", price);
+        // PlayerPrefs.SetFloat($"UpgradeItem{index}increaseValue", increaseValue);
+        // PlayerPrefs.SetFloat($"UpgradeItem{index}buysCount", buysCount);
     }
 
     private void Initialize()
@@ -154,26 +154,26 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
             SetUnknownItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
         }
 
         //WaitingForDrawing
         if (currentState == PanelItemState.WaitingForDrawing)
         {
             SetWaitingForDrawingItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
         }
 
         if (currentState == PanelItemState.Available)
         {
             SetAvailableItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "available");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "available");
         }
     }
 
@@ -182,30 +182,30 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public void UnkownPanel()
     {
         SetUnknownItemView();
-        PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
+        // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
     }
 
     private void SaveState()
     {
         if (currentState == PanelItemState.Collapsed)
         {
-            PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
-            PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
         }
 
         //WaitingForDrawing
         if (currentState == PanelItemState.WaitingForDrawing)
         {
-            PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
         }
 
         if (currentState == PanelItemState.Available)
         {
-            PlayerPrefs.SetString("UpgradeItem" + index, "available");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "available");
         }
     }
 
@@ -224,26 +224,26 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (currentState == PanelItemState.Collapsed)
         {
             CollapseItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
         }
 
         if (currentState == PanelItemState.Unknown)
         {
             SetUnknownItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
         }
 
         if (currentState == PanelItemState.Available)
         {
             SetAvailableItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "available");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "available");
         }
 
         //WaitingForDrawing
         if (currentState == PanelItemState.WaitingForDrawing)
         {
             SetWaitingForDrawingItemView();
-            PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
+            // PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
         }
 
         UpdateView();
@@ -293,10 +293,10 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (CraftPanelItemsManager.Instance != null && CraftPanelItemsManager.Instance.awardPanel != null)
         {
             CraftPanelItemsManager.Instance.awardPanel[EraController.Instance.currentEraNumber].SetActive(true);
-            PlayerPrefs.SetInt("AwardPanel", 1);
+            // PlayerPrefs.SetInt("AwardPanel", 1);
         }
 
-        PlayerPrefs.SetInt("currentWaitingPanelNumber", index);
+        // PlayerPrefs.SetInt("currentWaitingPanelNumber", index);
     }
 
     //Unknown

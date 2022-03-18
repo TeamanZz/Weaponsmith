@@ -43,7 +43,7 @@ public class EquipmentManager : MonoBehaviour
     }
     public void SaveWeaponNumber()
     {
-        PlayerPrefs.SetInt("WeaponNumber", weaponNumber);
+        // PlayerPrefs.SetInt("WeaponNumber", weaponNumber);
     }
 
     public void ShowWeaponsByNumber()

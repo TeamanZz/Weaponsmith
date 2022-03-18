@@ -53,21 +53,21 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         WorkshopPanelItemsManager.Instance.UnlockObject(index);
         if (currentType == PanelType.anDungeonItem)
         {
-            PlayerPrefs.SetInt("dungeoonIsOpen", 1);
+            // PlayerPrefs.SetInt("dungeoonIsOpen", 1);
             dungeoonIsOpen = 1;
             PanelsHandler.Instance.EnableDungeonButton();
         }
 
         if (currentType == PanelType.anEnchantmentTableItem)
         {
-            PlayerPrefs.SetInt("enchantmentIsOpen", 1);
+            // PlayerPrefs.SetInt("enchantmentIsOpen", 1);
             enchantmentIsOpen = 1;
             PanelsHandler.Instance.EnableBoostersButton();
         }
 
         CollapseItemView();
         iconAnimator.Play("Jump", 0, 0);
-        PlayerPrefs.SetString("WorkshopGameobject" + index, "unlocked");
+        // PlayerPrefs.SetString("WorkshopGameobject" + index, "unlocked");
     }
 
     public void ReplaceOldObjects()

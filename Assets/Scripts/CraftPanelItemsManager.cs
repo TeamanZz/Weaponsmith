@@ -59,7 +59,7 @@ public class CraftPanelItemsManager : MonoBehaviour
 
             EquipmentManager.Singleton.ShowWeaponsByNumber();
             awardPanel[EraController.Instance.currentEraNumber].SetActive(false);
-            PlayerPrefs.SetInt("AwardPanel", 0);
+            // PlayerPrefs.SetInt("AwardPanel", 0);
         }
     }
 

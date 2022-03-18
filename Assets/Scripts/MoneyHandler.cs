@@ -55,7 +55,7 @@ public class MoneyHandler : MonoBehaviour
 
     private void SaveMoneyPerSec()
     {
-        PlayerPrefs.SetInt("MoneyPerSecond", moneyPerSecond);
+        // PlayerPrefs.SetInt("MoneyPerSecond", moneyPerSecond);
     }
 
     public void IncreaseMoneyPerSecondValue(int value)

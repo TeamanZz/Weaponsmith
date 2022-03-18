@@ -87,7 +87,7 @@ public class EraController : MonoBehaviour
         //stortages[currentEraNumber].skinStortageObject.SetActive(true);
         skinsManager.Initialization(stortages[currentEraNumber].skinsInRoom, stortages[currentEraNumber].dungeonSkins);
 
-        PlayerPrefs.SetInt("currentEraNumber", currentEraNumber);
+        // PlayerPrefs.SetInt("currentEraNumber", currentEraNumber);
         if (SettingsManager.settingsManager != null)
             SettingsManager.settingsManager.RemovingOldEraProgress();
     }

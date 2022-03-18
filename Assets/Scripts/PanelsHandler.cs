@@ -25,6 +25,9 @@ public class PanelsHandler : MonoBehaviour
     public GameObject dungeonCamera;
 
     [Space]
+    public GameObject dungeonPreviewUI;
+
+    [Space]
     [SerializeField] private List<string> panelNames = new List<string>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
@@ -51,6 +54,16 @@ public class PanelsHandler : MonoBehaviour
     {
         panels.Clear();
         panels.AddRange(stortage.panels);
+    }
+
+    public void EnableDungeonPreviewUI()
+    {
+        dungeonPreviewUI.SetActive(true);
+    }
+
+    public void DisableDungeonPreviewUI()
+    {
+        dungeonPreviewUI.SetActive(false);
     }
 
     public void OpenPanel(int panelIndex)

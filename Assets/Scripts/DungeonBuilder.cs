@@ -16,6 +16,12 @@ public class DungeonBuilder : MonoBehaviour
     public Transform enemiesContainer;
     public GameObject enemyPrefab;
 
+    [Header("Preview")]
+    public Transform dungeonCharacter;
+    public Transform dungeonCharacterPreviewPos;
+    public TrackingCamera dungeonCamera;
+    public Transform dungeonCameraPreviewPos;
+
     private GameObject lastSpawnedPiece;
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
@@ -33,6 +39,16 @@ public class DungeonBuilder : MonoBehaviour
         {
             SpawnPiece();
         }
+    }
+
+    public void ShowCharacterPreview()
+    {
+        dungeonCharacter.transform.position = dungeonCharacterPreviewPos.position;
+        dungeonCharacter.transform.rotation = Quaternion.Euler(0, -90, 0);
+
+        dungeonCamera.transform.position = dungeonCameraPreviewPos.position;
+        dungeonCamera.transform.rotation = Quaternion.Euler(7, 90, 0);
+        dungeonCamera.targetDistance = 0;
     }
 
     public void SpawnDungeonContent()
@@ -65,4 +81,6 @@ public class DungeonBuilder : MonoBehaviour
             lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
         }
     }
+
+
 }
