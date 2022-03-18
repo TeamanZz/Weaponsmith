@@ -19,14 +19,18 @@ public class DungeonBuilder : MonoBehaviour
     [Header("Preview")]
     public Transform dungeonCharacter;
     public Transform dungeonCharacterPreviewPos;
+    public Transform dungeonCharacterStartPos;
     public TrackingCamera dungeonCamera;
     public Transform dungeonCameraPreviewPos;
+    public Transform dungeonCameraStartPos;
 
     private GameObject lastSpawnedPiece;
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
 
     public List<GameObject> enemiesSkinsStats = new List<GameObject>();
+
+    public bool isDungeonStarted;
 
     private void Awake()
     {
@@ -41,8 +45,22 @@ public class DungeonBuilder : MonoBehaviour
         }
     }
 
+    public void SetCharacterOnStart()
+    {
+        dungeonCharacter.transform.position = dungeonCharacterStartPos.position;
+        dungeonCharacter.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        dungeonCamera.transform.position = dungeonCameraStartPos.position;
+        dungeonCamera.transform.rotation = Quaternion.Euler(32, 0, 0);
+        dungeonCamera.targetDistance = 17;
+
+        isDungeonStarted = true;
+    }
+
     public void ShowCharacterPreview()
     {
+        if (isDungeonStarted)
+            return;
         dungeonCharacter.transform.position = dungeonCharacterPreviewPos.position;
         dungeonCharacter.transform.rotation = Quaternion.Euler(0, -90, 0);
 

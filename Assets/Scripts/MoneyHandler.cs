@@ -84,7 +84,7 @@ public class MoneyHandler : MonoBehaviour
 
     public void SpawnCurrencyPopUp()
     {
-        var newPopup = Instantiate(currencyPopupPrefab, currencyPopupContainer);
+        var newPopup = Instantiate(currencyPopupPrefab, new Vector3(-1000, 1, 0), Quaternion.identity, currencyPopupContainer);
         newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3 * (double)boosterCoefficient) + "$";
         newPopup.transform.SetAsFirstSibling();
     }

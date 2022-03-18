@@ -21,7 +21,7 @@ public class DungeonPanelItem : MonoBehaviour
     [FoldoutGroup("Current Runtime Values")][SerializeField] private int generalIncreaseValue;
 
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    // [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
     [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
@@ -68,7 +68,7 @@ public class DungeonPanelItem : MonoBehaviour
         buyButtonImage = buyButton.GetComponent<Image>();
         buyButtonAnimator = buyButton.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
-        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
+        // generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
         buysCountTextAnimator = buysCountText.GetComponent<Animator>();
 
         if (currentState != PanelItemState.Unknown)
@@ -284,7 +284,7 @@ public class DungeonPanelItem : MonoBehaviour
         unknownSign.SetActive(true);
         itemNameText.text = "???";
         progressBar.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(false);
+        // generalIncreaseValueText.gameObject.SetActive(false);
         buyButton.SetActive(false);
         completedSign.SetActive(false);
         blurPanel.SetActive(true);
@@ -297,7 +297,7 @@ public class DungeonPanelItem : MonoBehaviour
         blurPanel.SetActive(false);
         itemNameText.text = itemName;
         progressBar.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(false);
+        // generalIncreaseValueText.gameObject.SetActive(false);
         buyButton.SetActive(false);
         completedSign.SetActive(true);
         itemIcon.SetActive(true);
@@ -319,7 +319,7 @@ public class DungeonPanelItem : MonoBehaviour
 
     private void UpdateView()
     {
-        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
+        // generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
 
         buysCountText.text = buysCount.ToString() + "/" + costCurve.keys[costCurve.length - 1].time.ToString();
@@ -331,7 +331,7 @@ public class DungeonPanelItem : MonoBehaviour
     {
         itemConditionsGO.SetActive(false);
         blurPanel.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(true);
+        // generalIncreaseValueText.gameObject.SetActive(true);
         unknownSign.SetActive(false);
         progressBar.SetActive(true);
         buyButton.SetActive(true);

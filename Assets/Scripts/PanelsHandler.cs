@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PanelsHandler : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class PanelsHandler : MonoBehaviour
 
     [Space]
     public GameObject dungeonPreviewUI;
+    public GameObject dungeonEnteringPanel;
+    public GameObject panelsContainer;
 
     [Space]
     [SerializeField] private List<string> panelNames = new List<string>();
@@ -56,8 +59,45 @@ public class PanelsHandler : MonoBehaviour
         panels.AddRange(stortage.panels);
     }
 
+    public void EnableDungeonEnteringPanel()
+    {
+        dungeonEnteringPanel.SetActive(true);
+        dungeonEnteringPanel.transform.localScale = Vector3.one;
+        StartCoroutine(IEEnableDungeonEnteringPanel());
+    }
+
+    public void DisableDungeonEnteringPanel()
+    {
+        dungeonEnteringPanel.transform.DOScale(0, 1f).SetEase(Ease.InBack);
+    }
+
+    public void EnablePanelsContainer()
+    {
+        panelsContainer.SetActive(true);
+    }
+
+    private IEnumerator IEEnableDungeonEnteringPanel()
+    {
+        DungeonBuilder.Instance.SetCharacterOnStart();
+        DisablePanelsContainer();
+        yield return new WaitForSeconds(1);
+        DisableDungeonEnteringPanel();
+        DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", true);
+        DungeonCharacter.Instance.runSpeed = 0.1f;
+        yield return new WaitForSeconds(1);
+        dungeonEnteringPanel.SetActive(false);
+    }
+
+    public void DisablePanelsContainer()
+    {
+        if (DungeonBuilder.Instance.isDungeonStarted)
+            panelsContainer.SetActive(false);
+    }
+
     public void EnableDungeonPreviewUI()
     {
+        if (DungeonBuilder.Instance.isDungeonStarted)
+            return;
         dungeonPreviewUI.SetActive(true);
     }
 
