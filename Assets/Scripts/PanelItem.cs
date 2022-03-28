@@ -9,6 +9,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 {
     public PanelItemState currentState;
     public CurrentPanel currentPanelState;
+    public ItemEquipment.EquipmentType currentEquipmentType;
+
     public PanelItem connectPanel;
     public PanelItem nextUpgradeItem;
     public string itemName;
@@ -26,8 +28,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
     [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
     [FoldoutGroup("View Components")][FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
-    [FoldoutGroup("View Components")][SerializeField] private Image buyButtonImage;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject progressBar;
+    [FoldoutGroup("View Components")][SerializeField] public Image buyButtonImage;
+    [FoldoutGroup("View Components")][SerializeField] public GameObject progressBar;
     [FoldoutGroup("View Components")][SerializeField] private GameObject completedSign;
     [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
     [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
@@ -41,9 +43,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
 
-    private int generalIncreaseValue;
-    private int price;
+    public int generalIncreaseValue;
+    public int price;
 
+    public ItemEquipment currentItemEquipment;
+    public PanelItemInHub currentPanelItemInHub;
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();
@@ -69,6 +73,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         InvokeRepeating("SaveData", 3, 3);
         if (buysCount >= costCurve.keys[costCurve.length - 1].time)
             ChangeState(PanelItemState.Collapsed);
+
+        //
+        ChangeState(currentState);
     }
 
     //show weapon
@@ -124,6 +131,10 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         UpdateView();
         PlayJumpAnimation();
         CheckOnCollapse();
+
+        if (currentPanelItemInHub == null)
+            return;
+        currentPanelItemInHub.UpdateUI();
     }
 
     private void CheckOnCollapse()
@@ -151,30 +162,56 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         currentState = newState;
 
-        if (currentState == PanelItemState.Collapsed)
+        switch(newState)
         {
-            CollapseItemView();
-            // PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
+            case PanelItemState.Collapsed:
+                CollapseItemView();
+                break;
+
+            case PanelItemState.Unknown:
+                SetUnknownItemView();
+                break;
+
+            case PanelItemState.WaitingForDrawing:
+                SetWaitingForDrawingItemView();
+                break;
+
+            case PanelItemState.Available:
+                SetAvailableItemView(); 
+                currentItemEquipment.currentCount = buysCount;
+                
+                if(DungeonHubManager.dungeonHubManager != null)
+                    DungeonHubManager.dungeonHubManager.AddEquipment(this);
+                Debug.Log("Start");
+                break;
         }
 
-        if (currentState == PanelItemState.Unknown)
-        {
-            SetUnknownItemView();
-            // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
-        }
 
-        //WaitingForDrawing
-        if (currentState == PanelItemState.WaitingForDrawing)
-        {
-            SetWaitingForDrawingItemView();
-            // PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
-        }
+        //if (currentState == PanelItemState.Collapsed)
+        //{
+        //    CollapseItemView();
+        //    // PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
+        //}
 
-        if (currentState == PanelItemState.Available)
-        {
-            SetAvailableItemView();
-            // PlayerPrefs.SetString("UpgradeItem" + index, "available");
-        }
+        //if (currentState == PanelItemState.Unknown)
+        //{
+        //    SetUnknownItemView();
+
+        //    // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
+        //}
+
+        ////WaitingForDrawing
+        //if (currentState == PanelItemState.WaitingForDrawing)
+        //{
+        //    SetWaitingForDrawingItemView();
+        //    // PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
+        //}
+
+        //if (currentState == PanelItemState.Available)
+        //{
+        //    SetAvailableItemView();
+        //    // PlayerPrefs.SetString("UpgradeItem" + index, "available");
+        //}
     }
 
     //  unkown
@@ -220,31 +257,27 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (newState == PanelItemState.Collapsed)
             Debug.Log(gameObject);
         //ItemsManager.Instance.CheckConditions(this);
-
-        if (currentState == PanelItemState.Collapsed)
+        
+        switch (currentState)
         {
-            CollapseItemView();
-            // PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
+            case PanelItemState.Collapsed:
+                CollapseItemView();
+                break;
+
+            case PanelItemState.Unknown:
+                SetUnknownItemView();
+                break;
+
+            case PanelItemState.WaitingForDrawing:
+                SetWaitingForDrawingItemView();
+                break;
+
+            case PanelItemState.Available:
+                SetAvailableItemView();
+                DungeonHubManager.dungeonHubManager.AddEquipment(this);
+                break;
         }
 
-        if (currentState == PanelItemState.Unknown)
-        {
-            SetUnknownItemView();
-            // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
-        }
-
-        if (currentState == PanelItemState.Available)
-        {
-            SetAvailableItemView();
-            // PlayerPrefs.SetString("UpgradeItem" + index, "available");
-        }
-
-        //WaitingForDrawing
-        if (currentState == PanelItemState.WaitingForDrawing)
-        {
-            SetWaitingForDrawingItemView();
-            // PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
-        }
 
         UpdateView();
     }

@@ -84,64 +84,66 @@ public class SettingsManager : MonoBehaviour
     //all
     public void DeleteAllProgress()
     {
-        // Debug.Log("Start Clear");
-        // if (MoneyHandler.Instance != null)
-        //     MoneyHandler.Instance.moneyCount = 0;
+        Debug.Log("Delete All");
+        PlayerPrefs.DeleteAll();
+        //Debug.Log("Start Clear");
+        //if (MoneyHandler.Instance != null)
+        //    MoneyHandler.Instance.moneyCount = 0;
 
-        // PlayerPrefs.DeleteKey("skinIndex");
-        // PlayerPrefs.DeleteKey("MoneyPerSecond");
-        // PlayerPrefs.SetInt("currentWaitingPanelNumber", 0);
-        // PlayerPrefs.DeleteKey("allowedAttackAnimationsCount");
-        // PlayerPrefs.DeleteKey("weaponTrailEnabled");
-        // PlayerPrefs.DeleteKey("canCriticalHit");
+        //PlayerPrefs.DeleteKey("skinIndex");
+        //PlayerPrefs.DeleteKey("MoneyPerSecond");
+        //PlayerPrefs.SetInt("currentWaitingPanelNumber", 0);
+        //PlayerPrefs.DeleteKey("allowedAttackAnimationsCount");
+        //PlayerPrefs.DeleteKey("weaponTrailEnabled");
+        //PlayerPrefs.DeleteKey("canCriticalHit");
 
-        // if (CraftPanelItemsManager.Instance != null)
-        //     for (int i = 0; i < CraftPanelItemsManager.Instance.craftPanelItemsList.Count; i++)
-        //     {
-        //         PlayerPrefs.DeleteKey("UpgradeItem" + i);
-        //         PlayerPrefs.DeleteKey($"UpgradeItem{i}generalIncreaseValue");
-        //         PlayerPrefs.DeleteKey($"UpgradeItem{i}price");
-        //         PlayerPrefs.DeleteKey($"UpgradeItem{i}increaseValue");
-        //         PlayerPrefs.DeleteKey($"UpgradeItem{i}buysCount");
-        //     }
+        //if (CraftPanelItemsManager.Instance != null)
+        //    for (int i = 0; i < CraftPanelItemsManager.Instance.craftPanelItemsList.Count; i++)
+        //    {
+        //        PlayerPrefs.DeleteKey("UpgradeItem" + i);
+        //        PlayerPrefs.DeleteKey($"UpgradeItem{i}generalIncreaseValue");
+        //        PlayerPrefs.DeleteKey($"UpgradeItem{i}price");
+        //        PlayerPrefs.DeleteKey($"UpgradeItem{i}increaseValue");
+        //        PlayerPrefs.DeleteKey($"UpgradeItem{i}buysCount");
+        //    }
 
-        // if (DungeonPanelItemsManager.Instance != null)
-        //     for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
-        //     {
-        //         PlayerPrefs.DeleteKey("DungeonUpgradeItem" + i);
-        //         PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}generalIncreaseValue");
-        //         PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}price");
-        //         PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}increaseValue");
-        //         PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}buysCount");
-        //     }
+        //if (DungeonPanelItemsManager.Instance != null)
+        //    for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
+        //    {
+        //        PlayerPrefs.DeleteKey("DungeonUpgradeItem" + i);
+        //        PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}generalIncreaseValue");
+        //        PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}price");
+        //        PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}increaseValue");
+        //        PlayerPrefs.DeleteKey($"DungeonUpgradeItem{i}buysCount");
+        //    }
 
-        // if (BoostersPanelItemsManager.Instance != null)
-        //     for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
-        //     {
-        //         PlayerPrefs.DeleteKey("BoostersUpgradeItem" + i);
-        //         PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}generalIncreaseValue");
-        //         PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}price");
-        //         PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}increaseValue");
-        //         PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}buysCount");
-        //     }
+        //if (BoostersPanelItemsManager.Instance != null)
+        //    for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
+        //    {
+        //        PlayerPrefs.DeleteKey("BoostersUpgradeItem" + i);
+        //        PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}generalIncreaseValue");
+        //        PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}price");
+        //        PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}increaseValue");
+        //        PlayerPrefs.DeleteKey($"BoostersUpgradeItem{i}buysCount");
+        //    }
 
-        // if (WorkshopPanelItemsManager.Instance != null)
-        //     for (int i = 0; i < 30; i++)
-        //     {
-        //         PlayerPrefs.DeleteKey("WorkshopGameobject" + i);
-        //     }
+        //if (WorkshopPanelItemsManager.Instance != null)
+        //    for (int i = 0; i < 30; i++)
+        //    {
+        //        PlayerPrefs.DeleteKey("WorkshopGameobject" + i);
+        //    }
 
-        // PlayerPrefs.SetInt("AwardPanel", 0);
-        // PlayerPrefs.DeleteKey("MoneyCount");
-        // PlayerPrefs.DeleteKey("dungeoonIsOpen");
-        // PlayerPrefs.DeleteKey("enchantmentIsOpen");
-        // PlayerPrefs.SetInt("WeaponNumber", 0);
-        // PlayerPrefs.SetInt("EnemySkinCount", 0);
-        // PlayerPrefs.SetInt("currentEraNumber", 0);
+        //PlayerPrefs.SetInt("AwardPanel", 0);
+        //PlayerPrefs.DeleteKey("MoneyCount");
+        //PlayerPrefs.DeleteKey("dungeoonIsOpen");
+        //PlayerPrefs.DeleteKey("enchantmentIsOpen");
+        //PlayerPrefs.SetInt("WeaponNumber", 0);
+        //PlayerPrefs.SetInt("EnemySkinCount", 0);
+        //PlayerPrefs.SetInt("currentEraNumber", 0);
 
-        // Debug.Log("End all clear");
-        // PlayerPrefs.SetString("needLaunch", "true");
-        // PlayerPrefs.Save();
-        // SceneManager.LoadScene(0);
+        //Debug.Log("End all clear");
+        //PlayerPrefs.SetString("needLaunch", "true");
+        //PlayerPrefs.Save();
+        //SceneManager.LoadScene(0);
     }
 }

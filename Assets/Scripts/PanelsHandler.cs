@@ -44,6 +44,7 @@ public class PanelsHandler : MonoBehaviour
         currentLocationInTheDungeon = false;
         mainCamera.SetActive(true);
         dungeonCamera.SetActive(false);
+        DisableDungeonPreviewUI();
     }
 
     public void Start()
@@ -51,6 +52,9 @@ public class PanelsHandler : MonoBehaviour
         EnableDungeonButton();
         EnableBoostersButton();
         OpenPanel(1);
+        //
+        WorkshopItem.dungeoonIsOpen = 1;
+        dungeonButtonComponent.interactable = true;
     }
 
     public void Initialization(PanelsStortage stortage)
@@ -119,7 +123,8 @@ public class PanelsHandler : MonoBehaviour
                 dungeonCamera.SetActive(true);
 
                 panelLabelObject.SetActive(false);
-                panels[panelIndex].SetActive(false);
+                panels[panelIndex].SetActive(false); 
+                //DisableDungeonPreviewUI
                 return;
             }
             else
