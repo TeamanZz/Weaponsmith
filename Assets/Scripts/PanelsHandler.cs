@@ -49,12 +49,12 @@ public class PanelsHandler : MonoBehaviour
 
     public void Start()
     {
+        WorkshopItem.dungeoonIsOpen = 1;
+        dungeonButtonComponent.interactable = true;
+        //
         EnableDungeonButton();
         EnableBoostersButton();
         OpenPanel(1);
-        //
-        WorkshopItem.dungeoonIsOpen = 1;
-        dungeonButtonComponent.interactable = true;
     }
 
     public void Initialization(PanelsStortage stortage)
@@ -166,30 +166,30 @@ public class PanelsHandler : MonoBehaviour
 
     public void EnableDungeonButton()
     {
-        if (PlayerPrefs.GetInt("dungeoonIsOpen") == 0)
-        {
-            dungeonButtonComponent.interactable = false;
-            dungeonButtonImageComponent.color = Color.grey;
-        }
-        else
-        {
+        //if (PlayerPrefs.GetInt("dungeoonIsOpen") == 0)
+        //{
+        //    dungeonButtonComponent.interactable = false;
+        //    dungeonButtonImageComponent.color = Color.grey;
+        //}
+        //else
+        //{
             dungeonButtonComponent.interactable = true;
             dungeonButtonImageComponent.color = Color.white;
-        }
+        //}
     }
 
     public void EnableBoostersButton()
     {
-        if (PlayerPrefs.GetInt("enchantmentIsOpen") == 0)
-        {
-            boostersButtonComponent.interactable = false;
-            boostersButtonImageComponent.color = Color.gray;
-        }
-        else
-        {
+        //if (PlayerPrefs.GetInt("enchantmentIsOpen") == 0)
+        //{
+        //    boostersButtonComponent.interactable = false;
+        //    boostersButtonImageComponent.color = Color.gray;
+        //}
+        //else
+        //{
             boostersButtonComponent.interactable = true;
             boostersButtonImageComponent.color = Color.white;
-        }
+        //}
     }
 
     public void ResetButtonColorOnDeselect()

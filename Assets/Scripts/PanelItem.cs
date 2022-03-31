@@ -22,24 +22,24 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [Space]
     public AnimationCurve costCurve;
 
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
-    [FoldoutGroup("View Components")][FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
-    [FoldoutGroup("View Components")][SerializeField] public Image buyButtonImage;
-    [FoldoutGroup("View Components")][SerializeField] public GameObject progressBar;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject completedSign;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
-    [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
-    [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
-    [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
-    [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
-    [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI itemNameText;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI buysCountText;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject buyButton;
+    [FoldoutGroup("View Components")] [FoldoutGroup("View Components")] [SerializeField] private Button buyButtonComponent;
+    [FoldoutGroup("View Components")] [SerializeField] public Image buyButtonImage;
+    [FoldoutGroup("View Components")] [SerializeField] public GameObject progressBar;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject completedSign;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject unknownSign;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject blurPanel;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemConditionsGO;
+    [FoldoutGroup("View Components")] [SerializeField] private Image progressBarFilled;
+    [FoldoutGroup("View Components")] [SerializeField] private Animator buyButtonAnimator;
+    [FoldoutGroup("View Components")] [SerializeField] private Animator iconAnimator;
+    [FoldoutGroup("View Components")] [SerializeField] private Animator generalIncreaseValueTextAnimator;
+    [FoldoutGroup("View Components")] [SerializeField] private Animator buysCountTextAnimator;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
 
@@ -48,6 +48,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     public ItemEquipment currentItemEquipment;
     public PanelItemInHub currentPanelItemInHub;
+
+    public GameObject currentObject;
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();
@@ -60,11 +62,23 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         {
             buyButtonComponent.enabled = true;
             buyButtonImage.color = buttonDefaultColor;
+
+            //if (currentPanelItemInHub != null)
+            //{
+            //    currentPanelItemInHub.buyButtonComponent.enabled = true;
+            //    currentPanelItemInHub.buyButtonImage.color = buttonDefaultColor;
+            //}
         }
         else
         {
             buyButtonComponent.enabled = false;
             buyButtonImage.color = Color.gray;
+
+            //if (currentPanelItemInHub != null)
+            //{
+            //    currentPanelItemInHub.buyButtonComponent.enabled = false;
+            //    currentPanelItemInHub.buyButtonImage.color = Color.gray;
+            //}
         }
     }
 
@@ -147,6 +161,12 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
             if (connectPanel.currentState == PanelItemState.Collapsed)
             {
+                //if (currentPanelItemInHub != null)
+                //{
+                //    Debug.Log("Collapse in parent");
+                //    currentPanelItemInHub.CollapseItem();
+                //}
+
                 if (nextUpgradeItem == null)
                 {
                     Debug.Log("Next upgrade is null");
@@ -162,10 +182,22 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         currentState = newState;
 
-        switch(newState)
+        switch (newState)
         {
             case PanelItemState.Collapsed:
-                CollapseItemView();
+                CollapseItemView(); 
+
+                if (currentPanelItemInHub != null)
+                {
+                    Debug.Log("Collapse in parent");
+                    currentPanelItemInHub.CollapseItem();
+                }
+                else
+                {
+                    DungeonHubManager.dungeonHubManager.AddEquipment(this);
+                    currentPanelItemInHub.CollapseItem();
+                }
+
                 break;
 
             case PanelItemState.Unknown:
@@ -177,11 +209,15 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 break;
 
             case PanelItemState.Available:
-                SetAvailableItemView(); 
+                SetAvailableItemView();
                 currentItemEquipment.currentCount = buysCount;
-                
-                if(DungeonHubManager.dungeonHubManager != null)
+
+                if (DungeonHubManager.dungeonHubManager != null)
                     DungeonHubManager.dungeonHubManager.AddEquipment(this);
+
+                if (connectPanel != null)
+                    connectPanel.ChangeState(connectPanel.currentState);
+                
                 Debug.Log("Start");
                 break;
         }
@@ -257,7 +293,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (newState == PanelItemState.Collapsed)
             Debug.Log(gameObject);
         //ItemsManager.Instance.CheckConditions(this);
-        
+
         switch (currentState)
         {
             case PanelItemState.Collapsed:
@@ -274,7 +310,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
             case PanelItemState.Available:
                 SetAvailableItemView();
-                DungeonHubManager.dungeonHubManager.AddEquipment(this);
+                //DungeonHubManager.dungeonHubManager.AddEquipment(this);
                 break;
         }
 

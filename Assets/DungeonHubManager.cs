@@ -11,9 +11,24 @@ public class DungeonHubManager : MonoBehaviour
     public Transform weaponContent;
 
     public PanelItemInHub panelInHubPrefab;
+
+    public PanelItemInHub armorActivatePanel;
+    public PanelItemInHub weaponActivatePanel;
+
+    public List<GameObject> armorList = new List<GameObject>();
+    public List<GameObject> weaponList = new List<GameObject>();
     public void Awake()
     {
         dungeonHubManager = this;
+        foreach (var currentObj in weaponList)
+        {
+            currentObj.SetActive(false);
+        }
+        foreach (var currentObj in armorList)
+        {
+            currentObj.SetActive(false);
+        }
+
     }
 
     public void AddEquipment(PanelItem newPunelItem)
