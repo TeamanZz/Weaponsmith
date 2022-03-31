@@ -191,6 +191,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 {
                     Debug.Log("Collapse in parent");
                     currentPanelItemInHub.CollapseItem();
+                    currentPanelItemInHub.SelectedWeapon();
                 }
                 else
                 {
