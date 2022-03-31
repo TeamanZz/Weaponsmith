@@ -212,12 +212,16 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 SetAvailableItemView();
                 currentItemEquipment.currentCount = buysCount;
 
-                if (DungeonHubManager.dungeonHubManager != null)
-                    DungeonHubManager.dungeonHubManager.AddEquipment(this);
+                if (currentPanelState == CurrentPanel.parent)
+                {
+                    if (DungeonHubManager.dungeonHubManager == null)
+                        break;
 
-                if (connectPanel != null)
-                    connectPanel.ChangeState(connectPanel.currentState);
-                
+                    DungeonHubManager.dungeonHubManager.AddEquipment(this);
+                    if (connectPanel != null)
+                        DungeonHubManager.dungeonHubManager.AddEquipment(connectPanel);
+                    //connectPanel.ChangeState(connectPanel.currentState);
+                }
                 Debug.Log("Start");
                 break;
         }
