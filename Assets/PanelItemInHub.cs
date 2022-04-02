@@ -126,6 +126,7 @@ public class PanelItemInHub : MonoBehaviour
         selectedWeaponButton.interactable = false;
         currentObject.SetActive(true);
 
+        //DungeonBuilder.Instance.CameraFocus(currentObject.transform);
     }
     public void DeselectedWeapon()
     {

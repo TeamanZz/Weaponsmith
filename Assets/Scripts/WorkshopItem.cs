@@ -47,10 +47,12 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         }
     }
 
+    [Header("Focus")]
+    public float focusField = 30f;
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
-        WorkshopPanelItemsManager.Instance.UnlockObject(index);
+        WorkshopPanelItemsManager.Instance.PreUnlock(index, focusField);
         if (currentType == PanelType.anDungeonItem)
         {
             // PlayerPrefs.SetInt("dungeoonIsOpen", 1);

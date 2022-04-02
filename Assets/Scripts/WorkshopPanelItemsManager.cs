@@ -1,3 +1,5 @@
+using Cinemachine;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +17,16 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     [HideInInspector] public Button transitionButton;
     [HideInInspector] public int numberOfOpenPanels = 0;
     [HideInInspector] public bool endOfEra = false;
+
+    [Header("Camera")]
+    public Coroutine currentFocusCorutine;
+    public float unlockObjectTime = 1f;
+
+    public CinemachineVirtualCamera dungeonCinemaCamera;
+    public Transform calibrationPosition;
+
+    public float startCameraField = 80f;
+    public float timeToReturnFocus = 0.5f;
 
     [ContextMenu("Awake")]
     public void Awake()
@@ -60,9 +72,24 @@ public class WorkshopPanelItemsManager : MonoBehaviour
         Debug.Log("Open transition");
         transitionPanel.SetActive(true);
     }
+    public Coroutine invokeCoroutine;
+    public void PreUnlock(int index, float focus)
+    {
+        CameraFocus(currentEraWorkshopObjects[index].transform, focus);
+        if (invokeCoroutine != null)
+            StopCoroutine(invokeCoroutine);
+
+        invokeCoroutine = StartCoroutine(Unlock(index));
+    }
+    public IEnumerator Unlock(int index)
+    {
+        yield return new WaitForSeconds(unlockObjectTime);
+        UnlockObject(index);
+    }
 
     public void UnlockObject(int index)
     {
+        Debug.Log("Unlock");
         currentEraWorkshopObjects[index].SetActive(!currentEraWorkshopObjects[index].activeSelf);
         Instantiate(appearParticles, currentEraWorkshopObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
         workshopPanelItems[index].ReplaceOldObjects();
@@ -73,4 +100,38 @@ public class WorkshopPanelItemsManager : MonoBehaviour
         currentEraWorkshopObjects[index].SetActive(!currentEraWorkshopObjects[index].activeSelf);
         workshopPanelItems[index].ReplaceOldObjects();
     }
+
+    public void CameraFocus(Transform target, float focus)
+    {
+        Debug.Log("Camera Focus");
+        if (currentFocusCorutine != null)
+            StopCoroutine(currentFocusCorutine);
+
+        currentFocusCorutine = StartCoroutine(EnterFocus(target, focus));
+    }
+
+    public IEnumerator EnterFocus(Transform target, float focusField)
+    {
+        Debug.Log("Enter Focus");
+
+        dungeonCinemaCamera.LookAt = target;
+        dungeonCinemaCamera.m_Lens.FieldOfView = startCameraField;
+
+        DOTween.To(() => dungeonCinemaCamera.m_Lens.FieldOfView, x => dungeonCinemaCamera.m_Lens.FieldOfView = x, focusField, timeToReturnFocus);
+        yield return new WaitForSeconds(timeToReturnFocus);
+
+        currentFocusCorutine = StartCoroutine(ReturnFocus());
+    }
+    public IEnumerator ReturnFocus()
+    {
+        Debug.Log("Return Focus");
+
+        DOTween.To(() => dungeonCinemaCamera.m_Lens.FieldOfView, x => dungeonCinemaCamera.m_Lens.FieldOfView = x, startCameraField, timeToReturnFocus);
+        yield return new WaitForSeconds(timeToReturnFocus);
+
+        dungeonCinemaCamera.LookAt = calibrationPosition;
+        currentFocusCorutine = null;
+        //dungeonCinemaCamera.m_Lens.FieldOfView = startCameraField;
+    }
+
 }
