@@ -11,6 +11,8 @@ public class PanelItemInHub : MonoBehaviour
     public TextMeshProUGUI priceText;
     public TextMeshProUGUI buysCountText;
 
+    public float value;
+
     public Image itemIcon;
     public Image progressBarFilled;
 
@@ -38,6 +40,9 @@ public class PanelItemInHub : MonoBehaviour
         selectedWeaponButton.gameObject.SetActive(false);
 
         panelItem = newPanelItem;
+        //
+        value = panelItem.currentItemEquipment.value;
+
 
         if (newPanelItem.currentObject != null)
             currentObject = newPanelItem.currentObject;
@@ -91,27 +96,32 @@ public class PanelItemInHub : MonoBehaviour
         buyButtonComponent.interactable = false;
 
         progressBarFilled.transform.parent.gameObject.SetActive(false);
-        
+
         buyButtonComponent.gameObject.SetActive(false);
         selectedWeaponButton.gameObject.SetActive(true);
         //buyButtonComponent.onClick.AddListener(() => SelectedWeapon());
     }
 
-    public void SelectedWeapon() 
+    public void SelectedWeapon()
     {
         if (DungeonHubManager.dungeonHubManager == null && currentObject != null)
             return;
-        
+
         selectedButtonAnimator.Play("Jump", 0, 0);
 
         Debug.Log("Selected");
         switch (panelItem.currentEquipmentType)
         {
             case ItemEquipment.EquipmentType.Weapon:
-                if(DungeonHubManager.dungeonHubManager.weaponActivatePanel != null)
+                if (DungeonHubManager.dungeonHubManager.weaponActivatePanel != null)
                     DungeonHubManager.dungeonHubManager.weaponActivatePanel.DeselectedWeapon();
 
                 DungeonHubManager.dungeonHubManager.weaponActivatePanel = this;
+                if (panelItem.iconSprite != null)
+                    DungeonHubManager.dungeonHubManager.weaponSprite = panelItem.iconSprite;
+                DungeonHubManager.dungeonHubManager.UpdateUI();
+
+                LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.damageFill, value);
                 break;
 
             case ItemEquipment.EquipmentType.Armor:
@@ -119,6 +129,11 @@ public class PanelItemInHub : MonoBehaviour
                     DungeonHubManager.dungeonHubManager.armorActivatePanel.DeselectedWeapon();
 
                 DungeonHubManager.dungeonHubManager.armorActivatePanel = this;
+                if (panelItem.iconSprite != null)
+                    DungeonHubManager.dungeonHubManager.armorSprite = panelItem.iconSprite;
+                DungeonHubManager.dungeonHubManager.UpdateUI();
+
+                LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.protectionFill, value);
                 break;
 
         }
@@ -145,7 +160,7 @@ public class PanelItemInHub : MonoBehaviour
                     //{
                     //    DungeonHubManager.dungeonHubManager.weaponActivatePanel.DeselectedWeapon();
                     //    currentObj.SetActive(false);
-                        
+
                     //    return;
                     //}
                 }

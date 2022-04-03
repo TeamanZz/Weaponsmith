@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DungeonHubManager : MonoBehaviour
 {
     public static DungeonHubManager dungeonHubManager;
+[Header("Data")]
     public List<GameObject> equipmentPanelContent = new List<GameObject>();
 
     public Transform armorContent;
@@ -17,6 +19,13 @@ public class DungeonHubManager : MonoBehaviour
 
     public List<GameObject> armorList = new List<GameObject>();
     public List<GameObject> weaponList = new List<GameObject>();
+    [Header("UI")]
+    public Image armorUIImage;
+    public Image weaponUIImage;
+
+    public Sprite armorSprite;
+    public Sprite weaponSprite;
+
     public void Awake()
     {
         dungeonHubManager = this;
@@ -29,8 +38,14 @@ public class DungeonHubManager : MonoBehaviour
             currentObj.SetActive(false);
         }
 
+        UpdateUI();
     }
 
+    public void UpdateUI()
+    {
+        armorUIImage.sprite = armorSprite;
+        weaponUIImage.sprite = weaponSprite;
+    }
     public void AddEquipment(PanelItem newPunelItem)
     {
         Debug.Log("Start Add Equipment");
@@ -61,13 +76,21 @@ public class DungeonHubManager : MonoBehaviour
         Debug.Log(newPanelItemInHub);
     }
     public void OpenPanel(int panelIndex)
-    { 
-        for(int i = 0; i < equipmentPanelContent.Count; i++)
+    {
+        for (int i = 0; i < equipmentPanelContent.Count; i++)
         {
             equipmentPanelContent[i].SetActive(false);
         }
 
-        switch(panelIndex)
+        LoadoutController.loadoutController.health = 50;
+
+        if (armorActivatePanel != null)
+            LoadoutController.loadoutController.protection = armorActivatePanel.value;
+        
+        if (weaponActivatePanel != null)
+            LoadoutController.loadoutController.damage = weaponActivatePanel.value;
+
+        switch (panelIndex)
         {
             case 3:
                 PanelsHandler.Instance.EnableDungeonEnteringPanel();

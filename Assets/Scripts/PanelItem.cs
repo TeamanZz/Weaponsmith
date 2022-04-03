@@ -42,7 +42,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")] [SerializeField] private Animator buysCountTextAnimator;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
-
     //public int generalIncreaseValue;
     public int price;
 
@@ -50,6 +49,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public PanelItemInHub currentPanelItemInHub;
 
     public GameObject currentObject;
+    [Header("Sprite")]
+    public Sprite iconSprite;
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();
