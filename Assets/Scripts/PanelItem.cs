@@ -16,14 +16,14 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public string itemName;
     public int index;
     public int currentWeaponNumber = 0;
-    [SerializeField] private int increaseValue;
+    //[SerializeField] private int increaseValue;
     [Space]
     public int buysCount;
     [Space]
     public AnimationCurve costCurve;
 
     [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI itemNameText;
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    //[FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
     [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI priceText;
     [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI buysCountText;
     [FoldoutGroup("View Components")] [SerializeField] private GameObject buyButton;
@@ -38,12 +38,12 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")] [SerializeField] private Image progressBarFilled;
     [FoldoutGroup("View Components")] [SerializeField] private Animator buyButtonAnimator;
     [FoldoutGroup("View Components")] [SerializeField] private Animator iconAnimator;
-    [FoldoutGroup("View Components")] [SerializeField] private Animator generalIncreaseValueTextAnimator;
+    //[FoldoutGroup("View Components")] [SerializeField] private Animator generalIncreaseValueTextAnimator;
     [FoldoutGroup("View Components")] [SerializeField] private Animator buysCountTextAnimator;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
 
-    public int generalIncreaseValue;
+    //public int generalIncreaseValue;
     public int price;
 
     public ItemEquipment currentItemEquipment;
@@ -115,7 +115,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         buyButtonImage = buyButton.GetComponent<Image>();
         buyButtonAnimator = buyButton.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
-        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
+//        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
         buysCountTextAnimator = buysCountText.GetComponent<Animator>();
 
         if (currentState != PanelItemState.Unknown)
@@ -128,7 +128,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         buyButtonAnimator.Play("Jump", 0, 0);
         iconAnimator.Play("Jump", 0, 0);
-        generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
+//        generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
         buysCountTextAnimator.Play("Jump", 0, 0);
     }
 
@@ -140,7 +140,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public void BuyItem()
     {
         MoneyHandler.Instance.moneyCount -= price;
-        MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
+        //MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
         UpdateItemValues();
         UpdateView();
         PlayJumpAnimation();
@@ -290,9 +290,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public void ChangeStateViaLoader(PanelItemState newState)
     {
         Initialize();
-        generalIncreaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}generalIncreaseValue");
+        //generalIncreaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}generalIncreaseValue");
         price = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}price", (int)costCurve.Evaluate(buysCount));
-        increaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}increaseValue", increaseValue);
+        //increaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}increaseValue", increaseValue);
         buysCount = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}buysCount");
         currentState = newState;
         if (newState == PanelItemState.Collapsed)
@@ -328,7 +328,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         itemConditionsGO.SetActive(false);
         blurPanel.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(true);
+        //generalIncreaseValueText.gameObject.SetActive(true);
         unknownSign.SetActive(false);
         progressBar.SetActive(true);
         buyButton.SetActive(true);
@@ -354,7 +354,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         itemConditionsGO.SetActive(false);
 
         blurPanel.SetActive(true);
-        generalIncreaseValueText.gameObject.SetActive(false);
+        //generalIncreaseValueText.gameObject.SetActive(false);
         unknownSign.SetActive(false);
         progressBar.SetActive(false);
         buyButton.SetActive(false);
@@ -380,7 +380,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         unknownSign.SetActive(true);
         itemNameText.text = "???";
         progressBar.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(false);
+        //generalIncreaseValueText.gameObject.SetActive(false);
         buyButton.SetActive(false);
         completedSign.SetActive(false);
         blurPanel.SetActive(true);
@@ -393,7 +393,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         blurPanel.SetActive(false);
         itemNameText.text = itemName;
         progressBar.SetActive(false);
-        generalIncreaseValueText.gameObject.SetActive(false);
+        //generalIncreaseValueText.gameObject.SetActive(false);
         buyButton.SetActive(false);
         completedSign.SetActive(true);
         itemIcon.SetActive(true);
@@ -403,12 +403,12 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void UpdateItemValues()
     {
-        generalIncreaseValue += increaseValue;
-        increaseValue += (int)(1.5f * index);
-        if (index == 0)
-        {
-            increaseValue += 2;
-        }
+        //generalIncreaseValue += increaseValue;
+        //increaseValue += (int)(1.5f * index);
+        //if (index == 0)
+        //{
+        //    increaseValue += 2;
+        //}
 
         buysCount += 1;
         price = (int)costCurve.Evaluate(buysCount);// + PanelsHandler.Instance.numberOfPurchases);
@@ -416,7 +416,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void UpdateView()
     {
-        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
+        //generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
 
         buysCountText.text = buysCount.ToString() + "/" + costCurve.keys[costCurve.length - 1].time.ToString();

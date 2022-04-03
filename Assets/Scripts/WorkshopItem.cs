@@ -9,9 +9,12 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
 {
     [SerializeField] private int index;
     public long price;
+    public int generalIncreaseValue;
     public PanelType currentType;
     public List<GameObject> objectsToReplace = new List<GameObject>();
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
     [FoldoutGroup("View Components")] public GameObject buyButton;
     [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
@@ -28,9 +31,13 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         buyButtonComponent = buyButton.GetComponent<Button>();
         buyButtonImage = buyButton.GetComponent<Image>();
         iconAnimator = itemIcon.GetComponent<Animator>();
+        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
+
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
         dungeoonIsOpen = PlayerPrefs.GetInt("dungeoonIsOpen");
         enchantmentIsOpen = PlayerPrefs.GetInt("enchantmentIsOpen");
+
+        generalIncreaseValueText.text = generalIncreaseValue.ToString();
     }
 
     private void Update()
@@ -53,6 +60,12 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     {
         MoneyHandler.Instance.moneyCount -= price;
         WorkshopPanelItemsManager.Instance.PreUnlock(index, focusField);
+
+        MoneyHandler.Instance.IncreaseMoneyPerSecondValue(generalIncreaseValue);
+        generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
+
+        generalIncreaseValueText.text = "";
+
         if (currentType == PanelType.anDungeonItem)
         {
             // PlayerPrefs.SetInt("dungeoonIsOpen", 1);
