@@ -121,7 +121,7 @@ public class PanelItemInHub : MonoBehaviour
                     DungeonHubManager.dungeonHubManager.weaponSprite = panelItem.iconSprite;
                 DungeonHubManager.dungeonHubManager.UpdateUI();
 
-                LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.damageFill, value);
+                LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.fill[2], value);
                 break;
 
             case ItemEquipment.EquipmentType.Armor:
@@ -133,7 +133,7 @@ public class PanelItemInHub : MonoBehaviour
                     DungeonHubManager.dungeonHubManager.armorSprite = panelItem.iconSprite;
                 DungeonHubManager.dungeonHubManager.UpdateUI();
 
-                LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.protectionFill, value);
+                LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.fill[1], value);
                 break;
 
         }

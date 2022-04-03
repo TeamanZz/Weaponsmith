@@ -23,12 +23,26 @@ public class MoneyHandler : MonoBehaviour
     private float timeBetweenMoneyIncrease = 0.5f;
     private float boosterCoefficient = 1;
 
+    [Header("improvement points")]
+    public int maxPoints = 24;
+    public int improvementCount = 0;
+    public int currentImprovementPoints = 0;
     private void Awake()
     {
         Instance = this;
         moneyPerSecond = PlayerPrefs.GetInt("MoneyPerSecond");
         if (moneyPerSecond == 0)
             moneyPerSecond = 1;
+    }
+
+    [ContextMenu("Add Improvement Point")]
+    public void AddImprovementPoint()
+    {
+        if (improvementCount >= maxPoints)
+            return;
+
+        currentImprovementPoints += 1;
+        LoadoutController.loadoutController.UpdateImprovementPoints();
     }
 
     private void Start()

@@ -141,7 +141,13 @@ public class PanelsHandler : MonoBehaviour
 
             panelLabelObject.SetActive(true);
             panels[panelIndex].SetActive(true);
-            LoadoutController.loadoutController.Initialization();
+
+            Debug.Log("Update");
+            if (LoadoutController.loadoutController != null)
+            {
+                LoadoutController.loadoutController.Initialization();
+                LoadoutController.loadoutController.UpdateImprovementPoints();
+            }
             DungeonHubManager.dungeonHubManager.OpenPanel(0);
             return;
         }
