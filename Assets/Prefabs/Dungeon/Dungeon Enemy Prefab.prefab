@@ -2545,24 +2545,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a02446ccc869a41be83eaa753d6613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animators: []
+  scale: 1.5
+  distanceToCollider: 1.5
+  enemyLVL: 0
+  chestPrefab: {fileID: 8550988676938562279, guid: ad31a4a27d46c914cad3af90476c1289, type: 3}
+  enemyHealthBar: {fileID: 7294571177279151111}
+  enemyLvlText: {fileID: 6952486300126442324}
+  audioSource: {fileID: 1447379779080449485}
   currentEnemySkin:
   - {fileID: 2421047781830366064}
   - {fileID: 734316264275037642}
   - {fileID: 2421569553009797130}
-  blueprintPrefab: {fileID: 8550988676938562279, guid: ad31a4a27d46c914cad3af90476c1289, type: 3}
-  scale: 1.5
-  distanceToCollider: 1.5
-  enemyHealthBar: {fileID: 7294571177279151111}
-  enemyLVL: 0
-  enemyLvlText: {fileID: 6952486300126442324}
   sounds:
   - {fileID: 8300000, guid: faec709c9791ab24aa78a0356d38aa33, type: 3}
   - {fileID: 8300000, guid: 3b7228a7a0dab844c918e6a5bf8d3506, type: 3}
   - {fileID: 8300000, guid: 8fc0b326c711a34458663d11a522ddbf, type: 3}
   - {fileID: 8300000, guid: 8d41c783d37e502459f656cf95d952a3, type: 3}
   - {fileID: 8300000, guid: cae9a28ab4ec80b48ab0c6e5b29c8db1, type: 3}
-  audioSource: {fileID: 1447379779080449485}
 --- !u!114 &7294571177279151111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2575,11 +2574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dcf2fdacce14094980b4344fe81b188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 5
+  currentHealth: 5
   canvas: {fileID: 2687112264568518647}
   healthBar: {fileID: 7670038327919690335}
   healthBarImage: {fileID: 6200760753246620540}
-  maxHealth: 5
-  currentHealth: 5
   hitParticles: {fileID: 4108658266958865263}
   doubleHitParticles: {fileID: 4804952997777954392}
   deathParticles: {fileID: 8142781167481904350}
@@ -3518,7 +3517,7 @@ MonoBehaviour:
   m_text: X LVL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a3ae66b4fa67a44eadb8fd176943f0e, type: 2}
-  m_sharedMaterial: {fileID: -8775230164189864463, guid: 5a3ae66b4fa67a44eadb8fd176943f0e, type: 2}
+  m_sharedMaterial: {fileID: -2961434318825279210, guid: 5a3ae66b4fa67a44eadb8fd176943f0e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -10,7 +10,7 @@ public class MoneyHandler : MonoBehaviour
 
     [Header("Currency Values")]
     public long moneyCount;
-    [SerializeField] private int moneyPerSecond;
+    public int moneyPerSecond;
 
     [Header("Currency Popup")]
     [SerializeField] private GameObject currencyPopupPrefab;

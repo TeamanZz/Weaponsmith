@@ -28,13 +28,17 @@ public class DungeonBuilder : MonoBehaviour
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
 
-    public List<GameObject> enemiesSkinsStats = new List<GameObject>();
-
     public bool isDungeonStarted;
 
+    [Header("Chest Settings")]
+    public int currentDropRate = 0;
+    public int maxDropRate = 5;
+
+    public int currentStarValue = 0;
     private void Awake()
     {
         Instance = this;
+        currentDropRate = maxDropRate;
     }
 
     private void Start()
@@ -93,6 +97,9 @@ public class DungeonBuilder : MonoBehaviour
 
             var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
             enemyHealthComponent.InitializeHP(Random.Range(2, 6));
+
+            DungeonEnemy enemydata = enemy.GetComponent<DungeonEnemy>();
+            enemydata.Initialization();
 
             enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
             enemy.transform.localScale = Vector3.one * 1.5f;

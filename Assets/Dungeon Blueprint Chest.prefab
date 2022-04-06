@@ -9866,6 +9866,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb7e5e2a2a4e5948ab8471c26f55012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentFilling: 0
+  particle: {fileID: 2996204992104212717}
+  rewardsColor:
+  - {r: 1, g: 0.78039217, b: 0.44705883, a: 0.25490198}
+  - {r: 0, g: 0.13725491, b: 1, a: 0.25490198}
+  currentMoneyReward: 0
 --- !u!95 &8550988676938562273
 Animator:
   serializedVersion: 3
