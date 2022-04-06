@@ -10,7 +10,7 @@ public class CraftPanelItemsManager : MonoBehaviour
     public List<GameObject> awardPanel = new List<GameObject>();
 
     [HideInInspector] public List<PanelItem> craftPanelItemsList = new List<PanelItem>();
-    [HideInInspector] public PanelItem currentWaitingPanel;
+    public PanelItem currentWaitingPanel;
 
     private WeaponUnlockPanel weaponPanel;
     private int awardPanelState = 0;

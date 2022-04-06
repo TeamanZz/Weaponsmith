@@ -14,7 +14,6 @@ public class DungeonEnemy : MonoBehaviour
     public List<GameObject> currentEnemySkin = new List<GameObject>();
     public List<AudioClip> sounds = new List<AudioClip>();
 
-    private int dropRate = 0;
     private int cuurentSkinIndex;
     private BoxCollider detectionCollider;
     private List<Animator> animators = new List<Animator>();
@@ -32,9 +31,9 @@ public class DungeonEnemy : MonoBehaviour
     public void Initialization()
     {
         AddAnimatorToAnimatorsList();
-        InitializeVariables();
+        //InitializeVariables();
         SetEnemySkin();
-        IncreaseBlueprintDropChance();
+        //IncreaseBlueprintDropChance();
         SetScale();
         HandleDistanceCollider();
         SetEnemyLVL();
@@ -48,22 +47,22 @@ public class DungeonEnemy : MonoBehaviour
             enemyLvlText.text = enemyLVL.ToString() + " LVL";
     }
 
-    private void InitializeVariables()
-    {
-        dropRate = PanelsHandler.Instance.dropChanceImprovements;
-    }
+    //private void InitializeVariables()
+    //{
+    //    dropRate = PanelsHandler.Instance.dropChanceImprovements;
+    //}
 
     private void SetScale()
     {
         transform.localScale = Vector3.one * scale;
     }
 
-    private static void IncreaseBlueprintDropChance()
-    {
-        PanelsHandler.Instance.dropChanceImprovements -= 1;
-        if (PanelsHandler.Instance.dropChanceImprovements <= 0)
-            PanelsHandler.Instance.dropChanceImprovements = 12;
-    }
+    //private static void IncreaseBlueprintDropChance()
+    //{
+    //    PanelsHandler.Instance.dropChanceImprovements -= 1;
+    //    if (PanelsHandler.Instance.dropChanceImprovements <= 0)
+    //        PanelsHandler.Instance.dropChanceImprovements = 12;
+    //}
 
     private void AddAnimatorToAnimatorsList()
     {
@@ -116,15 +115,14 @@ public class DungeonEnemy : MonoBehaviour
             builder.currentDropRate -= 1;
             int value = builder.currentDropRate;
             
-            Debug.Log("Value - " + value + " | " + "Drop rate - " + dropRate);
+            Debug.Log("Value - " + value + " | " + "Drop rate");
             
-            GameObject chestObject = Instantiate(chestPrefab, transform.position + new Vector3(0, 0.325f, 0), Quaternion.identity, transform.parent);
-            DungeonWeaponBlueprint chest = chestObject.GetComponent<DungeonWeaponBlueprint>();
-
             if (value == 0)
             {
+                GameObject chestObject = Instantiate(chestPrefab, transform.position + new Vector3(0, 0.325f, 0), Quaternion.identity, transform.parent);
+                DungeonWeaponBlueprint chest = chestObject.GetComponent<DungeonWeaponBlueprint>();
+
                 builder.currentStarValue += 1;
-                builder.currentDropRate = builder.maxDropRate;
 
                 switch (builder.currentStarValue)
                 {
@@ -138,7 +136,10 @@ public class DungeonEnemy : MonoBehaviour
 
                     case 3:
                         if (CraftPanelItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
+                        {
                             chest.Initialization(DungeonWeaponBlueprint.ChestFilling.drawing);
+                            Debug.Log(CraftPanelItemsManager.Instance.currentWaitingPanel.currentState);
+                        }
                         else
                             chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money);
 
@@ -146,8 +147,8 @@ public class DungeonEnemy : MonoBehaviour
                         break;
                 }
 
-                PanelsHandler.Instance.dropChanceImprovements = 7;
-            }
+                builder.currentDropRate = builder.maxDropRate;
+            }                                                                                                                                                                               
         }
 
         for (int i = 0; i < animators.Count; i++)

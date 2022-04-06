@@ -18,11 +18,19 @@ public class DungeonWeaponBlueprint : MonoBehaviour
     public Color[] rewardsColor;
 
     public int currentMoneyReward;
+    public Transform chest—over;
+
+    public Vector3 endPosition = Vector3.zero;
+    public float openTime = 0.25f;
+
+    public Material material;
     void Start()
     {
+        material.color = Color.white;
         transform.DOLocalJump(transform.localPosition + new Vector3(0, 0, 10), 4, 1, 1f).SetEase(Ease.OutBounce);
         Invoke("EnableInteract", 0.3f);
         GetComponent<AudioSource>().Play();
+        chest—over.eulerAngles = new Vector3(0, 0, 0);
     }
 
     public void Initialization(ChestFilling newFilling)
@@ -30,16 +38,22 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         switch (newFilling)
         {
             case ChestFilling.money:
-                particle.startColor = rewardsColor[0];
+                material.color = rewardsColor[0];
                 currentMoneyReward = MoneyHandler.Instance.moneyPerSecond * DungeonBuilder.Instance.currentStarValue;
                 break;
 
             case ChestFilling.drawing:
-                particle.startColor = rewardsColor[1];
+                material.color = rewardsColor[1];
                 break;
         }
+        Debug.Log(currentFilling);
     }
 
+    [ContextMenu("View Color")]
+    private void ViewCurrentColor()
+    {
+        Initialization(currentFilling);
+    }
     public void CheckReward()
     {
         if (!canInteract)
@@ -56,9 +70,10 @@ public class DungeonWeaponBlueprint : MonoBehaviour
                 break;
         }
 
+        Debug.Log("Reward");
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (!canInteract)
             return;
@@ -66,6 +81,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         DungeonCharacter character;
         if (other.TryGetComponent<DungeonCharacter>(out character))
         {
+            chest—over.DOLocalRotate(endPosition, openTime);
             CheckReward();
             canInteract = false;
         }
