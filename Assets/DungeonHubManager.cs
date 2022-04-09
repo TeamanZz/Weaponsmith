@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class DungeonHubManager : MonoBehaviour
 {
     public static DungeonHubManager dungeonHubManager;
-[Header("Data")]
+    
+    [Header("Data")]
     public List<GameObject> equipmentPanelContent = new List<GameObject>();
 
     public Transform armorContent;
@@ -19,6 +20,7 @@ public class DungeonHubManager : MonoBehaviour
 
     public List<GameObject> armorList = new List<GameObject>();
     public List<GameObject> weaponList = new List<GameObject>();
+
     [Header("UI")]
     public Image armorUIImage;
     public Image weaponUIImage;

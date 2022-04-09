@@ -14,8 +14,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         drawing
     }
 
-    public ParticleSystem particle;
-    public Color[] rewardsColor;
+    public GameObject[] rewardsVisualObject;
 
     public int currentMoneyReward;
     public Transform chest—over;
@@ -35,15 +34,18 @@ public class DungeonWeaponBlueprint : MonoBehaviour
 
     public void Initialization(ChestFilling newFilling)
     {
+        Debug.Log(newFilling);
         switch (newFilling)
         {
             case ChestFilling.money:
-                material.color = rewardsColor[0];
+                rewardsVisualObject[0].SetActive(true);
+                rewardsVisualObject[1].SetActive(false);
                 currentMoneyReward = MoneyHandler.Instance.moneyPerSecond * DungeonBuilder.Instance.currentStarValue;
                 break;
 
             case ChestFilling.drawing:
-                material.color = rewardsColor[1];
+                rewardsVisualObject[0].SetActive(false);
+                rewardsVisualObject[1].SetActive(true);
                 break;
         }
         Debug.Log(currentFilling);

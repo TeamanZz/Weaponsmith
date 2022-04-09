@@ -117,7 +117,7 @@ public class DungeonEnemy : MonoBehaviour
             
             Debug.Log("Value - " + value + " | " + "Drop rate");
             
-            if (value == 0)
+            if (value <= 0)
             {
                 GameObject chestObject = Instantiate(chestPrefab, transform.position + new Vector3(0, 0.325f, 0), Quaternion.identity, transform.parent);
                 DungeonWeaponBlueprint chest = chestObject.GetComponent<DungeonWeaponBlueprint>();
