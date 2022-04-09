@@ -86,26 +86,76 @@ public class DungeonBuilder : MonoBehaviour
         lastSpawnedPieceZPos += 5;
     }
 
+    [Header("Boss Settings")]
+    public bool bossCreated = false;
+    public GameObject bossPrefab;
+    public int bossHealth = 12;
+    public float bossScale = 3f;
     private void SpawnEnemy()
     {
         if (lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 5 || lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 10)
             return;
 
-        if (Random.Range(0, enemySpawnRate) == 0)
+        if (bossCreated == true)
+            return;
+
+        //if (Random.Range(0, enemySpawnRate) == 0)
+        //{
+            if (currentStarValue == 2 && currentDropRate == 1)
+            {
+                GameObject enemy = Instantiate(bossPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), enemiesContainer);
+
+                var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
+                enemyHealthComponent.InitializeHP(bossHealth);
+
+                DungeonEnemy enemydata = enemy.GetComponent<DungeonEnemy>();
+                enemydata.Initialization();
+
+                enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
+                enemy.transform.localScale = Vector3.one * bossScale;
+                lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
+
+                enemydata.isEmpty = false;
+                enemydata.rewardStars = 3;
+                bossCreated = true;
+                return;
+            }
+            else
+            {
+                GameObject enemy = Instantiate(enemyPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), enemiesContainer);
+
+                var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
+                enemyHealthComponent.InitializeHP(Random.Range(2, 6));
+
+                DungeonEnemy enemydata = enemy.GetComponent<DungeonEnemy>();
+                enemydata.Initialization();
+
+                if(currentDropRate == 0)
+                {
+                    enemydata.isEmpty = false;
+                    enemydata.rewardStars = currentStarValue;
+                }
+
+                enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
+                enemy.transform.localScale = Vector3.one * 1.5f;
+                lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
+            }
+        //}
+        if (currentDropRate > 1)
+            currentDropRate -= 1;
+        else
         {
-            GameObject enemy = Instantiate(enemyPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), enemiesContainer);
-
-            var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
-            enemyHealthComponent.InitializeHP(Random.Range(2, 6));
-
-            DungeonEnemy enemydata = enemy.GetComponent<DungeonEnemy>();
-            enemydata.Initialization();
-
-            enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
-            enemy.transform.localScale = Vector3.one * 1.5f;
-            lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
+            currentDropRate = maxDropRate;
+            currentStarValue += 1;
         }
     }
 
+    public void ClearDungeon()
+    {
+        currentStarValue = 0;
+        currentDropRate = maxDropRate;
+        bossCreated = false;
 
+
+    }
 }

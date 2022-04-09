@@ -57,13 +57,6 @@ public class DungeonEnemy : MonoBehaviour
         transform.localScale = Vector3.one * scale;
     }
 
-    //private static void IncreaseBlueprintDropChance()
-    //{
-    //    PanelsHandler.Instance.dropChanceImprovements -= 1;
-    //    if (PanelsHandler.Instance.dropChanceImprovements <= 0)
-    //        PanelsHandler.Instance.dropChanceImprovements = 12;
-    //}
-
     private void AddAnimatorToAnimatorsList()
     {
         animators.Add(GetComponent<Animator>());
@@ -105,55 +98,72 @@ public class DungeonEnemy : MonoBehaviour
             animators[i].Play("Take Damage", 0, 0);
     }
 
+    public bool isEmpty = true;
+    public int rewardStars = 0;
     public void InvokeDeathAnimation()
     {
-        if (CraftPanelItemsManager.Instance.currentWaitingPanel != null )//&& CraftPanelItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
-        {
-            //int val = Random.Range(0, dropRate);
-            DungeonBuilder builder = DungeonBuilder.Instance;
-
-            builder.currentDropRate -= 1;
-            int value = builder.currentDropRate;
-            
-            Debug.Log("Value - " + value + " | " + "Drop rate");
-            
-            if (value <= 0)
-            {
-                GameObject chestObject = Instantiate(chestPrefab, transform.position + new Vector3(0, 0.325f, 0), Quaternion.identity, transform.parent);
-                DungeonWeaponBlueprint chest = chestObject.GetComponent<DungeonWeaponBlueprint>();
-
-                builder.currentStarValue += 1;
-
-                switch (builder.currentStarValue)
-                {
-                    case 1:
-                        chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money);
-                        break;
-
-                    case 2:
-                        chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money);
-                        break;
-
-                    case 3:
-                        if (CraftPanelItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
-                        {
-                            chest.Initialization(DungeonWeaponBlueprint.ChestFilling.drawing);
-                            Debug.Log(CraftPanelItemsManager.Instance.currentWaitingPanel.currentState);
-                        }
-                        else
-                            chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money);
-
-                        DungeonBuilder.Instance.currentStarValue = 0;
-                        break;
-                }
-
-                builder.currentDropRate = builder.maxDropRate;
-            }                                                                                                                                                                               
-        }
+        CheckReward();
 
         for (int i = 0; i < animators.Count; i++)
             animators[i].SetTrigger("Death");
         PlayEnemyDeathSound();
         Destroy(gameObject, 10f);
+    }
+
+    public void CheckReward()
+    {
+        if (isEmpty)
+            return;
+
+        if (CraftPanelItemsManager.Instance.currentWaitingPanel != null)//&& CraftPanelItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
+        {
+            DungeonBuilder builder = DungeonBuilder.Instance;
+
+            //builder.currentDropRate -= 1;
+            //int value = builder.currentDropRate;
+
+            //Debug.Log("Value - " + value + " | " + "Drop rate");
+
+            //if (value <= 0)
+            //{
+            GameObject chestObject = Instantiate(chestPrefab, transform.position + new Vector3(0, 0.325f, 0), Quaternion.identity, transform.parent);
+            DungeonWeaponBlueprint chest = chestObject.GetComponent<DungeonWeaponBlueprint>();
+
+            //builder.currentStarValue += 1;
+
+            switch (rewardStars)
+            {
+                case 1:
+                    chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money);
+                    break;
+
+                case 2:
+                    chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money);
+                    break;
+
+                case 3:
+                    if (CraftPanelItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
+                    {
+                        chest.Initialization(DungeonWeaponBlueprint.ChestFilling.drawing);
+                        Debug.Log(CraftPanelItemsManager.Instance.currentWaitingPanel.currentState);
+                    }
+                    else
+                        chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money);
+
+                    DungeonBuilder.Instance.currentStarValue = 0;
+                    break;
+
+                case 0:
+                    break;
+            }
+
+            if (DungeonBuilder.Instance.bossCreated && rewardStars == 3)
+            {
+                DungeonBuilder.Instance.ClearDungeon();
+            }
+
+            //builder.currentDropRate = builder.maxDropRate;
+            //}
+        }
     }
 }
