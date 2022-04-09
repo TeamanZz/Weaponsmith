@@ -151,6 +151,8 @@ public class DungeonEnemy : MonoBehaviour
                         DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.armorSprite, "New Blueprint");
                         DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.weaponSprite, "New Blueprint");
                         Debug.Log(CraftPanelItemsManager.Instance.currentWaitingPanel.currentState);
+
+                        CraftPanelItemsManager.Instance.OpenWaitingPanel();
                     }
                     else
                     {
@@ -168,8 +170,6 @@ public class DungeonEnemy : MonoBehaviour
             {
                 DungeonBuilder.Instance.ClearDungeon();
                 DungeonRewardPanel.dungeonRewardPanel.Initialization(true, rewardStars);
-                //  open blueprints
-                CraftPanelItemsManager.Instance.OpenWaitingPanel();
             }
 
             //builder.currentDropRate = builder.maxDropRate;

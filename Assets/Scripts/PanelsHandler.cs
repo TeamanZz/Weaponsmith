@@ -153,6 +153,8 @@ public class PanelsHandler : MonoBehaviour
         }
         else
         {
+            DungeonRewardPanel.dungeonRewardPanel.ClosedPanel();
+
             currentLocationInTheDungeon = false;
             mainCamera.SetActive(true);
             dungeonCamera.SetActive(false);
