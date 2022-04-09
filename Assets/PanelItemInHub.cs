@@ -29,8 +29,13 @@ public class PanelItemInHub : MonoBehaviour
 
     public GameObject currentObject;
 
+    public TextMeshProUGUI viewValueText;
+    public Image viewIcon;
+    public Sprite[] viewSprite;
     public void Initialization(PanelItem newPanelItem)
     {
+        viewValueText.gameObject.SetActive(false); 
+
         buyButtonAnimator = buyButtonComponent.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
         buysCountTextAnimator = buysCountText.GetComponent<Animator>();
@@ -108,6 +113,7 @@ public class PanelItemInHub : MonoBehaviour
             return;
 
         selectedButtonAnimator.Play("Jump", 0, 0);
+        viewValueText.gameObject.SetActive(true);
 
         Debug.Log("Selected");
         switch (panelItem.currentEquipmentType)
@@ -121,6 +127,9 @@ public class PanelItemInHub : MonoBehaviour
                     DungeonHubManager.dungeonHubManager.weaponSprite = panelItem.iconSprite;
                 DungeonHubManager.dungeonHubManager.UpdateUI();
 
+                viewValueText.text = panelItem.currentItemEquipment.value.ToString();
+                viewIcon.sprite = viewSprite[0];
+
                 LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.fill[2], value);
                 break;
 
@@ -132,6 +141,9 @@ public class PanelItemInHub : MonoBehaviour
                 if (panelItem.iconSprite != null)
                     DungeonHubManager.dungeonHubManager.armorSprite = panelItem.iconSprite;
                 DungeonHubManager.dungeonHubManager.UpdateUI();
+
+                viewValueText.text = panelItem.currentItemEquipment.value.ToString();
+                viewIcon.sprite = viewSprite[1];
 
                 LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.fill[1], value);
                 break;

@@ -32,9 +32,20 @@ public class LoadoutController : MonoBehaviour
     public void Initialization()
     {
         Debug.Log("Initialization");
+        //  health
         FillTheBar(fill[0], 50);
-        FillTheBar(fill[1], 0);
-        FillTheBar(fill[2], 0);
+
+        //  armor
+        if(DungeonHubManager.dungeonHubManager.armorActivatePanel== null)
+            FillTheBar(fill[1], 0);
+        else
+            FillTheBar(fill[1], DungeonHubManager.dungeonHubManager.armorActivatePanel.value);
+
+        //  weapon
+        if (DungeonHubManager.dungeonHubManager.armorActivatePanel == null)
+            FillTheBar(fill[2], 0);
+        else
+            FillTheBar(fill[2], DungeonHubManager.dungeonHubManager.weaponActivatePanel.value);
 
         foreach (var button in improvementButton)
             button.SetActive(false);
