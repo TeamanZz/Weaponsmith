@@ -130,10 +130,10 @@ public class DungeonBuilder : MonoBehaviour
                 DungeonEnemy enemydata = enemy.GetComponent<DungeonEnemy>();
                 enemydata.Initialization();
 
-                if(currentDropRate == 0)
+                if(currentDropRate == 1)
                 {
                     enemydata.isEmpty = false;
-                    enemydata.rewardStars = currentStarValue;
+                    enemydata.rewardStars = currentStarValue + 1;
                 }
 
                 enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);

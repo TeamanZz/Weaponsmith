@@ -34,7 +34,7 @@ public class CraftPanelItemsManager : MonoBehaviour
         craftPanelItemsList.Clear();
         craftPanelItemsList.AddRange(newPanelItems);
 
-        currentWaitingPanel = craftPanelItemsList[0];
+        currentWaitingPanel = craftPanelItemsList[0]; 
     }
 
     public void MakeNextUnknownItemAsUnavailable()

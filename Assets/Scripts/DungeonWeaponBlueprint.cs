@@ -32,7 +32,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         chest—over.eulerAngles = new Vector3(0, 0, 0);
     }
 
-    public void Initialization(ChestFilling newFilling)
+    public void Initialization(ChestFilling newFilling, int starsNumber)
     {
         Debug.Log(newFilling);
         switch (newFilling)
@@ -40,22 +40,20 @@ public class DungeonWeaponBlueprint : MonoBehaviour
             case ChestFilling.money:
                 rewardsVisualObject[0].SetActive(true);
                 rewardsVisualObject[1].SetActive(false);
-                currentMoneyReward = MoneyHandler.Instance.moneyPerSecond * DungeonBuilder.Instance.currentStarValue;
+                currentMoneyReward = MoneyHandler.Instance.moneyPerSecond * starsNumber;
+                //DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.moneySprite, currentMoneyReward.ToString());
                 break;
 
             case ChestFilling.drawing:
                 rewardsVisualObject[0].SetActive(false);
                 rewardsVisualObject[1].SetActive(true);
+                //DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.armorSprite, "New Blueprint");
+                //DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.weaponSprite, "New Blueprint");
                 break;
         }
         Debug.Log(currentFilling);
     }
 
-    [ContextMenu("View Color")]
-    private void ViewCurrentColor()
-    {
-        Initialization(currentFilling);
-    }
     public void CheckReward()
     {
         if (!canInteract)
