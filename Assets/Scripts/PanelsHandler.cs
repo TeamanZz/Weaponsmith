@@ -144,10 +144,8 @@ public class PanelsHandler : MonoBehaviour
 
             Debug.Log("Update");
             if (LoadoutController.loadoutController != null)
-            {
                 LoadoutController.loadoutController.Initialization();
-                LoadoutController.loadoutController.UpdateImprovementPoints();
-            }
+
             DungeonHubManager.dungeonHubManager.OpenPanel(0);
             return;
         }

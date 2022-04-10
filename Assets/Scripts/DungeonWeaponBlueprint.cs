@@ -66,7 +66,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
                 break;
 
             case ChestFilling.drawing:
-                CraftPanelItemsManager.Instance.OpenWaitingPanel();
+                //CraftPanelItemsManager.Instance.OpenWaitingPanel();
                 break;
         }
 
@@ -82,7 +82,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         if (other.TryGetComponent<DungeonCharacter>(out character))
         {
             chest—over.DOLocalRotate(endPosition, openTime);
-            CheckReward();
+            //CheckReward();
             canInteract = false;
         }
     }

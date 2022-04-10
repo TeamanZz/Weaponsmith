@@ -152,12 +152,15 @@ public class DungeonEnemy : MonoBehaviour
                         DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.weaponSprite, "New Blueprint");
                         Debug.Log(CraftPanelItemsManager.Instance.currentWaitingPanel.currentState);
 
-                        CraftPanelItemsManager.Instance.OpenWaitingPanel();
+                        CraftPanelItemsManager.Instance.OpenWaitingPanel(); 
+                        chest.CheckReward();
                     }
                     else
                     {
                         chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money, rewardStars);
                         DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.moneySprite, chest.currentMoneyReward.ToString());
+                        
+                        chest.CheckReward();
                     }
                     DungeonBuilder.Instance.currentStarValue = 0;
                     break;

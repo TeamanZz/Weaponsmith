@@ -9,8 +9,8 @@ public class LoadoutController : MonoBehaviour
     public static LoadoutController loadoutController;
     [Header("Data")]
     public float health = 50f;
-    public float protection = 0f;
-    public float damage = 0f;
+    //public float protection = 0f;
+    //public float damage = 0f;
 
     [Header("UI")]
     public List<Image> fill = new List<Image>();
@@ -31,21 +31,17 @@ public class LoadoutController : MonoBehaviour
     [ContextMenu("Initialization")]
     public void Initialization()
     {
-        Debug.Log("Initialization");
-        //  health
-        FillTheBar(fill[0], 50);
+        FillTheBar(fill[0], health + (improvementScoreCounter[0] * pointValue));
 
-        //  armor
-        if(DungeonHubManager.dungeonHubManager.armorActivatePanel== null)
-            FillTheBar(fill[1], 0);
+        if (DungeonHubManager.dungeonHubManager.armorActivatePanel== null)
+            FillTheBar(fill[1], (improvementScoreCounter[1] * pointValue));
         else
-            FillTheBar(fill[1], DungeonHubManager.dungeonHubManager.armorActivatePanel.value);
+            FillTheBar(fill[1], DungeonHubManager.dungeonHubManager.armorActivatePanel.value + (improvementScoreCounter[1] * pointValue));
 
-        //  weapon
-        if (DungeonHubManager.dungeonHubManager.armorActivatePanel == null)
-            FillTheBar(fill[2], 0);
+        if (DungeonHubManager.dungeonHubManager.weaponActivatePanel == null)
+            FillTheBar(fill[2], (improvementScoreCounter[2] * pointValue));
         else
-            FillTheBar(fill[2], DungeonHubManager.dungeonHubManager.weaponActivatePanel.value);
+            FillTheBar(fill[2], DungeonHubManager.dungeonHubManager.weaponActivatePanel.value + (improvementScoreCounter[2] * pointValue));
 
         foreach (var button in improvementButton)
             button.SetActive(false);
@@ -76,15 +72,23 @@ public class LoadoutController : MonoBehaviour
         switch (number)
         {
             case 0:
-                FillTheBar(fill[number], health);
+                FillTheBar(fill[number], health + (improvementScoreCounter[number] * pointValue));
                 break;
 
             case 1:
-                FillTheBar(fill[number], protection);
+                if (DungeonHubManager.dungeonHubManager.armorActivatePanel == null)
+                    FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
+                else
+                    FillTheBar(fill[number], DungeonHubManager.dungeonHubManager.armorActivatePanel.value + (improvementScoreCounter[number] * pointValue));
+                //FillTheBar(fill[number], protection);
                 break;
 
             case 2:
-                FillTheBar(fill[number], damage);
+                if (DungeonHubManager.dungeonHubManager.weaponActivatePanel == null)
+                    FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
+                else
+                    FillTheBar(fill[number], DungeonHubManager.dungeonHubManager.weaponActivatePanel.value + (improvementScoreCounter[number] * pointValue));
+                //FillTheBar(fill[number], damage);
                 break;
         }
 

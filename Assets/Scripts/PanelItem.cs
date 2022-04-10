@@ -57,29 +57,23 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         Initialize();
     }
 
+    public void CheckPriceCoefficient()
+    {
+        // (int)costCurve.length;
+        price = (int)costCurve.Evaluate(buysCount);
+    }
+
     private void FixedUpdate()
     {
         if (price <= MoneyHandler.Instance.moneyCount)
         {
             buyButtonComponent.enabled = true;
             buyButtonImage.color = buttonDefaultColor;
-
-            //if (currentPanelItemInHub != null)
-            //{
-            //    currentPanelItemInHub.buyButtonComponent.enabled = true;
-            //    currentPanelItemInHub.buyButtonImage.color = buttonDefaultColor;
-            //}
         }
         else
         {
             buyButtonComponent.enabled = false;
             buyButtonImage.color = Color.gray;
-
-            //if (currentPanelItemInHub != null)
-            //{
-            //    currentPanelItemInHub.buyButtonComponent.enabled = false;
-            //    currentPanelItemInHub.buyButtonImage.color = Color.gray;
-            //}
         }
     }
 
@@ -89,7 +83,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (buysCount >= costCurve.keys[costCurve.length - 1].time)
             ChangeState(PanelItemState.Collapsed);
 
-        //
         ChangeState(currentState);
     }
 
@@ -227,33 +220,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 Debug.Log("Start");
                 break;
         }
-
-
-        //if (currentState == PanelItemState.Collapsed)
-        //{
-        //    CollapseItemView();
-        //    // PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
-        //}
-
-        //if (currentState == PanelItemState.Unknown)
-        //{
-        //    SetUnknownItemView();
-
-        //    // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
-        //}
-
-        ////WaitingForDrawing
-        //if (currentState == PanelItemState.WaitingForDrawing)
-        //{
-        //    SetWaitingForDrawingItemView();
-        //    // PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
-        //}
-
-        //if (currentState == PanelItemState.Available)
-        //{
-        //    SetAvailableItemView();
-        //    // PlayerPrefs.SetString("UpgradeItem" + index, "available");
-        //}
     }
 
     //  unkown
@@ -404,13 +370,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void UpdateItemValues()
     {
-        //generalIncreaseValue += increaseValue;
-        //increaseValue += (int)(1.5f * index);
-        //if (index == 0)
-        //{
-        //    increaseValue += 2;
-        //}
-
         buysCount += 1;
         price = (int)costCurve.Evaluate(buysCount);// + PanelsHandler.Instance.numberOfPurchases);
     }

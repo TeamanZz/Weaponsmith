@@ -28,6 +28,7 @@ public class DungeonHubManager : MonoBehaviour
     public Sprite armorSprite;
     public Sprite weaponSprite;
 
+    public LoadoutController loadoutController;
     public void Awake()
     {
         dungeonHubManager = this;
@@ -84,13 +85,14 @@ public class DungeonHubManager : MonoBehaviour
             equipmentPanelContent[i].SetActive(false);
         }
 
-        LoadoutController.loadoutController.health = 50;
+        loadoutController.Initialization();
+        //loadoutController.health = 50;
 
-        if (armorActivatePanel != null)
-            LoadoutController.loadoutController.protection = armorActivatePanel.value;
+        //if (armorActivatePanel != null)
+        //    loadoutController.protection = armorActivatePanel.value;
         
-        if (weaponActivatePanel != null)
-            LoadoutController.loadoutController.damage = weaponActivatePanel.value;
+        //if (weaponActivatePanel != null)
+        //    loadoutController.damage = weaponActivatePanel.value;
 
         switch (panelIndex)
         {
