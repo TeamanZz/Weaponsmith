@@ -76,8 +76,8 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public void PreUnlock(int index, float focus)
     {
         CameraFocus(currentEraWorkshopObjects[index].transform, focus);
-        if (invokeCoroutine != null)
-            StopCoroutine(invokeCoroutine);
+        //if (invokeCoroutine != null)
+        //    StopCoroutine(invokeCoroutine);
 
         invokeCoroutine = StartCoroutine(Unlock(index));
     }
