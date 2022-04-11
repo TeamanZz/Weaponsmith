@@ -17,7 +17,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
     public GameObject[] rewardsVisualObject;
 
     public int currentMoneyReward;
-    public Transform chest—over;
+    public Transform chestover;
 
     public Vector3 endPosition = Vector3.zero;
     public float openTime = 0.25f;
@@ -29,7 +29,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         transform.DOLocalJump(transform.localPosition + new Vector3(0, 0, 10), 4, 1, 1f).SetEase(Ease.OutBounce);
         Invoke("EnableInteract", 0.3f);
         GetComponent<AudioSource>().Play();
-        chest—over.eulerAngles = new Vector3(0, 0, 0);
+        chestover.eulerAngles = new Vector3(0, 0, 0);
     }
 
     public void Initialization(ChestFilling newFilling, int starsNumber)
@@ -81,7 +81,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         DungeonCharacter character;
         if (other.TryGetComponent<DungeonCharacter>(out character))
         {
-            chest—over.DOLocalRotate(endPosition, openTime);
+            chestover.DOLocalRotate(endPosition, openTime);
             //CheckReward();
             canInteract = false;
         }
