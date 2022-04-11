@@ -57,14 +57,41 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         Initialize();
     }
 
+    [SerializeField] private int currentCoefficientValue = 1;
+    [SerializeField] private int maxCount = 1;
     public void CheckPriceCoefficient()
     {
         // (int)costCurve.length;
-        price = (int)costCurve.Evaluate(buysCount);
+
+        Debug.Log("Panel " + itemNameText.text + " - Coef " + (buysCount + CoefficientManager.coefficientValue) + " Lenght " + costCurve.keys[costCurve.length - 1].time);
+        if (buysCount + CoefficientManager.coefficientValue > costCurve.keys[costCurve.length - 1].time)
+            maxCount = (int)costCurve.keys[costCurve.length - 1].time - buysCount;
+        else
+            maxCount = buysCount + CoefficientManager.coefficientValue;
+
+        int currentPrice = (int)costCurve.Evaluate(buysCount);
+        for (int i = buysCount; i < maxCount; i++)
+        {
+            //currentCoefficientValue = i - buysCount;
+            int newPrice = (int)costCurve.Evaluate(i);
+
+            if (currentPrice + newPrice <= MoneyHandler.Instance.moneyCount)
+                currentPrice += newPrice;
+            else
+            {
+                currentCoefficientValue = i - buysCount;
+                //currentCoefficientValue = i - buysCount;
+                break;
+            }
+        }
+
+        price = currentPrice;
+        priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
     }
 
     private void FixedUpdate()
     {
+        CheckPriceCoefficient();
         if (price <= MoneyHandler.Instance.moneyCount)
         {
             buyButtonComponent.enabled = true;
@@ -370,7 +397,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void UpdateItemValues()
     {
-        buysCount += 1;
+        buysCount += currentCoefficientValue;
+        //buysCount += 1;
         price = (int)costCurve.Evaluate(buysCount);// + PanelsHandler.Instance.numberOfPurchases);
     }
 

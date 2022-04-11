@@ -11,6 +11,7 @@ public class CoefficientManager : MonoBehaviour
     public int[] toggleCoefficient = { 1, 10, 25 };
     [SerializeField] private int currentCoefNumber = 0;
 
+    public static int coefficientValue = 1;
     public void Awake()
     {
         InitializationUI();
@@ -18,6 +19,8 @@ public class CoefficientManager : MonoBehaviour
     public void InitializationUI()
     {
         toggleCoefficientText.text = toggleCoefficient[currentCoefNumber].ToString() + "x";
+        Debug.Log("Value " + coefficientValue + " Number" + currentCoefNumber);
+        coefficientValue = toggleCoefficient[currentCoefNumber];
     }
 
     public void ChangeCoefficient()
