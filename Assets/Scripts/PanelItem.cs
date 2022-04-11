@@ -62,29 +62,36 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public void CheckPriceCoefficient()
     {
         // (int)costCurve.length;
-
-        Debug.Log("Panel " + itemNameText.text + " - Coef " + (buysCount + CoefficientManager.coefficientValue) + " Lenght " + costCurve.keys[costCurve.length - 1].time);
+        int checkValue = 0;
+        //Debug.Log("Panel " + itemNameText.text + " - Coef " + (buysCount + CoefficientManager.coefficientValue) + " Lenght " + costCurve.keys[costCurve.length - 1].time);
         if (buysCount + CoefficientManager.coefficientValue > costCurve.keys[costCurve.length - 1].time)
+        {
             maxCount = (int)costCurve.keys[costCurve.length - 1].time - buysCount;
+            checkValue = maxCount;
+            Debug.Log("Panel " + name + " MaxCount " + maxCount);
+        }
         else
             maxCount = buysCount + CoefficientManager.coefficientValue;
 
         int currentPrice = (int)costCurve.Evaluate(buysCount);
+        
+
         for (int i = buysCount; i < maxCount; i++)
         {
-            //currentCoefficientValue = i - buysCount;
             int newPrice = (int)costCurve.Evaluate(i);
+            checkValue += 1;
+            //Debug.Log("Panel " + name + "Number " + i + " Result " + checkValue);
 
             if (currentPrice + newPrice <= MoneyHandler.Instance.moneyCount)
-                currentPrice += newPrice;
+                  currentPrice += newPrice;    
             else
             {
-                currentCoefficientValue = i - buysCount;
-                //currentCoefficientValue = i - buysCount;
                 break;
             }
         }
 
+        currentCoefficientValue = checkValue;
+        
         price = currentPrice;
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
     }
@@ -102,6 +109,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             buyButtonComponent.enabled = false;
             buyButtonImage.color = Color.gray;
         }
+        CheckOnCollapse();
     }
 
     private void Start()

@@ -33,7 +33,7 @@ public class LoadoutController : MonoBehaviour
     {
         FillTheBar(fill[0], health + (improvementScoreCounter[0] * pointValue));
 
-        if (DungeonHubManager.dungeonHubManager.armorActivatePanel== null)
+        if (DungeonHubManager.dungeonHubManager.armorActivatePanel == null)
             FillTheBar(fill[1], (improvementScoreCounter[1] * pointValue));
         else
             FillTheBar(fill[1], DungeonHubManager.dungeonHubManager.armorActivatePanel.value + (improvementScoreCounter[1] * pointValue));

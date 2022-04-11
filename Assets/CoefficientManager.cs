@@ -19,7 +19,7 @@ public class CoefficientManager : MonoBehaviour
     public void InitializationUI()
     {
         toggleCoefficientText.text = toggleCoefficient[currentCoefNumber].ToString() + "x";
-        Debug.Log("Value " + coefficientValue + " Number" + currentCoefNumber);
+        //Debug.Log("Value " + coefficientValue + " Number" + currentCoefNumber);
         coefficientValue = toggleCoefficient[currentCoefNumber];
     }
 
