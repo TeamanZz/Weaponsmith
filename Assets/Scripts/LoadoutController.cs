@@ -21,7 +21,7 @@ public class LoadoutController : MonoBehaviour
     public int pointValue = 5;
     public int maxCount = 8;
     public GameObject[] improvementButton;
-    
+
     public void Awake()
     {
         loadoutController = this;
@@ -113,10 +113,10 @@ public class LoadoutController : MonoBehaviour
             }
         }
 
-        Debug.Log("" + number);
+        // Debug.Log("" + number);
         if (number >= 0)
             fillingLevel = fillingLevel + (improvementScoreCounter[number] * pointValue);
-        Debug.Log(fillingLevel);
+        // Debug.Log(fillingLevel);
         fillingLevel /= 100;
         DOTween.To(() => fillingImage.fillAmount, x => fillingImage.fillAmount = x, fillingLevel, fillingTime);
     }

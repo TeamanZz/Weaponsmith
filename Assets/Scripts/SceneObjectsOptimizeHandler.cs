@@ -6,7 +6,7 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
 {
     public GameObject dungeonRoom;
     public DungeonCharacter dungeonCharacter;
-    public DungeonBuilder dungeonBuilder;
+    public DungeonManager dungeonManager;
     private GameObject mainRoom;
 
     private void Awake()
@@ -22,7 +22,7 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
     public void EnableDungeonSceneObjects()
     {
         dungeonRoom.SetActive(true);
-        if (dungeonBuilder.isDungeonStarted)
+        if (dungeonManager.isDungeonStarted)
         {
             dungeonCharacter.animator.enabled = true;
 
@@ -35,7 +35,7 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
     {
         dungeonRoom.SetActive(false);
         dungeonCharacter.runSpeed = 0;
-        if (dungeonBuilder.isDungeonStarted)
+        if (dungeonManager.isDungeonStarted)
             dungeonCharacter.animator.enabled = false;
         mainRoom.SetActive(true);
     }

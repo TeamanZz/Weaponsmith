@@ -17,6 +17,13 @@ public class SettingsManager : MonoBehaviour
         settingsPanel.SetActive(!settingsPanel.activeSelf);
     }
 
+    [ContextMenu("Delete all data")]
+    public void DeletePrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
+
     public void RemovingOldEraProgress()
     {
         // Debug.Log("Start Clear");

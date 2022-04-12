@@ -82,7 +82,8 @@ public class PanelsHandler : MonoBehaviour
 
     private IEnumerator IEEnableDungeonEnteringPanel()
     {
-        DungeonBuilder.Instance.SetCharacterOnStart();
+
+        DungeonManager.Instance.SetCharacterOnStart();
         DisablePanelsContainer();
         yield return new WaitForSeconds(1);
         DisableDungeonEnteringPanel();
@@ -94,13 +95,13 @@ public class PanelsHandler : MonoBehaviour
 
     public void DisablePanelsContainer()
     {
-        if (DungeonBuilder.Instance.isDungeonStarted)
+        if (DungeonManager.Instance.isDungeonStarted)
             panelsContainer.SetActive(false);
     }
 
     public void EnableDungeonPreviewUI()
     {
-        if (DungeonBuilder.Instance.isDungeonStarted)
+        if (DungeonManager.Instance.isDungeonStarted)
             return;
         dungeonPreviewUI.SetActive(true);
     }
@@ -123,7 +124,7 @@ public class PanelsHandler : MonoBehaviour
                 dungeonCamera.SetActive(true);
 
                 panelLabelObject.SetActive(false);
-                panels[panelIndex].SetActive(false); 
+                panels[panelIndex].SetActive(false);
                 //DisableDungeonPreviewUI
                 return;
             }
@@ -142,7 +143,6 @@ public class PanelsHandler : MonoBehaviour
             panelLabelObject.SetActive(true);
             panels[panelIndex].SetActive(true);
 
-            Debug.Log("Update");
             if (LoadoutController.loadoutController != null)
                 LoadoutController.loadoutController.Initialization();
 
@@ -181,8 +181,8 @@ public class PanelsHandler : MonoBehaviour
         //}
         //else
         //{
-            dungeonButtonComponent.interactable = true;
-            dungeonButtonImageComponent.color = Color.white;
+        dungeonButtonComponent.interactable = true;
+        dungeonButtonImageComponent.color = Color.white;
         //}
     }
 
@@ -195,8 +195,8 @@ public class PanelsHandler : MonoBehaviour
         //}
         //else
         //{
-            boostersButtonComponent.interactable = true;
-            boostersButtonImageComponent.color = Color.white;
+        boostersButtonComponent.interactable = true;
+        boostersButtonImageComponent.color = Color.white;
         //}
     }
 

@@ -22,24 +22,24 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [Space]
     public AnimationCurve costCurve;
 
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI itemNameText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
     //[FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI priceText;
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI buysCountText;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject buyButton;
-    [FoldoutGroup("View Components")] [FoldoutGroup("View Components")] [SerializeField] private Button buyButtonComponent;
-    [FoldoutGroup("View Components")] [SerializeField] public Image buyButtonImage;
-    [FoldoutGroup("View Components")] [SerializeField] public GameObject progressBar;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject completedSign;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemIcon;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject unknownSign;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject blurPanel;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemConditionsGO;
-    [FoldoutGroup("View Components")] [SerializeField] private Image progressBarFilled;
-    [FoldoutGroup("View Components")] [SerializeField] private Animator buyButtonAnimator;
-    [FoldoutGroup("View Components")] [SerializeField] private Animator iconAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
+    [FoldoutGroup("View Components")][FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
+    [FoldoutGroup("View Components")][SerializeField] public Image buyButtonImage;
+    [FoldoutGroup("View Components")][SerializeField] public GameObject progressBar;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject completedSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
+    [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
+    [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
     //[FoldoutGroup("View Components")] [SerializeField] private Animator generalIncreaseValueTextAnimator;
-    [FoldoutGroup("View Components")] [SerializeField] private Animator buysCountTextAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
     //public int generalIncreaseValue;
@@ -74,7 +74,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             maxCount = buysCount + CoefficientManager.coefficientValue;
 
         int currentPrice = (int)costCurve.Evaluate(buysCount);
-        
+
 
         for (int i = buysCount; i < maxCount; i++)
         {
@@ -83,7 +83,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             //Debug.Log("Panel " + name + "Number " + i + " Result " + checkValue);
 
             if (currentPrice + newPrice <= MoneyHandler.Instance.moneyCount)
-                  currentPrice += newPrice;    
+                currentPrice += newPrice;
             else
             {
                 break;
@@ -91,7 +91,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         }
 
         currentCoefficientValue = checkValue;
-        
+
         price = currentPrice;
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
     }
@@ -144,7 +144,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         buyButtonImage = buyButton.GetComponent<Image>();
         buyButtonAnimator = buyButton.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
-//        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
+        //        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
         buysCountTextAnimator = buysCountText.GetComponent<Animator>();
 
         if (currentState != PanelItemState.Unknown)
@@ -157,7 +157,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         buyButtonAnimator.Play("Jump", 0, 0);
         iconAnimator.Play("Jump", 0, 0);
-//        generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
+        //        generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
         buysCountTextAnimator.Play("Jump", 0, 0);
     }
 
@@ -214,7 +214,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         switch (newState)
         {
             case PanelItemState.Collapsed:
-                CollapseItemView(); 
+                CollapseItemView();
 
                 if (currentPanelItemInHub != null)
                 {
@@ -293,9 +293,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         Initialize();
         //generalIncreaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}generalIncreaseValue");
-        price = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}price", (int)costCurve.Evaluate(buysCount));
+        // price = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}price", (int)costCurve.Evaluate(buysCount));
         //increaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}increaseValue", increaseValue);
-        buysCount = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}buysCount");
+        // buysCount = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}buysCount");
         currentState = newState;
         if (newState == PanelItemState.Collapsed)
             Debug.Log(gameObject);

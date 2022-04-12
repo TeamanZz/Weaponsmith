@@ -7,155 +7,83 @@ public class DungeonBuilder : MonoBehaviour
     public static DungeonBuilder Instance;
 
     [Header("Dungeon Pieces Spawn")]
-    public Transform piecesParent;
     [SerializeField] private GameObject piecePrefab;
-    [SerializeField] private GameObject piecesContainer;
+    [SerializeField] private Transform piecesContainer;
 
     [Header("Enemy Spawn")]
-    public int enemySpawnRate;
-    public Transform enemiesContainer;
-    public GameObject enemyPrefab;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private Transform enemiesContainer;
 
-    [Header("Preview")]
-    public Transform dungeonCharacter;
-    public Transform dungeonCharacterPreviewPos;
-    public Transform dungeonCharacterStartPos;
-    public TrackingCamera dungeonCamera;
-    public Transform dungeonCameraPreviewPos;
-    public Transform dungeonCameraStartPos;
+    [SerializeField] private int firstWaveEnemiesCount;
+    [SerializeField] private int secondWaveEnemiesCount;
+
+    [Header("Boss Settings")]
+    [SerializeField] private int bossHealth = 12;
+    [SerializeField] private float bossScale = 3f;
 
     private GameObject lastSpawnedPiece;
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
+    private bool needSpawnBoss;
 
-    public bool isDungeonStarted;
-
-    [Header("Chest Settings")]
-    public int currentDropRate = 0;
-    public int maxDropRate = 5;
-
-    public int currentStarValue = 0;
     private void Awake()
     {
         Instance = this;
-        currentDropRate = maxDropRate;
     }
 
     private void Start()
     {
-        for (int i = 0; i <= 20; i++)
+        for (int i = 0; i <= 30; i++)
         {
             SpawnPiece();
         }
+        lastSpawnedPieceZPos = 0;
+        for (int i = 0; i <= firstWaveEnemiesCount; i++)
+        {
+            SpawnHostileObject();
+        }
     }
 
-    public void SetCharacterOnStart()
-    {
-        dungeonCharacter.transform.position = dungeonCharacterStartPos.position;
-        dungeonCharacter.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-        dungeonCamera.transform.position = dungeonCameraStartPos.position;
-        dungeonCamera.transform.rotation = Quaternion.Euler(32, 0, 0);
-        dungeonCamera.targetDistance = 17;
-
-        isDungeonStarted = true;
-    }
-
-    public void ShowCharacterPreview()
-    {
-        if (isDungeonStarted)
-            return;
-        dungeonCharacter.transform.position = dungeonCharacterPreviewPos.position;
-        dungeonCharacter.transform.rotation = Quaternion.Euler(0, -90, 0);
-
-        dungeonCamera.transform.position = dungeonCameraPreviewPos.position;
-        dungeonCamera.transform.rotation = Quaternion.Euler(7, 90, 0);
-        dungeonCamera.targetDistance = 0;
-    }
+    private void SpawnChestWithGold() { }
 
     public void SpawnDungeonContent()
     {
         SpawnPiece();
-        SpawnEnemy();
+        SpawnHostileObject();
     }
 
     public void SpawnPiece()
     {
-        lastSpawnedPiece = Instantiate(piecePrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.identity, piecesParent);
+        lastSpawnedPiece = Instantiate(piecePrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.identity, piecesContainer);
         lastSpawnedPiece.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
         lastSpawnedPieceZPos += 5;
     }
 
-    [Header("Boss Settings")]
-    public bool bossCreated = false;
-    public GameObject bossPrefab;
-    public int bossHealth = 12;
-    public float bossScale = 3f;
-    private void SpawnEnemy()
+    private void SpawnHostileObject()
     {
-        if (lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 5 || lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 10)
-            return;
+        // if (lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 5 || lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 10)
+        //     return;
 
-        if (bossCreated == true)
-            return;
-
-        //if (Random.Range(0, enemySpawnRate) == 0)
-        //{
-            if (currentStarValue == 2 && currentDropRate == 1)
-            {
-                GameObject enemy = Instantiate(bossPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), enemiesContainer);
-
-                var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
-                enemyHealthComponent.InitializeHP(bossHealth);
-
-                DungeonEnemy enemydata = enemy.GetComponent<DungeonEnemy>();
-                enemydata.Initialization();
-
-                enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
-                enemy.transform.localScale = Vector3.one * bossScale;
-                lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
-
-                enemydata.isEmpty = false;
-                enemydata.rewardStars = 3;
-                bossCreated = true;
-                return;
-            }
-            else
-            {
-                GameObject enemy = Instantiate(enemyPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.Euler(0, 180, 0), enemiesContainer);
-
-                var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
-                enemyHealthComponent.InitializeHP(Random.Range(2, 6));
-
-                DungeonEnemy enemydata = enemy.GetComponent<DungeonEnemy>();
-                enemydata.Initialization();
-
-                if(currentDropRate == 1)
-                {
-                    enemydata.isEmpty = false;
-                    enemydata.rewardStars = currentStarValue + 1;
-                }
-
-                enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
-                enemy.transform.localScale = Vector3.one * 1.5f;
-                lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
-            }
-        //}
-        if (currentDropRate > 1)
-            currentDropRate -= 1;
+        if (needSpawnBoss)
+            SpawnEnemy(bossHealth, bossScale);
         else
-        {
-            currentDropRate = maxDropRate;
-            currentStarValue += 1;
-        }
+            SpawnEnemy(Random.Range(2, 6), 1.5f);
     }
 
-    public void ClearDungeon()
+    public void SpawnEnemy(int hpValue, float modelScale)
     {
-        currentStarValue = 0;
-        currentDropRate = maxDropRate;
-        bossCreated = false;
+        var newEnemyPos = new Vector3(0, 0, lastSpawnedPieceZPos);
+        var newEnemyRotation = Quaternion.Euler(0, 180, 0);
+        GameObject enemy = Instantiate(enemyPrefab, newEnemyPos, newEnemyRotation, enemiesContainer);
 
+        var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
+        enemyHealthComponent.InitializeHP(hpValue);
 
+        var enemyData = enemy.GetComponent<DungeonEnemy>();
+        enemyData.Initialization();
+
+        enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
+        enemy.transform.localScale = Vector3.one * modelScale;
+        lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
     }
 }

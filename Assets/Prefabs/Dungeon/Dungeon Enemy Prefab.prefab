@@ -2562,6 +2562,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8fc0b326c711a34458663d11a522ddbf, type: 3}
   - {fileID: 8300000, guid: 8d41c783d37e502459f656cf95d952a3, type: 3}
   - {fileID: 8300000, guid: cae9a28ab4ec80b48ab0c6e5b29c8db1, type: 3}
+  isEmpty: 1
+  rewardStars: 0
 --- !u!114 &7294571177279151111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23259,6 +23261,22 @@ PrefabInstance:
     - target: {fileID: 19884710, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19884710, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19884710, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19884710, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19884710, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19920518, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
       propertyPath: m_Materials.Array.size

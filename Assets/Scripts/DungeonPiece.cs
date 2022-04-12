@@ -20,14 +20,14 @@ public class DungeonPiece : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        DungeonCharacter dungeonCharacterTemp;
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     DungeonCharacter dungeonCharacterTemp;
 
-        if (other.TryGetComponent<DungeonCharacter>(out dungeonCharacterTemp))
-        {
-            dungeonCharacter = dungeonCharacterTemp;
-            DungeonBuilder.Instance.SpawnDungeonContent();
-        }
-    }
+    //     if (other.TryGetComponent<DungeonCharacter>(out dungeonCharacterTemp))
+    //     {
+    //         dungeonCharacter = dungeonCharacterTemp;
+    //         DungeonBuilder.Instance.SpawnDungeonContent();
+    //     }
+    // }
 }
