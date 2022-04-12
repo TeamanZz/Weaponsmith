@@ -54,7 +54,8 @@ public class DungeonBuilder : MonoBehaviour
         // SpawnChestWithBlueprint();
 
         SpawnDungeonPieces();
-        SpawnChestWithGold();
+        SpawnChestWithBlueprint();
+        // SpawnChestWithGold();
     }
 
     private void SpawnChestWithGold()
@@ -63,7 +64,7 @@ public class DungeonBuilder : MonoBehaviour
 
         GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
-        chestComponent.Initialization(DungeonChest.ChestFilling.Money);
+        chestComponent.Initialize(DungeonChest.ChestFilling.Money);
         DungeonRewardPanel.Instance.AddItem(DungeonRewardPanel.Instance.moneySprite, chestComponent.currentMoneyReward.ToString());
 
         chestObject.transform.localPosition = new Vector3(0, 0, newZPos);
@@ -72,12 +73,16 @@ public class DungeonBuilder : MonoBehaviour
 
     private void SpawnChestWithBlueprint()
     {
-        // GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
-        // DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
-        //CHEST AFTER BOSS
-        // chestComponent.Initialization(DungeonWeaponBlueprint.ChestFilling.drawing, rewardStars);
-        // DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.armorSprite, "New Blueprint");
-        // DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.weaponSprite, "New Blueprint");
+        int newZPos = Random.Range(minDistanceBetweenEnemies, maxDistanceBetweenEnemies) + lastSpawnedEnemyZPos;
+
+        GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
+        DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
+        chestComponent.Initialize(DungeonChest.ChestFilling.BlueprintAndMoney);
+        DungeonRewardPanel.Instance.AddItem(DungeonRewardPanel.Instance.armorSprite, "New Blueprint");
+        DungeonRewardPanel.Instance.AddItem(DungeonRewardPanel.Instance.weaponSprite, "New Blueprint");
+
+        chestObject.transform.localPosition = new Vector3(0, 0, newZPos);
+        lastSpawnedEnemyZPos = newZPos;
     }
 
     public void SpawnPiece()

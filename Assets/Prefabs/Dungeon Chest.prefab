@@ -174,7 +174,6 @@ GameObject:
   - component: {fileID: 8550988676938562276}
   - component: {fileID: 8550988676938562274}
   - component: {fileID: 8550988676938562277}
-  - component: {fileID: 8550988676938562273}
   - component: {fileID: 721645953009775916}
   m_Layer: 0
   m_Name: Dungeon Chest
@@ -226,32 +225,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMoneyReward: 0
-  currentFilling: 0
+  chestLid: {fileID: 83496296056518011}
+  openedLidRotation: {x: -45, y: 0, z: 0}
+  openTime: 0.25
   rewardsVisualObject:
   - {fileID: 4336358496094442581}
   - {fileID: 35615415875380193}
-  chestover: {fileID: 83496296056518011}
-  endPosition: {x: -45, y: 0, z: 0}
-  openTime: 0.25
---- !u!95 &8550988676938562273
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8550988676938562279}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c0e3360bdc96ab343a4521dfc3034776, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!82 &721645953009775916
 AudioSource:
   m_ObjectHideFlags: 0

@@ -35,7 +35,6 @@ public class DungeonRewardPanel : MonoBehaviour
 
     public void AddItem(Sprite sprite, string title)
     {
-        Debug.Log("Add " + title);
         RewardUIItem newItem = Instantiate(itemPrefab, group.transform);
         newItem.InitializePanel(sprite, title);
 
@@ -58,28 +57,27 @@ public class DungeonRewardPanel : MonoBehaviour
         {
             yield return new WaitForSeconds(timeToNewStar);
             starsViewImage[i].rectTransform.DOScale(Vector3.one, openStarTime);
-            Debug.Log(i);
         }
     }
 
-    // public void Initialization(int starsValue)
-    // {
-    //     for (int i = 0; i < starsViewImage.Length; i++)
-    //     {
-    //         starsViewImage[i].transform.localScale = Vector3.zero;
-    //     }
+    public void OpenRewardPanel(int starsValue)
+    {
+        for (int i = 0; i < starsViewImage.Length; i++)
+        {
+            starsViewImage[i].transform.localScale = Vector3.zero;
+        }
 
-    //     if (starsValue == 3)
-    //         titleText.text = resultInTitle[0];
-    //     else
-    //         titleText.text = resultInTitle[1];
+        if (starsValue == 3)
+            titleText.text = resultInTitle[0];
+        else
+            titleText.text = resultInTitle[1];
 
-    //     panel.SetActive(true);
+        panel.SetActive(true);
 
-    //     if (coroutine != null)
-    //         StopCoroutine(coroutine);
+        if (coroutine != null)
+            StopCoroutine(coroutine);
 
-    //     coroutine = StartCoroutine(StarsInitialization(starsValue));
-    // }
+        coroutine = StartCoroutine(StarsInitialization(starsValue));
+    }
 
 }
