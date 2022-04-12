@@ -3,49 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class DungeonWeaponBlueprint : MonoBehaviour
+public class DungeonChest : MonoBehaviour
 {
+    [HideInInspector] public int currentMoneyReward;
+
+    [SerializeField] private ChestFilling currentFilling;
+    [SerializeField] private GameObject[] rewardsVisualObject;
+    [SerializeField] private Transform chestover;
+    [SerializeField] private Vector3 endPosition = Vector3.zero;
+    [SerializeField] private float openTime = 0.25f;
+
     private bool canInteract;
 
-    public ChestFilling currentFilling;
-    public enum ChestFilling
-    {
-        money,
-        drawing
-    }
-
-    public GameObject[] rewardsVisualObject;
-
-    public int currentMoneyReward;
-    public Transform chestover;
-
-    public Vector3 endPosition = Vector3.zero;
-    public float openTime = 0.25f;
-
-    public Material material;
     void Start()
     {
-        material.color = Color.white;
         transform.DOLocalJump(transform.localPosition + new Vector3(0, 0, 10), 4, 1, 1f).SetEase(Ease.OutBounce);
         Invoke("EnableInteract", 0.3f);
         GetComponent<AudioSource>().Play();
         chestover.eulerAngles = new Vector3(0, 0, 0);
     }
 
-    public void Initialization(ChestFilling newFilling, int starsNumber)
+    public void Initialization(ChestFilling filling)
     {
-        Debug.Log(newFilling);
-        switch (newFilling)
+        switch (filling)
         {
-            case ChestFilling.money:
+            case ChestFilling.Money:
                 rewardsVisualObject[0].SetActive(true);
-                rewardsVisualObject[1].SetActive(false);
-                currentMoneyReward = MoneyHandler.Instance.moneyPerSecond * starsNumber;
+                currentMoneyReward = 100;
                 //DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.moneySprite, currentMoneyReward.ToString());
                 break;
 
-            case ChestFilling.drawing:
-                rewardsVisualObject[0].SetActive(false);
+            case ChestFilling.BlueprintAndMoney:
                 rewardsVisualObject[1].SetActive(true);
                 //DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.armorSprite, "New Blueprint");
                 //DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.weaponSprite, "New Blueprint");
@@ -54,18 +42,18 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         Debug.Log(currentFilling);
     }
 
-    public void CheckReward()
+    public void TakeReward()
     {
         if (!canInteract)
             return;
 
         switch (currentFilling)
         {
-            case ChestFilling.money:
+            case ChestFilling.Money:
                 MoneyHandler.Instance.moneyCount += currentMoneyReward;
                 break;
 
-            case ChestFilling.drawing:
+            case ChestFilling.BlueprintAndMoney:
                 //CraftPanelItemsManager.Instance.OpenWaitingPanel();
                 break;
         }
@@ -82,7 +70,7 @@ public class DungeonWeaponBlueprint : MonoBehaviour
         if (other.TryGetComponent<DungeonCharacter>(out character))
         {
             chestover.DOLocalRotate(endPosition, openTime);
-            //CheckReward();
+            TakeReward();
             canInteract = false;
         }
     }
@@ -90,5 +78,11 @@ public class DungeonWeaponBlueprint : MonoBehaviour
     private void EnableInteract()
     {
         canInteract = true;
+    }
+
+    public enum ChestFilling
+    {
+        Money,
+        BlueprintAndMoney
     }
 }

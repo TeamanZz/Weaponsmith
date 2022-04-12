@@ -8,7 +8,7 @@ public class RewardUIItem : MonoBehaviour
 {
     public TextMeshProUGUI title;
     public Image icon;
-    public void InitializationPanel(Sprite sprite, string title)
+    public void InitializePanel(Sprite sprite, string title)
     {
         icon.sprite = sprite;
         this.title.text = title;

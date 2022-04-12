@@ -21,6 +21,8 @@ public class DungeonBuilder : MonoBehaviour
     [SerializeField] private int bossHealth = 12;
     [SerializeField] private float bossScale = 3f;
 
+    [SerializeField] private GameObject chestPrefab;
+
     private GameObject lastSpawnedPiece;
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
@@ -33,23 +35,36 @@ public class DungeonBuilder : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i <= 30; i++)
-        {
-            SpawnPiece();
-        }
-        lastSpawnedPieceZPos = 0;
-        for (int i = 0; i <= firstWaveEnemiesCount; i++)
-        {
-            SpawnHostileObject();
-        }
+        BuildDungeon();
+    }
+
+    private void BuildDungeon()
+    {
+        SpawnDungeonPieces();
+        SpawnFirstWaveEnemies();
+        SpawnChestWithGold();
+        SpawnSecondWaveEnemies();
+        SpawnBoss();
+        SpawnChestWithBlueprint();
     }
 
     private void SpawnChestWithGold() { }
+    private void SpawnChestWithBlueprint() { }
 
-    public void SpawnDungeonContent()
+    public void SpawnChest()
     {
-        SpawnPiece();
-        SpawnHostileObject();
+        GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
+        DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
+
+        chestComponent.Initialization(DungeonChest.ChestFilling.Money);
+        // chestComponent.TakeReward();
+        //CHEST AFTER 1 WAVE
+        DungeonRewardPanel.Instance.AddItem(DungeonRewardPanel.Instance.moneySprite, chestComponent.currentMoneyReward.ToString());
+
+        //CHEST AFTER BOSS
+        // chestComponent.Initialization(DungeonWeaponBlueprint.ChestFilling.drawing, rewardStars);
+        // DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.armorSprite, "New Blueprint");
+        // DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.weaponSprite, "New Blueprint");
     }
 
     public void SpawnPiece()
@@ -59,31 +74,52 @@ public class DungeonBuilder : MonoBehaviour
         lastSpawnedPieceZPos += 5;
     }
 
-    private void SpawnHostileObject()
-    {
-        // if (lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 5 || lastSpawnedEnemyZPos == lastSpawnedPieceZPos - 10)
-        //     return;
-
-        if (needSpawnBoss)
-            SpawnEnemy(bossHealth, bossScale);
-        else
-            SpawnEnemy(Random.Range(2, 6), 1.5f);
-    }
-
     public void SpawnEnemy(int hpValue, float modelScale)
     {
-        var newEnemyPos = new Vector3(0, 0, lastSpawnedPieceZPos);
+        var newEnemyPos = new Vector3(0, 0, lastSpawnedEnemyZPos);
         var newEnemyRotation = Quaternion.Euler(0, 180, 0);
         GameObject enemy = Instantiate(enemyPrefab, newEnemyPos, newEnemyRotation, enemiesContainer);
 
         var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
         enemyHealthComponent.InitializeHP(hpValue);
 
-        var enemyData = enemy.GetComponent<DungeonEnemy>();
-        enemyData.Initialization();
+        var enemyComponent = enemy.GetComponent<DungeonEnemy>();
+        enemyComponent.Initialization();
 
-        enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
+        enemy.transform.localPosition = new Vector3(0, 0, lastSpawnedEnemyZPos);
         enemy.transform.localScale = Vector3.one * modelScale;
-        lastSpawnedEnemyZPos = lastSpawnedPieceZPos;
+
+        lastSpawnedEnemyZPos += 5;
+    }
+
+
+
+    private void SpawnBoss()
+    {
+        SpawnEnemy(bossHealth, bossScale);
+    }
+
+    private void SpawnSecondWaveEnemies()
+    {
+        for (int i = 0; i <= secondWaveEnemiesCount; i++)
+        {
+            SpawnEnemy(Random.Range(2, 6), 1.5f);
+        }
+    }
+
+    private void SpawnFirstWaveEnemies()
+    {
+        for (int i = 0; i <= firstWaveEnemiesCount; i++)
+        {
+            SpawnEnemy(Random.Range(2, 6), 1.5f);
+        }
+    }
+
+    private void SpawnDungeonPieces()
+    {
+        for (int i = 0; i <= 30; i++)
+        {
+            SpawnPiece();
+        }
     }
 }

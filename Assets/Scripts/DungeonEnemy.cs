@@ -4,19 +4,28 @@ using TMPro;
 
 public class DungeonEnemy : MonoBehaviour
 {
-    public float scale = 1.5f;
-    public float distanceToCollider = 1.5f;
-    public float enemyLVL;
-    public GameObject chestPrefab;
     public EnemyHealthBar enemyHealthBar;
-    public TextMeshProUGUI enemyLvlText;
-    public AudioSource audioSource;
-    public List<GameObject> currentEnemySkin = new List<GameObject>();
-    public List<AudioClip> sounds = new List<AudioClip>();
+
+    [SerializeField] private GameObject chestPrefab;
+    [SerializeField] private TextMeshProUGUI enemyLvlText;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private List<GameObject> currentEnemySkin = new List<GameObject>();
+    [SerializeField] private List<AudioClip> sounds = new List<AudioClip>();
+    [SerializeField] private float scale = 1.5f;
+    [SerializeField] private float distanceToCollider = 1.5f;
+    [SerializeField] private float enemyLVL;
 
     private int curentSkinIndex;
     private BoxCollider detectionCollider;
     private List<Animator> animators = new List<Animator>();
+
+    private bool isDead;
+
+    private void OnDisable()
+    {
+        if (isDead)
+            Destroy(gameObject);
+    }
 
     public void PlayEnemyDeathSound()
     {
@@ -33,16 +42,7 @@ public class DungeonEnemy : MonoBehaviour
         AddAnimatorToAnimatorsList();
         SetEnemySkin();
         SetScale();
-        HandleDistanceCollider();
-        SetEnemyLVL();
-    }
-
-    private void SetEnemyLVL()
-    {
-        if (enemyLVL == 0)
-            enemyLvlText.text = (enemyLVL + 1).ToString() + " LVL";
-        else
-            enemyLvlText.text = enemyLVL.ToString() + " LVL";
+        UpdateColliderPosition();
     }
 
     private void SetScale()
@@ -56,7 +56,7 @@ public class DungeonEnemy : MonoBehaviour
         animators.AddRange(GetComponentsInChildren<Animator>());
     }
 
-    private void HandleDistanceCollider()
+    private void UpdateColliderPosition()
     {
         detectionCollider = GetComponent<BoxCollider>();
         detectionCollider.center = new Vector3(detectionCollider.center.x, detectionCollider.center.y, distanceToCollider);
@@ -90,73 +90,20 @@ public class DungeonEnemy : MonoBehaviour
             animators[i].Play("Take Damage", 0, 0);
     }
 
-    public bool isEmpty = true;
-    public int rewardStars = 0;
     public void InvokeDeathAnimation()
     {
-        // CheckReward();
-
         for (int i = 0; i < animators.Count; i++)
             animators[i].SetTrigger("Death");
+        isDead = true;
         PlayEnemyDeathSound();
         Destroy(gameObject, 10f);
     }
 
-    // public void CheckReward()
-    // {
-    //     if (isEmpty)
-    //         return;
-
-    //     if (CraftPanelItemsManager.Instance.currentWaitingPanel != null)
-    //     {
-    //         GameObject chestObject = Instantiate(chestPrefab, transform.position + new Vector3(0, 0.325f, 0), Quaternion.identity, transform.parent);
-    //         chestObject.name = "Chest";
-    //         DungeonWeaponBlueprint chest = chestObject.GetComponent<DungeonWeaponBlueprint>();
-
-    //         switch (rewardStars)
-    //         {
-    //             case 1:
-    //                 chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money, rewardStars);
-    //                 chest.CheckReward();
-    //                 DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.moneySprite, chest.currentMoneyReward.ToString());
-    //                 break;
-
-    //             case 2:
-    //                 chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money, rewardStars);
-    //                 chest.CheckReward();
-    //                 DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.moneySprite, chest.currentMoneyReward.ToString());
-    //                 break;
-
-    //             case 3:
-    //                 if (CraftPanelItemsManager.Instance.currentWaitingPanel.currentState == PanelItemState.WaitingForDrawing)
-    //                 {
-    //                     chest.Initialization(DungeonWeaponBlueprint.ChestFilling.drawing, rewardStars);
-    //                     DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.armorSprite, "New Blueprint");
-    //                     DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.weaponSprite, "New Blueprint");
-    //                     Debug.Log(CraftPanelItemsManager.Instance.currentWaitingPanel.currentState);
-
-    //                     CraftPanelItemsManager.Instance.OpenWaitingPanel();
-    //                     chest.CheckReward();
-    //                 }
-    //                 else
-    //                 {
-    //                     chest.Initialization(DungeonWeaponBlueprint.ChestFilling.money, rewardStars);
-    //                     DungeonRewardPanel.dungeonRewardPanel.AddItem(DungeonRewardPanel.dungeonRewardPanel.moneySprite, chest.currentMoneyReward.ToString());
-
-    //                     chest.CheckReward();
-    //                 }
-    //                 DungeonManager.Instance.currentStarValue = 0;
-    //                 break;
-
-    //             case 0:
-    //                 break;
-    //         }
-
-    //         if (rewardStars == 3)
-    //         {
-    //             DungeonManager.Instance.ClearDungeon();
-    //             DungeonRewardPanel.dungeonRewardPanel.Initialization(true, rewardStars);
-    //         }
-    //     }
-    // }
+    private void SetEnemyLVL()
+    {
+        if (enemyLVL == 0)
+            enemyLvlText.text = (enemyLVL + 1).ToString() + " LVL";
+        else
+            enemyLvlText.text = enemyLVL.ToString() + " LVL";
+    }
 }
