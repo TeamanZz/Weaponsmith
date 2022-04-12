@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 8550988676938562273}
   - component: {fileID: 721645953009775916}
   m_Layer: 0
-  m_Name: Dungeon Blueprint Chest
+  m_Name: Dungeon Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +230,7 @@ MonoBehaviour:
   rewardsVisualObject:
   - {fileID: 4336358496094442581}
   - {fileID: 35615415875380193}
-  chestover: {fileID: 0}
+  chestover: {fileID: 83496296056518011}
   endPosition: {x: -45, y: 0, z: 0}
   openTime: 0.25
 --- !u!95 &8550988676938562273

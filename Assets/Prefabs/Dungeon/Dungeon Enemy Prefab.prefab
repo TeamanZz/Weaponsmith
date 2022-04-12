@@ -2545,11 +2545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a02446ccc869a41be83eaa753d6613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 1.5
-  distanceToCollider: 1.5
-  enemyLVL: 0
-  chestPrefab: {fileID: 8550988676938562279, guid: ad31a4a27d46c914cad3af90476c1289, type: 3}
   enemyHealthBar: {fileID: 7294571177279151111}
+  chestPrefab: {fileID: 8550988676938562279, guid: ad31a4a27d46c914cad3af90476c1289, type: 3}
   enemyLvlText: {fileID: 6952486300126442324}
   audioSource: {fileID: 1447379779080449485}
   currentEnemySkin:
@@ -2562,8 +2559,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8fc0b326c711a34458663d11a522ddbf, type: 3}
   - {fileID: 8300000, guid: 8d41c783d37e502459f656cf95d952a3, type: 3}
   - {fileID: 8300000, guid: cae9a28ab4ec80b48ab0c6e5b29c8db1, type: 3}
-  isEmpty: 1
-  rewardStars: 0
+  scale: 1.5
+  distanceToCollider: 1.5
+  enemyLVL: 0
 --- !u!114 &7294571177279151111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3450,7 +3448,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4087
 --- !u!1 &5302369997482512107
 GameObject:
   m_ObjectHideFlags: 0
@@ -3468,7 +3466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1539574305668809971
 RectTransform:
   m_ObjectHideFlags: 0
