@@ -30,6 +30,8 @@ public class PanelsHandler : MonoBehaviour
     public GameObject dungeonEnteringPanel;
     public GameObject panelsContainer;
 
+    public DungeonRewardPanel dungeonRewardPanel;
+
     [Space]
     [SerializeField] private List<string> panelNames = new List<string>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
@@ -151,7 +153,7 @@ public class PanelsHandler : MonoBehaviour
         }
         else
         {
-            DungeonRewardPanel.Instance.ClosePanel();
+            dungeonRewardPanel.ClosePanel();
 
             currentLocationInTheDungeon = false;
             mainCamera.SetActive(true);

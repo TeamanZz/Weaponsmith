@@ -87,9 +87,9 @@ public class DungeonBuilder : MonoBehaviour
         lastSpawnedPieceZPos += 5;
     }
 
-    public void SpawnEnemy(int hpValue, float modelScale)
+    public void SpawnEnemy(int hpValue, float modelScale, float distanceCoefficient = 1)
     {
-        int newZPos = Random.Range(minDistanceBetweenEnemies, maxDistanceBetweenEnemies) + lastSpawnedEnemyZPos;
+        int newZPos = (int)((Random.Range(minDistanceBetweenEnemies, maxDistanceBetweenEnemies) + lastSpawnedEnemyZPos) * distanceCoefficient);
 
         var newEnemyRotation = Quaternion.Euler(0, 180, 0);
         var enemy = Instantiate(enemyPrefab, Vector3.zero, newEnemyRotation, enemiesContainer);
@@ -108,7 +108,7 @@ public class DungeonBuilder : MonoBehaviour
 
     private void SpawnBoss()
     {
-        SpawnEnemy(bossHealth, bossScale);
+        SpawnEnemy(bossHealth, bossScale, 1.5f);
     }
 
     private void SpawnSecondWaveEnemies()
