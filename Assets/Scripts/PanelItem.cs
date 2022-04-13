@@ -59,37 +59,51 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     [SerializeField] private int currentCoefficientValue = 1;
     [SerializeField] private int maxCount = 1;
-    public void CheckPriceCoefficient()
+    [SerializeField] private int checkValue = 0;
+    [SerializeField] private List<Vector2Int> priceList = new List<Vector2Int>();
+   public void CheckPriceCoefficient()
     {
-        // (int)costCurve.length;
-        int checkValue = 0;
+        priceList.Clear();
+        checkValue = 0;
+        int currentPrice = (int)costCurve.Evaluate(buysCount);
         //Debug.Log("Panel " + itemNameText.text + " - Coef " + (buysCount + CoefficientManager.coefficientValue) + " Lenght " + costCurve.keys[costCurve.length - 1].time);
-        if (buysCount + CoefficientManager.coefficientValue > costCurve.keys[costCurve.length - 1].time)
+        if (buysCount + CoefficientManager.coefficientValue > costCurve.keys[costCurve.length - 1].time || CoefficientManager.coefficientValue == 1)
         {
-            maxCount = (int)costCurve.keys[costCurve.length - 1].time - buysCount;
+            if (CoefficientManager.coefficientValue == 1)
+                maxCount = 1;
+            else
+                maxCount = (int)costCurve.keys[costCurve.length - 1].time - buysCount;
+
+            priceList.Add(new Vector2Int(currentPrice, currentPrice));
+
             checkValue = maxCount;
-            Debug.Log("Panel " + name + " MaxCount " + maxCount);
         }
         else
+        {
             maxCount = buysCount + CoefficientManager.coefficientValue;
+        }
 
-        int currentPrice = (int)costCurve.Evaluate(buysCount);
-
+        //Debug.Log("Panel " + name + " MaxCount " + maxCount);
 
         for (int i = buysCount; i < maxCount; i++)
         {
             int newPrice = (int)costCurve.Evaluate(i);
-            checkValue += 1;
-            //Debug.Log("Panel " + name + "Number " + i + " Result " + checkValue);
 
             if (currentPrice + newPrice <= MoneyHandler.Instance.moneyCount)
+            {
                 currentPrice += newPrice;
+                priceList.Add(new Vector2Int(currentPrice, newPrice));
+                checkValue += 1;
+            }
             else
             {
                 break;
             }
+
+            Debug.Log("Panel " + name + "Number " + i + " Result " + checkValue);
         }
 
+        checkValue = Mathf.Clamp(checkValue, buysCount, buysCount + CoefficientManager.coefficientValue);
         currentCoefficientValue = checkValue;
 
         price = currentPrice;
