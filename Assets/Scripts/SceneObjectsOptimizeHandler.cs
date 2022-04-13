@@ -26,7 +26,7 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
         {
             dungeonCharacter.animator.enabled = true;
 
-            dungeonCharacter.runSpeed = 0.1f;
+            dungeonCharacter.EnableCharacterRun();
         }
         mainRoom.SetActive(false);
     }
@@ -34,7 +34,7 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
     public void EnableAnvilSceneObjects()
     {
         dungeonRoom.SetActive(false);
-        dungeonCharacter.runSpeed = 0;
+        dungeonCharacter.DisableCharacterRun();
         if (dungeonManager.isDungeonStarted)
             dungeonCharacter.animator.enabled = false;
         mainRoom.SetActive(true);

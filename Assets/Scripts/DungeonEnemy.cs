@@ -20,21 +20,43 @@ public class DungeonEnemy : MonoBehaviour
     private List<Animator> animators = new List<Animator>();
 
     private bool isDead;
+    private bool isInBattle;
+    [HideInInspector] public DungeonCharacter currentEnemy;
+
+    private void Start()
+    {
+        // InvokeRepeating("AttackCharacter", 2, 5);
+    }
+
+    private void FixedUpdate()
+    {
+        if (isInBattle)
+            HandleBattle();
+    }
+
+    public void HandleBattle()
+    {
+        for (int i = 0; i < animators.Count; i++)
+            animators[i].SetInteger("AttackIndex", 1);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        DungeonCharacter dungeonCharacter;
+        if (other.TryGetComponent<DungeonCharacter>(out dungeonCharacter))
+        {
+            isInBattle = true;
+            currentEnemy = dungeonCharacter;
+            other.enabled = false;
+            for (int i = 0; i < animators.Count; i++)
+                animators[i].SetInteger("AttackIndex", 1);
+        }
+    }
 
     private void OnDisable()
     {
         if (isDead)
             Destroy(gameObject);
-    }
-
-    public void PlayEnemyDeathSound()
-    {
-        audioSource.PlayOneShot(sounds[Random.Range(3, 5)]);
-    }
-
-    public void PlayEnemyDamageSound()
-    {
-        audioSource.PlayOneShot(sounds[Random.Range(0, 3)]);
     }
 
     public void Initialization()
@@ -45,9 +67,10 @@ public class DungeonEnemy : MonoBehaviour
         UpdateColliderPosition();
     }
 
-    private void SetScale()
+    public void AttackCharacter()
     {
-        transform.localScale = Vector3.one * scale;
+        for (int i = 0; i < animators.Count; i++)
+            animators[i].Play("Attack", 0, 0);
     }
 
     private void AddAnimatorToAnimatorsList()
@@ -87,7 +110,7 @@ public class DungeonEnemy : MonoBehaviour
         PlayEnemyDamageSound();
 
         for (int i = 0; i < animators.Count; i++)
-            animators[i].Play("Take Damage", 0, 0);
+            animators[i].SetTrigger("Damage");
     }
 
     public void InvokeDeathAnimation()
@@ -105,5 +128,20 @@ public class DungeonEnemy : MonoBehaviour
             enemyLvlText.text = (enemyLVL + 1).ToString() + " LVL";
         else
             enemyLvlText.text = enemyLVL.ToString() + " LVL";
+    }
+
+    public void PlayEnemyDeathSound()
+    {
+        audioSource.PlayOneShot(sounds[Random.Range(3, 5)]);
+    }
+
+    public void PlayEnemyDamageSound()
+    {
+        audioSource.PlayOneShot(sounds[Random.Range(0, 3)]);
+    }
+
+    private void SetScale()
+    {
+        transform.localScale = Vector3.one * scale;
     }
 }

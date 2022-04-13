@@ -90,7 +90,7 @@ public class PanelsHandler : MonoBehaviour
         yield return new WaitForSeconds(1);
         DisableDungeonEnteringPanel();
         DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", true);
-        DungeonCharacter.Instance.runSpeed = 0.1f;
+        DungeonCharacter.Instance.EnableCharacterRun();
         yield return new WaitForSeconds(1);
         dungeonEnteringPanel.SetActive(false);
     }

@@ -1,16 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class DungeonCharacter : MonoBehaviour
 {
     public static DungeonCharacter Instance;
 
-    public float runSpeed;
-    public int criticalHitRate;
-    public int maxAllowedAttackAnimationsCount = 4;
-    public int boosterDamageCoefficient = 1;
-    public MeleeWeaponTrail weaponTrail;
-    public AudioSource audioSource;
+    [SerializeField] private float runSpeed;
+    [SerializeField] private int criticalHitRate;
+    [SerializeField] private int maxAllowedAttackAnimationsCount = 4;
+    [SerializeField] private int boosterDamageCoefficient = 1;
+    [SerializeField] private MeleeWeaponTrail weaponTrail;
+    [SerializeField] private AudioSource audioSource;
+
+    [Header("Health")]
+    [SerializeField] private int currentHealth;
+    [SerializeField] private int maxHealth;
+    [SerializeField] private Image healthImageFilled;
+
+    [Space]
+    [SerializeField] private List<AudioClip> sounds = new List<AudioClip>();
 
     [HideInInspector] public float lastSpeedUpValue;
     [HideInInspector] public int allowedAttackAnimationsCount = 2;
@@ -21,30 +31,59 @@ public class DungeonCharacter : MonoBehaviour
     [HideInInspector] public DungeonEnemy currentEnemy;
     [HideInInspector] public Animator animator;
 
-    public List<AudioClip> sounds = new List<AudioClip>();
+    [SerializeField] private float attackDelay;
+    [SerializeField] private float currentAttackDelayValue;
 
     private void Awake()
     {
         Instance = this;
-        LoadWeaponTrailValue();
-        LoadCriticalHitValue();
         animator = GetComponent<Animator>();
         allowedAttackAnimationsCount = PlayerPrefs.GetInt("allowedAttackAnimationsCount", 2);
 
+        LoadWeaponTrailValue();
+        LoadCriticalHitValue();
+
         if (needSpeedUpOnAwake)
-        {
             animator.speed = lastSpeedUpValue;
+
+        currentAttackDelayValue = attackDelay;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isInBattle)
+            RunForward();
+        else
+            HandleBattle();
+
+        if (currentAttackDelayValue >= 0)
+            currentAttackDelayValue -= Time.deltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        DungeonEnemy tempEnemy;
+        if (other.TryGetComponent<DungeonEnemy>(out tempEnemy))
+        {
+            isInBattle = true;
+            currentEnemy = tempEnemy;
+            other.enabled = false;
+            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
+            if (weaponTrailEnabled)
+                weaponTrail.Emit = true;
         }
     }
 
-    public void PlayRoundHitSound()
+    public void TakeDamage(int damageValue)
     {
-        audioSource.PlayOneShot(sounds[UnityEngine.Random.Range(0, 2)]);
+        currentHealth -= damageValue;
+        UpdateHPBar();
     }
 
-    public void PlayHitSound()
+    private void UpdateHPBar()
     {
-        audioSource.PlayOneShot(sounds[2]);
+        var newBarValue = ((float)currentHealth / (float)maxHealth);
+        healthImageFilled.DOFillAmount(newBarValue, 0.5f).SetEase(Ease.OutBack);
     }
 
     private void LoadWeaponTrailValue()
@@ -70,7 +109,7 @@ public class DungeonCharacter : MonoBehaviour
         if (newAnimatorCoefficient != 1)
             runSpeed = 0.15f;
         else
-            runSpeed = 0.1f;
+            EnableCharacterRun();
 
         lastSpeedUpValue = newAnimatorCoefficient;
 
@@ -101,14 +140,6 @@ public class DungeonCharacter : MonoBehaviour
         weaponTrailEnabled = true;
     }
 
-    private void FixedUpdate()
-    {
-        if (!isInBattle)
-            RunForward();
-        else
-            HandleBattle();
-    }
-
     private void RunForward()
     {
         transform.position += new Vector3(0, 0, runSpeed);
@@ -126,6 +157,9 @@ public class DungeonCharacter : MonoBehaviour
 
     public void HandleBattle()
     {
+        if (currentAttackDelayValue > 0)
+            return;
+        currentAttackDelayValue = attackDelay;
         if (animator.GetBool("EnemyIsNear") == false)
         {
             animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
@@ -144,20 +178,6 @@ public class DungeonCharacter : MonoBehaviour
             currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        DungeonEnemy tempEnemy;
-        if (other.TryGetComponent<DungeonEnemy>(out tempEnemy))
-        {
-            isInBattle = true;
-            currentEnemy = tempEnemy;
-            other.enabled = false;
-            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
-            if (weaponTrailEnabled)
-                weaponTrail.Emit = true;
-        }
-    }
-
     public void KillEnemy()
     {
         currentEnemy.InvokeDeathAnimation();
@@ -168,5 +188,25 @@ public class DungeonCharacter : MonoBehaviour
         isInBattle = false;
         if (weaponTrailEnabled)
             weaponTrail.Emit = false;
+    }
+
+    public void DisableCharacterRun()
+    {
+        runSpeed = 0;
+    }
+
+    public void EnableCharacterRun()
+    {
+        runSpeed = 0.1f;
+    }
+
+    public void PlayRoundHitSound()
+    {
+        audioSource.PlayOneShot(sounds[UnityEngine.Random.Range(0, 2)]);
+    }
+
+    public void PlayHitSound()
+    {
+        audioSource.PlayOneShot(sounds[2]);
     }
 }

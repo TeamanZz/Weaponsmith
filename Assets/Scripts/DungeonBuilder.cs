@@ -46,15 +46,15 @@ public class DungeonBuilder : MonoBehaviour
 
     private void BuildDungeon()
     {
-        // SpawnDungeonPieces();
-        // SpawnFirstWaveEnemies();
-        // SpawnChestWithGold();
-        // SpawnSecondWaveEnemies();
-        // SpawnBoss();
-        // SpawnChestWithBlueprint();
-
         SpawnDungeonPieces();
+        SpawnFirstWaveEnemies();
+        SpawnChestWithGold();
+        SpawnSecondWaveEnemies();
+        SpawnBoss();
         SpawnChestWithBlueprint();
+
+        // SpawnDungeonPieces();
+        // SpawnChestWithBlueprint();
         // SpawnChestWithGold();
     }
 
