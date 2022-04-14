@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Collections;
 
 public class DungeonCharacter : MonoBehaviour
 {
@@ -44,12 +45,19 @@ public class DungeonCharacter : MonoBehaviour
             animator.speed = lastSpeedUpValue;
     }
 
+    private IEnumerator IEAttack()
+    {
+        yield return new WaitForSeconds(3);
+        animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
+        yield return new WaitForSeconds(2.667f);
+        animator.SetInteger("AttackIndex", -1);
+        yield return IEAttack();
+    }
+
     private void FixedUpdate()
     {
         if (!isInBattle)
             RunForward();
-        else
-            HandleBattle();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,10 +65,11 @@ public class DungeonCharacter : MonoBehaviour
         DungeonEnemy tempEnemy;
         if (other.TryGetComponent<DungeonEnemy>(out tempEnemy))
         {
+            animator.SetBool("EnemyIsNear", true);
             isInBattle = true;
             currentEnemy = tempEnemy;
             other.enabled = false;
-            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
+            StartCoroutine(IEAttack());
             if (weaponTrailEnabled)
                 weaponTrail.Emit = true;
         }
@@ -158,13 +167,13 @@ public class DungeonCharacter : MonoBehaviour
 
     public void HitEnemy()
     {
-        animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
+        // animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
         currentEnemy.PlayDamageAnimation();
-        int isCrit = UnityEngine.Random.Range(0, criticalHitRate);
-        if (isCrit == 0 && canCriticalHit)
-            currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient, isDoubleDamage: true);
-        else
-            currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient);
+        // int isCrit = UnityEngine.Random.Range(0, criticalHitRate);
+        // if (isCrit == 0 && canCriticalHit)
+        //     currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient, isDoubleDamage: true);
+        // else
+        //     currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient);
     }
 
     public void KillEnemy()

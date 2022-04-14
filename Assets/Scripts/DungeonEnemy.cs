@@ -18,7 +18,7 @@ public class DungeonEnemy : MonoBehaviour
 
     private int curentSkinIndex;
     private BoxCollider detectionCollider;
-    private List<Animator> animators = new List<Animator>();
+    public List<Animator> animators = new List<Animator>();
 
     private bool isDead;
     private bool isInBattle;
@@ -113,7 +113,6 @@ public class DungeonEnemy : MonoBehaviour
     public void PlayDamageAnimation()
     {
         PlayEnemyDamageSound();
-
         for (int i = 0; i < animators.Count; i++)
             animators[i].SetTrigger("Damage");
     }
