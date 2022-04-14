@@ -22,24 +22,25 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [Space]
     public AnimationCurve costCurve;
 
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI itemNameText;
     //[FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
-    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
-    [FoldoutGroup("View Components")][FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
-    [FoldoutGroup("View Components")][SerializeField] public Image buyButtonImage;
-    [FoldoutGroup("View Components")][SerializeField] public GameObject progressBar;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject completedSign;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
-    [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
-    [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
-    [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
-    [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI coefficientText;
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI buysCountText;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject buyButton;
+    [FoldoutGroup("View Components")] [FoldoutGroup("View Components")] [SerializeField] private Button buyButtonComponent;
+    [FoldoutGroup("View Components")] [SerializeField] public Image buyButtonImage;
+    [FoldoutGroup("View Components")] [SerializeField] public GameObject progressBar;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject completedSign;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject unknownSign;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject blurPanel;
+    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemConditionsGO;
+    [FoldoutGroup("View Components")] [SerializeField] private Image progressBarFilled;
+    [FoldoutGroup("View Components")] [SerializeField] private Animator buyButtonAnimator;
+    [FoldoutGroup("View Components")] [SerializeField] private Animator iconAnimator;
     //[FoldoutGroup("View Components")] [SerializeField] private Animator generalIncreaseValueTextAnimator;
-    [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
+    [FoldoutGroup("View Components")] [SerializeField] private Animator buysCountTextAnimator;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
     //public int generalIncreaseValue;
@@ -61,7 +62,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [SerializeField] private int maxCount = 1;
     [SerializeField] private int checkValue = 0;
     [SerializeField] private List<Vector2Int> priceList = new List<Vector2Int>();
-   public void CheckPriceCoefficient()
+    public void CheckPriceCoefficient()
     {
         priceList.Clear();
         checkValue = 0;
@@ -103,11 +104,13 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             Debug.Log("Panel " + name + "Number " + i + " Result " + checkValue);
         }
 
-        checkValue = Mathf.Clamp(checkValue, buysCount, buysCount + CoefficientManager.coefficientValue);
+        checkValue = Mathf.Clamp(checkValue, 1, (int)costCurve.keys[costCurve.length - 1].time);
         currentCoefficientValue = checkValue;
 
         price = currentPrice;
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
+        if (coefficientText != null)
+            coefficientText.text = "x" + currentCoefficientValue.ToString() + "lvl";
     }
 
     private void FixedUpdate()
