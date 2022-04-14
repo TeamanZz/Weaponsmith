@@ -60,7 +60,7 @@ public class SkinsManager : MonoBehaviour
             part.Play();
         }
 
-        skins[currentNumber].SetActive(true);
+        skins[0/*currentNumber*/].SetActive(true);
         dungeonSkins[currentNumber].SetActive(true);
     }
 }

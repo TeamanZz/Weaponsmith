@@ -58,14 +58,14 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         Initialize();
     }
 
-    [SerializeField] private int currentCoefficientValue = 1;
+    public int currentCoefficientValue = 1;
     [SerializeField] private int maxCount = 1;
     [SerializeField] private int checkValue = 0;
-    [SerializeField] private List<Vector2Int> priceList = new List<Vector2Int>();
+    //[SerializeField] private List<Vector2Int> priceList = new List<Vector2Int>();
 
     public void CheckPriceCoefficient()
     {
-        priceList.Clear();
+        //priceList.Clear();
         checkValue = 0;
         int currentPrice = (int)costCurve.Evaluate(buysCount);
         //Debug.Log("Panel " + itemNameText.text + " - Coef " + (buysCount + CoefficientManager.coefficientValue) + " Lenght " + costCurve.keys[costCurve.length - 1].time);
@@ -76,9 +76,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             else
                 maxCount = (int)costCurve.keys[costCurve.length - 1].time; //- buysCount;
 
-            priceList.Add(new Vector2Int(currentPrice, currentPrice));
+            //priceList.Add(new Vector2Int(currentPrice, currentPrice));
 
-            checkValue = maxCount;
+            //checkValue = maxCount;
         }
         else
         {
@@ -94,7 +94,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             if (currentPrice + newPrice <= MoneyHandler.Instance.moneyCount)
             {
                 currentPrice += newPrice;
-                priceList.Add(new Vector2Int(currentPrice, newPrice));
+                //priceList.Add(new Vector2Int(currentPrice, newPrice));
                 checkValue += 1;
             }
             else
@@ -105,7 +105,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             Debug.Log("Panel " + name + "Number " + i + " Result " + checkValue);
         }
 
-        checkValue = Mathf.Clamp(checkValue, 1, (int)costCurve.keys[costCurve.length - 1].time);
+        checkValue = Mathf.Clamp(checkValue, 1, 9999/* (int)costCurve.keys[costCurve.length - 1].time*/);
         currentCoefficientValue = checkValue;
 
         price = currentPrice;
@@ -116,6 +116,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
     private void FixedUpdate()
     {
+        if (currentState != PanelItemState.Available)
+            return;
+
         CheckPriceCoefficient();
         if (price <= MoneyHandler.Instance.moneyCount)
         {

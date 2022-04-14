@@ -80,7 +80,9 @@ public class PanelItemInHub : MonoBehaviour
 
     public void BuyItemInOriginal()
     {
+        panelItem.currentCoefficientValue = 1;
         panelItem.BuyItem();
+
         PlayJumpAnimation();
 
         if (SFX.Instance != null)
