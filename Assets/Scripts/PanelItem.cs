@@ -130,7 +130,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             buyButtonComponent.enabled = false;
             buyButtonImage.color = Color.gray;
         }
-        CheckOnCollapse();
+        
+        //CheckOnCollapse();
     }
 
     private void Start()
