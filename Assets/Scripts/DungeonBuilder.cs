@@ -128,7 +128,7 @@ public class DungeonBuilder : MonoBehaviour
     {
         for (int i = 0; i <= firstWaveEnemiesCount; i++)
         {
-            SpawnEnemy(Random.Range(2, 6), 1.5f);
+            SpawnEnemy(Random.Range(200, 600), 1.5f);
         }
     }
 

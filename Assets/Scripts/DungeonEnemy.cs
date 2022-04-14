@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class DungeonEnemy : MonoBehaviour
 {
@@ -28,11 +29,22 @@ public class DungeonEnemy : MonoBehaviour
         // InvokeRepeating("AttackCharacter", 2, 5);
     }
 
-    private void FixedUpdate()
+    private IEnumerator IEAttack()
     {
-        if (isInBattle)
-            HandleBattle();
+        yield return new WaitForSeconds(2);
+        for (int i = 0; i < animators.Count; i++)
+            animators[i].SetInteger("AttackIndex", 1);
+        yield return new WaitForSeconds(2.667f);
+        for (int i = 0; i < animators.Count; i++)
+            animators[i].SetInteger("AttackIndex", 0);
+        yield return IEAttack();
     }
+
+    // private void FixedUpdate()
+    // {
+    //     if (isInBattle)
+    //         HandleBattle();
+    // }
 
     public void HandleBattle()
     {
@@ -48,8 +60,7 @@ public class DungeonEnemy : MonoBehaviour
             isInBattle = true;
             currentEnemy = dungeonCharacter;
             other.enabled = false;
-            for (int i = 0; i < animators.Count; i++)
-                animators[i].SetInteger("AttackIndex", 1);
+            StartCoroutine(IEAttack());
         }
     }
 
@@ -65,12 +76,6 @@ public class DungeonEnemy : MonoBehaviour
         SetEnemySkin();
         SetScale();
         UpdateColliderPosition();
-    }
-
-    public void AttackCharacter()
-    {
-        for (int i = 0; i < animators.Count; i++)
-            animators[i].Play("Attack", 0, 0);
     }
 
     private void AddAnimatorToAnimatorsList()

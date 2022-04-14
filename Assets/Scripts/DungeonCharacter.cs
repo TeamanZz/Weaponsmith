@@ -31,9 +31,6 @@ public class DungeonCharacter : MonoBehaviour
     [HideInInspector] public DungeonEnemy currentEnemy;
     [HideInInspector] public Animator animator;
 
-    [SerializeField] private float attackDelay;
-    [SerializeField] private float currentAttackDelayValue;
-
     private void Awake()
     {
         Instance = this;
@@ -45,8 +42,6 @@ public class DungeonCharacter : MonoBehaviour
 
         if (needSpeedUpOnAwake)
             animator.speed = lastSpeedUpValue;
-
-        currentAttackDelayValue = attackDelay;
     }
 
     private void FixedUpdate()
@@ -55,9 +50,6 @@ public class DungeonCharacter : MonoBehaviour
             RunForward();
         else
             HandleBattle();
-
-        if (currentAttackDelayValue >= 0)
-            currentAttackDelayValue -= Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -157,9 +149,6 @@ public class DungeonCharacter : MonoBehaviour
 
     public void HandleBattle()
     {
-        if (currentAttackDelayValue > 0)
-            return;
-        currentAttackDelayValue = attackDelay;
         if (animator.GetBool("EnemyIsNear") == false)
         {
             animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
