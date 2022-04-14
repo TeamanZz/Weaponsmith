@@ -62,6 +62,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [SerializeField] private int maxCount = 1;
     [SerializeField] private int checkValue = 0;
     [SerializeField] private List<Vector2Int> priceList = new List<Vector2Int>();
+
     public void CheckPriceCoefficient()
     {
         priceList.Clear();
@@ -71,9 +72,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (buysCount + CoefficientManager.coefficientValue > costCurve.keys[costCurve.length - 1].time || CoefficientManager.coefficientValue == 1)
         {
             if (CoefficientManager.coefficientValue == 1)
-                maxCount = 1;
+                maxCount = 0;
             else
-                maxCount = (int)costCurve.keys[costCurve.length - 1].time - buysCount;
+                maxCount = (int)costCurve.keys[costCurve.length - 1].time; //- buysCount;
 
             priceList.Add(new Vector2Int(currentPrice, currentPrice));
 
