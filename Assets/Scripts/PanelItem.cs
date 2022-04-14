@@ -49,7 +49,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public ItemEquipment currentItemEquipment;
     public PanelItemInHub currentPanelItemInHub;
 
-    public GameObject currentObject;
+    public List<GameObject> currentObject = new List<GameObject>();
     [Header("Sprite")]
     public Sprite iconSprite;
     private void Awake()

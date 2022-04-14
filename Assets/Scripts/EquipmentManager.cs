@@ -23,21 +23,21 @@ public class EquipmentManager : MonoBehaviour
         if (dungeonCharacterWeaponsList.Count < 0)
             return;
 
-        dungeonCharacterWeaponsList[weaponNumber].gameObject.SetActive(true);
-        weaponsOnAnvil[weaponNumber].gameObject.SetActive(true);
+        //dungeonCharacterWeaponsList[weaponNumber].gameObject.SetActive(true);
+        //weaponsOnAnvil[weaponNumber].gameObject.SetActive(true);
 
-        foreach (GameObject wepon in dungeonCharacterWeaponsList)
-        {
-            wepon.SetActive(false);
-        }
+        //foreach (GameObject wepon in dungeonCharacterWeaponsList)
+        //{
+        //    wepon.SetActive(false);
+        //}
 
-        foreach (GameObject weaponOn in weaponsOnAnvil)
-        {
-            weaponOn.SetActive(false);
-        }
+        //foreach (GameObject weaponOn in weaponsOnAnvil)
+        //{
+        //    weaponOn.SetActive(false);
+        //}
 
-        dungeonCharacterWeaponsList[weaponNumber].gameObject.SetActive(true);
-        weaponsOnAnvil[weaponNumber].gameObject.SetActive(true);
+        //dungeonCharacterWeaponsList[weaponNumber].gameObject.SetActive(true);
+        //weaponsOnAnvil[weaponNumber].gameObject.SetActive(true);
 
         SaveWeaponNumber();
     }
@@ -56,18 +56,18 @@ public class EquipmentManager : MonoBehaviour
             return;
         }
 
-        foreach (GameObject wepon in dungeonCharacterWeaponsList)
-        {
-            wepon.SetActive(false);
-        }
+        //foreach (GameObject wepon in dungeonCharacterWeaponsList)
+        //{
+        //    wepon.SetActive(false);
+        //}
 
-        foreach (GameObject weaponOn in weaponsOnAnvil)
-        {
-            weaponOn.SetActive(false);
-        }
+        //foreach (GameObject weaponOn in weaponsOnAnvil)
+        //{
+        //    weaponOn.SetActive(false);
+        //}
 
-        dungeonCharacterWeaponsList[weaponNumber].gameObject.SetActive(true);
-        weaponsOnAnvil[weaponNumber].gameObject.SetActive(true);
+        //dungeonCharacterWeaponsList[weaponNumber].gameObject.SetActive(true);
+        //weaponsOnAnvil[weaponNumber].gameObject.SetActive(true);
 
         Debug.Log(weaponNumber);
         Debug.Log(dungeonCharacterWeaponsList[weaponNumber].gameObject + " -> First object" + " | " + weaponsOnAnvil[weaponNumber] + " -> Two object");
