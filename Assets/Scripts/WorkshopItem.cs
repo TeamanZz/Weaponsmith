@@ -37,7 +37,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         dungeoonIsOpen = PlayerPrefs.GetInt("dungeoonIsOpen");
         enchantmentIsOpen = PlayerPrefs.GetInt("enchantmentIsOpen");
 
-        generalIncreaseValueText.text = generalIncreaseValue.ToString();
+        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
     }
 
     private void Update()
