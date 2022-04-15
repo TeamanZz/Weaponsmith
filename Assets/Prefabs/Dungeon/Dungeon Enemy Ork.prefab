@@ -1491,7 +1491,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8d41c783d37e502459f656cf95d952a3, type: 3}
   - {fileID: 8300000, guid: cae9a28ab4ec80b48ab0c6e5b29c8db1, type: 3}
   scale: 1.5
-  distanceToCollider: 1.5
+  distanceToCollider: 1
   enemyLVL: 0
   animator: {fileID: 2363075298075672282}
   currentEnemy: {fileID: 0}

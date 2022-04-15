@@ -19,6 +19,7 @@ public class DungeonCharacter : MonoBehaviour
     [SerializeField] private int currentHealth;
     [SerializeField] private int maxHealth;
     [SerializeField] private Image healthImageFilled;
+    [SerializeField] private ParticleSystem hitParticles;
 
     [Space]
     [SerializeField] private List<AudioClip> sounds = new List<AudioClip>();
@@ -47,10 +48,8 @@ public class DungeonCharacter : MonoBehaviour
 
     private IEnumerator IEAttack()
     {
-        yield return new WaitForSeconds(3);
-        animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
-        yield return new WaitForSeconds(2.667f);
-        animator.SetInteger("AttackIndex", -1);
+        yield return new WaitForSeconds(Random.Range(4, 7));
+        animator.SetTrigger("Attack");
         yield return IEAttack();
     }
 
@@ -79,6 +78,8 @@ public class DungeonCharacter : MonoBehaviour
     {
         currentHealth -= damageValue;
         UpdateHPBar();
+        hitParticles.Play();
+        animator.Play("Recieve Damage", 1);
     }
 
     private void UpdateHPBar()
@@ -156,19 +157,11 @@ public class DungeonCharacter : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void HandleBattle()
-    {
-        if (animator.GetBool("EnemyIsNear") == false)
-        {
-            animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
-            animator.SetBool("EnemyIsNear", true);
-        }
-    }
-
     public void HitEnemy()
     {
         // animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
         currentEnemy.PlayDamageAnimation();
+        currentEnemy.enemyHealthBar.TakeDamage(damage: 1);
         // int isCrit = UnityEngine.Random.Range(0, criticalHitRate);
         // if (isCrit == 0 && canCriticalHit)
         //     currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient, isDoubleDamage: true);
@@ -180,7 +173,6 @@ public class DungeonCharacter : MonoBehaviour
     {
         currentEnemy.InvokeDeathAnimation();
         currentEnemy = null;
-        animator.SetInteger("AttackIndex", -1);
         animator.SetBool("EnemyIsNear", false);
         animator.SetTrigger("EnemyDeath");
         isInBattle = false;

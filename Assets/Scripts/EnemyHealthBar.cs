@@ -31,7 +31,7 @@ public class EnemyHealthBar : MonoBehaviour
     }
 
     [ContextMenu("Take damage")]
-    public void TakeDamageControll(int damage = 1, bool isDoubleDamage = false)
+    public void TakeDamage(int damage = 1, bool isDoubleDamage = false)
     {
         if (enemyComponent == null)
         {

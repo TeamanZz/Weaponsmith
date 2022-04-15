@@ -52,10 +52,6 @@ public class DungeonBuilder : MonoBehaviour
         SpawnSecondWaveEnemies();
         SpawnBoss();
         SpawnChestWithBlueprint();
-
-        // SpawnDungeonPieces();
-        // SpawnChestWithBlueprint();
-        // SpawnChestWithGold();
     }
 
     private void SpawnChestWithGold()
