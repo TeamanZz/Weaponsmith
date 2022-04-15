@@ -16,6 +16,7 @@ public class EnemyHealthBar : MonoBehaviour
     public ParticleSystem hitParticles;
     public ParticleSystem doubleHitParticles;
     public ParticleSystem deathParticles;
+    public ParticleSystem goldParticles;
 
     private DungeonEnemy enemyComponent;
 
@@ -60,6 +61,7 @@ public class EnemyHealthBar : MonoBehaviour
             DungeonCharacter.Instance.KillEnemy();
             canvas.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack);
             deathParticles.Play();
+            goldParticles.Play();
             return;
         }
     }

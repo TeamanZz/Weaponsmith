@@ -71,6 +71,7 @@ public class PanelsHandler : MonoBehaviour
     public void EnableDungeonEnteringPanel()
     {
         dungeonEnteringPanel.SetActive(true);
+        loadoutObject.SetActive(false);
         dungeonEnteringPanel.transform.localScale = Vector3.one;
         StartCoroutine(IEEnableDungeonEnteringPanel());
     }

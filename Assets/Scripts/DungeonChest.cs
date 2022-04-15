@@ -13,6 +13,8 @@ public class DungeonChest : MonoBehaviour
     [SerializeField] private List<GameObject> rewardsVisualObject = new List<GameObject>();
 
     private ChestFilling currentFilling;
+    public ParticleSystem openParticles;
+    public Transform cube;
 
     public void Initialize(ChestFilling filling)
     {
@@ -51,7 +53,16 @@ public class DungeonChest : MonoBehaviour
         {
             chestLid.DOLocalRotate(openedLidRotation, openTime);
             TakeReward();
+            RemoveChest();
+            openParticles.Play();
         }
+    }
+
+    private void RemoveChest()
+    {
+        cube.DOLocalMoveY(cube.transform.position.y - 5, 0.5f).SetEase(Ease.InBack);
+        transform.DOLocalRotate(new Vector3(0, -1000, 0), 1.5f).SetEase(Ease.InBack);
+        transform.DOLocalMoveY(transform.position.y - 6f, 1.5f).SetEase(Ease.InBack);
     }
 
     public enum ChestFilling
