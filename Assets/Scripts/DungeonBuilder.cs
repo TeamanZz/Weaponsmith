@@ -27,12 +27,18 @@ public class DungeonBuilder : MonoBehaviour
     [SerializeField] private int bossHealth = 12;
     [SerializeField] private float bossScale = 3f;
 
+
+    [SerializeField] private int minEnemiesHealth;
+    [SerializeField] private int maxEnemiesHealth;
+
     [SerializeField] private GameObject chestPrefab;
 
     private GameObject lastSpawnedPiece;
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
     private bool needSpawnBoss;
+
+
 
     private void Awake()
     {
@@ -116,7 +122,7 @@ public class DungeonBuilder : MonoBehaviour
     {
         for (int i = 0; i <= secondWaveEnemiesCount; i++)
         {
-            SpawnEnemy(Random.Range(2, 6), 1.5f);
+            SpawnEnemy(Random.Range(minEnemiesHealth, maxEnemiesHealth), 1.5f);
         }
     }
 
@@ -124,7 +130,7 @@ public class DungeonBuilder : MonoBehaviour
     {
         for (int i = 0; i <= firstWaveEnemiesCount; i++)
         {
-            SpawnEnemy(Random.Range(200, 600), 1.5f);
+            SpawnEnemy(Random.Range(minEnemiesHealth, maxEnemiesHealth), 1.5f);
         }
     }
 

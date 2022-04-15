@@ -14,6 +14,7 @@ public class DungeonCharacter : MonoBehaviour
     [SerializeField] private int boosterDamageCoefficient = 1;
     [SerializeField] private MeleeWeaponTrail weaponTrail;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private CapsuleCollider detectionCollider;
 
     [Header("Health")]
     [SerializeField] private int currentHealth;
@@ -33,10 +34,13 @@ public class DungeonCharacter : MonoBehaviour
     [HideInInspector] public DungeonEnemy currentEnemy;
     [HideInInspector] public Animator animator;
 
+    private Coroutine attackCoroutine;
+
     private void Awake()
     {
         Instance = this;
         animator = GetComponent<Animator>();
+        detectionCollider = GetComponent<CapsuleCollider>();
         allowedAttackAnimationsCount = PlayerPrefs.GetInt("allowedAttackAnimationsCount", 2);
 
         LoadWeaponTrailValue();
@@ -48,7 +52,7 @@ public class DungeonCharacter : MonoBehaviour
 
     private IEnumerator IEAttack()
     {
-        yield return new WaitForSeconds(Random.Range(4, 7));
+        yield return new WaitForSeconds(Random.Range(3, 4.5f));
         animator.SetTrigger("Attack");
         yield return IEAttack();
     }
@@ -67,8 +71,8 @@ public class DungeonCharacter : MonoBehaviour
             animator.SetBool("EnemyIsNear", true);
             isInBattle = true;
             currentEnemy = tempEnemy;
-            other.enabled = false;
-            StartCoroutine(IEAttack());
+            detectionCollider.enabled = false;
+            attackCoroutine = StartCoroutine(IEAttack());
             if (weaponTrailEnabled)
                 weaponTrail.Emit = true;
         }
@@ -175,9 +179,12 @@ public class DungeonCharacter : MonoBehaviour
         currentEnemy = null;
         animator.SetBool("EnemyIsNear", false);
         animator.SetTrigger("EnemyDeath");
+        detectionCollider.enabled = true;
         isInBattle = false;
         if (weaponTrailEnabled)
             weaponTrail.Emit = false;
+
+        StopCoroutine(attackCoroutine);
     }
 
     public void DisableCharacterRun()

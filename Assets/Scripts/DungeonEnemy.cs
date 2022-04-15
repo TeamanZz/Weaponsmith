@@ -25,7 +25,7 @@ public class DungeonEnemy : MonoBehaviour
 
     private IEnumerator IEAttack()
     {
-        yield return new WaitForSeconds(Random.Range(4, 9));
+        yield return new WaitForSeconds(Random.Range(3, 4.5f));
         animator.SetTrigger("Attack");
         yield return IEAttack();
     }
@@ -37,7 +37,7 @@ public class DungeonEnemy : MonoBehaviour
         {
             isInBattle = true;
             currentEnemy = dungeonCharacter;
-            other.enabled = false;
+            detectionCollider.enabled = false;
             StartCoroutine(IEAttack());
         }
     }
