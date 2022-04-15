@@ -39,6 +39,7 @@ public class PanelsHandler : MonoBehaviour
 
     public static bool currentLocationInTheDungeon = false;
 
+    public GameObject loadoutObject;
     public void Awake()
     {
         Instance = this;
@@ -46,6 +47,8 @@ public class PanelsHandler : MonoBehaviour
         currentLocationInTheDungeon = false;
         mainCamera.SetActive(true);
         dungeonCamera.SetActive(false);
+        loadoutObject.SetActive(false);
+
         DisableDungeonPreviewUI();
     }
 
@@ -148,6 +151,7 @@ public class PanelsHandler : MonoBehaviour
             if (LoadoutController.loadoutController != null)
                 LoadoutController.loadoutController.Initialization();
 
+            loadoutObject.SetActive(true);
             DungeonHubManager.dungeonHubManager.OpenPanel(0);
             return;
         }
@@ -158,6 +162,8 @@ public class PanelsHandler : MonoBehaviour
             currentLocationInTheDungeon = false;
             mainCamera.SetActive(true);
             dungeonCamera.SetActive(false);
+
+            loadoutObject.SetActive(false);
         }
 
         for (int i = 0; i < panels.Count; i++)

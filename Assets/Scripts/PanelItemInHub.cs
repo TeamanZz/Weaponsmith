@@ -27,7 +27,7 @@ public class PanelItemInHub : MonoBehaviour
     public Animator buysCountTextAnimator;
     public Animator selectedButtonAnimator;
 
-    public GameObject currentObject;
+    public List<GameObject> currentObject = new List<GameObject>();
 
     public TextMeshProUGUI viewValueText;
     public Image viewIcon;
@@ -48,9 +48,12 @@ public class PanelItemInHub : MonoBehaviour
         //
         value = panelItem.currentItemEquipment.value;
 
-
-        if (newPanelItem.currentObject != null)
-            currentObject = newPanelItem.currentObject;
+        currentObject = newPanelItem.currentObject;
+        //foreach (var currentObjectInPanel in currentObject)
+        //{
+        //    if (currentObjectInPanel != null)
+        //        currentObject = currentObjectInPanel;
+        //}
 
         itemNameText.text = newPanelItem.itemName;
         itemIcon.sprite = newPanelItem.weaponSprite.sprite;
@@ -80,7 +83,9 @@ public class PanelItemInHub : MonoBehaviour
 
     public void BuyItemInOriginal()
     {
+        panelItem.currentCoefficientValue = 1;
         panelItem.BuyItem();
+
         PlayJumpAnimation();
 
         if (SFX.Instance != null)
@@ -151,7 +156,13 @@ public class PanelItemInHub : MonoBehaviour
         }
 
         selectedWeaponButton.interactable = false;
-        currentObject.SetActive(true);
+
+        foreach (var currentObjectInPanel in currentObject)
+        {
+            if (currentObjectInPanel != null)
+                currentObjectInPanel.SetActive(true);
+        }
+        //currentObject.SetActive(true);
 
         //DungeonBuilder.Instance.CameraFocus(currentObject.transform);
     }
@@ -161,6 +172,12 @@ public class PanelItemInHub : MonoBehaviour
             return;
 
         selectedWeaponButton.interactable = true;
+
+        foreach (var currentObjectInPanel in currentObject)
+        {
+            if (currentObjectInPanel != null)
+                currentObjectInPanel.SetActive(false);
+        }
 
         switch (panelItem.currentEquipmentType)
         {
