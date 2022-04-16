@@ -62,7 +62,6 @@ public class DungeonRewardPanel : MonoBehaviour
         foreach (var item in rewardsList)
             Destroy(item.gameObject);
         rewardsList.Clear();
-        DungeonManager.Instance.ResetDungeon();
     }
 
     public IEnumerator StarsInitialization(int number)
@@ -77,6 +76,7 @@ public class DungeonRewardPanel : MonoBehaviour
 
     public void OpenRewardPanel(int starsValue)
     {
+        DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", false);
         DungeonManager.Instance.isDungeonStarted = false;
         for (int i = 0; i < starsViewImage.Length; i++)
         {

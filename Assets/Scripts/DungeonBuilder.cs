@@ -26,7 +26,6 @@ public class DungeonBuilder : MonoBehaviour
     [SerializeField] private int bossHealth = 12;
     [SerializeField] private float bossScale = 3f;
 
-
     [SerializeField] private int minEnemiesHealth;
     [SerializeField] private int maxEnemiesHealth;
 
@@ -35,7 +34,6 @@ public class DungeonBuilder : MonoBehaviour
     private GameObject lastSpawnedPiece;
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
-    private bool needSpawnBoss;
 
     private List<GameObject> enemiesList = new List<GameObject>();
     private List<GameObject> buildedPiecesList = new List<GameObject>();
@@ -47,11 +45,18 @@ public class DungeonBuilder : MonoBehaviour
 
     private void Start()
     {
-        BuildDungeon();
+        // BuildDungeon();
     }
 
-    private void BuildDungeon()
+    private void ResetVariablesValues()
     {
+        lastSpawnedPieceZPos = 0;
+        lastSpawnedEnemyZPos = 0;
+    }
+
+    public void BuildDungeon()
+    {
+        ResetVariablesValues();
         SpawnDungeonPieces();
         SpawnFirstWaveEnemies();
         SpawnChestWithGold();
@@ -66,11 +71,13 @@ public class DungeonBuilder : MonoBehaviour
         {
             Destroy(enemiesList[i]);
         }
+        enemiesList.Clear();
 
         for (int i = 0; i < buildedPiecesList.Count; i++)
         {
             Destroy(buildedPiecesList[i]);
         }
+        buildedPiecesList.Clear();
     }
 
     private void SpawnChestWithGold()

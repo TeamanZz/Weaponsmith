@@ -42,11 +42,4 @@ public class DungeonManager : MonoBehaviour
         dungeonCamera.transform.rotation = Quaternion.Euler(7, 90, 0);
         dungeonCamera.targetDistance = 0;
     }
-
-    public void ResetDungeon()
-    {
-        ShowCharacterPreview();
-        DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", false);
-        DungeonBuilder.Instance.ResetDungeon();
-    }
 }

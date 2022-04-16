@@ -27,6 +27,7 @@ public class PanelsHandler : MonoBehaviour
 
     [Space]
     public GameObject dungeonPreviewUI;
+    public GameObject dungeonBarsGroup;
     public GameObject dungeonEnteringPanel;
     public GameObject panelsContainer;
 
@@ -68,6 +69,40 @@ public class PanelsHandler : MonoBehaviour
         panels.AddRange(stortage.panels);
     }
 
+    public void HandleDungeonPanelUI()
+    {
+        if (DungeonManager.Instance.isDungeonStarted)
+        {
+            panelsContainer.SetActive(false);
+            dungeonBarsGroup.SetActive(false);
+        }
+        else
+        {
+            EnablePanelsContainer();
+            dungeonPreviewUI.SetActive(true);
+            dungeonBarsGroup.SetActive(true);
+        }
+    }
+
+    public void DisablePanelsContainer()
+    {
+        if (DungeonManager.Instance.isDungeonStarted)
+        {
+            panelsContainer.SetActive(false);
+            dungeonBarsGroup.SetActive(false);
+        }
+    }
+
+    public void EnablePanelsContainer()
+    {
+        panelsContainer.SetActive(true);
+    }
+
+    public void DisableDungeonPreviewUI()
+    {
+        dungeonPreviewUI.SetActive(false);
+    }
+
     public void EnableDungeonEnteringPanel()
     {
         dungeonEnteringPanel.SetActive(true);
@@ -81,14 +116,8 @@ public class PanelsHandler : MonoBehaviour
         dungeonEnteringPanel.transform.DOScale(0, 1f).SetEase(Ease.InBack);
     }
 
-    public void EnablePanelsContainer()
-    {
-        panelsContainer.SetActive(true);
-    }
-
     private IEnumerator IEEnableDungeonEnteringPanel()
     {
-
         DungeonManager.Instance.SetCharacterOnStart();
         DisablePanelsContainer();
         yield return new WaitForSeconds(1);
@@ -97,24 +126,6 @@ public class PanelsHandler : MonoBehaviour
         DungeonCharacter.Instance.EnableCharacterRun();
         yield return new WaitForSeconds(1);
         dungeonEnteringPanel.SetActive(false);
-    }
-
-    public void DisablePanelsContainer()
-    {
-        if (DungeonManager.Instance.isDungeonStarted)
-            panelsContainer.SetActive(false);
-    }
-
-    public void EnableDungeonPreviewUI()
-    {
-        if (DungeonManager.Instance.isDungeonStarted)
-            return;
-        dungeonPreviewUI.SetActive(true);
-    }
-
-    public void DisableDungeonPreviewUI()
-    {
-        dungeonPreviewUI.SetActive(false);
     }
 
     public void OpenPanel(int panelIndex)
