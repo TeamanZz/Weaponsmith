@@ -14,7 +14,6 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private TrackingCamera dungeonCamera;
     [SerializeField] private Transform dungeonCameraPreviewPos;
     [SerializeField] private Transform dungeonCameraStartPos;
-    [SerializeField] private int currentStarValue = 0;
 
     private void Awake()
     {
@@ -39,14 +38,15 @@ public class DungeonManager : MonoBehaviour
             return;
         dungeonCharacter.transform.position = dungeonCharacterPreviewPos.position;
         dungeonCharacter.transform.rotation = Quaternion.Euler(0, -90, 0);
-
         dungeonCamera.transform.position = dungeonCameraPreviewPos.position;
         dungeonCamera.transform.rotation = Quaternion.Euler(7, 90, 0);
         dungeonCamera.targetDistance = 0;
     }
 
-    public void ClearDungeon()
+    public void ResetDungeon()
     {
-        currentStarValue = 0;
+        ShowCharacterPreview();
+        DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", false);
+        DungeonBuilder.Instance.ResetDungeon();
     }
 }

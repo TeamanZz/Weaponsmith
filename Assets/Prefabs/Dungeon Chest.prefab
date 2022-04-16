@@ -316,6 +316,7 @@ MonoBehaviour:
   - {fileID: 35615415875380193}
   openParticles: {fileID: 7252629974342309069}
   cube: {fileID: 1245310011906829170}
+  boxCollider: {fileID: 8550988676938562274}
 --- !u!82 &721645953009775916
 AudioSource:
   m_ObjectHideFlags: 0

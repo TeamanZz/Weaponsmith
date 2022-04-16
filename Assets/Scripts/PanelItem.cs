@@ -8,39 +8,37 @@ using TMPro;
 public class PanelItem : MonoBehaviour, IBuyableItem
 {
     public PanelItemState currentState;
-    public CurrentPanel currentPanelState;
     public ItemEquipment.EquipmentType currentEquipmentType;
 
-    public PanelItem connectPanel;
-    public PanelItem nextUpgradeItem;
     public string itemName;
     public int index;
     public int currentWeaponNumber = 0;
-    //[SerializeField] private int increaseValue;
+
     [Space]
     public int buysCount;
+
     [Space]
     public AnimationCurve costCurve;
 
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI itemNameText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
     //[FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI priceText;
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI coefficientText;
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI buysCountText;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject buyButton;
-    [FoldoutGroup("View Components")] [FoldoutGroup("View Components")] [SerializeField] private Button buyButtonComponent;
-    [FoldoutGroup("View Components")] [SerializeField] public Image buyButtonImage;
-    [FoldoutGroup("View Components")] [SerializeField] public GameObject progressBar;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject completedSign;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemIcon;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject unknownSign;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject blurPanel;
-    [FoldoutGroup("View Components")] [SerializeField] private GameObject itemConditionsGO;
-    [FoldoutGroup("View Components")] [SerializeField] private Image progressBarFilled;
-    [FoldoutGroup("View Components")] [SerializeField] private Animator buyButtonAnimator;
-    [FoldoutGroup("View Components")] [SerializeField] private Animator iconAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI coefficientText;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject buyButton;
+    [FoldoutGroup("View Components")][FoldoutGroup("View Components")][SerializeField] private Button buyButtonComponent;
+    [FoldoutGroup("View Components")][SerializeField] public Image buyButtonImage;
+    [FoldoutGroup("View Components")][SerializeField] public GameObject progressBar;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject completedSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemIcon;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject unknownSign;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject blurPanel;
+    [FoldoutGroup("View Components")][SerializeField] private GameObject itemConditionsGO;
+    [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
+    [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
     //[FoldoutGroup("View Components")] [SerializeField] private Animator generalIncreaseValueTextAnimator;
-    [FoldoutGroup("View Components")] [SerializeField] private Animator buysCountTextAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
     //public int generalIncreaseValue;
@@ -85,8 +83,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             maxCount = buysCount + CoefficientManager.coefficientValue;
         }
 
-        //Debug.Log("Panel " + name + " MaxCount " + maxCount);
-
         for (int i = buysCount; i < maxCount; i++)
         {
             int newPrice = (int)costCurve.Evaluate(i);
@@ -102,7 +98,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 break;
             }
 
-            Debug.Log("Panel " + name + "Number " + i + " Result " + checkValue);
         }
 
         checkValue = Mathf.Clamp(checkValue, 1, 9999/* (int)costCurve.keys[costCurve.length - 1].time*/);
@@ -130,7 +125,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             buyButtonComponent.enabled = false;
             buyButtonImage.color = Color.gray;
         }
-        
+
         //CheckOnCollapse();
     }
 
@@ -143,14 +138,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         ChangeState(currentState);
     }
 
-    //show weapon
-    public void ShowWeaponsByNumber()
-    {
-        if (currentPanelState == CurrentPanel.parent)
-        {
-            Debug.Log("\n" + "Current weapon number - " + currentWeaponNumber);
-        }
-    }
     private void SaveData()
     {
         // SaveState();
@@ -209,23 +196,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
             SFX.Instance.PlayQuestComplete();
             ChangeState(PanelItemState.Collapsed);
-
-            if (connectPanel.currentState == PanelItemState.Collapsed)
-            {
-                //if (currentPanelItemInHub != null)
-                //{
-                //    Debug.Log("Collapse in parent");
-                //    currentPanelItemInHub.CollapseItem();
-                //}
-
-                if (nextUpgradeItem == null)
-                {
-                    Debug.Log("Next upgrade is null");
-                    return;
-                }
-
-                nextUpgradeItem.ChangeState(PanelItemState.WaitingForDrawing);
-            }
         }
     }
 
@@ -264,17 +234,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 SetAvailableItemView();
                 currentItemEquipment.currentCount = buysCount;
 
-                if (currentPanelState == CurrentPanel.parent)
-                {
-                    if (DungeonHubManager.dungeonHubManager == null)
-                        break;
 
-                    DungeonHubManager.dungeonHubManager.AddEquipment(this);
-                    if (connectPanel != null)
-                        DungeonHubManager.dungeonHubManager.AddEquipment(connectPanel);
-                    //connectPanel.ChangeState(connectPanel.currentState);
-                }
-                Debug.Log("Start");
+                if (DungeonHubManager.dungeonHubManager == null)
+                    break;
+
+                DungeonHubManager.dungeonHubManager.AddEquipment(this);
                 break;
         }
     }
@@ -359,20 +323,12 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         completedSign.SetActive(false);
         itemIcon.SetActive(true);
         itemNameText.text = itemName;
-
-        if (currentPanelState == CurrentPanel.parent)
-        {
-            if (connectPanel != null)
-                connectPanel.ChangeStateViaLoader(PanelItemState.Available);
-            else
-                Debug.Log("Child panel = null " + connectPanel);
-        }
     }
 
     //WaitingForDrawing
     public void SetWaitingForDrawingItemView()
     {
-        CraftPanelItemsManager.Instance.currentWaitingPanel = this;
+        // CraftPanelItemsManager.Instance.currentWaitingPanel = this;
 
         //itemConditionsGO.SetActive(true);
         itemConditionsGO.SetActive(false);
@@ -388,11 +344,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         itemIcon.SetActive(false);
         unknownSign.SetActive(true);
 
-        if (CraftPanelItemsManager.Instance != null && CraftPanelItemsManager.Instance.awardPanel != null)
-        {
-            CraftPanelItemsManager.Instance.awardPanel[EraController.Instance.currentEraNumber].SetActive(true);
-            // PlayerPrefs.SetInt("AwardPanel", 1);
-        }
+        // if (CraftPanelItemsManager.Instance != null && CraftPanelItemsManager.Instance.awardPanel != null)
+        // {
+        //     CraftPanelItemsManager.Instance.awardPanel[EraController.Instance.currentEraNumber].SetActive(true);
+        //     // PlayerPrefs.SetInt("AwardPanel", 1);
+        // }
 
         // PlayerPrefs.SetInt("currentWaitingPanelNumber", index);
     }

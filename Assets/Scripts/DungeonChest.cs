@@ -15,7 +15,7 @@ public class DungeonChest : MonoBehaviour
     private ChestFilling currentFilling;
     public ParticleSystem openParticles;
     public Transform cube;
-
+    public BoxCollider boxCollider;
     public void Initialize(ChestFilling filling)
     {
         currentFilling = filling;
@@ -42,6 +42,8 @@ public class DungeonChest : MonoBehaviour
 
             case ChestFilling.BlueprintAndMoney:
                 DungeonRewardPanel.Instance.OpenRewardPanel(3);
+                CraftPanelItemsManager.Instance.OpenNewBlueprint();
+                DungeonCharacter.Instance.DisableCharacterRun();
                 break;
         }
     }
@@ -51,6 +53,7 @@ public class DungeonChest : MonoBehaviour
         DungeonCharacter character;
         if (other.TryGetComponent<DungeonCharacter>(out character))
         {
+            boxCollider.enabled = false;
             chestLid.DOLocalRotate(openedLidRotation, openTime);
             TakeReward();
             RemoveChest();

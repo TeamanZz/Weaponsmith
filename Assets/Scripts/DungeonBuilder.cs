@@ -12,7 +12,6 @@ public class DungeonBuilder : MonoBehaviour
 
     [SerializeField] private int startDungeonPiecesCount = 40;
 
-
     [Header("Enemy Spawn")]
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform enemiesContainer;
@@ -38,7 +37,8 @@ public class DungeonBuilder : MonoBehaviour
     private int lastSpawnedEnemyZPos;
     private bool needSpawnBoss;
 
-
+    private List<GameObject> enemiesList = new List<GameObject>();
+    private List<GameObject> buildedPiecesList = new List<GameObject>();
 
     private void Awake()
     {
@@ -60,6 +60,19 @@ public class DungeonBuilder : MonoBehaviour
         SpawnChestWithBlueprint();
     }
 
+    public void ResetDungeon()
+    {
+        for (int i = 0; i < enemiesList.Count; i++)
+        {
+            Destroy(enemiesList[i]);
+        }
+
+        for (int i = 0; i < buildedPiecesList.Count; i++)
+        {
+            Destroy(buildedPiecesList[i]);
+        }
+    }
+
     private void SpawnChestWithGold()
     {
         int newZPos = Random.Range(minDistanceBetweenEnemies, maxDistanceBetweenEnemies) + lastSpawnedEnemyZPos;
@@ -67,10 +80,12 @@ public class DungeonBuilder : MonoBehaviour
         GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
         chestComponent.Initialize(DungeonChest.ChestFilling.Money);
-        DungeonRewardPanel.Instance.AddItem(DungeonRewardPanel.Instance.moneySprite, chestComponent.currentMoneyReward.ToString());
+        DungeonRewardPanel.Instance.AddMoneyItem(chestComponent.currentMoneyReward.ToString());
 
         chestObject.transform.localPosition = new Vector3(0, 0, newZPos);
         lastSpawnedEnemyZPos = newZPos;
+        buildedPiecesList.Add(chestObject);
+
     }
 
     private void SpawnChestWithBlueprint()
@@ -80,11 +95,12 @@ public class DungeonBuilder : MonoBehaviour
         GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
         chestComponent.Initialize(DungeonChest.ChestFilling.BlueprintAndMoney);
-        DungeonRewardPanel.Instance.AddItem(DungeonRewardPanel.Instance.armorSprite, "New Blueprint");
-        DungeonRewardPanel.Instance.AddItem(DungeonRewardPanel.Instance.weaponSprite, "New Blueprint");
+        DungeonRewardPanel.Instance.AddMoneyItem(chestComponent.currentMoneyReward.ToString());
+        DungeonRewardPanel.Instance.AddItem();
 
         chestObject.transform.localPosition = new Vector3(0, 0, newZPos);
         lastSpawnedEnemyZPos = newZPos;
+        buildedPiecesList.Add(chestObject);
     }
 
     public void SpawnPiece()
@@ -92,6 +108,7 @@ public class DungeonBuilder : MonoBehaviour
         lastSpawnedPiece = Instantiate(piecePrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.identity, piecesContainer);
         lastSpawnedPiece.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
         lastSpawnedPieceZPos += 5;
+        buildedPiecesList.Add(lastSpawnedPiece);
     }
 
     public void SpawnEnemy(int hpValue, float modelScale, float distanceCoefficient = 1)
@@ -111,6 +128,7 @@ public class DungeonBuilder : MonoBehaviour
         enemy.transform.localScale = Vector3.one * modelScale;
 
         lastSpawnedEnemyZPos = newZPos;
+        enemiesList.Add(enemy);
     }
 
     private void SpawnBoss()

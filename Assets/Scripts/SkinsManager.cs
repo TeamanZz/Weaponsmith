@@ -43,8 +43,6 @@ public class SkinsManager : MonoBehaviour
     [ContextMenu("Change Skin")]
     public void ChangeSkin()
     {
-        int currentNumber = Mathf.Clamp(currentSkinIndex, 0, dungeonSkins.Count - 1);
-
         foreach (GameObject dungeSkin in dungeonSkins)
         {
             dungeSkin.SetActive(false);
@@ -61,6 +59,6 @@ public class SkinsManager : MonoBehaviour
         }
 
         skins[0/*currentNumber*/].SetActive(true);
-        dungeonSkins[currentNumber].SetActive(true);
+        dungeonSkins[currentSkinIndex].SetActive(true);
     }
 }

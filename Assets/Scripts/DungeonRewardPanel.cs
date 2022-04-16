@@ -24,20 +24,35 @@ public class DungeonRewardPanel : MonoBehaviour
     public GridLayoutGroup group;
     public RewardUIItem itemPrefab;
 
-    public List<RewardUIItem> rewardsList = new List<RewardUIItem>();
+    public PanelsStortage panelsStorage;
 
-    public int currentStar = 2;
+    public List<RewardUIItem> rewardsList = new List<RewardUIItem>();
 
     public void Awake()
     {
         Instance = this;
     }
 
-    public void AddItem(Sprite sprite, string title)
+    public void AddItem()
+    {
+        var newAnvilItem = panelsStorage.panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
+        RewardUIItem newItem = Instantiate(itemPrefab, group.transform);
+
+        if (newAnvilItem.currentEquipmentType == ItemEquipment.EquipmentType.Weapon)
+        {
+            newItem.InitializePanel(weaponSprite, "New weapon blueprint");
+        }
+        else if (newAnvilItem.currentEquipmentType == ItemEquipment.EquipmentType.Armor)
+        {
+            newItem.InitializePanel(armorSprite, "New armor blueprint");
+        }
+        rewardsList.Add(newItem);
+    }
+
+    public void AddMoneyItem(string currencyCount)
     {
         RewardUIItem newItem = Instantiate(itemPrefab, group.transform);
-        newItem.InitializePanel(sprite, title);
-
+        newItem.InitializePanel(moneySprite, currencyCount);
         rewardsList.Add(newItem);
     }
 
@@ -45,11 +60,11 @@ public class DungeonRewardPanel : MonoBehaviour
     {
         panel.SetActive(false);
         foreach (var item in rewardsList)
-        {
             Destroy(item.gameObject);
-        }
         rewardsList.Clear();
+        DungeonManager.Instance.ResetDungeon();
     }
+
     public IEnumerator StarsInitialization(int number)
     {
         number = Mathf.Clamp(number, 0, starsViewImage.Length);
@@ -62,6 +77,7 @@ public class DungeonRewardPanel : MonoBehaviour
 
     public void OpenRewardPanel(int starsValue)
     {
+        DungeonManager.Instance.isDungeonStarted = false;
         for (int i = 0; i < starsViewImage.Length; i++)
         {
             starsViewImage[i].transform.localScale = Vector3.zero;
@@ -79,5 +95,4 @@ public class DungeonRewardPanel : MonoBehaviour
 
         coroutine = StartCoroutine(StarsInitialization(starsValue));
     }
-
 }
