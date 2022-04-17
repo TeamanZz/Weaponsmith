@@ -45,9 +45,9 @@ public class DungeonChest : MonoBehaviour
                 break;
 
             case ChestFilling.BlueprintAndMoney:
+                DungeonCharacter.Instance.DisableCharacterRun();
                 DungeonRewardPanel.Instance.OpenRewardPanel(3);
                 CraftPanelItemsManager.Instance.OpenNewBlueprint();
-                DungeonCharacter.Instance.DisableCharacterRun();
                 MoneyHandler.Instance.AddImprovementPoint();
                 break;
         }

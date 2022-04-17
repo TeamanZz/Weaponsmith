@@ -77,7 +77,10 @@ public class DungeonRewardPanel : MonoBehaviour
     public void OpenRewardPanel(int starsValue)
     {
         DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", false);
+        DungeonCharacter.Instance.animator.SetBool("EnemyIsNear", false);
+        DungeonCharacter.Instance.isInBattle = false;
         DungeonManager.Instance.isDungeonStarted = false;
+
         for (int i = 0; i < starsViewImage.Length; i++)
         {
             starsViewImage[i].transform.localScale = Vector3.zero;

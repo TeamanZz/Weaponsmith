@@ -69,6 +69,7 @@ public class DungeonCharacter : MonoBehaviour
         characterDamage = damageValue;
         currentHealth = hpValue;
         maxHealth = hpValue;
+        UpdateHPBar();
     }
 
     private IEnumerator IEAttack()
@@ -111,6 +112,15 @@ public class DungeonCharacter : MonoBehaviour
         animator.Play("Recieve Damage", 1);
         var newPopup = Instantiate(damageTextPopup, transform.position + new Vector3(-2, 1, 0), Quaternion.Euler(32, 0, 0));
         newPopup.GetComponent<DungeonPopupText>().InitializeCharacterDamageText(damageValue.ToString());
+
+        if (currentHealth <= 0)
+        {
+            DungeonCharacter.Instance.DisableCharacterRun();
+            DungeonRewardPanel.Instance.OpenRewardPanel(1);
+            currentEnemy.gameObject.SetActive(false);
+            detectionCollider.enabled = true;
+
+        }
     }
 
     private void UpdateHPBar()
@@ -187,8 +197,6 @@ public class DungeonCharacter : MonoBehaviour
         // PlayerPrefs.SetInt("allowedAttackAnimationsCount", allowedAttackAnimationsCount);
         PlayerPrefs.Save();
     }
-
-
 
     public void KillEnemy()
     {
