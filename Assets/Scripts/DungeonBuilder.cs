@@ -71,12 +71,13 @@ public class DungeonBuilder : MonoBehaviour
         {
             Destroy(enemiesList[i]);
         }
-        enemiesList.Clear();
 
         for (int i = 0; i < buildedPiecesList.Count; i++)
         {
             Destroy(buildedPiecesList[i]);
         }
+
+        enemiesList.Clear();
         buildedPiecesList.Clear();
     }
 

@@ -6,11 +6,7 @@ using UnityEngine.UI;
 
 public class LoadoutController : MonoBehaviour
 {
-    public static LoadoutController loadoutController;
-    [Header("Data")]
-    public float health = 50f;
-    //public float protection = 0f;
-    //public float damage = 0f;
+    public static LoadoutController Instance;
 
     [Header("UI")]
     public List<Image> fill = new List<Image>();
@@ -26,14 +22,19 @@ public class LoadoutController : MonoBehaviour
 
     public void Awake()
     {
-        loadoutController = this;
+        Instance = this;
         Initialization();
+    }
+
+    public void InitializeCharacterStats()
+    {
+        DungeonCharacter.Instance.InitializeStats(improvementScoreCounter[0] * pointValue, improvementScoreCounter[1] * pointValue, improvementScoreCounter[2] * pointValue);
     }
 
     [ContextMenu("Initialization")]
     public void Initialization()
     {
-        FillTheBar(fill[0], health + (improvementScoreCounter[0] * pointValue));
+        FillTheBar(fill[0], (improvementScoreCounter[0] * pointValue));
 
         if (hubManager.armorActivatePanel == null)
             FillTheBar(fill[1], (improvementScoreCounter[1] * pointValue));
@@ -74,7 +75,7 @@ public class LoadoutController : MonoBehaviour
         switch (number)
         {
             case 0:
-                FillTheBar(fill[number], health + (improvementScoreCounter[number] * pointValue));
+                FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
                 break;
 
             case 1:
@@ -82,7 +83,6 @@ public class LoadoutController : MonoBehaviour
                     FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
                 else
                     FillTheBar(fill[number], hubManager.armorActivatePanel.value + (improvementScoreCounter[number] * pointValue));
-                //FillTheBar(fill[number], protection);
                 break;
 
             case 2:
@@ -90,7 +90,6 @@ public class LoadoutController : MonoBehaviour
                     FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
                 else
                     FillTheBar(fill[number], hubManager.weaponActivatePanel.value + (improvementScoreCounter[number] * pointValue));
-                //FillTheBar(fill[number], damage);
                 break;
         }
 
@@ -100,7 +99,6 @@ public class LoadoutController : MonoBehaviour
         if (MoneyHandler.Instance.currentImprovementPoints <= 0)
             foreach (var button in improvementButton)
                 button.SetActive(false);
-
     }
 
     public void FillTheBar(Image fillingImage, float fillingLevel)
@@ -115,11 +113,9 @@ public class LoadoutController : MonoBehaviour
             }
         }
 
-        // Debug.Log("" + number);
         if (number >= 0)
             fillingLevel = fillingLevel + (improvementScoreCounter[number] * pointValue);
-        // Debug.Log(fillingLevel);
-        fillingLevel /= 100;
+        fillingLevel /= 3000;
         DOTween.To(() => fillingImage.fillAmount, x => fillingImage.fillAmount = x, fillingLevel, fillingTime);
     }
 }

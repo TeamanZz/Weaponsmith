@@ -6,9 +6,9 @@ public class CraftPanelItemsManager : MonoBehaviour
 {
     public static CraftPanelItemsManager Instance;
     public List<PanelItem> craftPanelItemsList = new List<PanelItem>();
+
     private int awardPanelState = 0;
 
-    [ContextMenu("Awake")]
     public void Awake()
     {
         Instance = this;
@@ -20,7 +20,7 @@ public class CraftPanelItemsManager : MonoBehaviour
         craftPanelItemsList.AddRange(newPanelItems);
     }
 
-    [ContextMenu("Test")]
+    [ContextMenu("Open new blueprint")]
     public void OpenNewBlueprint()
     {
         var nextItem = craftPanelItemsList.Find(x => x.currentState == PanelItemState.Unknown);

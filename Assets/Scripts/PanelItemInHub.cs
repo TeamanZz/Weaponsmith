@@ -34,7 +34,7 @@ public class PanelItemInHub : MonoBehaviour
     public Sprite[] viewSprite;
     public void Initialization(PanelItem newPanelItem)
     {
-        viewValueText.gameObject.SetActive(false); 
+        viewValueText.gameObject.SetActive(false);
 
         buyButtonAnimator = buyButtonComponent.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
@@ -45,15 +45,8 @@ public class PanelItemInHub : MonoBehaviour
         selectedWeaponButton.gameObject.SetActive(false);
 
         panelItem = newPanelItem;
-        //
         value = panelItem.currentItemEquipment.value;
-
         currentObject = newPanelItem.currentObject;
-        //foreach (var currentObjectInPanel in currentObject)
-        //{
-        //    if (currentObjectInPanel != null)
-        //        currentObject = currentObjectInPanel;
-        //}
 
         itemNameText.text = newPanelItem.itemName;
         itemIcon.sprite = newPanelItem.weaponSprite.sprite;
@@ -135,7 +128,7 @@ public class PanelItemInHub : MonoBehaviour
                 viewValueText.text = panelItem.currentItemEquipment.value.ToString();
                 viewIcon.sprite = viewSprite[0];
 
-                LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.fill[2], value);
+                LoadoutController.Instance.FillTheBar(LoadoutController.Instance.fill[2], value);
                 break;
 
             case ItemEquipment.EquipmentType.Armor:
@@ -150,7 +143,7 @@ public class PanelItemInHub : MonoBehaviour
                 viewValueText.text = panelItem.currentItemEquipment.value.ToString();
                 viewIcon.sprite = viewSprite[1];
 
-                LoadoutController.loadoutController.FillTheBar(LoadoutController.loadoutController.fill[1], value);
+                LoadoutController.Instance.FillTheBar(LoadoutController.Instance.fill[1], value);
                 break;
 
         }

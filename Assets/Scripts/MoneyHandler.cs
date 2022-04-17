@@ -27,6 +27,7 @@ public class MoneyHandler : MonoBehaviour
     public int maxPoints = 24;
     public int improvementCount = 0;
     public int currentImprovementPoints = 0;
+
     private void Awake()
     {
         Instance = this;
@@ -42,7 +43,7 @@ public class MoneyHandler : MonoBehaviour
             return;
 
         currentImprovementPoints += 1;
-        LoadoutController.loadoutController.UpdateImprovementPoints();
+        LoadoutController.Instance.UpdateImprovementPoints();
     }
 
     private void Start()

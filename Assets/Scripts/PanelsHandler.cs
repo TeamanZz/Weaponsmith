@@ -32,15 +32,14 @@ public class PanelsHandler : MonoBehaviour
     public GameObject panelsContainer;
 
     public DungeonRewardPanel dungeonRewardPanel;
+    public static bool currentLocationInTheDungeon = false;
+    public GameObject loadoutObject;
 
     [Space]
     [SerializeField] private List<string> panelNames = new List<string>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
 
-    public static bool currentLocationInTheDungeon = false;
-
-    public GameObject loadoutObject;
     public void Awake()
     {
         Instance = this;
@@ -57,7 +56,6 @@ public class PanelsHandler : MonoBehaviour
     {
         WorkshopItem.dungeoonIsOpen = 1;
         dungeonButtonComponent.interactable = true;
-        //
         EnableDungeonButton();
         EnableBoostersButton();
         OpenPanel(1);
@@ -142,7 +140,6 @@ public class PanelsHandler : MonoBehaviour
 
                 panelLabelObject.SetActive(false);
                 panels[panelIndex].SetActive(false);
-                //DisableDungeonPreviewUI
                 return;
             }
             else
@@ -160,8 +157,8 @@ public class PanelsHandler : MonoBehaviour
             panelLabelObject.SetActive(true);
             panels[panelIndex].SetActive(true);
 
-            if (LoadoutController.loadoutController != null)
-                LoadoutController.loadoutController.Initialization();
+            if (LoadoutController.Instance != null)
+                LoadoutController.Instance.Initialization();
 
             loadoutObject.SetActive(true);
             DungeonHubManager.dungeonHubManager.OpenPanel(0);
@@ -192,30 +189,14 @@ public class PanelsHandler : MonoBehaviour
 
     public void EnableDungeonButton()
     {
-        //if (PlayerPrefs.GetInt("dungeoonIsOpen") == 0)
-        //{
-        //    dungeonButtonComponent.interactable = false;
-        //    dungeonButtonImageComponent.color = Color.grey;
-        //}
-        //else
-        //{
         dungeonButtonComponent.interactable = true;
         dungeonButtonImageComponent.color = Color.white;
-        //}
     }
 
     public void EnableBoostersButton()
     {
-        //if (PlayerPrefs.GetInt("enchantmentIsOpen") == 0)
-        //{
-        //    boostersButtonComponent.interactable = false;
-        //    boostersButtonImageComponent.color = Color.gray;
-        //}
-        //else
-        //{
         boostersButtonComponent.interactable = true;
         boostersButtonImageComponent.color = Color.white;
-        //}
     }
 
     public void ResetButtonColorOnDeselect()

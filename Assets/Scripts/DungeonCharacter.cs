@@ -14,27 +14,29 @@ public class DungeonCharacter : MonoBehaviour
     [SerializeField] private int boosterDamageCoefficient = 1;
     [SerializeField] private MeleeWeaponTrail weaponTrail;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private CapsuleCollider detectionCollider;
 
-    [Header("Health")]
+    [Header("Health And Stats")]
     [SerializeField] private int currentHealth;
     [SerializeField] private int maxHealth;
+    [SerializeField] private int characterArmor;
+    [SerializeField] private int characterDamage;
     [SerializeField] private Image healthImageFilled;
     [SerializeField] private ParticleSystem hitParticles;
 
     [Space]
     [SerializeField] private List<AudioClip> sounds = new List<AudioClip>();
 
+    [HideInInspector] public DungeonEnemy currentEnemy;
+    [HideInInspector] public Animator animator;
     [HideInInspector] public float lastSpeedUpValue;
     [HideInInspector] public int allowedAttackAnimationsCount = 2;
     [HideInInspector] public bool isInBattle = false;
     [HideInInspector] public bool canCriticalHit = false;
-    [HideInInspector] private bool weaponTrailEnabled = false;
     [HideInInspector] public bool needSpeedUpOnAwake;
-    [HideInInspector] public DungeonEnemy currentEnemy;
-    [HideInInspector] public Animator animator;
 
+    private CapsuleCollider detectionCollider;
     private Coroutine attackCoroutine;
+    private bool weaponTrailEnabled = false;
 
     private void Awake()
     {
@@ -48,6 +50,20 @@ public class DungeonCharacter : MonoBehaviour
 
         if (needSpeedUpOnAwake)
             animator.speed = lastSpeedUpValue;
+    }
+
+    public void HitEnemy()
+    {
+        currentEnemy.PlayDamageAnimation();
+        currentEnemy.enemyHealthBar.TakeDamage(damage: characterDamage);
+    }
+
+    public void InitializeStats(int hpValue, int armorValue, int damageValue)
+    {
+        characterArmor = armorValue;
+        characterDamage = damageValue;
+        currentHealth = hpValue;
+        maxHealth = hpValue;
     }
 
     private IEnumerator IEAttack()
@@ -80,7 +96,11 @@ public class DungeonCharacter : MonoBehaviour
 
     public void TakeDamage(int damageValue)
     {
-        currentHealth -= damageValue;
+        var tempDamage = damageValue - characterArmor;
+        if (tempDamage < 0)
+            tempDamage = 0;
+
+        currentHealth -= tempDamage;
         UpdateHPBar();
         hitParticles.Play();
         animator.Play("Recieve Damage", 1);
@@ -161,17 +181,7 @@ public class DungeonCharacter : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void HitEnemy()
-    {
-        // animator.SetInteger("AttackIndex", UnityEngine.Random.Range(0, allowedAttackAnimationsCount));
-        currentEnemy.PlayDamageAnimation();
-        currentEnemy.enemyHealthBar.TakeDamage(damage: 1);
-        // int isCrit = UnityEngine.Random.Range(0, criticalHitRate);
-        // if (isCrit == 0 && canCriticalHit)
-        //     currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient, isDoubleDamage: true);
-        // else
-        //     currentEnemy.enemyHealthBar.TakeDamageControll(damage: 1 * boosterDamageCoefficient);
-    }
+
 
     public void KillEnemy()
     {
