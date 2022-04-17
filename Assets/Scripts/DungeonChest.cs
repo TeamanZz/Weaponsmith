@@ -16,6 +16,8 @@ public class DungeonChest : MonoBehaviour
     public ParticleSystem openParticles;
     public Transform cube;
     public BoxCollider boxCollider;
+    public GameObject textPopup;
+
     public void Initialize(ChestFilling filling)
     {
         currentFilling = filling;
@@ -28,6 +30,8 @@ public class DungeonChest : MonoBehaviour
 
             case ChestFilling.BlueprintAndMoney:
                 rewardsVisualObject[1].SetActive(true);
+                transform.localScale = Vector3.one * 1.5f;
+                boxCollider.center = new Vector3(0, 0, boxCollider.center.z / 1.5f);
                 break;
         }
     }
@@ -55,18 +59,23 @@ public class DungeonChest : MonoBehaviour
         if (other.TryGetComponent<DungeonCharacter>(out character))
         {
             boxCollider.enabled = false;
-            chestLid.DOLocalRotate(openedLidRotation, openTime);
+            chestLid.DOLocalRotate(openedLidRotation, openTime).SetEase(Ease.OutBack);
             TakeReward();
             RemoveChest();
             openParticles.Play();
+            var newPopup = Instantiate(textPopup, transform.position + new Vector3(0, 3, 0), Quaternion.Euler(32, 0, 0));
+            newPopup.GetComponent<DungeonPopupText>().InitializeRewardText(currentMoneyReward.ToString());
+            SFX.Instance.PlayChestOpen();
         }
     }
 
     private void RemoveChest()
     {
-        cube.DOLocalMoveY(cube.transform.position.y - 5, 0.5f).SetEase(Ease.InBack);
-        transform.DOLocalRotate(new Vector3(0, -1000, 0), 1.5f).SetEase(Ease.InBack);
-        transform.DOLocalMoveY(transform.position.y - 6f, 1.5f).SetEase(Ease.InBack);
+        var s = DOTween.Sequence();
+        s.Append(transform.DOLocalMoveY(transform.position.y + 3, 0.8f).SetEase(Ease.OutBack));
+        s.Append(transform.DOLocalMoveY(transform.position.y - 9f, 0.6f).SetEase(Ease.InBack));
+        transform.DOLocalRotate(new Vector3(0, -720, 0), 1.5f).SetEase(Ease.InOutBack);
+        transform.DOScale(Vector3.zero, 1.5f).SetEase(Ease.InBack);
     }
 
     public enum ChestFilling

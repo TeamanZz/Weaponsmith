@@ -54,4 +54,9 @@ public class SFX : MonoBehaviour
     {
         source.PlayOneShot(soundsList[9]);
     }
+
+    public void PlayChestOpen()
+    {
+        source.PlayOneShot(soundsList[10]);
+    }
 }

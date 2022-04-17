@@ -16,6 +16,8 @@ public class DungeonCharacter : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
 
     [Header("Health And Stats")]
+    [SerializeField] private float minAttackDelay = 2;
+    [SerializeField] private float maxAttackDelay = 3.5f;
     [SerializeField] private int currentHealth;
     [SerializeField] private int maxHealth;
     [SerializeField] private int characterArmor;
@@ -38,6 +40,8 @@ public class DungeonCharacter : MonoBehaviour
     private Coroutine attackCoroutine;
     private bool weaponTrailEnabled = false;
 
+    public DungeonPopupText damageTextPopup;
+
     private void Awake()
     {
         Instance = this;
@@ -54,8 +58,9 @@ public class DungeonCharacter : MonoBehaviour
 
     public void HitEnemy()
     {
-        currentEnemy.PlayDamageAnimation();
-        currentEnemy.enemyHealthBar.TakeDamage(damage: characterDamage);
+        var damageValue = characterDamage + Random.Range((-characterDamage / 5), (characterDamage / 5));
+        currentEnemy.PlayDamageAnimation(damageValue);
+        currentEnemy.enemyHealthBar.TakeDamage(damage: damageValue);
     }
 
     public void InitializeStats(int hpValue, int armorValue, int damageValue)
@@ -68,7 +73,7 @@ public class DungeonCharacter : MonoBehaviour
 
     private IEnumerator IEAttack()
     {
-        yield return new WaitForSeconds(Random.Range(3, 4.5f));
+        yield return new WaitForSeconds(Random.Range(minAttackDelay, maxAttackDelay));
         animator.SetTrigger("Attack");
         yield return IEAttack();
     }
@@ -104,6 +109,8 @@ public class DungeonCharacter : MonoBehaviour
         UpdateHPBar();
         hitParticles.Play();
         animator.Play("Recieve Damage", 1);
+        var newPopup = Instantiate(damageTextPopup, transform.position + new Vector3(-2, 1, 0), Quaternion.Euler(32, 0, 0));
+        newPopup.GetComponent<DungeonPopupText>().InitializeCharacterDamageText(damageValue.ToString());
     }
 
     private void UpdateHPBar()
