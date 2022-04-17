@@ -23,9 +23,11 @@ public class DungeonEnemy : MonoBehaviour
     private bool isInBattle;
     [HideInInspector] public DungeonCharacter currentEnemy;
 
+    public GameObject damageTextPopup;
+
     private IEnumerator IEAttack()
     {
-        yield return new WaitForSeconds(Random.Range(3, 4.5f));
+        yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
         animator.SetTrigger("Attack");
         yield return IEAttack();
     }
@@ -65,10 +67,12 @@ public class DungeonEnemy : MonoBehaviour
         detectionCollider.center = new Vector3(detectionCollider.center.x, detectionCollider.center.y, distanceToCollider);
     }
 
-    public void PlayDamageAnimation()
+    public void PlayDamageAnimation(int value)
     {
         PlayEnemyDamageSound();
         animator.Play("Recieve Damage", 1);
+        var newPopup = Instantiate(damageTextPopup, transform.position + new Vector3(2, 1, 0), Quaternion.Euler(32, 0, 0));
+        newPopup.GetComponent<DungeonPopupText>().InitializeEnemyDamageText(value.ToString());
     }
 
     public void InvokeDeathAnimation()

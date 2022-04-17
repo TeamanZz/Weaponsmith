@@ -146,7 +146,7 @@ public class DungeonBuilder : MonoBehaviour
 
     private void SpawnSecondWaveEnemies()
     {
-        for (int i = 0; i <= secondWaveEnemiesCount; i++)
+        for (int i = 0; i < secondWaveEnemiesCount; i++)
         {
             SpawnEnemy(Random.Range(minEnemiesHealth, maxEnemiesHealth), 1.5f);
         }
@@ -154,7 +154,7 @@ public class DungeonBuilder : MonoBehaviour
 
     private void SpawnFirstWaveEnemies()
     {
-        for (int i = 0; i <= firstWaveEnemiesCount; i++)
+        for (int i = 0; i < firstWaveEnemiesCount; i++)
         {
             SpawnEnemy(Random.Range(minEnemiesHealth, maxEnemiesHealth), 1.5f);
         }
