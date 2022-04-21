@@ -123,6 +123,8 @@ public class PanelsHandler : MonoBehaviour
         DisableDungeonEnteringPanel();
         DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", true);
         DungeonCharacter.Instance.EnableCharacterRun();
+        SceneObjectsOptimizeHandler.Instance.EnableFirstPieces();
+        SceneObjectsOptimizeHandler.Instance.DisablePreviewScene();
         yield return new WaitForSeconds(1);
         dungeonEnteringPanel.SetActive(false);
     }

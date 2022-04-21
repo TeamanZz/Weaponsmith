@@ -1494,6 +1494,7 @@ MonoBehaviour:
   scale: 1.5
   distanceToCollider: 1
   enemyLVL: 0
+  damage: 250
   animator: {fileID: 2363075298075672282}
   currentEnemy: {fileID: 0}
   damageTextPopup: {fileID: 7068809545133855033, guid: 4522aa093d53fff4397ee411f54ebdbb, type: 3}

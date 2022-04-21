@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
+using TMPro;
 
 public class DungeonCharacter : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class DungeonCharacter : MonoBehaviour
     [SerializeField] private int characterDamage;
     [SerializeField] private Image healthImageFilled;
     [SerializeField] private ParticleSystem hitParticles;
+    [SerializeField] private TextMeshProUGUI hpText;
+
 
     [Space]
     [SerializeField] private List<AudioClip> sounds = new List<AudioClip>();
@@ -111,7 +114,7 @@ public class DungeonCharacter : MonoBehaviour
         hitParticles.Play();
         animator.Play("Recieve Damage", 1);
         var newPopup = Instantiate(damageTextPopup, transform.position + new Vector3(-2, 1, 0), Quaternion.Euler(32, 0, 0));
-        newPopup.GetComponent<DungeonPopupText>().InitializeCharacterDamageText(damageValue.ToString());
+        newPopup.GetComponent<DungeonPopupText>().InitializeCharacterDamageText(tempDamage.ToString());
 
         if (currentHealth <= 0)
         {
@@ -126,7 +129,9 @@ public class DungeonCharacter : MonoBehaviour
     private void UpdateHPBar()
     {
         var newBarValue = ((float)currentHealth / (float)maxHealth);
+        Debug.Log("NEW BAR VALUE " + newBarValue);
         healthImageFilled.DOFillAmount(newBarValue, 0.5f).SetEase(Ease.OutBack);
+        hpText.text = currentHealth.ToString();
     }
 
     private void LoadWeaponTrailValue()
