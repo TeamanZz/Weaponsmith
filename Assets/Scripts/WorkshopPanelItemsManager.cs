@@ -28,11 +28,13 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public float startCameraField = 80f;
     public float timeToReturnFocus = 0.5f;
 
+    public CameraWidth cameraWidth;
+
     [ContextMenu("Awake")]
     public void Awake()
     {
         Instance = this;
-
+        startCameraField = dungeonCinemaCamera.m_Lens.FieldOfView;
         if (transitionPanel == null)
         {
             Debug.Log("Transition panel in storage is null");
@@ -113,7 +115,8 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public IEnumerator EnterFocus(Transform target, float focusField)
     {
         Debug.Log("Enter Focus");
-
+        cameraWidth.enabled = false;
+        startCameraField = dungeonCinemaCamera.m_Lens.FieldOfView;
         dungeonCinemaCamera.LookAt = target;
         dungeonCinemaCamera.m_Lens.FieldOfView = startCameraField;
 
@@ -125,9 +128,9 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public IEnumerator ReturnFocus()
     {
         Debug.Log("Return Focus");
-
         DOTween.To(() => dungeonCinemaCamera.m_Lens.FieldOfView, x => dungeonCinemaCamera.m_Lens.FieldOfView = x, startCameraField, timeToReturnFocus);
         yield return new WaitForSeconds(timeToReturnFocus);
+        cameraWidth.enabled = true;
 
         dungeonCinemaCamera.LookAt = calibrationPosition;
         currentFocusCorutine = null;

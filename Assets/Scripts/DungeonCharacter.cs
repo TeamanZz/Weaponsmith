@@ -124,6 +124,7 @@ public class DungeonCharacter : MonoBehaviour
             detectionCollider.enabled = true;
 
         }
+        PlayHitSound();
     }
 
     private void UpdateHPBar()
