@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DungeonHubManager : MonoBehaviour
 {
     public static DungeonHubManager dungeonHubManager;
-    
+
     [Header("Data")]
     public List<GameObject> equipmentPanelContent = new List<GameObject>();
 
@@ -15,8 +15,8 @@ public class DungeonHubManager : MonoBehaviour
 
     public PanelItemInHub panelInHubPrefab;
 
-    public PanelItemInHub armorActivatePanel;
-    public PanelItemInHub weaponActivatePanel;
+    [HideInInspector] public PanelItemInHub armorActivatePanel;
+    [HideInInspector] public PanelItemInHub weaponActivatePanel;
 
     public List<GameObject> armorList = new List<GameObject>();
     public List<GameObject> weaponList = new List<GameObject>();
@@ -90,7 +90,7 @@ public class DungeonHubManager : MonoBehaviour
 
         //if (armorActivatePanel != null)
         //    loadoutController.protection = armorActivatePanel.value;
-        
+
         //if (weaponActivatePanel != null)
         //    loadoutController.damage = weaponActivatePanel.value;
 

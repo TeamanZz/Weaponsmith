@@ -6,7 +6,7 @@ public class SkinsManager : MonoBehaviour
 {
     public static SkinsManager Instance;
 
-    [HideInInspector] public int currentSkinIndex;
+    public int currentSkinIndex;
     [HideInInspector] public int dungeonEnemySkinCount = 0;
 
     public List<ParticleSystem> particles = new List<ParticleSystem>();
@@ -59,6 +59,28 @@ public class SkinsManager : MonoBehaviour
         }
 
         skins[0/*currentNumber*/].SetActive(true);
+        dungeonSkins[currentSkinIndex].SetActive(true);
+    }
+
+    public void ChangeSkin(int skinIndex)
+    {
+        foreach (GameObject dungeSkin in dungeonSkins)
+        {
+            dungeSkin.SetActive(false);
+        }
+
+        foreach (GameObject skin in skins)
+        {
+            skin.SetActive(false);
+        }
+
+        foreach (var part in particles)
+        {
+            part.Play();
+        }
+
+        currentSkinIndex = skinIndex;
+        skins[currentSkinIndex].SetActive(true);
         dungeonSkins[currentSkinIndex].SetActive(true);
     }
 }

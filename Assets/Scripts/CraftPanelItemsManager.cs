@@ -26,6 +26,6 @@ public class CraftPanelItemsManager : MonoBehaviour
         var nextItem = craftPanelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (nextItem != null)
             nextItem.ChangeState(PanelItemState.Available);
-        EquipmentManager.Singleton.ShowWeaponsByNumber();
+        // EquipmentManager.Singleton.ShowWeaponsByNumber();
     }
 }
