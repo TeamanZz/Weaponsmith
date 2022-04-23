@@ -135,13 +135,13 @@ public class DungeonPanelItem : MonoBehaviour
             }
         }
 
-        if (upgradeType == DungeonUpgradeType.Agility)
-        {
-            if (buysCount == 1)
-            {
-                DungeonCharacter.Instance.EnableWeaponTrail();
-            }
-        }
+        // if (upgradeType == DungeonUpgradeType.Agility)
+        // {
+        //     if (buysCount == 1)
+        //     {
+        //         DungeonCharacter.Instance.EnableWeaponTrail();
+        //     }
+        // }
 
         if (upgradeType == DungeonUpgradeType.CriticalDamage)
         {

@@ -18,15 +18,6 @@ public class SkinsManager : MonoBehaviour
         Instance = this;
         currentSkinIndex = PlayerPrefs.GetInt("skinIndex");
         dungeonEnemySkinCount = PlayerPrefs.GetInt("EnemySkinCount");
-
-        ChangeSkin();
-    }
-
-    private void Start()
-    {
-        var tempSkinIndex = PlayerPrefs.GetInt("skinIndex");
-        if (tempSkinIndex == 1)
-            ChangeSkin();
     }
 
     public void Initialization(List<GameObject> newSkins, List<GameObject> newDungeonSkins)
@@ -37,11 +28,11 @@ public class SkinsManager : MonoBehaviour
         skins = newSkins;
         dungeonSkins = newDungeonSkins;
 
-        ChangeSkin();
+        ChangeSkin(needShowParticles: false);
     }
 
     [ContextMenu("Change Skin")]
-    public void ChangeSkin()
+    public void ChangeSkin(bool needShowParticles = true)
     {
         foreach (GameObject dungeSkin in dungeonSkins)
         {
@@ -52,10 +43,12 @@ public class SkinsManager : MonoBehaviour
         {
             skin.SetActive(false);
         }
-
-        foreach (var part in particles)
+        if (needShowParticles)
         {
-            part.Play();
+            foreach (var part in particles)
+            {
+                part.Play();
+            }
         }
 
         skins[0/*currentNumber*/].SetActive(true);
