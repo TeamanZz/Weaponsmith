@@ -15,6 +15,9 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private Transform dungeonCameraPreviewPos;
     [SerializeField] private Transform dungeonCameraStartPos;
 
+    public int currentLevelEarnedMoneyCount;
+    public bool blueprintRecieved;
+
     private void Awake()
     {
         Instance = this;

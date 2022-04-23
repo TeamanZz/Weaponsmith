@@ -5,18 +5,17 @@ using DG.Tweening;
 
 public class DungeonChest : MonoBehaviour
 {
-    [HideInInspector] public int currentMoneyReward;
+    public GameObject textPopup;
+    public BoxCollider boxCollider;
+    public int moneyReward;
 
+    [SerializeField] private ParticleSystem openParticles;
     [SerializeField] private Transform chestLid;
     [SerializeField] private Vector3 openedLidRotation = Vector3.zero;
     [SerializeField] private float openTime = 0.25f;
     [SerializeField] private List<GameObject> rewardsVisualObject = new List<GameObject>();
 
     private ChestFilling currentFilling;
-    public ParticleSystem openParticles;
-    public Transform cube;
-    public BoxCollider boxCollider;
-    public GameObject textPopup;
 
     public void Initialize(ChestFilling filling)
     {
@@ -25,7 +24,7 @@ public class DungeonChest : MonoBehaviour
         {
             case ChestFilling.Money:
                 rewardsVisualObject[0].SetActive(true);
-                currentMoneyReward = 100;
+                moneyReward = 100;
                 break;
 
             case ChestFilling.BlueprintAndMoney:
@@ -41,13 +40,15 @@ public class DungeonChest : MonoBehaviour
         switch (currentFilling)
         {
             case ChestFilling.Money:
-                MoneyHandler.Instance.moneyCount += currentMoneyReward;
+                MoneyHandler.Instance.moneyCount += moneyReward;
+
                 break;
 
             case ChestFilling.BlueprintAndMoney:
+                DungeonManager.Instance.blueprintRecieved = true;
                 DungeonCharacter.Instance.DisableCharacterRun();
-                DungeonRewardPanel.Instance.OpenRewardPanel(3);
                 CraftPanelItemsManager.Instance.OpenNewBlueprint();
+                DungeonRewardPanel.Instance.OpenRewardPanel(3);
                 MoneyHandler.Instance.AddImprovementPoint();
                 break;
         }
@@ -58,13 +59,14 @@ public class DungeonChest : MonoBehaviour
         DungeonCharacter character;
         if (other.TryGetComponent<DungeonCharacter>(out character))
         {
+            DungeonManager.Instance.currentLevelEarnedMoneyCount += moneyReward;
             boxCollider.enabled = false;
             chestLid.DOLocalRotate(openedLidRotation, openTime).SetEase(Ease.OutBack);
             TakeReward();
             RemoveChest();
             openParticles.Play();
             var newPopup = Instantiate(textPopup, transform.position + new Vector3(0, 3, 0), Quaternion.Euler(32, 0, 0));
-            newPopup.GetComponent<DungeonPopupText>().InitializeRewardText(currentMoneyReward.ToString());
+            newPopup.GetComponent<DungeonPopupText>().InitializeRewardText(moneyReward.ToString());
             SFX.Instance.PlayChestOpen();
         }
     }

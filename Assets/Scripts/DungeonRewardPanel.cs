@@ -16,52 +16,39 @@ public class DungeonRewardPanel : MonoBehaviour
     public float openStarTime = 0.25f;
     public float timeToNewStar = 0.5f;
     public Coroutine coroutine;
-
     public Sprite moneySprite;
     public Sprite weaponSprite;
     public Sprite armorSprite;
-
     public GridLayoutGroup group;
     public RewardUIItem itemPrefab;
-
     public PanelsStortage panelsStorage;
 
-    public List<RewardUIItem> rewardsList = new List<RewardUIItem>();
+    public RewardUIItem moneyReward;
+    public RewardUIItem blueprintReward;
 
     public void Awake()
     {
         Instance = this;
     }
 
-    public void AddItem()
+    public void InitializeBlueprintItem()
     {
         var newAnvilItem = panelsStorage.panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
-        RewardUIItem newItem = Instantiate(itemPrefab, group.transform);
 
         if (newAnvilItem.currentEquipmentType == ItemEquipment.EquipmentType.Weapon)
         {
-            newItem.InitializePanel(weaponSprite, "New weapon blueprint");
+            blueprintReward.InitializePanel(weaponSprite, "New weapon blueprint");
         }
         else if (newAnvilItem.currentEquipmentType == ItemEquipment.EquipmentType.Armor)
         {
-            newItem.InitializePanel(armorSprite, "New armor blueprint");
+            blueprintReward.InitializePanel(armorSprite, "New armor blueprint");
         }
-        rewardsList.Add(newItem);
-    }
-
-    public void AddMoneyItem(string currencyCount)
-    {
-        RewardUIItem newItem = Instantiate(itemPrefab, group.transform);
-        newItem.InitializePanel(moneySprite, currencyCount);
-        rewardsList.Add(newItem);
     }
 
     public void ClosePanel()
     {
+        blueprintReward.gameObject.SetActive(false);
         panel.SetActive(false);
-        foreach (var item in rewardsList)
-            Destroy(item.gameObject);
-        rewardsList.Clear();
     }
 
     public IEnumerator StarsInitialization(int number)
@@ -80,6 +67,15 @@ public class DungeonRewardPanel : MonoBehaviour
         DungeonCharacter.Instance.animator.SetBool("EnemyIsNear", false);
         DungeonCharacter.Instance.isInBattle = false;
         DungeonManager.Instance.isDungeonStarted = false;
+
+        moneyReward.InitializePanel(moneySprite, DungeonManager.Instance.currentLevelEarnedMoneyCount.ToString());
+        DungeonManager.Instance.currentLevelEarnedMoneyCount = 0;
+
+        if (DungeonManager.Instance.blueprintRecieved)
+        {
+            blueprintReward.gameObject.SetActive(true);
+        }
+        DungeonManager.Instance.blueprintRecieved = false;
 
         for (int i = 0; i < starsViewImage.Length; i++)
         {

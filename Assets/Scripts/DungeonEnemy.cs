@@ -14,7 +14,7 @@ public class DungeonEnemy : MonoBehaviour
     [SerializeField] private float scale = 1.5f;
     [SerializeField] private float distanceToCollider = 1.5f;
     [SerializeField] private float enemyLVL;
-    [SerializeField] private int damage;
+    public int damage;
 
     private int curentSkinIndex;
     private BoxCollider detectionCollider;

@@ -25,9 +25,14 @@ public class DungeonBuilder : MonoBehaviour
     [Header("Boss Settings")]
     [SerializeField] private int bossHealth = 12;
     [SerializeField] private float bossScale = 3f;
+    [SerializeField] private int bossDamage;
 
     [SerializeField] private int minEnemiesHealth;
     [SerializeField] private int maxEnemiesHealth;
+
+    [SerializeField] private int minEnemiesDamage;
+    [SerializeField] private int maxEnemiesDamage;
+
 
     [SerializeField] private GameObject chestPrefab;
 
@@ -41,11 +46,6 @@ public class DungeonBuilder : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
-        // BuildDungeon();
     }
 
     private void ResetVariablesValues()
@@ -88,12 +88,9 @@ public class DungeonBuilder : MonoBehaviour
         GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
         chestComponent.Initialize(DungeonChest.ChestFilling.Money);
-        DungeonRewardPanel.Instance.AddMoneyItem(chestComponent.currentMoneyReward.ToString());
-
         chestObject.transform.localPosition = new Vector3(0, 0, newZPos);
         lastSpawnedEnemyZPos = newZPos;
         buildedPiecesList.Add(chestObject);
-
     }
 
     private void SpawnChestWithBlueprint()
@@ -103,8 +100,7 @@ public class DungeonBuilder : MonoBehaviour
         GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
         chestComponent.Initialize(DungeonChest.ChestFilling.BlueprintAndMoney);
-        DungeonRewardPanel.Instance.AddMoneyItem(chestComponent.currentMoneyReward.ToString());
-        DungeonRewardPanel.Instance.AddItem();
+        DungeonRewardPanel.Instance.InitializeBlueprintItem();
 
         chestObject.transform.localPosition = new Vector3(0, 0, newZPos);
         lastSpawnedEnemyZPos = newZPos;
@@ -119,7 +115,7 @@ public class DungeonBuilder : MonoBehaviour
         buildedPiecesList.Add(lastSpawnedPiece);
     }
 
-    public void SpawnEnemy(int hpValue, float modelScale, float distanceCoefficient = 1)
+    public void SpawnEnemy(int hpValue, int damageValue, float modelScale, float distanceCoefficient = 1)
     {
         int newZPos = (int)((Random.Range(minDistanceBetweenEnemies, maxDistanceBetweenEnemies) + lastSpawnedEnemyZPos) * distanceCoefficient);
 
@@ -132,6 +128,8 @@ public class DungeonBuilder : MonoBehaviour
         var enemyHealthComponent = enemy.GetComponent<EnemyHealthBar>();
         enemyHealthComponent.InitializeHP(hpValue);
 
+        enemyComponent.damage = damageValue;
+
         enemy.transform.localPosition = new Vector3(0, 0, newZPos);
         enemy.transform.localScale = Vector3.one * modelScale;
 
@@ -141,14 +139,14 @@ public class DungeonBuilder : MonoBehaviour
 
     private void SpawnBoss()
     {
-        SpawnEnemy(bossHealth, bossScale, 1.5f);
+        SpawnEnemy(bossHealth, bossDamage, bossScale, 1.5f);
     }
 
     private void SpawnSecondWaveEnemies()
     {
         for (int i = 0; i < secondWaveEnemiesCount; i++)
         {
-            SpawnEnemy(Random.Range(minEnemiesHealth, maxEnemiesHealth), 1.5f);
+            SpawnEnemy(Random.Range(minEnemiesHealth, maxEnemiesHealth), Random.Range(minEnemiesDamage, maxEnemiesDamage), 1.5f);
         }
     }
 
@@ -156,7 +154,7 @@ public class DungeonBuilder : MonoBehaviour
     {
         for (int i = 0; i < firstWaveEnemiesCount; i++)
         {
-            SpawnEnemy(Random.Range(minEnemiesHealth, maxEnemiesHealth), 1.5f);
+            SpawnEnemy(Random.Range(minEnemiesHealth, maxEnemiesHealth), Random.Range(minEnemiesDamage, maxEnemiesDamage), 1.5f);
         }
     }
 
