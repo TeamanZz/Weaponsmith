@@ -106,7 +106,6 @@ GameObject:
   - component: {fileID: 4359167137552490480}
   - component: {fileID: 4359167137552490482}
   - component: {fileID: 4359167137552490481}
-  - component: {fileID: 552982101}
   m_Layer: 5
   m_Name: Equipment Slot
   m_TagString: Untagged
@@ -172,15 +171,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &552982101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4359167137552490487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73f0360cbffecf48a264bb049163e7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

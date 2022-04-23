@@ -130,7 +130,6 @@ public class DungeonCharacter : MonoBehaviour
     private void UpdateHPBar()
     {
         var newBarValue = ((float)currentHealth / (float)maxHealth);
-        Debug.Log("NEW BAR VALUE " + newBarValue);
         healthImageFilled.DOFillAmount(newBarValue, 0.5f).SetEase(Ease.OutBack);
         hpText.text = currentHealth.ToString();
     }

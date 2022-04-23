@@ -140,6 +140,7 @@ public class DungeonBuilder : MonoBehaviour
     private void SpawnBoss()
     {
         SpawnEnemy(bossHealth, bossDamage, bossScale, 1.5f);
+        DungeonManager.Instance.bossZPosition = lastSpawnedEnemyZPos;
     }
 
     private void SpawnSecondWaveEnemies()

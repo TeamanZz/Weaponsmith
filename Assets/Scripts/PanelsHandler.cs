@@ -116,7 +116,6 @@ public class PanelsHandler : MonoBehaviour
 
     private IEnumerator IEEnableDungeonEnteringPanel()
     {
-        Debug.Log("SET");
         DungeonManager.Instance.SetCharacterOnStart();
         DisablePanelsContainer();
         yield return new WaitForSeconds(1);

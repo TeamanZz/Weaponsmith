@@ -6,6 +6,11 @@ using System.Collections;
 public class DungeonEnemy : MonoBehaviour
 {
     public EnemyHealthBar enemyHealthBar;
+    public Animator animator;
+    public GameObject damageTextPopup;
+    public int damage;
+
+    [HideInInspector] public DungeonCharacter currentEnemy;
 
     [SerializeField] private GameObject chestPrefab;
     [SerializeField] private TextMeshProUGUI enemyLvlText;
@@ -14,17 +19,10 @@ public class DungeonEnemy : MonoBehaviour
     [SerializeField] private float scale = 1.5f;
     [SerializeField] private float distanceToCollider = 1.5f;
     [SerializeField] private float enemyLVL;
-    public int damage;
 
-    private int curentSkinIndex;
     private BoxCollider detectionCollider;
-    public Animator animator;
-
     private bool isDead;
-    private bool isInBattle;
-    [HideInInspector] public DungeonCharacter currentEnemy;
-
-    public GameObject damageTextPopup;
+    private int curentSkinIndex;
 
     private IEnumerator IEAttack()
     {
@@ -38,7 +36,6 @@ public class DungeonEnemy : MonoBehaviour
         DungeonCharacter dungeonCharacter;
         if (other.TryGetComponent<DungeonCharacter>(out dungeonCharacter))
         {
-            isInBattle = true;
             currentEnemy = dungeonCharacter;
             detectionCollider.enabled = false;
             StartCoroutine(IEAttack());

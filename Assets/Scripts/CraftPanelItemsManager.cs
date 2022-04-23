@@ -7,8 +7,6 @@ public class CraftPanelItemsManager : MonoBehaviour
     public static CraftPanelItemsManager Instance;
     public List<PanelItem> craftPanelItemsList = new List<PanelItem>();
 
-    private int awardPanelState = 0;
-
     public void Awake()
     {
         Instance = this;

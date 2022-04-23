@@ -67,6 +67,7 @@ public class DungeonRewardPanel : MonoBehaviour
         DungeonCharacter.Instance.animator.SetBool("EnemyIsNear", false);
         DungeonCharacter.Instance.isInBattle = false;
         DungeonManager.Instance.isDungeonStarted = false;
+        DungeonManager.Instance.bossZPosition = 0;
 
         moneyReward.InitializePanel(moneySprite, DungeonManager.Instance.currentLevelEarnedMoneyCount.ToString());
         DungeonManager.Instance.currentLevelEarnedMoneyCount = 0;
