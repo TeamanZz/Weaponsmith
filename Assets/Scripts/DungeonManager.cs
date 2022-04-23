@@ -25,6 +25,8 @@ public class DungeonManager : MonoBehaviour
 
     public GameObject dungeonProgressBar;
 
+    public int currentDungeonLevelId;
+
     private void Awake()
     {
         Instance = this;
