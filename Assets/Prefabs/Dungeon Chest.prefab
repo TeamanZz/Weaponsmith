@@ -309,17 +309,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb7e5e2a2a4e5948ab8471c26f55012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMoneyReward: 0
+  textPopup: {fileID: 7068809545133855033, guid: 4522aa093d53fff4397ee411f54ebdbb, type: 3}
+  boxCollider: {fileID: 8550988676938562274}
+  moneyReward: 0
+  openParticles: {fileID: 7252629974342309069}
   chestLid: {fileID: 2414226468289623845}
   openedLidRotation: {x: 45, y: 0, z: 0}
   openTime: 0.25
   rewardsVisualObject:
   - {fileID: 4336358496094442581}
   - {fileID: 35615415875380193}
-  openParticles: {fileID: 7252629974342309069}
-  cube: {fileID: 1245310011906829170}
-  boxCollider: {fileID: 8550988676938562274}
-  textPopup: {fileID: 7068809545133855033, guid: 4522aa093d53fff4397ee411f54ebdbb, type: 3}
 --- !u!82 &721645953009775916
 AudioSource:
   m_ObjectHideFlags: 0
@@ -624,15 +623,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3878300005403869922, guid: 167e7a3c1cd72fa48b799828729623e5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.13
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3878300005403869922, guid: 167e7a3c1cd72fa48b799828729623e5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.13
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3878300005403869922, guid: 167e7a3c1cd72fa48b799828729623e5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.13
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3878300005403869922, guid: 167e7a3c1cd72fa48b799828729623e5, type: 3}
       propertyPath: m_LocalPosition.x

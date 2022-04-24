@@ -174,6 +174,10 @@ public class DungeonBuilder : MonoBehaviour
     {
         public int index;
 
+        [Header("Gold Settings")]
+        public int minGoldPerEnemy;
+        public int maxGoldPerEnemy;
+
         [Header("Entering Panel")]
         public string levelName;
         public Sprite levelLogo;

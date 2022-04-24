@@ -52,6 +52,8 @@ public class DungeonEnemy : MonoBehaviour
     {
         SetScale();
         UpdateColliderPosition();
+
+        animator.SetFloat("Cycle Offset", Random.Range(0, 1f));
     }
 
     public void HitPlayerCharacter()

@@ -1482,6 +1482,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealthBar: {fileID: 7294571177279151111}
+  animator: {fileID: 2363075298075672282}
+  damageTextPopup: {fileID: 7068809545133855033, guid: 4522aa093d53fff4397ee411f54ebdbb, type: 3}
+  damage: 0
+  currentEnemy: {fileID: 0}
   chestPrefab: {fileID: 8550988676938562279, guid: ad31a4a27d46c914cad3af90476c1289, type: 3}
   enemyLvlText: {fileID: 6952486300126442324}
   audioSource: {fileID: 1447379779080449485}
@@ -1494,10 +1498,6 @@ MonoBehaviour:
   scale: 1.5
   distanceToCollider: 1
   enemyLVL: 0
-  damage: 250
-  animator: {fileID: 2363075298075672282}
-  currentEnemy: {fileID: 0}
-  damageTextPopup: {fileID: 7068809545133855033, guid: 4522aa093d53fff4397ee411f54ebdbb, type: 3}
 --- !u!114 &7294571177279151111
 MonoBehaviour:
   m_ObjectHideFlags: 0
