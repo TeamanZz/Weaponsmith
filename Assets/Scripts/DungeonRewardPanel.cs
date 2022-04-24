@@ -34,7 +34,8 @@ public class DungeonRewardPanel : MonoBehaviour
     public void InitializeBlueprintItem()
     {
         var newAnvilItem = panelsStorage.panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
-
+        if (newAnvilItem == null)
+            return;
         if (newAnvilItem.currentEquipmentType == ItemEquipment.EquipmentType.Weapon)
         {
             blueprintReward.InitializePanel(weaponSprite, "New weapon blueprint");

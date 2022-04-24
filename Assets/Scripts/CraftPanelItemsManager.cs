@@ -12,6 +12,14 @@ public class CraftPanelItemsManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            OpenNewBlueprint();
+        }
+    }
+
     public void Initialization(List<PanelItem> newPanelItems)
     {
         craftPanelItemsList.Clear();
