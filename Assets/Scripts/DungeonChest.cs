@@ -17,14 +17,14 @@ public class DungeonChest : MonoBehaviour
 
     private ChestFilling currentFilling;
 
-    public void Initialize(ChestFilling filling)
+    public void Initialize(ChestFilling filling, int moneyPerChest)
     {
         currentFilling = filling;
+        moneyReward = moneyPerChest - (int)(Random.Range(-1, 2) * moneyPerChest * Random.Range(0.03f, 0.1f)); //Отнимаем или прибавляем от 3 до 10 процентов награды сундука
         switch (filling)
         {
             case ChestFilling.Money:
                 rewardsVisualObject[0].SetActive(true);
-                moneyReward = 100;
                 break;
 
             case ChestFilling.BlueprintAndMoney:

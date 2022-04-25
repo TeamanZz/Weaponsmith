@@ -79,7 +79,7 @@ public class DungeonBuilder : MonoBehaviour
 
         GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
-        chestComponent.Initialize(DungeonChest.ChestFilling.Money);
+        chestComponent.Initialize(DungeonChest.ChestFilling.Money, currentLevelSettings.firstChestGold);
         chestObject.transform.localPosition = new Vector3(0, 0, newZPos);
         lastSpawnedEnemyZPos = newZPos;
         buildedPiecesList.Add(chestObject);
@@ -91,7 +91,7 @@ public class DungeonBuilder : MonoBehaviour
 
         GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
-        chestComponent.Initialize(DungeonChest.ChestFilling.BlueprintAndMoney);
+        chestComponent.Initialize(DungeonChest.ChestFilling.BlueprintAndMoney, currentLevelSettings.secondChestGold);
         DungeonRewardPanel.Instance.InitializeBlueprintItem();
 
         chestObject.transform.localPosition = new Vector3(0, 0, newZPos);
@@ -177,6 +177,8 @@ public class DungeonBuilder : MonoBehaviour
         [Header("Gold Settings")]
         public int minGoldPerEnemy;
         public int maxGoldPerEnemy;
+        public int firstChestGold;
+        public int secondChestGold;
 
         [Header("Entering Panel")]
         public string levelName;
