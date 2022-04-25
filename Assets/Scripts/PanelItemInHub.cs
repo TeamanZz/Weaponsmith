@@ -11,6 +11,7 @@ public class PanelItemInHub : MonoBehaviour
     public TextMeshProUGUI priceText;
     public TextMeshProUGUI buysCountText;
 
+    public int armorIndex;
     public float value;
 
     public Image itemIcon;
@@ -144,6 +145,7 @@ public class PanelItemInHub : MonoBehaviour
                 viewIcon.sprite = viewSprite[1];
 
                 LoadoutController.Instance.FillTheBar(LoadoutController.Instance.fill[1], value);
+                // SkinsManager.Instance.ChangeSkin()
                 break;
 
         }
@@ -178,28 +180,13 @@ public class PanelItemInHub : MonoBehaviour
                 foreach (var currentObj in DungeonHubManager.dungeonHubManager.weaponList)
                 {
                     currentObj.SetActive(false);
-                    //if (currentObj == currentObject)
-                    //{
-                    //    DungeonHubManager.dungeonHubManager.weaponActivatePanel.DeselectedWeapon();
-                    //    currentObj.SetActive(false);
-
-                    //    return;
-                    //}
                 }
-
                 break;
 
             case ItemEquipment.EquipmentType.Armor:
                 foreach (var currentObj in DungeonHubManager.dungeonHubManager.armorList)
                 {
                     currentObj.SetActive(false);
-                    //if (currentObj == currentObject)
-                    //{
-                    //    DungeonHubManager.dungeonHubManager.aromorActivatePanel.DeselectedWeapon();
-                    //    currentObj.SetActive(false);
-
-                    //    return;
-                    //}
                 }
                 break;
         }

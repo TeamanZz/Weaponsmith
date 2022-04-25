@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using DG.Tweening;
 
 public class DungeonManager : MonoBehaviour
 {
     public static DungeonManager Instance;
 
     public bool isDungeonStarted;
+    public int currentLevelEarnedMoneyCount;
+    public bool blueprintRecieved;
 
     [SerializeField] private Transform dungeonCharacter;
     [SerializeField] private Transform dungeonCharacterPreviewPos;
@@ -15,9 +20,29 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private Transform dungeonCameraPreviewPos;
     [SerializeField] private Transform dungeonCameraStartPos;
 
+    public Image progressBarFill;
+    public float bossZPosition = 0;
+
+    public GameObject dungeonProgressBar;
+
+    public int currentDungeonLevelId;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        UpdateProgressBarValue();
+    }
+
+    private void UpdateProgressBarValue()
+    {
+        if (bossZPosition == 0)
+            return;
+        var newBarValue = (DungeonCharacter.Instance.transform.position.z - -6.5f) / (bossZPosition - -6.5f);
+        progressBarFill.fillAmount = newBarValue + 0.05f;
     }
 
     public void SetCharacterOnStart()
@@ -30,6 +55,7 @@ public class DungeonManager : MonoBehaviour
         dungeonCamera.targetDistance = 17;
 
         isDungeonStarted = true;
+        dungeonProgressBar.SetActive(true);
     }
 
     public void ShowCharacterPreview()
@@ -41,5 +67,6 @@ public class DungeonManager : MonoBehaviour
         dungeonCamera.transform.position = dungeonCameraPreviewPos.position;
         dungeonCamera.transform.rotation = Quaternion.Euler(7, 90, 0);
         dungeonCamera.targetDistance = 0;
+        dungeonProgressBar.SetActive(false);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
+using TMPro;
 
 public class DungeonCharacter : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class DungeonCharacter : MonoBehaviour
     [SerializeField] private int characterDamage;
     [SerializeField] private Image healthImageFilled;
     [SerializeField] private ParticleSystem hitParticles;
+    [SerializeField] private TextMeshProUGUI hpText;
 
     [Space]
     [SerializeField] private List<AudioClip> sounds = new List<AudioClip>();
@@ -38,9 +40,10 @@ public class DungeonCharacter : MonoBehaviour
 
     private CapsuleCollider detectionCollider;
     private Coroutine attackCoroutine;
-    private bool weaponTrailEnabled = false;
 
     public DungeonPopupText damageTextPopup;
+
+    public List<MeleeWeaponTrail> trailsList = new List<MeleeWeaponTrail>();
 
     private void Awake()
     {
@@ -49,11 +52,28 @@ public class DungeonCharacter : MonoBehaviour
         detectionCollider = GetComponent<CapsuleCollider>();
         allowedAttackAnimationsCount = PlayerPrefs.GetInt("allowedAttackAnimationsCount", 2);
 
-        LoadWeaponTrailValue();
         LoadCriticalHitValue();
 
         if (needSpeedUpOnAwake)
             animator.speed = lastSpeedUpValue;
+    }
+
+    public void EnableWeaponEmit()
+    {
+        for (int i = 0; i < trailsList.Count; i++)
+        {
+            if (trailsList[i].enabled)
+                trailsList[i].Emit = true;
+        }
+    }
+
+    public void DisableWeaponEmit()
+    {
+        for (int i = 0; i < trailsList.Count; i++)
+        {
+            if (trailsList[i].enabled)
+                trailsList[i].Emit = false;
+        }
     }
 
     public void HitEnemy()
@@ -95,8 +115,6 @@ public class DungeonCharacter : MonoBehaviour
             currentEnemy = tempEnemy;
             detectionCollider.enabled = false;
             attackCoroutine = StartCoroutine(IEAttack());
-            if (weaponTrailEnabled)
-                weaponTrail.Emit = true;
         }
     }
 
@@ -111,7 +129,7 @@ public class DungeonCharacter : MonoBehaviour
         hitParticles.Play();
         animator.Play("Recieve Damage", 1);
         var newPopup = Instantiate(damageTextPopup, transform.position + new Vector3(-2, 1, 0), Quaternion.Euler(32, 0, 0));
-        newPopup.GetComponent<DungeonPopupText>().InitializeCharacterDamageText(damageValue.ToString());
+        newPopup.GetComponent<DungeonPopupText>().InitializeCharacterDamageText(tempDamage.ToString());
 
         if (currentHealth <= 0)
         {
@@ -121,21 +139,14 @@ public class DungeonCharacter : MonoBehaviour
             detectionCollider.enabled = true;
 
         }
+        PlayHitSound();
     }
 
     private void UpdateHPBar()
     {
         var newBarValue = ((float)currentHealth / (float)maxHealth);
         healthImageFilled.DOFillAmount(newBarValue, 0.5f).SetEase(Ease.OutBack);
-    }
-
-    private void LoadWeaponTrailValue()
-    {
-        string trailEnabled = PlayerPrefs.GetString("weaponTrailEnabled", "false");
-        if (trailEnabled == "true")
-            weaponTrailEnabled = true;
-        else
-            weaponTrailEnabled = false;
+        hpText.text = currentHealth.ToString();
     }
 
     private void LoadCriticalHitValue()
@@ -177,12 +188,6 @@ public class DungeonCharacter : MonoBehaviour
         // PlayerPrefs.SetString("canCriticalHit", "true");
     }
 
-    public void EnableWeaponTrail()
-    {
-        // PlayerPrefs.SetString("weaponTrailEnabled", "true");
-        weaponTrailEnabled = true;
-    }
-
     private void RunForward()
     {
         transform.position += new Vector3(0, 0, runSpeed);
@@ -206,8 +211,6 @@ public class DungeonCharacter : MonoBehaviour
         animator.SetTrigger("EnemyDeath");
         detectionCollider.enabled = true;
         isInBattle = false;
-        if (weaponTrailEnabled)
-            weaponTrail.Emit = false;
 
         StopCoroutine(attackCoroutine);
     }

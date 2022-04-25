@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DungeonHubManager : MonoBehaviour
 {
     public static DungeonHubManager dungeonHubManager;
-    
+
     [Header("Data")]
     public List<GameObject> equipmentPanelContent = new List<GameObject>();
 
@@ -15,8 +15,8 @@ public class DungeonHubManager : MonoBehaviour
 
     public PanelItemInHub panelInHubPrefab;
 
-    public PanelItemInHub armorActivatePanel;
-    public PanelItemInHub weaponActivatePanel;
+    [HideInInspector] public PanelItemInHub armorActivatePanel;
+    [HideInInspector] public PanelItemInHub weaponActivatePanel;
 
     public List<GameObject> armorList = new List<GameObject>();
     public List<GameObject> weaponList = new List<GameObject>();
@@ -51,32 +51,28 @@ public class DungeonHubManager : MonoBehaviour
     }
     public void AddEquipment(PanelItem newPunelItem)
     {
-        Debug.Log("Start Add Equipment");
+
         if (newPunelItem.currentEquipmentType == ItemEquipment.EquipmentType.Empty)
             return;
 
-        Debug.Log("Add Equipment");
         PanelItemInHub newPanelItemInHub = null;
-        ////newPanelItemInHub.panelItem = newPunelItem;
-        //newPanelItemInHub.Initialization(newPunelItem);
-
 
         switch (newPunelItem.currentEquipmentType)
         {
             case ItemEquipment.EquipmentType.Weapon:
                 newPanelItemInHub = Instantiate(panelInHubPrefab, weaponContent);
-                newPanelItemInHub.transform.parent = weaponContent;
+                newPanelItemInHub.transform.SetParent(weaponContent);
                 break;
 
             case ItemEquipment.EquipmentType.Armor:
                 newPanelItemInHub = Instantiate(panelInHubPrefab, weaponContent);
-                newPanelItemInHub.transform.parent = armorContent;
+                newPanelItemInHub.transform.SetParent(armorContent);
                 break;
         }
 
         newPanelItemInHub.Initialization(newPunelItem);
         newPunelItem.currentPanelItemInHub = newPanelItemInHub;
-        Debug.Log(newPanelItemInHub);
+
     }
     public void OpenPanel(int panelIndex)
     {
@@ -86,13 +82,6 @@ public class DungeonHubManager : MonoBehaviour
         }
 
         loadoutController.Initialization();
-        //loadoutController.health = 50;
-
-        //if (armorActivatePanel != null)
-        //    loadoutController.protection = armorActivatePanel.value;
-        
-        //if (weaponActivatePanel != null)
-        //    loadoutController.damage = weaponActivatePanel.value;
 
         switch (panelIndex)
         {
@@ -108,5 +97,4 @@ public class DungeonHubManager : MonoBehaviour
                 break;
         }
     }
-
 }

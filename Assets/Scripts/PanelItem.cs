@@ -9,19 +9,20 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 {
     public PanelItemState currentState;
     public ItemEquipment.EquipmentType currentEquipmentType;
-
     public string itemName;
-    public int index;
-    public int currentWeaponNumber = 0;
-
-    [Space]
+    public int price;
     public int buysCount;
-
-    [Space]
     public AnimationCurve costCurve;
+    public Sprite iconSprite;
+    public int currentCoefficientValue = 1;
+    [SerializeField] private int maxCount = 1;
+    [SerializeField] private int checkValue = 0;
+    public ItemEquipment currentItemEquipment;
+    public List<GameObject> currentObject = new List<GameObject>();
+
+    [HideInInspector] public PanelItemInHub currentPanelItemInHub;
 
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
-    //[FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI coefficientText;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI buysCountText;
@@ -37,29 +38,15 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")][SerializeField] private Image progressBarFilled;
     [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
-    //[FoldoutGroup("View Components")] [SerializeField] private Animator generalIncreaseValueTextAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
-    //public int generalIncreaseValue;
-    public int price;
 
-    public ItemEquipment currentItemEquipment;
-    public PanelItemInHub currentPanelItemInHub;
-
-    public List<GameObject> currentObject = new List<GameObject>();
-    [Header("Sprite")]
-    public Sprite iconSprite;
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();
         Initialize();
     }
-
-    public int currentCoefficientValue = 1;
-    [SerializeField] private int maxCount = 1;
-    [SerializeField] private int checkValue = 0;
-    //[SerializeField] private List<Vector2Int> priceList = new List<Vector2Int>();
 
     public void CheckPriceCoefficient()
     {
