@@ -57,20 +57,20 @@ public class LoadoutController : MonoBehaviour
         if (MoneyHandler.Instance == null)
             return;
 
-        if (MoneyHandler.Instance.currentImprovementPoints <= 0)
-            return;
+        //if (MoneyHandler.Instance.currentImprovementPoints <= 0)
+        //    return;
 
-        for (int i = 0; i < improvementScoreCounter.Length; i++)
-        {
-            if (improvementScoreCounter[i] < maxCount)
-                improvementButton[i].SetActive(true);
-        }
+        //for (int i = 0; i < improvementScoreCounter.Length; i++)
+        //{
+        //    if (improvementScoreCounter[i] < maxCount)
+        //        improvementButton[i].SetActive(true);
+        //}
     }
 
     public void UseExperiencePoints(int number)
     {
         improvementScoreCounter[number] += 1;
-        MoneyHandler.Instance.currentImprovementPoints -= 1;
+        //MoneyHandler.Instance.currentImprovementPoints -= 1;
 
         switch (number)
         {
@@ -96,9 +96,9 @@ public class LoadoutController : MonoBehaviour
         if (improvementScoreCounter[number] >= 8)
             improvementButton[number].SetActive(false);
 
-        if (MoneyHandler.Instance.currentImprovementPoints <= 0)
-            foreach (var button in improvementButton)
-                button.SetActive(false);
+        //if (MoneyHandler.Instance.currentImprovementPoints <= 0)
+        //    foreach (var button in improvementButton)
+        //        button.SetActive(false);
     }
 
     public void FillTheBar(Image fillingImage, float fillingLevel)

@@ -24,6 +24,8 @@ public class SkillItemView : MonoBehaviour
     public void UpdateView(SkillItem item)
     {
         iconImage.sprite = item.iconImage;
+        border.color = item.borderColor;
+        title.text = item.skillName + " Lvl " + item.skillLvl;
     }
 
     public void EnableBlur()

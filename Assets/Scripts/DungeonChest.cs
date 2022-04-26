@@ -49,7 +49,7 @@ public class DungeonChest : MonoBehaviour
                 DungeonCharacter.Instance.DisableCharacterRun();
                 CraftPanelItemsManager.Instance.OpenNewBlueprint();
                 DungeonRewardPanel.Instance.OpenRewardPanel(3);
-                MoneyHandler.Instance.AddImprovementPoint();
+                SkillController.skillController.AddImprovementPoint();
                 break;
         }
     }
