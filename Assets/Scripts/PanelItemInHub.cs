@@ -103,8 +103,22 @@ public class PanelItemInHub : MonoBehaviour
 
         buyButtonComponent.gameObject.SetActive(false);
         selectedWeaponButton.gameObject.SetActive(true);
-        //buyButtonComponent.onClick.AddListener(() => SelectedWeapon());
-    }
+
+        viewValueText.gameObject.SetActive(true);
+        switch (panelItem.currentEquipmentType)
+        {
+            case ItemEquipment.EquipmentType.Weapon:
+                viewValueText.text = panelItem.currentItemEquipment.value.ToString();
+                viewIcon.sprite = viewSprite[0];
+                break;
+
+            case ItemEquipment.EquipmentType.Armor:
+                viewValueText.text = panelItem.currentItemEquipment.value.ToString();
+                viewIcon.sprite = viewSprite[1];
+                break;
+        }
+            //buyButtonComponent.onClick.AddListener(() => SelectedWeapon());
+        }
 
     public void SelectedWeapon()
     {
@@ -129,7 +143,7 @@ public class PanelItemInHub : MonoBehaviour
                 viewValueText.text = panelItem.currentItemEquipment.value.ToString();
                 viewIcon.sprite = viewSprite[0];
 
-                LoadoutController.Instance.FillTheBar(LoadoutController.Instance.fill[2], value);
+                //LoadoutController.Instance.FillTheBar(LoadoutController.Instance.fill[2], value);
                 break;
 
             case ItemEquipment.EquipmentType.Armor:
@@ -144,7 +158,7 @@ public class PanelItemInHub : MonoBehaviour
                 viewValueText.text = panelItem.currentItemEquipment.value.ToString();
                 viewIcon.sprite = viewSprite[1];
 
-                LoadoutController.Instance.FillTheBar(LoadoutController.Instance.fill[1], value);
+                //LoadoutController.Instance.FillTheBar(LoadoutController.Instance.fill[1], value);
                 // SkinsManager.Instance.ChangeSkin()
                 break;
 
@@ -159,6 +173,7 @@ public class PanelItemInHub : MonoBehaviour
         }
         //currentObject.SetActive(true);
 
+        LoadoutController.Instance.Initialization();
         //DungeonBuilder.Instance.CameraFocus(currentObject.transform);
     }
     public void DeselectedWeapon()
