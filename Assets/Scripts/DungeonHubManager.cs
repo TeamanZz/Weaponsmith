@@ -41,6 +41,7 @@ public class DungeonHubManager : MonoBehaviour
             currentObj.SetActive(false);
         }
 
+        armorList[0].SetActive(true);
         UpdateUI();
     }
 

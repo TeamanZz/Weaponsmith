@@ -22,58 +22,58 @@ public class SkinsManager : MonoBehaviour
 
     public void Initialization(List<GameObject> newSkins, List<GameObject> newDungeonSkins)
     {
-        skins.Clear();
-        dungeonSkins.Clear();
+        //skins.Clear();
+        //dungeonSkins.Clear();
 
-        skins = newSkins;
-        dungeonSkins = newDungeonSkins;
+        //skins = newSkins;
+        //dungeonSkins = newDungeonSkins;
 
-        ChangeSkin(needShowParticles: false);
+        //ChangeSkin(needShowParticles: false);
     }
 
     [ContextMenu("Change Skin")]
     public void ChangeSkin(bool needShowParticles = true)
     {
-        foreach (GameObject dungeSkin in dungeonSkins)
-        {
-            dungeSkin.SetActive(false);
-        }
+        //foreach (GameObject dungeSkin in dungeonSkins)
+        //{
+        //    dungeSkin.SetActive(false);
+        //}
 
-        foreach (GameObject skin in skins)
-        {
-            skin.SetActive(false);
-        }
-        if (needShowParticles)
-        {
-            foreach (var part in particles)
-            {
-                part.Play();
-            }
-        }
+        //foreach (GameObject skin in skins)
+        //{
+        //    skin.SetActive(false);
+        //}
+        //if (needShowParticles)
+        //{
+        //    foreach (var part in particles)
+        //    {
+        //        part.Play();
+        //    }
+        //}
 
-        skins[0/*currentNumber*/].SetActive(true);
-        dungeonSkins[currentSkinIndex].SetActive(true);
+        //skins[0/*currentNumber*/].SetActive(true);
+        //dungeonSkins[currentSkinIndex].SetActive(true);
     }
 
     public void ChangeSkin(int skinIndex)
     {
-        foreach (GameObject dungeSkin in dungeonSkins)
-        {
-            dungeSkin.SetActive(false);
-        }
+        //foreach (GameObject dungeSkin in dungeonSkins)
+        //{
+        //    dungeSkin.SetActive(false);
+        //}
 
-        foreach (GameObject skin in skins)
-        {
-            skin.SetActive(false);
-        }
+        //foreach (GameObject skin in skins)
+        //{
+        //    skin.SetActive(false);
+        //}
 
-        foreach (var part in particles)
-        {
-            part.Play();
-        }
+        //foreach (var part in particles)
+        //{
+        //    part.Play();
+        //}
 
-        currentSkinIndex = skinIndex;
-        skins[currentSkinIndex].SetActive(true);
-        dungeonSkins[currentSkinIndex].SetActive(true);
+        //currentSkinIndex = skinIndex;
+        //skins[currentSkinIndex].SetActive(true);
+        //dungeonSkins[currentSkinIndex].SetActive(true);
     }
 }

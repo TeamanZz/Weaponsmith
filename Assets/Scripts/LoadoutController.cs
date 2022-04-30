@@ -21,7 +21,8 @@ public class LoadoutController : MonoBehaviour
     public GameObject[] improvementButton;
 
     public DungeonHubManager hubManager;
-    
+    public ParticleSystem selectedParticle;
+
     public void Awake()
     {
         Instance = this;
@@ -39,6 +40,7 @@ public class LoadoutController : MonoBehaviour
         //FillTheBar(fill[0], (improvementScoreCounter[0] * pointValue));
                
         FillTheBar(fill[0], 100);
+        fillValue[0].text = (improvementScoreCounter[0] * pointValue).ToString();
 
         if (hubManager.armorActivatePanel == null)
         {
@@ -70,6 +72,11 @@ public class LoadoutController : MonoBehaviour
             button.SetActive(false);
 
         UpdateImprovementPoints();
+    }
+
+    public void PlaySelectedAnimation()
+    {
+        selectedParticle.Play();
     }
 
     public void UpdateImprovementPoints()
