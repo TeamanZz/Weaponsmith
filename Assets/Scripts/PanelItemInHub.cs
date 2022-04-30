@@ -33,6 +33,8 @@ public class PanelItemInHub : MonoBehaviour
     public TextMeshProUGUI viewValueText;
     public Image viewIcon;
     public Sprite[] viewSprite;
+
+
     public void Initialization(PanelItem newPanelItem)
     {
         viewValueText.gameObject.SetActive(false);

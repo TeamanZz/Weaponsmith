@@ -534,6 +534,7 @@ MonoBehaviour:
   itemNameText: {fileID: 5508555025605444898}
   priceText: {fileID: 5508555025873317893}
   buysCountText: {fileID: 5508555026136533731}
+  armorIndex: 0
   value: 0
   itemIcon: {fileID: 5508555026139587788}
   progressBarFilled: {fileID: 5508555025739487079}
@@ -545,12 +546,13 @@ MonoBehaviour:
   iconAnimator: {fileID: 0}
   buysCountTextAnimator: {fileID: 0}
   selectedButtonAnimator: {fileID: 0}
-  currentObject: {fileID: 0}
+  currentObject:
+  - {fileID: 0}
   viewValueText: {fileID: 5545996471087860664}
   viewIcon: {fileID: 2072246763084811060}
   viewSprite:
-  - {fileID: 21300000, guid: 75ccccfb64fe6e44699e8ce5f1050a69, type: 3}
-  - {fileID: 21300000, guid: 3a6ace85e1bfd3b45acd4339246679c6, type: 3}
+  - {fileID: 21300000, guid: 096ae7a23a4b19a42af1567d2e97d231, type: 3}
+  - {fileID: 21300000, guid: 6567e09470b56b04bbda942219908d53, type: 3}
 --- !u!1 &5508555025179014584
 GameObject:
   m_ObjectHideFlags: 0
