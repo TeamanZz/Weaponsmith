@@ -128,11 +128,16 @@ public class PanelsHandler : MonoBehaviour
         dungeonEnteringPanel.SetActive(false);
     }
 
+    public GameObject anvilSound;
+    public GameObject tapArea;
     public void OpenPanel(int panelIndex)
     {
         //dungeon panel
         if (panelIndex == 2)
         {
+            anvilSound.SetActive(false);
+            tapArea.SetActive(false);
+
             if (WorkshopItem.dungeoonIsOpen == 0)
             {
                 Debug.Log("ISOPEN 0");
@@ -142,6 +147,8 @@ public class PanelsHandler : MonoBehaviour
 
                 panelLabelObject.SetActive(false);
                 panels[panelIndex].SetActive(false);
+
+                
                 return;
             }
             else
@@ -179,6 +186,20 @@ public class PanelsHandler : MonoBehaviour
         {
             if (i == panelIndex)
             {
+                if (panelIndex == 1 || panelIndex == 0)
+                {
+                    anvilSound.SetActive(true);
+                    if (panelIndex != 1)
+                        tapArea.SetActive(false);
+                    else
+                        tapArea.SetActive(true);
+
+                }
+                else
+                {
+                    anvilSound.SetActive(false);
+                    tapArea.SetActive(false);
+                }
                 panels[i].SetActive(true);
             }
             else
