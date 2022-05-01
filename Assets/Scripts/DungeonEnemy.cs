@@ -18,8 +18,9 @@ public class DungeonEnemy : MonoBehaviour
     [SerializeField] private List<AudioClip> sounds = new List<AudioClip>();
     [SerializeField] private float scale = 1.5f;
     [SerializeField] private float distanceToCollider = 1.5f;
+    
     [SerializeField] private float enemyLVL;
-
+    
     private BoxCollider detectionCollider;
     private bool isDead;
     private int curentSkinIndex;
@@ -53,7 +54,7 @@ public class DungeonEnemy : MonoBehaviour
         SetScale();
         UpdateColliderPosition();
 
-        animator.SetFloat("Cycle Offset", Random.Range(0, 1f));
+        animator.SetFloat("Cycle Offset", Random.Range(0, 1f)); 
     }
 
     public void HitPlayerCharacter()

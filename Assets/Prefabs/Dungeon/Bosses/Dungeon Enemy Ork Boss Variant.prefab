@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1054349193648523950, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129270906803954782, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1539574305668809971, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -63,13 +71,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dungeon Enemy Ork Boss Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2687112264568518647, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5302369997482512107, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
       propertyPath: m_Name
       value: Name
       objectReference: {fileID: 0}
     - target: {fileID: 5302369997482512107, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302369997482512107, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788796720864340753, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6952486300126442324, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
       propertyPath: m_text
@@ -83,9 +103,25 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7670038327919690335, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7969250862843115880, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090589719900482771, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8224177123095458927, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9067841971420659320, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class EnemyHealthBar : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class EnemyHealthBar : MonoBehaviour
 
     private DungeonEnemy enemyComponent;
 
+    public TextMeshProUGUI enemyHPText;
+
     public void Awake()
     {
         enemyComponent = GetComponent<DungeonEnemy>();
@@ -29,6 +32,7 @@ public class EnemyHealthBar : MonoBehaviour
     {
         maxHealth = value;
         currentHealth = value;
+        enemyHPText.text = currentHealth.ToString();
     }
 
     [ContextMenu("Take damage")]
@@ -55,6 +59,8 @@ public class EnemyHealthBar : MonoBehaviour
 
         var newBarValue = ((float)currentHealth / (float)maxHealth);
         healthBarImage.DOFillAmount(newBarValue, 0.5f).SetEase(Ease.OutBack);
+        
+        enemyHPText.text = currentHealth.ToString();
 
         if (currentHealth <= 0)
         {
