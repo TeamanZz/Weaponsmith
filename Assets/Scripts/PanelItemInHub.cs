@@ -12,7 +12,7 @@ public class PanelItemInHub : MonoBehaviour
     public TextMeshProUGUI buysCountText;
 
     public int armorIndex;
-    public float value;
+    public int value;
 
     public Image itemIcon;
     public Image progressBarFilled;

@@ -19,13 +19,21 @@ public class DungeonCharacter : MonoBehaviour
     [Header("Health And Stats")]
     [SerializeField] private float minAttackDelay = 2;
     [SerializeField] private float maxAttackDelay = 3.5f;
+
     [SerializeField] private int currentHealth;
     [SerializeField] private int maxHealth;
-    [SerializeField] private int characterArmor;
+    [SerializeField] private int currentArmor;
+    [SerializeField] private int maxArmor;
+
+    //[SerializeField] private int characterArmor;
     [SerializeField] private int characterDamage;
+
     [SerializeField] private Image healthImageFilled;
+    [SerializeField] private Image armorImageFilled;
+
     [SerializeField] private ParticleSystem hitParticles;
     [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private TextMeshProUGUI armorText;
 
     [Space]
     [SerializeField] private List<AudioClip> sounds = new List<AudioClip>();
@@ -85,11 +93,15 @@ public class DungeonCharacter : MonoBehaviour
 
     public void InitializeStats(int hpValue, int armorValue, int damageValue)
     {
-        characterArmor = armorValue;
+        currentArmor = armorValue;
+        maxArmor = armorValue;
+
         characterDamage = damageValue;
+        
         currentHealth = hpValue;
         maxHealth = hpValue;
-        UpdateHPBar();
+
+        UpdateAllBars();
     }
 
     private IEnumerator IEAttack()
@@ -120,12 +132,31 @@ public class DungeonCharacter : MonoBehaviour
 
     public void TakeDamage(int damageValue)
     {
-        var tempDamage = damageValue - characterArmor;
-        if (tempDamage < 0)
-            tempDamage = 0;
+        //var tempDamage = damageValue - currentArmor;
+        //if (tempDamage < 0)
+        //    tempDamage = 0;
 
-        currentHealth -= tempDamage;
-        UpdateHPBar();
+        //currentHealth -= tempDamage;
+        int tempDamage;
+
+        if(currentArmor> damageValue)
+        {
+            currentArmor -= damageValue;
+            tempDamage = damageValue;
+        }
+        else
+        {
+            int checkDamage = damageValue - currentArmor;
+            currentArmor = 0;
+
+            currentHealth -= checkDamage;
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+            
+            tempDamage = damageValue;
+        }
+
+        UpdateAllBars();
+
         hitParticles.Play();
         animator.Play("Recieve Damage", 1);
         var newPopup = Instantiate(damageTextPopup, transform.position + new Vector3(-2, 1, 0), Quaternion.Euler(32, 0, 0));
@@ -142,11 +173,15 @@ public class DungeonCharacter : MonoBehaviour
         PlayHitSound();
     }
 
-    private void UpdateHPBar()
+    private void UpdateAllBars()
     {
-        var newBarValue = ((float)currentHealth / (float)maxHealth);
-        healthImageFilled.DOFillAmount(newBarValue, 0.5f).SetEase(Ease.OutBack);
+        var newHpBarValue = ((float)currentHealth / (float)maxHealth);
+        healthImageFilled.DOFillAmount(newHpBarValue, 0.5f).SetEase(Ease.OutBack);
         hpText.text = currentHealth.ToString();
+        
+        var newArmorBarValue = ((float)currentArmor / (float)maxArmor);
+        armorImageFilled.DOFillAmount(newArmorBarValue, 0.5f).SetEase(Ease.OutBack);
+        armorText.text = currentArmor.ToString();
     }
 
     private void LoadCriticalHitValue()

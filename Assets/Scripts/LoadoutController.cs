@@ -31,7 +31,23 @@ public class LoadoutController : MonoBehaviour
 
     public void InitializeCharacterStats()
     {
-        DungeonCharacter.Instance.InitializeStats(improvementScoreCounter[0] * pointValue, improvementScoreCounter[1] * pointValue, improvementScoreCounter[2] * pointValue);
+        int armorValue = 0;
+        if (hubManager.armorActivatePanel == null)
+        {
+            armorValue = improvementScoreCounter[1] * pointValue;
+        }
+        else
+            armorValue = hubManager.armorActivatePanel.value;
+
+        int damageValue = 0;
+        if (hubManager.weaponActivatePanel == null)
+        {
+            damageValue = improvementScoreCounter[2] * pointValue;
+        }
+        else
+            damageValue = hubManager.weaponActivatePanel.value;
+
+        DungeonCharacter.Instance.InitializeStats(improvementScoreCounter[0] * pointValue, armorValue, damageValue);
     }
 
     [ContextMenu("Initialization")]

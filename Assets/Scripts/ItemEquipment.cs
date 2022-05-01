@@ -10,7 +10,7 @@ public class ItemEquipment
     public int maxCount;
     public int currentCount;
 
-    public float value;
+    public int value;
 
     public PanelItem currentPanelItem;
 
