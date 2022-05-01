@@ -17,6 +17,8 @@ public class DungeonChest : MonoBehaviour
 
     private ChestFilling currentFilling;
 
+    public List<ParticleSystem> rewardParticles = new List<ParticleSystem>();
+
     public void Initialize(ChestFilling filling, int moneyPerChest)
     {
         currentFilling = filling;
@@ -68,6 +70,15 @@ public class DungeonChest : MonoBehaviour
             var newPopup = Instantiate(textPopup, transform.position + new Vector3(0, 3, 0), Quaternion.Euler(32, 0, 0));
             newPopup.GetComponent<DungeonPopupText>().InitializeRewardText(moneyReward.ToString());
             SFX.Instance.PlayChestOpen();
+        }
+    }
+
+    public void PlayRewardAnimation()
+    {
+        foreach(var particl in rewardParticles)
+        {
+            particl.gameObject.SetActive(true);
+            particl.Play();
         }
     }
 

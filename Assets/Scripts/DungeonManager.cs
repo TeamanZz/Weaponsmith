@@ -36,7 +36,7 @@ public class DungeonManager : MonoBehaviour
     {
         UpdateProgressBarValue();
     }
-
+    
     private void UpdateProgressBarValue()
     {
         if (bossZPosition == 0)

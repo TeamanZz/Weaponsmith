@@ -85,7 +85,12 @@ public class DungeonRewardPanel : MonoBehaviour
         }
 
         if (starsValue == 3)
+        {
+            if (DungeonBuilder.Instance.lastChest != null)
+                DungeonBuilder.Instance.lastChest.PlayRewardAnimation();
+
             titleText.text = resultInTitle[0];
+        }
         else
             titleText.text = resultInTitle[1];
 

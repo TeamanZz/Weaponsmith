@@ -32,6 +32,7 @@ public class DungeonBuilder : MonoBehaviour
     private List<GameObject> enemiesList = new List<GameObject>();
     private List<GameObject> buildedPiecesList = new List<GameObject>();
 
+    public DungeonChest lastChest;
     private void Awake()
     {
         Instance = this;
@@ -45,6 +46,7 @@ public class DungeonBuilder : MonoBehaviour
 
     public void BuildDungeon()
     {
+        lastChest = null;
         currentLevelSettings = levels[DungeonManager.Instance.currentDungeonLevelId];
         levelLogo.sprite = currentLevelSettings.levelLogo;
         levelName.text = currentLevelSettings.levelName;
@@ -93,6 +95,8 @@ public class DungeonBuilder : MonoBehaviour
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
         chestComponent.Initialize(DungeonChest.ChestFilling.BlueprintAndMoney, currentLevelSettings.secondChestGold);
         DungeonRewardPanel.Instance.InitializeBlueprintItem();
+
+        lastChest = chestComponent;
 
         chestObject.transform.localPosition = new Vector3(0, 0, newZPos);
         lastSpawnedEnemyZPos = newZPos;
