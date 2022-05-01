@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -0.0476}
-  m_SizeDelta: {x: 2.567, y: 0.2549}
+  m_SizeDelta: {x: 2.567, y: 0.333}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6742359536601791456
 CanvasRenderer:
@@ -3245,7 +3245,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: caf01dd5152f3934d8079e6160aa3b1e, type: 2}
+  - {fileID: 2100000, guid: ccd5c7429f61fb642b2e9ed0bf9c87e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
