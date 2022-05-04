@@ -97,7 +97,7 @@ public class DungeonCharacter : MonoBehaviour
         maxArmor = armorValue;
 
         characterDamage = damageValue;
-        
+
         currentHealth = hpValue;
         maxHealth = hpValue;
 
@@ -107,7 +107,8 @@ public class DungeonCharacter : MonoBehaviour
     private IEnumerator IEAttack()
     {
         yield return new WaitForSeconds(Random.Range(minAttackDelay, maxAttackDelay));
-        animator.SetTrigger("Attack");
+        int attackAnimationIndex = Random.Range(0, 9);
+        animator.SetTrigger("Attack" + attackAnimationIndex);
         yield return IEAttack();
     }
 
@@ -139,7 +140,7 @@ public class DungeonCharacter : MonoBehaviour
         //currentHealth -= tempDamage;
         int tempDamage;
 
-        if(currentArmor> damageValue)
+        if (currentArmor > damageValue)
         {
             currentArmor -= damageValue;
             tempDamage = damageValue;
@@ -151,7 +152,7 @@ public class DungeonCharacter : MonoBehaviour
 
             currentHealth -= checkDamage;
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-            
+
             tempDamage = damageValue;
         }
 
@@ -178,7 +179,7 @@ public class DungeonCharacter : MonoBehaviour
         var newHpBarValue = ((float)currentHealth / (float)maxHealth);
         healthImageFilled.DOFillAmount(newHpBarValue, 0.5f).SetEase(Ease.OutBack);
         hpText.text = currentHealth.ToString();
-        
+
         var newArmorBarValue = ((float)currentArmor / (float)maxArmor);
         armorImageFilled.DOFillAmount(newArmorBarValue, 0.5f).SetEase(Ease.OutBack);
         armorText.text = currentArmor.ToString();

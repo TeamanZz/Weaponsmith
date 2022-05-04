@@ -54,7 +54,7 @@ public class LoadoutController : MonoBehaviour
     public void Initialization()
     {
         //FillTheBar(fill[0], (improvementScoreCounter[0] * pointValue));
-               
+
         FillTheBar(fill[0], 100);
         fillValue[0].text = (improvementScoreCounter[0] * pointValue).ToString();
 
@@ -115,26 +115,26 @@ public class LoadoutController : MonoBehaviour
         improvementScoreCounter[number] += 1;
         //MoneyHandler.Instance.currentImprovementPoints -= 1;
 
-        switch (number)
-        {
-            //case 0:
-            //    FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
-            //    break;
+        // switch (number)
+        // {
+        //case 0:
+        //    FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
+        //    break;
 
-            //case 1:
-            //    if (hubManager.armorActivatePanel == null)
-            //        FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
-            //    else
-            //        FillTheBar(fill[number], hubManager.armorActivatePanel.value + (improvementScoreCounter[number] * pointValue));
-            //    break;
+        //case 1:
+        //    if (hubManager.armorActivatePanel == null)
+        //        FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
+        //    else
+        //        FillTheBar(fill[number], hubManager.armorActivatePanel.value + (improvementScoreCounter[number] * pointValue));
+        //    break;
 
-            //case 2:
-            //    if (hubManager.weaponActivatePanel == null)
-            //        FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
-            //    else
-            //        FillTheBar(fill[number], hubManager.weaponActivatePanel.value + (improvementScoreCounter[number] * pointValue));
-            //    break;
-        }
+        //case 2:
+        //    if (hubManager.weaponActivatePanel == null)
+        //        FillTheBar(fill[number], (improvementScoreCounter[number] * pointValue));
+        //    else
+        //        FillTheBar(fill[number], hubManager.weaponActivatePanel.value + (improvementScoreCounter[number] * pointValue));
+        //    break;
+        // }
 
         if (improvementScoreCounter[number] >= 8)
             improvementButton[number].SetActive(false);
