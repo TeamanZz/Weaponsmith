@@ -107,8 +107,9 @@ public class DungeonCharacter : MonoBehaviour
     private IEnumerator IEAttack()
     {
         yield return new WaitForSeconds(Random.Range(minAttackDelay, maxAttackDelay));
-        int attackAnimationIndex = Random.Range(0, 9);
+        int attackAnimationIndex = Random.Range(1, 9);
         animator.SetTrigger("Attack" + attackAnimationIndex);
+        // animator.SetTrigger("Attack" + 8);
         yield return IEAttack();
     }
 

@@ -62998,21 +62998,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.23333335
+  - time: 0.16666667
     functionName: PlayHitSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.36666667
+  - time: 0.3
     functionName: HitEnemy
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6333334
+  - time: 0.56666666
     functionName: DisableWeaponEmit
     data: 
     objectReferenceParameter: {fileID: 0}
