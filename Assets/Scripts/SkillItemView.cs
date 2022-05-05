@@ -13,6 +13,7 @@ public class SkillItemView : MonoBehaviour
     public Image iconImage;
     public Image border;
     public TextMeshProUGUI title;
+    public TextMeshProUGUI level;
 
     public Image blur;
     public void Initialization(SkillItem skillItem)
@@ -23,9 +24,10 @@ public class SkillItemView : MonoBehaviour
 
     public void UpdateView(SkillItem item)
     {
-        iconImage.sprite = item.iconImage;
-        border.color = item.borderColor;
-        title.text = item.skillName + " Lvl " + item.skillLvl;
+        // iconImage.sprite = item.iconImage;
+        // border.color = item.borderColor;
+        title.text = item.skillName;
+        level.text = item.skillLvl.ToString();
     }
 
     public void EnableBlur()

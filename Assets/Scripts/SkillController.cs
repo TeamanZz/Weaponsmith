@@ -43,10 +43,10 @@ public class SkillController : MonoBehaviour
         enableSkills.AddRange(skills);
 
         Initialization();
-        ChechButtonState();
+        CheckButtonState();
 
         int currentMax = 0;
-        foreach(var item in skillItemViews)
+        foreach (var item in skillItemViews)
         {
             currentMax += item.itemData.skillValue.Count;
         }
@@ -58,7 +58,7 @@ public class SkillController : MonoBehaviour
         skillItemViews.Clear();
         for (int i = 0; i < enableSkills.Count; i++)
         {
-            var newViewPanel = Instantiate(emptyPrefab, group.transform);
+            var newViewPanel = group.transform.GetChild(i).GetComponent<SkillItemView>();
             newViewPanel.Initialization(enableSkills[i]);
             skillItemViews.Add(newViewPanel);
         }
@@ -72,19 +72,19 @@ public class SkillController : MonoBehaviour
             return;
 
         currentImprovementPoints += 1;
-        ChechButtonState();
+        CheckButtonState();
         CheckSkillState();
         //LoadoutController.Instance.UpdateImprovementPoints();
     }
 
-    public void ChechButtonState()
+    public void CheckButtonState()
     {
         if (currentImprovementPoints == 0 || currentCorutine != null || enableSkills.Count == 0)
             buyButton.interactable = false;
         else
             buyButton.interactable = true;
 
-        buttonText.text = "Uprage \nx" + currentImprovementPoints;
+        buttonText.text = currentImprovementPoints + " x";
     }
 
     public void CheckUpgradePoints()
@@ -92,7 +92,7 @@ public class SkillController : MonoBehaviour
         if (currentImprovementPoints > 0)
         {
             currentImprovementPoints -= 1;
-            ChechButtonState();
+            CheckButtonState();
         }
         else
             return;
@@ -111,16 +111,16 @@ public class SkillController : MonoBehaviour
 
     public void CheckSkillState()
     {
-        foreach(var item in skillItemViews)
+        foreach (var item in skillItemViews)
         {
             if (item.itemData.skillLvl >= item.itemData.skillValue.Count)
             {
-                item.title.text = item.itemData.skillName + " Max Lvl";
+                item.level.text = "Max Lvl";
                 enableSkills.Remove(item.itemData);
                 skillItemViews.Remove(item);
             }
             else
-                item.title.text = item.itemData.skillName + " Lvl " + item.itemData.skillLvl;
+                item.level.text = item.itemData.skillLvl.ToString();
         }
     }
 
@@ -132,7 +132,7 @@ public class SkillController : MonoBehaviour
         {
             int itemNumber = UnityEngine.Random.Range(0, enableSkills.Count);
             skillItemViews[itemNumber].EnableBlur();
-            Debug.Log("Number - " + itemNumber +" Lenght - "+ (float)curve.Evaluate(i));
+            Debug.Log("Number - " + itemNumber + " Lenght - " + (float)curve.Evaluate(i));
 
             yield return new WaitForSeconds((float)curve.Evaluate(i));
             skillItemViews[itemNumber].DisableBlur();
@@ -161,7 +161,7 @@ public class SkillController : MonoBehaviour
         skillItemViews[endNumber].DisableBlur();
         currentCorutine = null;
 
-        ChechButtonState();
+        CheckButtonState();
         CheckSkillState();
     }
 }
