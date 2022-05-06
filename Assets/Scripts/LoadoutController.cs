@@ -27,65 +27,117 @@ public class LoadoutController : MonoBehaviour
     {
         Instance = this;
         Initialization();
+
+        foreach (var button in improvementButton)
+            button.SetActive(false);
     }
 
     public void InitializeCharacterStats()
     {
-        int armorValue = 0;
-        if (hubManager.armorActivatePanel == null)
-        {
-            armorValue = improvementScoreCounter[1] * pointValue;
-        }
-        else
-            armorValue = hubManager.armorActivatePanel.value;
+        var HPSkill = skillController.skills[0];
+        var damageSkill = skillController.skills[1];
+        var armorSkill = skillController.skills[2];
 
-        int damageValue = 0;
-        if (hubManager.weaponActivatePanel == null)
-        {
-            damageValue = improvementScoreCounter[2] * pointValue;
-        }
-        else
-            damageValue = hubManager.weaponActivatePanel.value;
-
-        DungeonCharacter.Instance.InitializeStats(improvementScoreCounter[0] * pointValue, armorValue, damageValue);
-    }
-
-    [ContextMenu("Initialization")]
-    public void Initialization()
-    {
-        //FillTheBar(fill[0], (improvementScoreCounter[0] * pointValue));
+        int hpValue;
+        int armorValue;
+        int damageValue;
 
         FillTheBar(fill[0], 100);
-        fillValue[0].text = (improvementScoreCounter[0] * pointValue).ToString();
+        hpValue = (int)((improvementScoreCounter[0] * pointValue) + HPSkill.skillValue[HPSkill.skillLvl]);
+        fillValue[0].text = hpValue.ToString();
 
         if (hubManager.armorActivatePanel == null)
         {
-            //FillTheBar(fill[1], (improvementScoreCounter[1] * pointValue));
-            FillTheBar(fill[1], 0);
-            fillValue[1].text = "0";
+            float value = armorSkill.skillValue[armorSkill.skillLvl];
+            armorValue = (int)value;
+            fillValue[1].text = value.ToString();
+
+            if (value == 0)
+                FillTheBar(fill[1], 0);
+            else
+                FillTheBar(fill[1], 100);
         }
         else
         {
             // FillTheBar(fill[1], hubManager.armorActivatePanel.value + (improvementScoreCounter[1] * pointValue));
-            FillTheBar(fill[1], 100);
-            fillValue[1].text = (hubManager.armorActivatePanel.value).ToString();
+            FillTheBar(fill[1], 100); 
+            
+            float value = armorSkill.skillValue[armorSkill.skillLvl];
+            armorValue = (int)((hubManager.armorActivatePanel.value) + value);
+
+            fillValue[1].text = ((hubManager.armorActivatePanel.value) + value).ToString();
         }
 
         if (hubManager.weaponActivatePanel == null)
         {
-            //FillTheBar(fill[2], (improvementScoreCounter[2] * pointValue));
-            FillTheBar(fill[2], 0);
-            fillValue[2].text = "0";
+            float value = damageSkill.skillValue[damageSkill.skillLvl];
+            damageValue = (int)value;
+            fillValue[2].text = value.ToString();
+
+            if (value == 0)
+                FillTheBar(fill[2], 0);
+            else
+                FillTheBar(fill[2], 100);
         }
         else
         {
             //FillTheBar(fill[2], hubManager.weaponActivatePanel.value + (improvementScoreCounter[2] * pointValue));
             FillTheBar(fill[2], 100);
-            fillValue[2].text = (hubManager.weaponActivatePanel.value).ToString();
+
+            float value = damageSkill.skillValue[damageSkill.skillLvl];
+            damageValue = (int)((hubManager.weaponActivatePanel.value) + value);
+
+            fillValue[2].text = ((hubManager.weaponActivatePanel.value) + value).ToString();
         }
 
-        foreach (var button in improvementButton)
-            button.SetActive(false);
+        DungeonCharacter.Instance.InitializeStats(hpValue, armorValue, damageValue);
+    }
+
+    public SkillController skillController;
+    [ContextMenu("Initialization")]
+    public void Initialization()
+    {
+        var HPSkill = skillController.skills[0];
+        var damageSkill = skillController.skills[1];
+        var armorSkill = skillController.skills[2];
+
+        FillTheBar(fill[0], 100);
+        fillValue[0].text = ((improvementScoreCounter[0] * pointValue) + HPSkill.skillValue[HPSkill.skillLvl]).ToString();
+
+        if (hubManager.armorActivatePanel == null)
+        {
+            float value = armorSkill.skillValue[armorSkill.skillLvl];
+            fillValue[1].text = value.ToString();
+            
+            if(value == 0)
+            FillTheBar(fill[1], 0);
+            else
+                FillTheBar(fill[1], 100);
+        }
+        else
+        {
+            // FillTheBar(fill[1], hubManager.armorActivatePanel.value + (improvementScoreCounter[1] * pointValue));
+            FillTheBar(fill[1], 100);
+            fillValue[1].text = ((hubManager.armorActivatePanel.value) + armorSkill.skillValue[armorSkill.skillLvl]).ToString();
+        }
+
+        if (hubManager.weaponActivatePanel == null)
+        {
+            float value = damageSkill.skillValue[damageSkill.skillLvl];
+            fillValue[2].text = value.ToString();
+
+            if (value == 0)
+                FillTheBar(fill[2], 0);
+            else
+                FillTheBar(fill[2], 100);
+        }
+        else
+        {
+            //FillTheBar(fill[2], hubManager.weaponActivatePanel.value + (improvementScoreCounter[2] * pointValue));
+            FillTheBar(fill[2], 100);
+            fillValue[2].text = ((hubManager.weaponActivatePanel.value) + damageSkill.skillValue[damageSkill.skillLvl]).ToString();
+        }
+
 
         UpdateImprovementPoints();
     }

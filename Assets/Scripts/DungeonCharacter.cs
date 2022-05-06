@@ -87,8 +87,12 @@ public class DungeonCharacter : MonoBehaviour
     public void HitEnemy()
     {
         var damageValue = characterDamage + Random.Range((-characterDamage / 5), (characterDamage / 5));
+        
+        if (damageValue == 0)
+            damageValue = 1;
+        
         currentEnemy.PlayDamageAnimation(damageValue);
-        currentEnemy.enemyHealthBar.TakeDamage(damage: damageValue);
+        currentEnemy.enemyHealthBar.TakeDamage(damageValue);
     }
 
     public void InitializeStats(int hpValue, int armorValue, int damageValue)
@@ -106,7 +110,15 @@ public class DungeonCharacter : MonoBehaviour
 
     private IEnumerator IEAttack()
     {
-        yield return new WaitForSeconds(Random.Range(minAttackDelay, maxAttackDelay));
+        var attackSpeed = skillController.skills[4];
+        float reloadTime;
+        
+        if (attackSpeed != null)
+            reloadTime = attackSpeed.skillValue[attackSpeed.skillLvl];
+        else
+            reloadTime = 0;
+
+        yield return new WaitForSeconds(Random.Range(minAttackDelay, maxAttackDelay - reloadTime));
         int attackAnimationIndex = Random.Range(1, 9);
         animator.SetTrigger("Attack" + attackAnimationIndex);
         // animator.SetTrigger("Attack" + 8);
@@ -132,13 +144,13 @@ public class DungeonCharacter : MonoBehaviour
         }
     }
 
+    public int regenerationNumber = 2;
+    public int maxNumber = 5;
+    public SkillController skillController;
     public void TakeDamage(int damageValue)
     {
-        //var tempDamage = damageValue - currentArmor;
-        //if (tempDamage < 0)
-        //    tempDamage = 0;
+        var regenerationSkill = skillController.skills[3];
 
-        //currentHealth -= tempDamage;
         int tempDamage;
 
         if (currentArmor > damageValue)
@@ -154,8 +166,19 @@ public class DungeonCharacter : MonoBehaviour
             currentHealth -= checkDamage;
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
+            int number = Random.Range(0, maxNumber);
+            if (number == regenerationNumber)
+            {
+                float num = maxHealth / 100;
+                int addHP = (int)(regenerationSkill.skillValue[regenerationSkill.skillLvl] * num);
+                currentHealth += addHP;
+                Debug.Log("Regeneration = " + addHP);
+            }
+
             tempDamage = damageValue;
         }
+
+        
 
         UpdateAllBars();
 
@@ -222,7 +245,6 @@ public class DungeonCharacter : MonoBehaviour
     public void EnableCriticalHit()
     {
         canCriticalHit = true;
-        // PlayerPrefs.SetString("canCriticalHit", "true");
     }
 
     private void RunForward()
@@ -236,7 +258,6 @@ public class DungeonCharacter : MonoBehaviour
             return;
 
         allowedAttackAnimationsCount++;
-        // PlayerPrefs.SetInt("allowedAttackAnimationsCount", allowedAttackAnimationsCount);
         PlayerPrefs.Save();
     }
 

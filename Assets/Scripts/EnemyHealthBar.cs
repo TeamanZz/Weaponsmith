@@ -36,13 +36,29 @@ public class EnemyHealthBar : MonoBehaviour
     }
 
     [ContextMenu("Take damage")]
-    public void TakeDamage(int damage = 1, bool isDoubleDamage = false)
+    public void TakeDamage(int damage = 1)//, bool isDoubleDamage = false)
     {
+        bool isDoubleDamage = false;
         if (enemyComponent == null)
         {
             DungeonCharacter.Instance.isInBattle = false;
             return;
         }
+
+        var hitSkill = SkillController.skillController.skills[5];
+        int maxNumber = 0;
+    
+        if(hitSkill != null)
+           maxNumber = (int)hitSkill.skillValue[hitSkill.skillLvl];
+
+        int number = Random.Range(0, maxNumber);
+        if (number == 2)
+        {
+            isDoubleDamage = true;
+            Debug.Log("Damage " + isDoubleDamage);
+        }
+        else
+            isDoubleDamage = false;
 
         if (isDoubleDamage)
         {
@@ -64,6 +80,11 @@ public class EnemyHealthBar : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            //  + money     currentLevelEarnedMoneyCount
+            int money = Random.Range(DungeonBuilder.Instance.levels[DungeonManager.Instance.currentDungeonLevelId].minGoldPerEnemy, DungeonBuilder.Instance.levels[DungeonManager.Instance.currentDungeonLevelId].maxGoldPerEnemy);
+            MoneyHandler.Instance.moneyCount += money;
+            DungeonManager.Instance.currentLevelEarnedMoneyCount += money;
+
             DungeonCharacter.Instance.KillEnemy();
             canvas.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack);
             deathParticles.Play();

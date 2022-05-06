@@ -8,7 +8,7 @@ public class SkillItem
 {
     public int ID;
     public string skillName;
-    public int skillLvl = 0;
+    public int skillLvl;
 
     public Sprite iconImage;
     public Color borderColor;

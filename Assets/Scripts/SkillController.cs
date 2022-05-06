@@ -34,6 +34,7 @@ public class SkillController : MonoBehaviour
     public int maxPoints = 24;
     public int improvementCount = 0;
     public int currentImprovementPoints = 0;
+
     public void Awake()
     {
         skillController = this;
@@ -98,6 +99,26 @@ public class SkillController : MonoBehaviour
             return;
 
         IncreaseSkillLevel();
+    }
+
+    [ContextMenu("Test corutine")]
+    public void CheckCorutineState(bool state)
+    {
+        if (currentCorutine == null)
+        {
+            Debug.Log(currentCorutine);
+            return;
+        }
+
+        if(!state)
+        {
+            StopCoroutine(currentCorutine);    
+        }
+        else
+        {
+            currentCorutine = null;
+            IncreaseSkillLevel();
+        }
     }
 
     [ContextMenu("Test")]

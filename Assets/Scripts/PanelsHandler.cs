@@ -130,11 +130,23 @@ public class PanelsHandler : MonoBehaviour
 
     public GameObject anvilSound;
     public GameObject tapArea;
+
+    public int currentIndex = 0;
     public void OpenPanel(int panelIndex)
     {
+        if (panelIndex == currentIndex || panelIndex < 0 || panelIndex > panels.Count)
+        {
+            Debug.Log("Current = " + currentIndex + " | Panel index = " + panelIndex);
+            return;
+        }
+
+        currentIndex = panelIndex;
         //dungeon panel
         if (panelIndex == 2)
         {
+            if (LoadoutController.Instance != null)
+                LoadoutController.Instance.Initialization();
+
             anvilSound.SetActive(false);
             tapArea.SetActive(false);
 
@@ -200,6 +212,7 @@ public class PanelsHandler : MonoBehaviour
                     anvilSound.SetActive(false);
                     tapArea.SetActive(false);
                 }
+
                 panels[i].SetActive(true);
             }
             else
@@ -207,6 +220,19 @@ public class PanelsHandler : MonoBehaviour
                 panels[i].SetActive(false);
             }
         }
+
+        if (SkillController.skillController != null)
+        {
+            if (panelIndex != 3)
+            {
+                SkillController.skillController.CheckCorutineState(false);
+            }
+            else
+            {
+                SkillController.skillController.CheckCorutineState(true);
+            }
+        }
+
         panelLabelObject.SetActive(true);
     }
 
