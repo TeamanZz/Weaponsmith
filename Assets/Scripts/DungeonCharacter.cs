@@ -105,6 +105,9 @@ public class DungeonCharacter : MonoBehaviour
         currentHealth = hpValue;
         maxHealth = hpValue;
 
+        healthImageFilled.DOFillAmount(1, 0.5f).SetEase(Ease.OutBack);
+        armorImageFilled.DOFillAmount(1, 0.5f).SetEase(Ease.OutBack);
+
         UpdateAllBars();
     }
 
