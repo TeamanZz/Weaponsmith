@@ -87,10 +87,10 @@ public class DungeonCharacter : MonoBehaviour
     public void HitEnemy()
     {
         var damageValue = characterDamage + Random.Range((-characterDamage / 5), (characterDamage / 5));
-        
+
         if (damageValue == 0)
             damageValue = 1;
-        
+
         currentEnemy.PlayDamageAnimation(damageValue);
         currentEnemy.enemyHealthBar.TakeDamage(damageValue);
     }
@@ -115,7 +115,7 @@ public class DungeonCharacter : MonoBehaviour
     {
         var attackSpeed = skillController.skills[4];
         float reloadTime;
-        
+
         if (attackSpeed != null)
             reloadTime = attackSpeed.skillValue[attackSpeed.skillLvl];
         else
@@ -181,7 +181,7 @@ public class DungeonCharacter : MonoBehaviour
             tempDamage = damageValue;
         }
 
-        
+
 
         UpdateAllBars();
 
@@ -203,11 +203,21 @@ public class DungeonCharacter : MonoBehaviour
 
     private void UpdateAllBars()
     {
-        var newHpBarValue = ((float)currentHealth / (float)maxHealth);
+        float newHpBarValue;
+        if (maxHealth > 0)
+            newHpBarValue = ((float)currentHealth / (float)maxHealth);
+        else
+            newHpBarValue = 0;
+
         healthImageFilled.DOFillAmount(newHpBarValue, 0.5f).SetEase(Ease.OutBack);
         hpText.text = currentHealth.ToString();
 
-        var newArmorBarValue = ((float)currentArmor / (float)maxArmor);
+        float newArmorBarValue;
+        if (maxArmor > 0)
+            newArmorBarValue = ((float)currentArmor / (float)maxArmor);
+        else
+            newArmorBarValue = 0;
+
         armorImageFilled.DOFillAmount(newArmorBarValue, 0.5f).SetEase(Ease.OutBack);
         armorText.text = currentArmor.ToString();
     }

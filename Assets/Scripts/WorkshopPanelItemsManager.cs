@@ -25,7 +25,9 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public CinemachineVirtualCamera dungeonCinemaCamera;
     public Transform calibrationPosition;
 
-    public float startCameraField = 80f;
+    [SerializeField] private float startCameraField = 80f;
+    [SerializeField] private float lastCameraField = 80f;
+
     public float timeToReturnFocus = 0.5f;
 
     public CameraWidth cameraWidth;
@@ -128,12 +130,13 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public IEnumerator ReturnFocus()
     {
         Debug.Log("Return Focus");
-        DOTween.To(() => dungeonCinemaCamera.m_Lens.FieldOfView, x => dungeonCinemaCamera.m_Lens.FieldOfView = x, startCameraField, timeToReturnFocus);
+        DOTween.To(() => dungeonCinemaCamera.m_Lens.FieldOfView, x => dungeonCinemaCamera.m_Lens.FieldOfView = x, lastCameraField, timeToReturnFocus);
         yield return new WaitForSeconds(timeToReturnFocus);
         cameraWidth.enabled = true;
 
         dungeonCinemaCamera.LookAt = calibrationPosition;
-        currentFocusCorutine = null;
+        dungeonCinemaCamera.m_Lens.FieldOfView = lastCameraField;
+         currentFocusCorutine = null;
         //dungeonCinemaCamera.m_Lens.FieldOfView = startCameraField;
     }
 
