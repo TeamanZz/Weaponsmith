@@ -6,11 +6,11 @@ using UnityEditor;
 /// 
 /// In the future, this extension will be deprecated when Timeline adds the missing API natively
 /// </summary>
-[InitializeOnLoad]
-class CinemachineTimelineEditorExtensions 
-{
-    static CinemachineTimelineEditorExtensions() 
-    { 
-       // CinemachineShotClipEditor.TimelineGlobalToLocalTime = TimelineEditorExtensions.ToLocalTime; 
-    } 
-}
+// [InitializeOnLoad]
+// class CinemachineTimelineEditorExtensions 
+// {
+//     static CinemachineTimelineEditorExtensions() 
+//     { 
+//        // CinemachineShotClipEditor.TimelineGlobalToLocalTime = TimelineEditorExtensions.ToLocalTime; 
+//     } 
+// }

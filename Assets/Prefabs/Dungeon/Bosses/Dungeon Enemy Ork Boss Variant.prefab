@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1539574305668809971, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2418422836702572392, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -54,6 +58,10 @@ PrefabInstance:
     - target: {fileID: 2421752204643170890, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
       propertyPath: m_Name
       value: Dungeon Enemy Ork Boss Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302369997482512107, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e47d5c1a4e205e4dbf66a656e2caf73, type: 3}
