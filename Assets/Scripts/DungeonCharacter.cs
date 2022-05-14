@@ -53,6 +53,11 @@ public class DungeonCharacter : MonoBehaviour
 
     public List<MeleeWeaponTrail> trailsList = new List<MeleeWeaponTrail>();
 
+    [Header("Regeneration")]
+    public Coroutine regenerationCorutine;
+    public float minReloadRegenerationTime = 4;
+    public float maxReloadRegenerationTime = 6;
+
     private void Awake()
     {
         Instance = this;
@@ -152,8 +157,6 @@ public class DungeonCharacter : MonoBehaviour
     public SkillController skillController;
     public void TakeDamage(int damageValue)
     {
-        var regenerationSkill = skillController.skills[3];
-
         int tempDamage;
 
         if (currentArmor > damageValue)
@@ -169,19 +172,13 @@ public class DungeonCharacter : MonoBehaviour
             currentHealth -= checkDamage;
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-            int number = Random.Range(0, maxNumber);
-            if (number == regenerationNumber)
+            if (regenerationCorutine == null)
             {
-                float num = maxHealth / 100;
-                int addHP = (int)(regenerationSkill.skillValue[regenerationSkill.skillLvl] * num);
-                currentHealth += addHP;
-                Debug.Log("Regeneration = " + addHP);
+                regenerationCorutine = StartCoroutine(Regeneration());
             }
 
             tempDamage = damageValue;
         }
-
-
 
         UpdateAllBars();
 
@@ -196,11 +193,50 @@ public class DungeonCharacter : MonoBehaviour
             DungeonRewardPanel.Instance.OpenRewardPanel(1);
             currentEnemy.gameObject.SetActive(false);
             detectionCollider.enabled = true;
+            
+            if (regenerationCorutine != null)
+            {
+                StopCoroutine(regenerationCorutine);
+                regenerationCorutine = null;
+                Debug.Log("Stop Regeneration Because Died");
+            }
 
         }
         PlayHitSound();
     }
 
+    public IEnumerator Regeneration()
+    {
+        var regenerationSkill = skillController.skills[3];
+        float num = maxHealth / 100f;
+        int addHP = (int)(regenerationSkill.skillValue[regenerationSkill.skillLvl] * num);
+        
+
+        currentHealth += addHP;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        UpdateAllBars();
+
+        Debug.Log("Regeneration = " + addHP + " | num value = " + num + "| % = " + regenerationSkill.skillValue[regenerationSkill.skillLvl] + " Max HP = " + currentHealth);
+
+        float reloadTime = Random.Range(minReloadRegenerationTime, maxReloadRegenerationTime);
+        yield return new WaitForSeconds(reloadTime);
+
+
+        if (currentHealth == 0 || currentHealth == maxHealth)
+        {
+            if (regenerationCorutine != null)
+            {
+                StopCoroutine(regenerationCorutine);
+                regenerationCorutine = null;
+                Debug.Log("Stop Regeneration In Corutine");
+            }
+        }
+        else
+        {
+           regenerationCorutine = StartCoroutine(Regeneration());
+        }
+    }
     private void UpdateAllBars()
     {
         float newHpBarValue;
