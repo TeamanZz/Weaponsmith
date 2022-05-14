@@ -14,6 +14,8 @@ TagManager:
   - clawInside
   - Enemy
   - Weapon
+  - Ground
+  - Missile
   layers:
   - Default
   - TransparentFX
@@ -27,7 +29,7 @@ TagManager:
   - CanvasParticles
   - CanvasWeapon
   - DungeonFloor
-  - 
+  - UI Bars Render
   - 
   - 
   - 

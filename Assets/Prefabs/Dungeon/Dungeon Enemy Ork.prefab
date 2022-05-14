@@ -21849,9 +21849,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418422836702572392}
     m_Modifications:
+    - target: {fileID: 111360, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140054, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140668, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 173668, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
       propertyPath: m_Name
       value: SwordHitYellow 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 173668, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 189538, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 441000, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
       propertyPath: m_RootOrder
@@ -21936,9 +21956,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418422836702572392}
     m_Modifications:
+    - target: {fileID: 150610, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 193062, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
       propertyPath: m_Name
       value: BloodExplosionRound 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 193062, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 470264, guid: 5906aaa740e18a243a8f095742a7f032, type: 3}
       propertyPath: m_RootOrder
@@ -22035,9 +22063,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418422836702572392}
     m_Modifications:
+    - target: {fileID: 111360, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140054, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140668, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 173668, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
       propertyPath: m_Name
       value: SwordHitRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 173668, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 189538, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 441000, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
       propertyPath: m_RootOrder
@@ -22149,6 +22197,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418422836702572392}
     m_Modifications:
+    - target: {fileID: 114844, guid: 40058e83069903f499411aae8b2279ae, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 116602, guid: 40058e83069903f499411aae8b2279ae, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 116602, guid: 40058e83069903f499411aae8b2279ae, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -22156,6 +22212,14 @@ PrefabInstance:
     - target: {fileID: 143964, guid: 40058e83069903f499411aae8b2279ae, type: 3}
       propertyPath: m_Name
       value: GoldCoinBlast 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 143964, guid: 40058e83069903f499411aae8b2279ae, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 188778, guid: 40058e83069903f499411aae8b2279ae, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 430288, guid: 40058e83069903f499411aae8b2279ae, type: 3}
       propertyPath: m_RootOrder
