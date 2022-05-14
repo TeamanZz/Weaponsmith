@@ -50,6 +50,7 @@ public class DungeonRewardPanel : MonoBehaviour
     {
         blueprintReward.gameObject.SetActive(false);
         panel.SetActive(false);
+        PanelsHandler.Instance.StartCoolDown();
     }
 
     public IEnumerator StarsInitialization(int number)
