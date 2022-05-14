@@ -39,7 +39,17 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private List<string> panelNames = new List<string>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
+   
+    [Header("Cool Down Settings")]
+    public Button buttonToDungeon;
+    public TextMeshProUGUI coolDownText;
+    public List<GameObject> buttonsToDungeonGroup = new List<GameObject>();
+    public Coroutine coolDownCoroutine;
 
+    public bool timerRunning = false;
+
+    public float reloadTime = 60;
+    [SerializeField] private float currentTime;
     public void Awake()
     {
         Instance = this;
@@ -59,6 +69,12 @@ public class PanelsHandler : MonoBehaviour
         EnableDungeonButton();
         EnableBoostersButton();
         OpenPanel(1);
+    }
+
+    public void Update()
+    {
+        if (coolDownCoroutine == null && Input.GetKeyUp(KeyCode.Q))
+            StartCoolDown();
     }
 
     public void Initialization(PanelsStortage stortage)
@@ -234,6 +250,48 @@ public class PanelsHandler : MonoBehaviour
         }
 
         panelLabelObject.SetActive(true);
+    }
+
+    [ContextMenu("Cool Down")]
+    public void StartCoolDown()
+    {
+        coolDownCoroutine = StartCoroutine(CoolDown());
+    }
+
+    public IEnumerator CoolDown()
+    {
+        Debug.Log("Start Cool Down");
+
+        currentTime = reloadTime;
+        buttonToDungeon.interactable = false;
+        timerRunning = false;
+        buttonsToDungeonGroup[0].SetActive(false);
+        buttonsToDungeonGroup[1].SetActive(true);
+
+        coolDownText.text = currentTime.ToString("F2");
+
+        while (!timerRunning)
+        {
+            yield return new WaitForSeconds(1f);
+            currentTime -= 1;
+            float seconds = currentTime % 60;
+            string secondsText;
+            if (seconds < 10)
+                secondsText = 0 + seconds.ToString();
+            else
+                secondsText = seconds.ToString();
+
+            coolDownText.text = (int)(currentTime / 60) + ":" + secondsText;
+            
+            if (currentTime <= 0)
+                timerRunning = true;
+        }
+        
+        coolDownCoroutine = null;
+        buttonToDungeon.interactable = true;
+
+        buttonsToDungeonGroup[0].SetActive(true);
+        buttonsToDungeonGroup[1].SetActive(false);
     }
 
     public void EnableDungeonButton()
