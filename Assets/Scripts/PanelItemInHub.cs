@@ -138,8 +138,10 @@ public class PanelItemInHub : MonoBehaviour
                     DungeonHubManager.dungeonHubManager.weaponActivatePanel.DeselectedWeapon();
 
                 DungeonHubManager.dungeonHubManager.weaponActivatePanel = this;
+               
                 if (panelItem.iconSprite != null)
                     DungeonHubManager.dungeonHubManager.weaponSprite = panelItem.iconSprite;
+                
                 DungeonHubManager.dungeonHubManager.UpdateUI();
 
                 viewValueText.text = panelItem.currentItemEquipment.value.ToString();
@@ -153,8 +155,10 @@ public class PanelItemInHub : MonoBehaviour
                     DungeonHubManager.dungeonHubManager.armorActivatePanel.DeselectedWeapon();
 
                 DungeonHubManager.dungeonHubManager.armorActivatePanel = this;
+                
                 if (panelItem.iconSprite != null)
                     DungeonHubManager.dungeonHubManager.armorSprite = panelItem.iconSprite;
+                
                 DungeonHubManager.dungeonHubManager.UpdateUI();
 
                 if (DungeonHubManager.dungeonHubManager.armorList[0] != null)
