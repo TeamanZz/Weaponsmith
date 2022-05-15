@@ -93,6 +93,9 @@ public class DungeonRewardPanel : MonoBehaviour
             titleText.text = resultInTitle[0];
             DungeonManager.Instance.currentDungeonLevelId = Mathf.Clamp(DungeonManager.Instance.currentDungeonLevelId + 1, 0, DungeonBuilder.Instance.levels.Count);
             Debug.Log("ID = " + DungeonManager.Instance.currentDungeonLevelId);
+
+            SkillController.skillController.OpenNewSkill();
+            SkillController.skillController.AddImprovementPoint();
         }
         else
             titleText.text = resultInTitle[1];
