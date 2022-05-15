@@ -45,7 +45,7 @@ public class EnemyHealthBar : MonoBehaviour
             return;
         }
 
-        var hitSkill = SkillController.skillController.skills[5];
+        var hitSkill = SkillController.skillController.mainSkillsData[5];
         int maxNumber = 0;
     
         if(hitSkill != null)

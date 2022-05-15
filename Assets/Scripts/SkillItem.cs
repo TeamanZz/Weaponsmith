@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[Serializable]
-public class SkillItem
+[Serializable][CreateAssetMenu(fileName = "Skill", menuName = "Skills Data", order = 0)]
+public class SkillItem: ScriptableObject
 {
     public int ID;
     public string skillName;

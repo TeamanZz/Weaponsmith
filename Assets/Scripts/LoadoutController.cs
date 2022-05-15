@@ -34,9 +34,9 @@ public class LoadoutController : MonoBehaviour
 
     public void InitializeCharacterStats()
     {
-        var HPSkill = skillController.skills[0];
-        var damageSkill = skillController.skills[1];
-        var armorSkill = skillController.skills[2];
+        var HPSkill = skillController.mainSkillsData[0];
+        var damageSkill = skillController.mainSkillsData[1];
+        var armorSkill = skillController.mainSkillsData[2];
 
         int hpValue;
         int armorValue;
@@ -97,9 +97,9 @@ public class LoadoutController : MonoBehaviour
     [ContextMenu("Initialization")]
     public void Initialization()
     {
-        var HPSkill = skillController.skills[0];
-        var damageSkill = skillController.skills[1];
-        var armorSkill = skillController.skills[2];
+        var HPSkill = skillController.mainSkillsData[0];
+        var damageSkill = skillController.mainSkillsData[1];
+        var armorSkill = skillController.mainSkillsData[2];
 
         FillTheBar(fill[0], 100);
         fillValue[0].text = ((improvementScoreCounter[0] * pointValue) + HPSkill.skillValue[HPSkill.skillLvl]).ToString();

@@ -7,36 +7,94 @@ using TMPro;
 public class SkillItemView : MonoBehaviour
 {
     [Header("Data")]
+    public SkillController skillController;
     public SkillItem itemData;
 
     [Header("View Settings")]
-    public Image iconImage;
-    public Image border;
+    public Image selectedOutline;
+    public Image blurPanel;
+
     public TextMeshProUGUI title;
     public TextMeshProUGUI level;
 
-    public Image blur;
+    public Button button;
+
+    public bool borderIsActive = false;
+    public bool panelIsActive = false;
+
     public void Initialization(SkillItem skillItem)
     {
+        skillController = SkillController.skillController;
         itemData = skillItem;
         UpdateView(itemData);
     }
 
     public void UpdateView(SkillItem item)
     {
-        // iconImage.sprite = item.iconImage;
-        // border.color = item.borderColor;
         title.text = item.skillName;
         level.text = item.skillLvl.ToString();
     }
 
-    public void EnableBlur()
+    [ContextMenu("Check Border")]
+    public void CheckButton()
     {
-        blur.gameObject.SetActive(true);
+        if (!panelIsActive)
+            return;
+
+        if (skillController.selectedPanel != null)
+        {
+            if (skillController.selectedPanel != this)
+                skillController.selectedPanel.DeselectedBorder();
+            else
+            {
+                DeselectedBorder();
+                return;
+            }
+        }
+        SelectedBorder();
+       
     }
 
-    public void DisableBlur()
+    public void SelectedBorder()
     {
-        blur.gameObject.SetActive(false);
+        if (!panelIsActive)
+            return;
+
+        skillController.selectedPanel = this;
+
+        selectedOutline.gameObject.SetActive(true);
+
+        skillController.UpdateButtonUI();
+    }
+
+    public void DeselectedBorder()
+    {
+        Debug.Log("Deselect Border");
+        selectedOutline.gameObject.SetActive(false);
+
+        skillController.selectedPanel = null;
+        skillController.UpdateButtonUI();
+    }
+
+    public void EnabledBlur()
+    {
+        panelIsActive = false;
+        blurPanel.gameObject.SetActive(true);
+    }
+
+    public void DisabledBlur()
+    {
+        panelIsActive = true;
+        blurPanel.gameObject.SetActive(false);
+        button.gameObject.SetActive(true);
+    }
+
+    public void DisabledButton()
+    {
+        Debug.Log("Diselected Button");
+        button.gameObject.SetActive(false);
+
+        borderIsActive = false;
+        DeselectedBorder();
     }
 }

@@ -30,7 +30,7 @@ public class EraController : MonoBehaviour
     {
         Instance = this;
 
-        currentEraNumber = PlayerPrefs.GetInt("currentEraNumber");
+        currentEraNumber = 0;
         // Debug.Log(currentEraNumber);
 
         //  objects

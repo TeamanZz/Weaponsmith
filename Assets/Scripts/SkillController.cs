@@ -11,59 +11,85 @@ public class SkillController : MonoBehaviour
     public static SkillController skillController;
     public PreviewSkillWindow previewSkillWindow;
     public GameObject previewWindow;
-    public Coroutine currentCorutine;
 
-    public List<SkillItem> skills = new List<SkillItem>();
-    [SerializeField] private List<SkillItem> enableSkills = new List<SkillItem>();
-
-    public int minNumber = 6;
-    public int maxNumber = 8;
+    public List<SkillItem> mainSkillsData = new List<SkillItem>();
+    [SerializeField] private List<SkillItemView> mainSkillsView = new List<SkillItemView>();
 
     [Header("View Settings")]
     public GridLayoutGroup group;
     public SkillItemView emptyPrefab;
-    public List<SkillItemView> skillItemViews = new List<SkillItemView>();
 
-    public AnimationCurve curve;
+    public List<SkillItem> copyMainSkillsData = new List<SkillItem>();
+    public List<SkillItemView> copyItemPanelsView = new List<SkillItemView>();
 
     [Header("Button Settings")]
     public Button buyButton;
     public TextMeshProUGUI buttonText;
 
-    [Header("improvement points")]
+    [Header("Improvement points")]
     public int maxPoints = 24;
     public int improvementCount = 0;
     public int currentImprovementPoints = 0;
 
+    [Header("View Scills Settings")]
+    public SkillItemView selectedPanel;
+
+    [Header("New Skills Settings")]
+    public int startNumber = 2;
+    [SerializeField] private int currentItemCount = 0;
+    public TextMeshProUGUI selectedDebuger;
+
     public void Awake()
     {
+        foreach (var skill in mainSkillsData)
+            skill.skillLvl = 0;
+
         skillController = this;
         previewWindow.SetActive(false);
 
-        enableSkills.Clear();
-        enableSkills.AddRange(skills);
+        copyMainSkillsData.Clear();
+        copyMainSkillsData.AddRange(mainSkillsData);
 
-        Initialization();
-        CheckButtonState();
-
-        int currentMax = 0;
-        foreach (var item in skillItemViews)
+        foreach (var item in mainSkillsView)
         {
-            currentMax += item.itemData.skillValue.Count;
+            item.EnabledBlur();
+        }
+        Initialization(startNumber);
+
+        //  scoring
+        int currentMax = 0;
+        foreach (var item in mainSkillsData)
+        {
+            currentMax += (item.skillValue.Count - 1) - item.skillLvl;
         }
         maxPoints = currentMax;
+
+        UpdateButtonUI();
     }
 
-    public void Initialization()
+    public void Initialization(int firstNumber)
     {
-        skillItemViews.Clear();
-        for (int i = 0; i < enableSkills.Count; i++)
+        copyItemPanelsView.Clear();
+
+        for (int i = 0; i < firstNumber; i++)
         {
-            var newViewPanel = group.transform.GetChild(i).GetComponent<SkillItemView>();
-            newViewPanel.Initialization(enableSkills[i]);
-            skillItemViews.Add(newViewPanel);
+            OpenNewSkill();
         }
-        CheckSkillState();
+        UpdateButtonUI();
+    }
+
+    [ContextMenu("Open Panel")]
+    public void OpenNewSkill()
+    {
+        if (currentItemCount >= mainSkillsData.Count)
+            return;
+
+        var newViewPanel = group.transform.GetChild(currentItemCount).GetComponent<SkillItemView>();
+        newViewPanel.Initialization(copyMainSkillsData[currentItemCount]);
+        newViewPanel.DisabledBlur();
+        copyItemPanelsView.Add(newViewPanel);
+
+        currentItemCount += 1;
     }
 
     [ContextMenu("Add Point")]
@@ -73,116 +99,64 @@ public class SkillController : MonoBehaviour
             return;
 
         currentImprovementPoints += 1;
-        CheckButtonState();
-        CheckSkillState();
-        //LoadoutController.Instance.UpdateImprovementPoints();
+        UpdateButtonUI();
     }
 
-    public void CheckButtonState()
+    public void UpdateButtonUI()
     {
-        if (currentImprovementPoints == 0 || currentCorutine != null || enableSkills.Count == 0)
+        currentImprovementPoints = Mathf.Clamp(currentImprovementPoints, 0, maxPoints);
+
+        if (currentImprovementPoints == 0 || selectedPanel == null || selectedPanel.itemData.skillLvl >= selectedPanel.itemData.skillValue.Count || copyMainSkillsData.Count == 0)
             buyButton.interactable = false;
         else
             buyButton.interactable = true;
 
+        if (selectedPanel != null)
+            selectedDebuger.text = selectedPanel.itemData.skillName;
+        else
+            selectedDebuger.text = "None";
+
         buttonText.text = currentImprovementPoints + " x";
     }
 
-    public void CheckUpgradePoints()
+    //  upgrade button
+    public void UpgradeSkill()
     {
-        if (currentImprovementPoints > 0)
+        Debug.Log("Upgrade " + " | CurrentImprovementPoints = " + currentImprovementPoints + " | Selected Panel = " + selectedPanel + " | Max Points = " + maxPoints);
+        if (currentImprovementPoints > 0 && selectedPanel != null && maxPoints > 0)
         {
+            Debug.Log("Upgrade True");
+            maxPoints -= 1;
             currentImprovementPoints -= 1;
-            CheckButtonState();
+            selectedPanel.itemData.skillLvl += 1;
+
+            UpdateButtonUI();
+            CheckMaximalSkillState(selectedPanel);
         }
         else
             return;
-
-        IncreaseSkillLevel();
     }
 
-    [ContextMenu("Test corutine")]
-    public void CheckCorutineState(bool state)
+    public void CheckMaximalSkillState(SkillItemView item)
     {
-        if (currentCorutine == null)
+        if (item.itemData.skillLvl == item.itemData.skillValue.Count - 1)
         {
-            Debug.Log(currentCorutine);
-            return;
-        }
-
-        if(!state)
-        {
-            StopCoroutine(currentCorutine);    
+            item.DisabledButton();
+            item.level.text = "Max Lvl";
         }
         else
+            item.level.text = item.itemData.skillLvl.ToString();
+    }
+
+    public void DeselectedAllPanelsBorder()
+    {
+        Debug.Log("Deselected All");
+        foreach (var panel in copyItemPanelsView)
         {
-            currentCorutine = null;
-            IncreaseSkillLevel();
+            panel.DeselectedBorder();
         }
-    }
+        selectedPanel = null;
 
-    [ContextMenu("Test")]
-    public void IncreaseSkillLevel()
-    {
-        int number = UnityEngine.Random.Range(minNumber, (int)curve.keys[curve.length - 1].time);//(int)curve.keys[curve.length - 1].time);
-        Debug.Log(number + " Lenght =" + curve.keys[curve.length - 1].time);
-
-        currentCorutine = StartCoroutine(Bluring(number));
-    }
-
-    public void CheckSkillState()
-    {
-        foreach (var item in skillItemViews)
-        {
-            if (item.itemData.skillLvl >= item.itemData.skillValue.Count)
-            {
-                item.level.text = "Max Lvl";
-                enableSkills.Remove(item.itemData);
-                skillItemViews.Remove(item);
-            }
-            else
-                item.level.text = item.itemData.skillLvl.ToString();
-        }
-    }
-
-    public IEnumerator Bluring(int value)
-    {
-        buyButton.interactable = false;
-
-        for (int i = 0; i < value; i++)
-        {
-            int itemNumber = UnityEngine.Random.Range(0, enableSkills.Count);
-            skillItemViews[itemNumber].EnableBlur();
-            Debug.Log("Number - " + itemNumber + " Lenght - " + (float)curve.Evaluate(i));
-
-            yield return new WaitForSeconds((float)curve.Evaluate(i));
-            skillItemViews[itemNumber].DisableBlur();
-        }
-
-        currentCorutine = StartCoroutine(LastBlur((float)curve.Evaluate(value)));
-        //int endNumber = UnityEngine.Random.Range(0, enableSkills.Count);
-        //skillItemViews[endNumber].itemData.skillLvl += 1;
-
-        //ChechButtonState(); 
-        //CheckSkillState();
-
-        //buyButton.interactable = true;
-    }
-
-    public IEnumerator LastBlur(float time)
-    {
-        int endNumber = UnityEngine.Random.Range(0, enableSkills.Count);
-        skillItemViews[endNumber].itemData.skillLvl += 1;
-        skillItemViews[endNumber].EnableBlur();
-
-        yield return new WaitForSeconds(time);
-        previewWindow.SetActive(true);
-        previewSkillWindow.ItemInitialization(skillItemViews[endNumber].itemData);
-
-        skillItemViews[endNumber].DisableBlur();
-        currentCorutine = null;
-
-        CheckButtonState();
-        CheckSkillState();
+        UpdateButtonUI();
     }
 }

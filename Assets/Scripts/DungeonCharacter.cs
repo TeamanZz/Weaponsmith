@@ -118,7 +118,7 @@ public class DungeonCharacter : MonoBehaviour
 
     private IEnumerator IEAttack()
     {
-        var attackSpeed = skillController.skills[4];
+        var attackSpeed = skillController.mainSkillsData[4];
         float reloadTime;
 
         if (attackSpeed != null)
@@ -207,7 +207,7 @@ public class DungeonCharacter : MonoBehaviour
 
     public IEnumerator Regeneration()
     {
-        var regenerationSkill = skillController.skills[3];
+        var regenerationSkill = skillController.mainSkillsData[3];
         float num = maxHealth / 100f;
         int addHP = (int)(regenerationSkill.skillValue[regenerationSkill.skillLvl] * num);
         

@@ -39,7 +39,7 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private List<string> panelNames = new List<string>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
-   
+
     [Header("Cool Down Settings")]
     public Button buttonToDungeon;
     public TextMeshProUGUI coolDownText;
@@ -156,6 +156,10 @@ public class PanelsHandler : MonoBehaviour
             return;
         }
 
+        if (SkillController.skillController != null)
+            if (panelIndex != 3 && SkillController.skillController.selectedPanel != null)
+                SkillController.skillController.DeselectedAllPanelsBorder();
+
         currentIndex = panelIndex;
         //dungeon panel
         if (panelIndex == 2)
@@ -176,7 +180,7 @@ public class PanelsHandler : MonoBehaviour
                 panelLabelObject.SetActive(false);
                 panels[panelIndex].SetActive(false);
 
-                
+
                 return;
             }
             else
@@ -237,18 +241,6 @@ public class PanelsHandler : MonoBehaviour
             }
         }
 
-        if (SkillController.skillController != null)
-        {
-            if (panelIndex != 3)
-            {
-                SkillController.skillController.CheckCorutineState(false);
-            }
-            else
-            {
-                SkillController.skillController.CheckCorutineState(true);
-            }
-        }
-
         panelLabelObject.SetActive(true);
     }
 
@@ -282,11 +274,11 @@ public class PanelsHandler : MonoBehaviour
                 secondsText = seconds.ToString();
 
             coolDownText.text = (int)(currentTime / 60) + ":" + secondsText;
-            
+
             if (currentTime <= 0)
                 timerRunning = true;
         }
-        
+
         coolDownCoroutine = null;
         buttonToDungeon.interactable = true;
 
