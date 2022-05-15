@@ -130,6 +130,9 @@ public class SkillController : MonoBehaviour
             currentImprovementPoints -= 1;
             selectedPanel.itemData.skillLvl += 1;
 
+            previewSkillWindow.gameObject.SetActive(true);
+            previewSkillWindow.ItemInitialization(selectedPanel.itemData);
+            
             UpdateButtonUI();
             CheckMaximalSkillState(selectedPanel);
         }

@@ -20,7 +20,7 @@ public class PreviewSkillWindow : MonoBehaviour
         title.text = newItem.skillName;
         lastLevel.text = "Lvl " + (newItem.skillLvl - 1).ToString();
 
-        if (newItem.skillLvl >= newItem.skillValue.Count)
+        if (newItem.skillLvl >= newItem.skillValue.Count - 1)
         {
             nextLevel.text = "Max Lvl";
         }

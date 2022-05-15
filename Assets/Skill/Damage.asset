@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   skillName: Damage
-  skillLvl: 0
-  iconImage: {fileID: 0}
+  skillLvl: 4
+  iconImage: {fileID: 21300000, guid: ca77a04d410ecb344a65dc1396c6d04c, type: 3}
   borderColor: {r: 0, g: 0, b: 0, a: 0}
   skillValue:
   - 0

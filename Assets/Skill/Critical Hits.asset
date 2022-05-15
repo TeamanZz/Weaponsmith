@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: 5
   skillName: Critical Hits
   skillLvl: 0
-  iconImage: {fileID: 0}
+  iconImage: {fileID: 21300000, guid: cc118fa875032c44e9615f88779c08e2, type: 3}
   borderColor: {r: 0, g: 0, b: 0, a: 0}
   skillValue:
   - 10
