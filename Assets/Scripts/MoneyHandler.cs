@@ -28,6 +28,9 @@ public class MoneyHandler : MonoBehaviour
     //public int improvementCount = 0;
     //public int currentImprovementPoints = 0;
 
+    public Coroutine increaseByTapCoroutine;
+    public int increaseByTapMoneyCount;
+
     private void Awake()
     {
         Instance = this;
@@ -35,16 +38,6 @@ public class MoneyHandler : MonoBehaviour
         if (moneyPerSecond == 0)
             moneyPerSecond = 1;
     }
-
-    //[ContextMenu("Add Improvement Point")]
-    //public void AddImprovementPoint()
-    //{
-    //    if (improvementCount >= maxPoints)
-    //        return;
-
-    //    currentImprovementPoints += 1;
-    //    LoadoutController.Instance.UpdateImprovementPoints();
-    //}
 
     private void Start()
     {
@@ -100,18 +93,42 @@ public class MoneyHandler : MonoBehaviour
     public void SpawnCurrencyPopUp()
     {
         var newPopup = Instantiate(currencyPopupPrefab, new Vector3(-1000, 1, 0), Quaternion.identity, currencyPopupContainer);
-        newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3 * (double)boosterCoefficient) + "$";
+        newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * (double)boosterCoefficient) + "$";
         newPopup.transform.SetAsFirstSibling();
     }
 
-    public void IncreaseIncomeByTap()
-    {
-        var increaseValue = moneyPerSecond / 10;
-        if (increaseValue == 0)
-            moneyCount++;
-        else
-            moneyCount += increaseValue;
-        moneyCountText.text = FormatNumsHelper.FormatNum((double)moneyCount);
+    // public void IncreaseIncomeByTap()
+    // {
+    //     var increaseValue = moneyPerSecond / 10;
+    //     if (increaseValue == 0)
+    //         moneyCount++;
+    //     else
+    //         moneyCount += increaseValue;
+    //     moneyCountText.text = FormatNumsHelper.FormatNum((double)moneyCount);
 
-    }
+    // }
+
+    // private IEnumerator IEClickCoroutine(int newPerSecValue)
+    // {
+    //     Debug.Log("started");
+    //     moneyPerSecond = newPerSecValue;
+    //     yield return new WaitForSeconds(2);
+    //     Debug.Log("canceled");
+    //     moneyPerSecond -= increaseByTapMoneyCount;
+    //     increaseByTapCoroutine = null;
+    // }
+
+    // public void IncreaseIncomeByTap()
+    // {
+    //     if (increaseByTapCoroutine != null)
+    //     {
+    //         increaseByTapMoneyCount = moneyPerSecond;
+    //         increaseByTapCoroutine = StartCoroutine(IEClickCoroutine(increaseByTapMoneyCount));
+    //     }
+    //     else
+    //     {
+    //         increaseByTapMoneyCount = (int)(moneyPerSecond * 0.1f);
+    //         increaseByTapCoroutine = StartCoroutine(IEClickCoroutine(increaseByTapMoneyCount));
+    //     }
+    // }
 }

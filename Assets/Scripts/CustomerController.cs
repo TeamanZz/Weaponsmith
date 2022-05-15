@@ -24,7 +24,7 @@ public class CustomerController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        MoneyHandler.Instance.IncreaseIncomeByTap();
+        // MoneyHandler.Instance.IncreaseIncomeByTap();
         SpawnTapCircle();
         currentTapTimerValue = maxTapTimerValue;
     }
