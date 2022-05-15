@@ -92,13 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 2
-  currentPanelState: 0
   currentEquipmentType: 0
-  connectPanel: {fileID: 0}
-  nextUpgradeItem: {fileID: 0}
   itemName: Wooden sword
-  index: 0
-  currentWeaponNumber: 0
+  price: 0
   buysCount: 0
   costCurve:
     serializedVersion: 2
@@ -124,6 +120,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  iconSprite: {fileID: 21300000, guid: 75ccccfb64fe6e44699e8ce5f1050a69, type: 3}
+  currentCoefficientValue: 1
+  maxCount: 1
+  checkValue: 0
+  currentItemEquipment:
+    itemSprite: {fileID: 0}
+    maxCount: 0
+    currentCount: 0
+    value: 15
+    currentPanelItem: {fileID: 0}
+    equipmentType: 0
+  currentObject:
+  - {fileID: 0}
+  currentPanelItemInHub: {fileID: 0}
   itemNameText: {fileID: 2417045017588380263}
   priceText: {fileID: 2417045018389989184}
   coefficientText: {fileID: 2417045017265780349}
@@ -141,23 +151,11 @@ MonoBehaviour:
   buyButtonAnimator: {fileID: 0}
   iconAnimator: {fileID: 0}
   buysCountTextAnimator: {fileID: 0}
+  generalIncreaseValueText: {fileID: 2417045017240629633}
+  generalIncreaseValueTextAnimator: {fileID: 2417045017240629646}
+  increaseValue: 0
   buttonDefaultColor: {r: 0.4117647, g: 0.7254902, b: 1, a: 1}
   weaponSprite: {fileID: 2417045018119394185}
-  price: 0
-  currentItemEquipment:
-    itemSprite: {fileID: 0}
-    maxCount: 0
-    currentCount: 0
-    value: 15
-    currentPanelItem: {fileID: 0}
-    equipmentType: 0
-  currentPanelItemInHub: {fileID: 0}
-  currentObject: {fileID: 0}
-  iconSprite: {fileID: 21300000, guid: 75ccccfb64fe6e44699e8ce5f1050a69, type: 3}
-  currentCoefficientValue: 1
-  maxCount: 1
-  checkValue: 0
-  priceList: []
 --- !u!1 &2417045016821490565
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2417045017240629647
 RectTransform:
   m_ObjectHideFlags: 0

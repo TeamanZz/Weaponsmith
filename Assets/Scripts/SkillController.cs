@@ -37,7 +37,7 @@ public class SkillController : MonoBehaviour
     [Header("New Skills Settings")]
     public int startNumber = 2;
     [SerializeField] private int currentItemCount = 0;
-    public TextMeshProUGUI selectedDebuger;
+    //public TextMeshProUGUI selectedDebuger;
 
     public void Awake()
     {
@@ -111,10 +111,10 @@ public class SkillController : MonoBehaviour
         else
             buyButton.interactable = true;
 
-        if (selectedPanel != null)
-            selectedDebuger.text = selectedPanel.itemData.skillName;
-        else
-            selectedDebuger.text = "None";
+        //if (selectedPanel != null)
+        //    selectedDebuger.text = selectedPanel.itemData.skillName;
+        //else
+        //    selectedDebuger.text = "None";
 
         buttonText.text = currentImprovementPoints + " x";
     }

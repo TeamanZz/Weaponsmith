@@ -39,6 +39,10 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")][SerializeField] private Animator buyButtonAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
+
+    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    [FoldoutGroup("View Components")] [SerializeField] private Animator generalIncreaseValueTextAnimator;
+    [SerializeField] private int increaseValue;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
 
@@ -46,6 +50,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         weaponSprite = itemIcon.GetComponent<Image>();
         Initialize();
+        generalIncreaseValueText.text = "";
     }
 
     public void CheckPriceCoefficient()
@@ -140,7 +145,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         buyButtonImage = buyButton.GetComponent<Image>();
         buyButtonAnimator = buyButton.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
-        //        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
+        generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
         buysCountTextAnimator = buysCountText.GetComponent<Animator>();
 
         if (currentState != PanelItemState.Unknown)
@@ -153,7 +158,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         buyButtonAnimator.Play("Jump", 0, 0);
         iconAnimator.Play("Jump", 0, 0);
-        //        generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
+        generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
         buysCountTextAnimator.Play("Jump", 0, 0);
     }
 
@@ -226,6 +231,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                     break;
 
                 DungeonHubManager.dungeonHubManager.AddEquipment(this);
+                generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)increaseValue) + "/s";
                 break;
         }
     }
@@ -364,6 +370,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         buyButton.SetActive(false);
         completedSign.SetActive(true);
         itemIcon.SetActive(true);
+
+        MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
+        generalIncreaseValueText.text = "";
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
     }
