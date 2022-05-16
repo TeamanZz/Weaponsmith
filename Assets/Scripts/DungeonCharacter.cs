@@ -58,6 +58,8 @@ public class DungeonCharacter : MonoBehaviour
     public float minReloadRegenerationTime = 4;
     public float maxReloadRegenerationTime = 6;
 
+    public DungeonRewardPanel rewardPanel;
+
     private void Awake()
     {
         Instance = this;
@@ -190,10 +192,10 @@ public class DungeonCharacter : MonoBehaviour
         if (currentHealth <= 0)
         {
             DungeonCharacter.Instance.DisableCharacterRun();
-            DungeonRewardPanel.Instance.OpenRewardPanel(1);
+            rewardPanel.OpenRewardPanel(1);
             currentEnemy.gameObject.SetActive(false);
             detectionCollider.enabled = true;
-            
+
             if (regenerationCorutine != null)
             {
                 StopCoroutine(regenerationCorutine);
@@ -210,7 +212,7 @@ public class DungeonCharacter : MonoBehaviour
         var regenerationSkill = skillController.mainSkillsData[3];
         float num = maxHealth / 100f;
         int addHP = (int)(regenerationSkill.skillValue[regenerationSkill.skillLvl] * num);
-        
+
 
         currentHealth += addHP;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -234,7 +236,7 @@ public class DungeonCharacter : MonoBehaviour
         }
         else
         {
-           regenerationCorutine = StartCoroutine(Regeneration());
+            regenerationCorutine = StartCoroutine(Regeneration());
         }
     }
     private void UpdateAllBars()

@@ -34,6 +34,9 @@ public class DungeonBuilder : MonoBehaviour
 
     public DungeonChest lastChest;
     public SkillController skillController;
+
+    public DungeonRewardPanel rewardPanel;
+
     private void Awake()
     {
         Instance = this;
@@ -44,6 +47,7 @@ public class DungeonBuilder : MonoBehaviour
         lastSpawnedPieceZPos = 0;
         lastSpawnedEnemyZPos = 0;
     }
+
     public void BuildDungeon()
     {
         lastChest = null;
@@ -54,24 +58,24 @@ public class DungeonBuilder : MonoBehaviour
         int value = skillController.improvementCount + skillController.improvementCount;
         if (value >= skillController.maxPoints)
         {
-            DungeonRewardPanel.Instance.crystalGroup.SetActive(false);
+            rewardPanel.crystalGroup.SetActive(false);
             Debug.Log("Crystal Closed");
         }
         else
         {
-            DungeonRewardPanel.Instance.crystalGroup.SetActive(true);
+            rewardPanel.crystalGroup.SetActive(true);
             Debug.Log("Crystal Open");
         }
 
         var nextItem = CraftPanelItemsManager.Instance.craftPanelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (nextItem != null)
         {
-            DungeonRewardPanel.Instance.blueprintGroup.SetActive(true);
+            rewardPanel.blueprintGroup.SetActive(true);
             Debug.Log("Blueprint Closed");
         }
         else
         {
-            DungeonRewardPanel.Instance.blueprintGroup.SetActive(false);
+            rewardPanel.blueprintGroup.SetActive(false);
             Debug.Log("Blueprint Open");
         }
 
@@ -121,7 +125,7 @@ public class DungeonBuilder : MonoBehaviour
         GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
         chestComponent.Initialize(DungeonChest.ChestFilling.BlueprintAndMoney, currentLevelSettings.secondChestGold);
-        DungeonRewardPanel.Instance.InitializeBlueprintItem();
+        rewardPanel.InitializeBlueprintItem();
 
         lastChest = chestComponent;
 

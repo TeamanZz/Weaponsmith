@@ -35,7 +35,7 @@ public class DungeonRewardPanel : MonoBehaviour
     public TextMeshProUGUI moneyForChest;
 
     public SkillController skillController;
-    
+
     [Space]
     public GameObject bottomBlueprintsGroup;
     public GameObject bottomCrystalGroup;
@@ -50,7 +50,7 @@ public class DungeonRewardPanel : MonoBehaviour
         var newAnvilItem = panelsStorage.panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (newAnvilItem == null)
             return;
-      
+
     }
 
     public void ClosePanel()
@@ -108,14 +108,14 @@ public class DungeonRewardPanel : MonoBehaviour
 
             DungeonManager.Instance.currentDungeonLevelId = Mathf.Clamp(DungeonManager.Instance.currentDungeonLevelId + 1, 0, DungeonBuilder.Instance.levels.Count);
             Debug.Log("ID = " + DungeonManager.Instance.currentDungeonLevelId);
- 
+
             SkillController.skillController.OpenNewSkill();
             SkillController.skillController.AddImprovementPoint();
         }
 
 
         var nextItem = CraftPanelItemsManager.Instance.craftPanelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
-        if(starsValue == 3)
+        if (starsValue == 3)
         {
             if (nextItem == null)
             {
@@ -127,7 +127,7 @@ public class DungeonRewardPanel : MonoBehaviour
                 bottomBlueprintsGroup.SetActive(true);
                 blueprintGroup.SetActive(true);
             }
-          
+
             int value = skillController.improvementCount + skillController.improvementCount;
 
             if (value >= skillController.maxPoints)
@@ -140,7 +140,6 @@ public class DungeonRewardPanel : MonoBehaviour
                 bottomCrystalGroup.SetActive(true);
                 crystalGroup.SetActive(true);
             }
-           
         }
         else
         {
