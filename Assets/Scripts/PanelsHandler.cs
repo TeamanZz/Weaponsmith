@@ -139,7 +139,7 @@ public class PanelsHandler : MonoBehaviour
     {
         DungeonManager.Instance.SetCharacterOnStart();
         DisablePanelsContainer();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         DisableDungeonEnteringPanel();
         DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", true);
         DungeonCharacter.Instance.EnableCharacterRun();
