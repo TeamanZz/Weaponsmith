@@ -28,6 +28,9 @@ public class DungeonHubManager : MonoBehaviour
     public Sprite armorSprite;
     public Sprite weaponSprite;
 
+    public GameObject rightOutline;
+    public GameObject leftOutline;
+
     public LoadoutController loadoutController;
     public void Awake()
     {
@@ -95,6 +98,18 @@ public class DungeonHubManager : MonoBehaviour
                     break;
 
                 equipmentPanelContent[panelIndex].SetActive(true);
+                Debug.Log("PIZDA PANEL" + panelIndex);
+                if (panelIndex == 0)
+                {
+                    rightOutline.SetActive(false);
+                    leftOutline.SetActive(true);
+                }
+
+                if (panelIndex == 1)
+                {
+                    leftOutline.SetActive(false);
+                    rightOutline.SetActive(true);
+                }
                 break;
         }
     }
