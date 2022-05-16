@@ -26,13 +26,14 @@ public class DungeonBuilder : MonoBehaviour
     public List<DungeonLevelSettings> levels = new List<DungeonLevelSettings>();
 
     private GameObject lastSpawnedPiece;
-    private DungeonLevelSettings currentLevelSettings;
+    public DungeonLevelSettings currentLevelSettings;
     private int lastSpawnedPieceZPos;
     private int lastSpawnedEnemyZPos;
     private List<GameObject> enemiesList = new List<GameObject>();
     private List<GameObject> buildedPiecesList = new List<GameObject>();
 
     public DungeonChest lastChest;
+    public SkillController skillController;
     private void Awake()
     {
         Instance = this;
@@ -43,13 +44,39 @@ public class DungeonBuilder : MonoBehaviour
         lastSpawnedPieceZPos = 0;
         lastSpawnedEnemyZPos = 0;
     }
-
     public void BuildDungeon()
     {
         lastChest = null;
         currentLevelSettings = levels[DungeonManager.Instance.currentDungeonLevelId];
         levelLogo.sprite = currentLevelSettings.levelLogo;
         levelName.text = currentLevelSettings.levelName;
+
+        int value = skillController.improvementCount + skillController.improvementCount;
+        if (value >= skillController.maxPoints)
+        {
+            DungeonRewardPanel.Instance.crystalGroup.SetActive(false);
+            Debug.Log("Crystal Closed");
+        }
+        else
+        {
+            DungeonRewardPanel.Instance.crystalGroup.SetActive(true);
+            Debug.Log("Crystal Open");
+        }
+
+        var nextItem = CraftPanelItemsManager.Instance.craftPanelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
+        if (nextItem != null)
+        {
+            DungeonRewardPanel.Instance.blueprintGroup.SetActive(true);
+            Debug.Log("Blueprint Closed");
+        }
+        else
+        {
+            DungeonRewardPanel.Instance.blueprintGroup.SetActive(false);
+            Debug.Log("Blueprint Open");
+        }
+
+        Debug.Log("Value =" + value + "Max Point =" + SkillController.skillController.maxPoints);
+
         ResetVariablesValues();
         SpawnDungeonPieces();
         SpawnFirstWaveEnemies();

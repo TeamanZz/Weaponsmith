@@ -36,7 +36,7 @@ public class SkillController : MonoBehaviour
 
     [Header("New Skills Settings")]
     public int startNumber = 2;
-    [SerializeField] private int currentItemCount = 0;
+    public int currentItemCount = 0;
     //public TextMeshProUGUI selectedDebuger;
 
     public void Awake()
@@ -125,6 +125,7 @@ public class SkillController : MonoBehaviour
         Debug.Log("Upgrade " + " | CurrentImprovementPoints = " + currentImprovementPoints + " | Selected Panel = " + selectedPanel + " | Max Points = " + maxPoints);
         if (currentImprovementPoints > 0 && selectedPanel != null && maxPoints > 0)
         {
+            improvementCount += 1;
             Debug.Log("Upgrade True");
             maxPoints -= 1;
             currentImprovementPoints -= 1;

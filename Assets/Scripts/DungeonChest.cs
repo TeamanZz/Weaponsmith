@@ -43,7 +43,7 @@ public class DungeonChest : MonoBehaviour
         {
             case ChestFilling.Money:
                 MoneyHandler.Instance.moneyCount += moneyReward;
-
+                DungeonManager.Instance.currentChestReward += moneyReward;
                 break;
 
             case ChestFilling.BlueprintAndMoney:

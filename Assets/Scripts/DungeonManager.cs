@@ -11,6 +11,8 @@ public class DungeonManager : MonoBehaviour
 
     public bool isDungeonStarted;
     public int currentLevelEarnedMoneyCount;
+    public int currentChestReward;
+
     public bool blueprintRecieved;
 
     [SerializeField] private Transform dungeonCharacter;

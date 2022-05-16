@@ -10,7 +10,7 @@ public class DungeonRewardPanel : MonoBehaviour
     public GameObject panel;
 
     [Header("Viewing Elements")]
-    public TextMeshProUGUI titleText;
+    //public TextMeshProUGUI titleText;
     public string[] resultInTitle;
     public Image[] starsViewImage;
     public float openStarTime = 0.25f;
@@ -20,12 +20,26 @@ public class DungeonRewardPanel : MonoBehaviour
     public Sprite weaponSprite;
     public Sprite armorSprite;
     public GridLayoutGroup group;
-    public RewardUIItem itemPrefab;
+    //public RewardUIItem itemPrefab;
     public PanelsStortage panelsStorage;
 
-    public RewardUIItem moneyReward;
-    public RewardUIItem blueprintReward;
+    //public RewardUIItem moneyReward;
+    //public RewardUIItem blueprintReward;
 
+    [Space]
+    public GameObject crystalGroup;
+    public GameObject blueprintGroup;
+
+    //public TextMeshProUGUI allMoney;
+    public TextMeshProUGUI moneyForEnemies;
+    public TextMeshProUGUI moneyForChest;
+
+    public SkillController skillController;
+    
+    [Space]
+    public GameObject bottomBlueprintsGroup;
+    public GameObject bottomCrystalGroup;
+    public TextMeshProUGUI allMoneyBottomText;
     public void Awake()
     {
         Instance = this;
@@ -36,19 +50,14 @@ public class DungeonRewardPanel : MonoBehaviour
         var newAnvilItem = panelsStorage.panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
         if (newAnvilItem == null)
             return;
-        if (newAnvilItem.currentEquipmentType == ItemEquipment.EquipmentType.Weapon)
-        {
-            blueprintReward.InitializePanel(weaponSprite, "New weapon blueprint");
-        }
-        else if (newAnvilItem.currentEquipmentType == ItemEquipment.EquipmentType.Armor)
-        {
-            blueprintReward.InitializePanel(armorSprite, "New armor blueprint");
-        }
+      
     }
 
     public void ClosePanel()
     {
-        blueprintReward.gameObject.SetActive(false);
+        blueprintGroup.SetActive(false);
+        crystalGroup.SetActive(false);
+
         panel.SetActive(false);
         PanelsHandler.Instance.StartCoolDown();
     }
@@ -63,6 +72,12 @@ public class DungeonRewardPanel : MonoBehaviour
         }
     }
 
+    [ContextMenu("Debug")]
+    public void Debuger()
+    {
+        OpenRewardPanel(3);
+    }
+
     public void OpenRewardPanel(int starsValue)
     {
         DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", false);
@@ -71,13 +86,14 @@ public class DungeonRewardPanel : MonoBehaviour
         DungeonManager.Instance.isDungeonStarted = false;
         DungeonManager.Instance.bossZPosition = 0;
 
-        moneyReward.InitializePanel(moneySprite, DungeonManager.Instance.currentLevelEarnedMoneyCount.ToString());
-        DungeonManager.Instance.currentLevelEarnedMoneyCount = 0;
+        moneyForEnemies.text = FormatNumsHelper.FormatNum((double)DungeonManager.Instance.currentLevelEarnedMoneyCount);
+        moneyForChest.text = FormatNumsHelper.FormatNum((double)DungeonManager.Instance.currentChestReward);
 
-        if (DungeonManager.Instance.blueprintRecieved)
-        {
-            blueprintReward.gameObject.SetActive(true);
-        }
+        allMoneyBottomText.text = FormatNumsHelper.FormatNum((double)(DungeonManager.Instance.currentLevelEarnedMoneyCount + DungeonManager.Instance.currentChestReward));
+
+        DungeonManager.Instance.currentLevelEarnedMoneyCount = 0;
+        DungeonManager.Instance.currentChestReward = 0;
+
         DungeonManager.Instance.blueprintRecieved = false;
 
         for (int i = 0; i < starsViewImage.Length; i++)
@@ -90,15 +106,50 @@ public class DungeonRewardPanel : MonoBehaviour
             if (DungeonBuilder.Instance.lastChest != null)
                 DungeonBuilder.Instance.lastChest.PlayRewardAnimation();
 
-            titleText.text = resultInTitle[0];
             DungeonManager.Instance.currentDungeonLevelId = Mathf.Clamp(DungeonManager.Instance.currentDungeonLevelId + 1, 0, DungeonBuilder.Instance.levels.Count);
             Debug.Log("ID = " + DungeonManager.Instance.currentDungeonLevelId);
-
+ 
             SkillController.skillController.OpenNewSkill();
             SkillController.skillController.AddImprovementPoint();
         }
+
+
+        var nextItem = CraftPanelItemsManager.Instance.craftPanelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
+        if(starsValue == 3)
+        {
+            if (nextItem == null)
+            {
+                bottomBlueprintsGroup.SetActive(false);
+                blueprintGroup.SetActive(false);
+            }
+            else
+            {
+                bottomBlueprintsGroup.SetActive(true);
+                blueprintGroup.SetActive(true);
+            }
+          
+            int value = skillController.improvementCount + skillController.improvementCount;
+
+            if (value >= skillController.maxPoints)
+            {
+                bottomCrystalGroup.SetActive(false);
+                crystalGroup.SetActive(false);
+            }
+            else
+            {
+                bottomCrystalGroup.SetActive(true);
+                crystalGroup.SetActive(true);
+            }
+           
+        }
         else
-            titleText.text = resultInTitle[1];
+        {
+            blueprintGroup.SetActive(false);
+            blueprintGroup.SetActive(false);
+
+            bottomCrystalGroup.SetActive(false);
+            crystalGroup.SetActive(false);
+        }
 
         panel.SetActive(true);
 

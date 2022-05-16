@@ -50,6 +50,11 @@ public class PanelsHandler : MonoBehaviour
 
     public float reloadTime = 60;
     [SerializeField] private float currentTime;
+
+    public GameObject anvilSound;
+    public GameObject tapArea;
+
+    public int currentIndex = 0;
     public void Awake()
     {
         Instance = this;
@@ -144,10 +149,6 @@ public class PanelsHandler : MonoBehaviour
         dungeonEnteringPanel.SetActive(false);
     }
 
-    public GameObject anvilSound;
-    public GameObject tapArea;
-
-    public int currentIndex = 0;
     public void OpenPanel(int panelIndex)
     {
         if (panelIndex == currentIndex || panelIndex < 0 || panelIndex > panels.Count)
