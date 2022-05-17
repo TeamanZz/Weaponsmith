@@ -25,6 +25,7 @@ public class DungeonManager : MonoBehaviour
     public Image progressBarFill;
     public float bossZPosition = 0;
 
+    public GameObject dungeonFogUI;
     public GameObject dungeonProgressBar;
 
     public int currentDungeonLevelId;
@@ -38,7 +39,7 @@ public class DungeonManager : MonoBehaviour
     {
         UpdateProgressBarValue();
     }
-    
+
     private void UpdateProgressBarValue()
     {
         if (bossZPosition == 0)
@@ -58,6 +59,7 @@ public class DungeonManager : MonoBehaviour
 
         isDungeonStarted = true;
         dungeonProgressBar.SetActive(true);
+        dungeonFogUI.SetActive(true);
     }
 
     public void ShowCharacterPreview()
@@ -70,5 +72,6 @@ public class DungeonManager : MonoBehaviour
         dungeonCamera.transform.rotation = Quaternion.Euler(7, 90, 0);
         dungeonCamera.targetDistance = 0;
         dungeonProgressBar.SetActive(false);
+        dungeonFogUI.SetActive(false);
     }
 }

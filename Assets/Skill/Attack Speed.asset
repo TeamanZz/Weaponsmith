@@ -18,8 +18,8 @@ MonoBehaviour:
   iconImage: {fileID: 21300000, guid: b8979ddb972f9fd4b9d0564afb5ece61, type: 3}
   borderColor: {r: 0, g: 0, b: 0, a: 0}
   skillValue:
-  - 3
-  - 2.5
-  - 2
-  - 1.5
+  - 0.2
+  - 0.3
+  - 0.5
+  - 0.7
   - 1

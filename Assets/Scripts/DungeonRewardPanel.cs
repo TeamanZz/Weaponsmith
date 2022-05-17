@@ -11,7 +11,6 @@ public class DungeonRewardPanel : MonoBehaviour
 
     [Header("Viewing Elements")]
     //public TextMeshProUGUI titleText;
-    public string[] resultInTitle;
     public Image[] starsViewImage;
     public float openStarTime = 0.25f;
     public float timeToNewStar = 0.5f;
@@ -40,6 +39,13 @@ public class DungeonRewardPanel : MonoBehaviour
     public GameObject bottomBlueprintsGroup;
     public GameObject bottomCrystalGroup;
     public TextMeshProUGUI allMoneyBottomText;
+
+    public GameObject successTitle;
+    public GameObject lostTitle;
+
+    public GameObject successParticles;
+    public GameObject lostParticles;
+
     public void Awake()
     {
         Instance = this;
@@ -86,8 +92,8 @@ public class DungeonRewardPanel : MonoBehaviour
         DungeonManager.Instance.isDungeonStarted = false;
         DungeonManager.Instance.bossZPosition = 0;
 
-        moneyForEnemies.text = FormatNumsHelper.FormatNum((double)DungeonManager.Instance.currentLevelEarnedMoneyCount);
-        moneyForChest.text = FormatNumsHelper.FormatNum((double)DungeonManager.Instance.currentChestReward);
+        moneyForEnemies.text = "enemies: " + FormatNumsHelper.FormatNum((double)DungeonManager.Instance.currentLevelEarnedMoneyCount);
+        moneyForChest.text = "chest: " + FormatNumsHelper.FormatNum((double)DungeonManager.Instance.currentChestReward);
 
         allMoneyBottomText.text = FormatNumsHelper.FormatNum((double)(DungeonManager.Instance.currentLevelEarnedMoneyCount + DungeonManager.Instance.currentChestReward));
 
@@ -103,6 +109,10 @@ public class DungeonRewardPanel : MonoBehaviour
 
         if (starsValue == 3)
         {
+            lostTitle.SetActive(false);
+            successTitle.SetActive(true);
+            successParticles.SetActive(true);
+            lostParticles.SetActive(false);
             if (DungeonBuilder.Instance.lastChest != null)
                 DungeonBuilder.Instance.lastChest.PlayRewardAnimation();
 
@@ -144,10 +154,14 @@ public class DungeonRewardPanel : MonoBehaviour
         else
         {
             blueprintGroup.SetActive(false);
-            blueprintGroup.SetActive(false);
 
             bottomCrystalGroup.SetActive(false);
             crystalGroup.SetActive(false);
+
+            lostTitle.SetActive(true);
+            successTitle.SetActive(false);
+            successParticles.SetActive(false);
+            lostParticles.SetActive(true);
         }
 
         panel.SetActive(true);

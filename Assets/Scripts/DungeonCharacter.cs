@@ -127,7 +127,6 @@ public class DungeonCharacter : MonoBehaviour
             reloadTime = attackSpeed.skillValue[attackSpeed.skillLvl];
         else
             reloadTime = 0;
-
         yield return new WaitForSeconds(Random.Range(minAttackDelay, maxAttackDelay - reloadTime));
         int attackAnimationIndex = Random.Range(1, 9);
         animator.SetTrigger("Attack" + attackAnimationIndex);
