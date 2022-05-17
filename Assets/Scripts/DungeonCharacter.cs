@@ -60,6 +60,9 @@ public class DungeonCharacter : MonoBehaviour
 
     public DungeonRewardPanel rewardPanel;
 
+    public bool canAttack;
+    [SerializeField] private ParticleSystem canAttackParticles;
+
     private void Awake()
     {
         Instance = this;
@@ -71,6 +74,14 @@ public class DungeonCharacter : MonoBehaviour
 
         if (needSpeedUpOnAwake)
             animator.speed = lastSpeedUpValue;
+    }
+
+    public void HitEnemyOnClick()
+    {
+        if (canAttack && animator.GetBool("EnemyIsNear") == true)
+        {
+            attackCoroutine = StartCoroutine(IEAttack());
+        }
     }
 
     public void EnableWeaponEmit()
@@ -122,16 +133,19 @@ public class DungeonCharacter : MonoBehaviour
     {
         var attackSpeed = skillController.mainSkillsData[4];
         float reloadTime;
-
         if (attackSpeed != null)
             reloadTime = attackSpeed.skillValue[attackSpeed.skillLvl];
         else
             reloadTime = 0;
-        yield return new WaitForSeconds(Random.Range(minAttackDelay, maxAttackDelay - reloadTime));
+
         int attackAnimationIndex = Random.Range(1, 9);
         animator.SetTrigger("Attack" + attackAnimationIndex);
+        Debug.Log("pis");
+        canAttack = false;
+        yield return new WaitForSeconds(Random.Range(minAttackDelay, maxAttackDelay - reloadTime));
+        canAttack = true;
+        canAttackParticles.Play();
         // animator.SetTrigger("Attack" + 8);
-        yield return IEAttack();
     }
 
     private void FixedUpdate()
@@ -147,9 +161,10 @@ public class DungeonCharacter : MonoBehaviour
         {
             animator.SetBool("EnemyIsNear", true);
             isInBattle = true;
+            canAttack = true;
+            canAttackParticles.Play();
             currentEnemy = tempEnemy;
             detectionCollider.enabled = false;
-            attackCoroutine = StartCoroutine(IEAttack());
         }
     }
 
