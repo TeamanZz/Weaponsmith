@@ -16,6 +16,7 @@ public class SkillItemView : MonoBehaviour
 
     public TextMeshProUGUI title;
     public TextMeshProUGUI level;
+    public GameObject levelGreenIcon;
 
     public Button button;
 
@@ -52,7 +53,7 @@ public class SkillItemView : MonoBehaviour
             }
         }
         SelectedBorder();
-       
+
     }
 
     public void SelectedBorder()
@@ -80,6 +81,7 @@ public class SkillItemView : MonoBehaviour
     {
         panelIsActive = false;
         blurPanel.gameObject.SetActive(true);
+        levelGreenIcon.SetActive(false);
     }
 
     public void DisabledBlur()
@@ -87,6 +89,7 @@ public class SkillItemView : MonoBehaviour
         panelIsActive = true;
         blurPanel.gameObject.SetActive(false);
         button.gameObject.SetActive(true);
+        levelGreenIcon.SetActive(true);
     }
 
     public void DisabledButton()

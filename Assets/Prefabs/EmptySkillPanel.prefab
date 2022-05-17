@@ -412,6 +412,7 @@ MonoBehaviour:
   blurPanel: {fileID: 3727641268986370596}
   title: {fileID: 6620280656500153994}
   level: {fileID: 1076741891549272941}
+  levelGreenIcon: {fileID: 5440711657295366268}
   button: {fileID: 7438929644172520233}
   borderIsActive: 0
   panelIsActive: 0

@@ -15,8 +15,9 @@ public class PreviewSkillWindow : MonoBehaviour
     public void ItemInitialization(SkillItem newItem)
     {
         iconImage.sprite = newItem.iconImage;
+        iconImage.SetNativeSize();
         borderImage.color = newItem.borderColor;
-        
+
         title.text = newItem.skillName;
         lastLevel.text = "Lvl " + (newItem.skillLvl - 1).ToString();
 
