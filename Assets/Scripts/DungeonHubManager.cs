@@ -98,7 +98,6 @@ public class DungeonHubManager : MonoBehaviour
                     break;
 
                 equipmentPanelContent[panelIndex].SetActive(true);
-                Debug.Log("PIZDA PANEL" + panelIndex);
                 if (panelIndex == 0)
                 {
                     rightOutline.SetActive(false);

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using DG.Tweening;
 
 [Serializable]
 public class SkillController : MonoBehaviour
@@ -133,7 +134,7 @@ public class SkillController : MonoBehaviour
 
             previewSkillWindow.gameObject.SetActive(true);
             previewSkillWindow.ItemInitialization(selectedPanel.itemData);
-            
+
             UpdateButtonUI();
             CheckMaximalSkillState(selectedPanel);
         }

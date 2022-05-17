@@ -16,6 +16,7 @@ TagManager:
   - Weapon
   - Ground
   - Missile
+  - Effects
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - CanvasWeapon
   - DungeonFloor
   - UI Bars Render
-  - 
+  - UI Particles
   - 
   - 
   - 
