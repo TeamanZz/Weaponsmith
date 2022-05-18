@@ -14,6 +14,7 @@ public class DungeonBuilder : MonoBehaviour
     [SerializeField] private int startDungeonPiecesCount = 40;
     [SerializeField] private Transform enemiesContainer;
     [SerializeField] private GameObject chestPrefab;
+    [SerializeField] private GameObject endWallPrefab;
 
     [Header("Enemy Spawn")]
     [SerializeField] private List<GameObject> enemyPrefabs = new List<GameObject>();
@@ -37,6 +38,8 @@ public class DungeonBuilder : MonoBehaviour
 
     public DungeonRewardPanel rewardPanel;
 
+    public bool endWallWasSpawned;
+
     private void Awake()
     {
         Instance = this;
@@ -46,6 +49,7 @@ public class DungeonBuilder : MonoBehaviour
     {
         lastSpawnedPieceZPos = 0;
         lastSpawnedEnemyZPos = 0;
+        endWallWasSpawned = false;
     }
 
     public void BuildDungeon()
@@ -82,12 +86,12 @@ public class DungeonBuilder : MonoBehaviour
         Debug.Log("Value =" + value + "Max Point =" + SkillController.skillController.maxPoints);
 
         ResetVariablesValues();
-        SpawnDungeonPieces();
         SpawnFirstWaveEnemies();
         SpawnChestWithGold();
         SpawnSecondWaveEnemies();
         SpawnBoss();
         SpawnChestWithBlueprint();
+        SpawnDungeonPieces();
     }
 
     public void ResetDungeon()
@@ -136,10 +140,22 @@ public class DungeonBuilder : MonoBehaviour
 
     public void SpawnPiece()
     {
-        lastSpawnedPiece = Instantiate(piecePrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.identity, piecesContainer);
-        lastSpawnedPiece.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
-        lastSpawnedPieceZPos += 5;
-        buildedPiecesList.Add(lastSpawnedPiece);
+        if (lastSpawnedPieceZPos > lastSpawnedEnemyZPos)
+        {
+            if (!endWallWasSpawned)
+            {
+                lastSpawnedPiece = Instantiate(endWallPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.identity, piecesContainer);
+                lastSpawnedPiece.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
+                endWallWasSpawned = true;
+            }
+        }
+        else
+        {
+            lastSpawnedPiece = Instantiate(piecePrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.identity, piecesContainer);
+            lastSpawnedPiece.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
+            lastSpawnedPieceZPos += 5;
+            buildedPiecesList.Add(lastSpawnedPiece);
+        }
     }
 
     public void SpawnEnemy(int hpValue, int damageValue, float modelScale, float distanceCoefficient = 1, bool isBoss = false)
