@@ -14,6 +14,10 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
 
     private GameObject mainRoom;
 
+
+    public GameObject anvilCharacter;
+    public GameObject dungeonCharacterSkins;
+
     private void Awake()
     {
         Instance = this;
@@ -39,7 +43,9 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
             firstPieces.SetActive(false);
             dungeonPreviewScene.SetActive(true);
         }
+        dungeonCharacterSkins.SetActive(true);
         mainRoom.SetActive(false);
+        anvilCharacter.SetActive(false);
     }
 
     public void EnableFirstPieces()
@@ -59,5 +65,7 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
         if (dungeonManager.isDungeonStarted)
             dungeonCharacter.animator.enabled = false;
         mainRoom.SetActive(true);
+        dungeonCharacterSkins.SetActive(false);
+        anvilCharacter.SetActive(true);
     }
 }
