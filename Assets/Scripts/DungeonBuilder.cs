@@ -146,6 +146,7 @@ public class DungeonBuilder : MonoBehaviour
             {
                 lastSpawnedPiece = Instantiate(endWallPrefab, new Vector3(0, 0, lastSpawnedPieceZPos), Quaternion.identity, piecesContainer);
                 lastSpawnedPiece.transform.localPosition = new Vector3(0, 0, lastSpawnedPiece.transform.position.z);
+                buildedPiecesList.Add(lastSpawnedPiece);
                 endWallWasSpawned = true;
             }
         }
