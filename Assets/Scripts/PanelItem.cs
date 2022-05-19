@@ -211,7 +211,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         if (buysCount >= costCurve.keys[costCurve.length - 1].time)
         {
-
             SFX.Instance.PlayQuestComplete();
             ChangeState(PanelItemState.Collapsed);
         }
@@ -302,6 +301,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     //open panel
     public void SetAvailableItemView()
     {
+        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)increaseValue) + "/s";
         itemConditionsGO.SetActive(false);
         blurPanel.SetActive(false);
         //generalIncreaseValueText.gameObject.SetActive(true);
@@ -311,13 +311,31 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         completedSign.SetActive(false);
         itemIcon.SetActive(true);
         itemNameText.text = itemName;
+        GetComponent<RectTransform>().sizeDelta = new Vector2(706, 120);
+    }
+
+    //collapse
+    public void CollapseItemView()
+    {
+        unknownSign.SetActive(false);
+        blurPanel.SetActive(false);
+        itemNameText.text = itemName;
+        progressBar.SetActive(false);
+        //generalIncreaseValueText.gameObject.SetActive(false);
+        buyButton.SetActive(false);
+        completedSign.SetActive(true);
+        itemIcon.SetActive(true);
+
+        MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
+        generalIncreaseValueText.text = "";
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
     }
 
     //WaitingForDrawing
     public void SetWaitingForDrawingItemView()
     {
         itemConditionsGO.SetActive(false);
-
         blurPanel.SetActive(true);
         //generalIncreaseValueText.gameObject.SetActive(false);
         unknownSign.SetActive(false);
@@ -341,24 +359,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         buyButton.SetActive(false);
         completedSign.SetActive(false);
         blurPanel.SetActive(true);
-    }
-
-    //collapse
-    public void CollapseItemView()
-    {
-        unknownSign.SetActive(false);
-        blurPanel.SetActive(false);
-        itemNameText.text = itemName;
-        progressBar.SetActive(false);
-        //generalIncreaseValueText.gameObject.SetActive(false);
-        buyButton.SetActive(false);
-        completedSign.SetActive(true);
-        itemIcon.SetActive(true);
-
-        MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
-        generalIncreaseValueText.text = "";
-
-        GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
     }
 
     private void UpdateItemValues()

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class WorkshopPanelItemsManager : MonoBehaviour
 {
     public static WorkshopPanelItemsManager Instance;
@@ -31,6 +32,7 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public float timeToReturnFocus = 0.5f;
 
     public CameraWidth cameraWidth;
+    public Coroutine invokeCoroutine;
 
     [ContextMenu("Awake")]
     public void Awake()
@@ -76,7 +78,9 @@ public class WorkshopPanelItemsManager : MonoBehaviour
         Debug.Log("Open transition");
         transitionPanel.SetActive(true);
     }
-    public Coroutine invokeCoroutine;
+
+
+
     public void PreUnlock(int index, float focus)
     {
         CameraFocus(currentEraWorkshopObjects[index].transform, focus);
