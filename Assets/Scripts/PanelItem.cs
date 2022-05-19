@@ -7,6 +7,7 @@ using TMPro;
 
 public class PanelItem : MonoBehaviour, IBuyableItem
 {
+    public int panelID;
     public PanelItemState currentState;
     public ItemEquipment.EquipmentType currentEquipmentType;
     public string itemName;
@@ -49,26 +50,22 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();
-        Initialize();
+        //Initialize();
+        LoadData();
         generalIncreaseValueText.text = "";
     }
 
     public void CheckPriceCoefficient()
     {
-        //priceList.Clear();
         checkValue = 0;
         int currentPrice = (int)costCurve.Evaluate(buysCount);
-        //Debug.Log("Panel " + itemNameText.text + " - Coef " + (buysCount + CoefficientManager.coefficientValue) + " Lenght " + costCurve.keys[costCurve.length - 1].time);
+
         if (buysCount + CoefficientManager.coefficientValue > costCurve.keys[costCurve.length - 1].time || CoefficientManager.coefficientValue == 1)
         {
             if (CoefficientManager.coefficientValue == 1)
                 maxCount = 0;
             else
-                maxCount = (int)costCurve.keys[costCurve.length - 1].time; //- buysCount;
-
-            //priceList.Add(new Vector2Int(currentPrice, currentPrice));
-
-            //checkValue = maxCount;
+                maxCount = (int)costCurve.keys[costCurve.length - 1].time; 
         }
         else
         {
@@ -82,7 +79,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             if (currentPrice + newPrice <= MoneyHandler.Instance.moneyCount)
             {
                 currentPrice += newPrice;
-                //priceList.Add(new Vector2Int(currentPrice, newPrice));
                 checkValue += 1;
             }
             else
@@ -92,7 +88,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
         }
 
-        checkValue = Mathf.Clamp(checkValue, 1, 9999/* (int)costCurve.keys[costCurve.length - 1].time*/);
+        checkValue = Mathf.Clamp(checkValue, 1, 9999);
         currentCoefficientValue = checkValue;
 
         price = currentPrice;
@@ -117,8 +113,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             buyButtonComponent.enabled = false;
             buyButtonImage.color = Color.gray;
         }
-
-        //CheckOnCollapse();
     }
 
     private void Start()
@@ -130,13 +124,42 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         ChangeState(currentState);
     }
 
+    [ContextMenu("Save Data")]
     private void SaveData()
     {
-        // SaveState();
-        // PlayerPrefs.SetFloat($"UpgradeItem{index}generalIncreaseValue", generalIncreaseValue);
-        // PlayerPrefs.SetFloat($"UpgradeItem{index}price", price);
-        // PlayerPrefs.SetFloat($"UpgradeItem{index}increaseValue", increaseValue);
-        // PlayerPrefs.SetFloat($"UpgradeItem{index}buysCount", buysCount);
+        PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)currentState);
+        PlayerPrefs.SetInt($"PanelItem{panelID}Count", buysCount);
+
+        Debug.Log("Save Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
+    }
+
+    public void LoadData()
+    {
+        currentState = (PanelItemState)PlayerPrefs.GetInt($"PanelItem{panelID}State");
+        buysCount = PlayerPrefs.GetInt($"PanelItem{panelID}Count");
+
+        Debug.Log("Load Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
+        Initialize();
+    }
+
+    [ContextMenu("Remove Data")]
+    public void RemoveData()
+    {
+        if (panelID == 0 || panelID == 1)
+            PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)PanelItemState.Available);
+        else
+            PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)PanelItemState.Unknown);
+
+        PlayerPrefs.SetInt($"PanelItem{panelID}Count", 0);
+        Debug.Log("Remove Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
+        Debug.Log("Receve Data = " + panelID);
+        
+        Destroy(currentPanelItemInHub.gameObject);
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(706, 120); 
+        progressBarFilled.fillAmount = 0;
+        SetAvailableItemView();
+        Awake();
     }
 
     private void Initialize()
@@ -176,6 +199,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         PlayJumpAnimation();
         CheckOnCollapse();
 
+        Debug.Log("Start Save = " + panelID);
+        SaveData();
+
         if (currentPanelItemInHub == null)
             return;
         currentPanelItemInHub.UpdateUI();
@@ -204,7 +230,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 {
                     Debug.Log("Collapse in parent");
                     currentPanelItemInHub.CollapseItem();
-                    //currentPanelItemInHub.SelectedWeapon();
                 }
                 else
                 {
@@ -241,44 +266,14 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public void UnkownPanel()
     {
         SetUnknownItemView();
-        // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
-    }
-
-    private void SaveState()
-    {
-        if (currentState == PanelItemState.Collapsed)
-        {
-            // PlayerPrefs.SetString("UpgradeItem" + index, "collapsed");
-        }
-
-        if (currentState == PanelItemState.Unknown)
-        {
-            // PlayerPrefs.SetString("UpgradeItem" + index, "unknown");
-        }
-
-        //WaitingForDrawing
-        if (currentState == PanelItemState.WaitingForDrawing)
-        {
-            // PlayerPrefs.SetString("UpgradeItem" + index, "WaitingForDrawing");
-        }
-
-        if (currentState == PanelItemState.Available)
-        {
-            // PlayerPrefs.SetString("UpgradeItem" + index, "available");
-        }
     }
 
     public void ChangeStateViaLoader(PanelItemState newState)
     {
         Initialize();
-        //generalIncreaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}generalIncreaseValue");
-        // price = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}price", (int)costCurve.Evaluate(buysCount));
-        //increaseValue = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}increaseValue", increaseValue);
-        // buysCount = (int)PlayerPrefs.GetFloat($"UpgradeItem{index}buysCount");
         currentState = newState;
         if (newState == PanelItemState.Collapsed)
             Debug.Log(gameObject);
-        //ItemsManager.Instance.CheckConditions(this);
 
         switch (currentState)
         {
@@ -321,9 +316,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     //WaitingForDrawing
     public void SetWaitingForDrawingItemView()
     {
-        // CraftPanelItemsManager.Instance.currentWaitingPanel = this;
-
-        //itemConditionsGO.SetActive(true);
         itemConditionsGO.SetActive(false);
 
         blurPanel.SetActive(true);
@@ -336,14 +328,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
         itemIcon.SetActive(false);
         unknownSign.SetActive(true);
-
-        // if (CraftPanelItemsManager.Instance != null && CraftPanelItemsManager.Instance.awardPanel != null)
-        // {
-        //     CraftPanelItemsManager.Instance.awardPanel[EraController.Instance.currentEraNumber].SetActive(true);
-        //     // PlayerPrefs.SetInt("AwardPanel", 1);
-        // }
-
-        // PlayerPrefs.SetInt("currentWaitingPanelNumber", index);
     }
 
     //Unknown
@@ -380,8 +364,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void UpdateItemValues()
     {
         buysCount += currentCoefficientValue;
-        //buysCount += 1;
-        price = (int)costCurve.Evaluate(buysCount);// + PanelsHandler.Instance.numberOfPurchases);
+        price = (int)costCurve.Evaluate(buysCount);
     }
 
     private void UpdateView()
