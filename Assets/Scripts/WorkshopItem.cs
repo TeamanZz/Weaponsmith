@@ -93,7 +93,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         Debug.Log("Remove Data = " + panelID + " State =" + price);
 
         SetAvailableItemView();
-        Awake();
+       // Awake();
     }
 
 

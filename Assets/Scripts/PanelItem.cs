@@ -52,7 +52,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         weaponSprite = itemIcon.GetComponent<Image>();
         //Initialize();
         LoadData();
-        generalIncreaseValueText.text = "";
     }
 
     public void CheckPriceCoefficient()
@@ -145,20 +144,27 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [ContextMenu("Remove Data")]
     public void RemoveData()
     {
-        if (panelID == 0 || panelID == 1)
-            PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)PanelItemState.Available);
-        else
-            PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)PanelItemState.Unknown);
+        if (currentPanelItemInHub != null)
+            Destroy(currentPanelItemInHub.gameObject);
 
+        if (panelID == 0 || panelID == 1)
+        {
+            PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)PanelItemState.Available);
+            ChangeState(PanelItemState.Available);
+            SetAvailableItemView();
+        }
+        else
+        {
+            PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)PanelItemState.Unknown);
+            ChangeState(PanelItemState.Unknown);
+            SetUnknownItemView();
+        }
         PlayerPrefs.SetInt($"PanelItem{panelID}Count", 0);
         Debug.Log("Remove Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
         Debug.Log("Receve Data = " + panelID);
         
-        Destroy(currentPanelItemInHub.gameObject);
-
-        GetComponent<RectTransform>().sizeDelta = new Vector2(706, 120); 
         progressBarFilled.fillAmount = 0;
-        SetAvailableItemView();
+        //
         Awake();
     }
 
