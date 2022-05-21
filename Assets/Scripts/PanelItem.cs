@@ -50,6 +50,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();
+        generalIncreaseValueText.text = "";
         //Initialize();
         LoadData();
     }
@@ -208,6 +209,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
         Debug.Log("Start Save = " + panelID);
         SaveData();
+        MoneyHandler.Instance.SaveData();
 
         if (currentPanelItemInHub == null)
             return;
