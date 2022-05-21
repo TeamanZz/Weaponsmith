@@ -129,7 +129,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)currentState);
         PlayerPrefs.SetInt($"PanelItem{panelID}Count", buysCount);
 
-        Debug.Log("Save Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
+        //Debug.Log("Save Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
     }
 
     public void LoadData()
@@ -137,7 +137,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         currentState = (PanelItemState)PlayerPrefs.GetInt($"PanelItem{panelID}State");
         buysCount = PlayerPrefs.GetInt($"PanelItem{panelID}Count");
 
-        Debug.Log("Load Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
+        //Debug.Log("Load Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
         Initialize();
     }
 
@@ -160,8 +160,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             SetUnknownItemView();
         }
         PlayerPrefs.SetInt($"PanelItem{panelID}Count", 0);
-        Debug.Log("Remove Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
-        Debug.Log("Receve Data = " + panelID);
+        //Debug.Log("Remove Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
+        //Debug.Log("Receve Data = " + panelID);
         
         progressBarFilled.fillAmount = 0;
         //
@@ -233,7 +233,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
 
                 if (currentPanelItemInHub != null)
                 {
-                    Debug.Log("Collapse in parent");
+                    //Debug.Log("Collapse in parent");
                     currentPanelItemInHub.CollapseItem();
                 }
                 else

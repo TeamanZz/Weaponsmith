@@ -34,10 +34,13 @@ public class PanelItemInHub : MonoBehaviour
     public Image viewIcon;
     public Sprite[] viewSprite;
 
+    public bool isSelected = false;
+    public int panelID;
 
     public void Initialization(PanelItem newPanelItem)
     {
         viewValueText.gameObject.SetActive(false);
+        panelID = newPanelItem.panelID;
 
         buyButtonAnimator = buyButtonComponent.GetComponent<Animator>();
         iconAnimator = itemIcon.GetComponent<Animator>();
@@ -61,6 +64,38 @@ public class PanelItemInHub : MonoBehaviour
         progressBarFilled.fillAmount = ((float)panelItem.buysCount / (float)panelItem.costCurve.keys[panelItem.costCurve.length - 1].time);
 
         buyButtonComponent.onClick.AddListener(() => /*newPanelItem.BuyItem*/BuyItemInOriginal());
+
+        SaveSystem.saveSystem.hubItem.Add(this);
+        LoadData();
+        UpdateUI();
+    }
+
+    bool IntToBool(int n)
+    => n == 1;
+    int BoolToInt(bool b)
+        => (b ? 1 : 0);
+
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt($"HubItem{panelID}State", BoolToInt(isSelected));
+        Debug.Log("ID =" + panelID + " | Save Data = " + isSelected);
+    }
+
+    public void LoadData()
+    {
+        isSelected = IntToBool(PlayerPrefs.GetInt($"HubItem{panelID}State"));
+
+        if (isSelected)
+            SelectedWeapon();
+        Debug.Log("ID =" + panelID + " | Load Data = " + isSelected);
+    }
+
+    [ContextMenu("Remove Data")]
+    public void RemoveData()
+    {
+        PlayerPrefs.SetInt($"HubItem{panelID}State", BoolToInt(false));
+        //DeselectedWeapon();
+        Debug.Log("ID =" + panelID + " | Remove Data");
     }
 
     private void FixedUpdate()
@@ -120,12 +155,15 @@ public class PanelItemInHub : MonoBehaviour
                 break;
         }
             //buyButtonComponent.onClick.AddListener(() => SelectedWeapon());
-        }
+    }
 
     public void SelectedWeapon()
     {
         if (DungeonHubManager.dungeonHubManager == null && currentObject != null)
             return;
+
+        isSelected = true;
+        SaveData();
 
         selectedButtonAnimator.Play("Jump", 0, 0);
         viewValueText.gameObject.SetActive(true);
@@ -191,6 +229,9 @@ public class PanelItemInHub : MonoBehaviour
     {
         if (DungeonHubManager.dungeonHubManager == null && currentObject != null)
             return;
+
+        isSelected = false;
+        SaveData();
 
         selectedWeaponButton.interactable = true;
 

@@ -69,8 +69,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     private void SaveData()
     {
         PlayerPrefs.SetInt($"WorkshopItem{panelID}State", BoolToInt(panelIsOpen));
-
-        Debug.Log("Save Data = " + panelID + " State =" + panelIsOpen);
+        //Debug.Log("Save Data = " + panelID + " State =" + panelIsOpen);
     }
 
     public void LoadData()
@@ -82,7 +81,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         else
             SetAvailableItemView();
 
-        Debug.Log("Load Data = " + panelID + " State =" + panelIsOpen);
+        //Debug.Log("Load Data = " + panelID + " State =" + panelIsOpen);
     }
 
     [ContextMenu("Remove Data")]
@@ -90,7 +89,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     {
         PlayerPrefs.SetInt($"WorkshopItem{panelID}State", BoolToInt(true));
 
-        Debug.Log("Remove Data = " + panelID + " State =" + price);
+        //Debug.Log("Remove Data = " + panelID + " State =" + price);
 
         SetAvailableItemView();
        // Awake();
