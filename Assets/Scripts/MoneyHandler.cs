@@ -38,11 +38,14 @@ public class MoneyHandler : MonoBehaviour
         
         if (moneyPerSecond == 0)
             moneyPerSecond = 1;
+
+        InvokeRepeating("SaveData", 3, 3);
     }
     public void SaveData()
     {
         PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyPerSecond", moneyPerSecond);
         PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyCount", (int)moneyCount);
+        Debug.Log("Money Handler " + " | Money Count =" + moneyCount + " | Money Per Second =" + moneyPerSecond);
     }
 
     public void LoadData()
@@ -55,6 +58,8 @@ public class MoneyHandler : MonoBehaviour
     {
         PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyPerSecond", 0);
         PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyCount", 0);
+        moneyCount = 0;
+        moneyPerSecond = 1;
     }
     private void Start()
     {
