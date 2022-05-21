@@ -15,7 +15,7 @@ public class SkillItemView : MonoBehaviour
     public Image blurPanel;
 
     public TextMeshProUGUI title;
-    public TextMeshProUGUI level;
+    public TextMeshProUGUI level; 
     public GameObject levelGreenIcon;
 
     public Button button;

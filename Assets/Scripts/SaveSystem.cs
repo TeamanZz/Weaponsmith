@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem saveSystem;
+    public SkillController skillController;
 
     public List<PanelItem> items = new List<PanelItem>();
     public List<WorkshopItem> workshopItems = new List<WorkshopItem>();
@@ -22,6 +23,7 @@ public class SaveSystem : MonoBehaviour
         RemoveHubPanelData();
         RemovePanelsData();
         RemoveRoomsData();
+        RemoveSkillsData();
     }
 
     [ContextMenu("Remove Panels Data")]
@@ -44,5 +46,11 @@ public class SaveSystem : MonoBehaviour
         foreach (var item in workshopItems)
             item.RemoveData();
         hubItem.Clear();
+    }
+
+    [ContextMenu("Remove Skills Data")]
+    public void RemoveSkillsData()
+    {
+        skillController.RemoveData();
     }
 } 

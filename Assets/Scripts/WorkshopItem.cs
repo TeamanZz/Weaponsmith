@@ -60,6 +60,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
             buyButtonImage.color = Color.gray;
         }
     }
+
     bool IntToBool(int n)
     => n == 1;
     int BoolToInt(bool b)

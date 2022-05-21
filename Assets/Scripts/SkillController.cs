@@ -53,9 +53,10 @@ public class SkillController : MonoBehaviour
 
         foreach (var item in mainSkillsView)
         {
-            item.EnabledBlur();
+            LoadData(item);
+                //item.EnabledBlur();
         }
-        Initialization(startNumber);
+        //Initialization(startNumber);
 
         //  scoring
         int currentMax = 0;
@@ -68,6 +69,51 @@ public class SkillController : MonoBehaviour
         UpdateButtonUI();
     }
 
+    bool IntToBool(int n)
+   => n == 1;
+    int BoolToInt(bool b)
+        => (b ? 1 : 0);
+
+    public void SaveData(SkillItem skillItem)
+    {
+        PlayerPrefs.SetInt($"SkillItem{skillItem.ID}SkillLvl", skillItem.skillLvl);
+        PlayerPrefs.SetInt($"SkillItem{skillItem.ID}IsOpen", BoolToInt(skillItem.isActive));
+    }
+
+    public void LoadData(SkillItemView skillItem)
+    {
+        int number = PlayerPrefs.GetInt($"SkillItem{skillItem.itemData.ID}SkillLvl");
+        skillItem.itemData.skillLvl = number;
+        bool isOpen = IntToBool(PlayerPrefs.GetInt($"SkillItem{skillItem.itemData.ID}IsOpen"));
+
+        if (skillItem.itemData.ID < startNumber)
+            isOpen = true;
+
+        if (number < skillItem.itemData.skillValue.Count - 1)
+        {
+            if (isOpen)
+                OpenNewSkill();
+            //skillItem.DisabledBlur();
+            else
+                skillItem.EnabledBlur();
+        }
+        else
+        {
+            CheckMaximalSkillState(skillItem);
+            Debug.Log("Collapse Id =" + skillItem.itemData.ID);
+        }
+    }
+
+    [ContextMenu("Remove Data")]
+    public void RemoveData()
+    {
+        foreach(var item in mainSkillsData)
+        {
+            PlayerPrefs.SetInt($"SkillItem{item.ID}SkillLvl", 0);
+            PlayerPrefs.SetInt($"SkillItem{item.ID}IsOpen", BoolToInt(false));
+            Debug.Log("Skill ID = " + item.ID +" | Skill Lvl =" + item.skillLvl + " | State =" + item.isActive);
+        }
+    }
     public void Initialization(int firstNumber)
     {
         copyItemPanelsView.Clear();
@@ -88,6 +134,9 @@ public class SkillController : MonoBehaviour
         var newViewPanel = group.transform.GetChild(currentItemCount).GetComponent<SkillItemView>();
         newViewPanel.Initialization(copyMainSkillsData[currentItemCount]);
         newViewPanel.DisabledBlur();
+        newViewPanel.itemData.isActive = true;
+        SaveData(newViewPanel.itemData);
+
         copyItemPanelsView.Add(newViewPanel);
 
         currentItemCount += 1;
@@ -131,6 +180,8 @@ public class SkillController : MonoBehaviour
             maxPoints -= 1;
             currentImprovementPoints -= 1;
             selectedPanel.itemData.skillLvl += 1;
+            
+            //SaveData(selectedPanel.itemData);
 
             previewSkillWindow.gameObject.SetActive(true);
             previewSkillWindow.ItemInitialization(selectedPanel.itemData);
@@ -147,10 +198,13 @@ public class SkillController : MonoBehaviour
         if (item.itemData.skillLvl == item.itemData.skillValue.Count - 1)
         {
             item.DisabledButton();
+            item.itemData.isActive = false;
             item.level.text = "Max Lvl";
         }
         else
             item.level.text = item.itemData.skillLvl.ToString();
+       
+        SaveData(item.itemData);
     }
 
     public void DeselectedAllPanelsBorder()

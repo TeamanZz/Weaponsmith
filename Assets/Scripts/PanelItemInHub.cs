@@ -78,7 +78,7 @@ public class PanelItemInHub : MonoBehaviour
     private void SaveData()
     {
         PlayerPrefs.SetInt($"HubItem{panelID}State", BoolToInt(isSelected));
-        Debug.Log("ID =" + panelID + " | Save Data = " + isSelected);
+        //Debug.Log("ID =" + panelID + " | Save Data = " + isSelected);
     }
 
     public void LoadData()
@@ -87,7 +87,7 @@ public class PanelItemInHub : MonoBehaviour
 
         if (isSelected)
             SelectedWeapon();
-        Debug.Log("ID =" + panelID + " | Load Data = " + isSelected);
+        //Debug.Log("ID =" + panelID + " | Load Data = " + isSelected);
     }
 
     [ContextMenu("Remove Data")]
@@ -95,7 +95,7 @@ public class PanelItemInHub : MonoBehaviour
     {
         PlayerPrefs.SetInt($"HubItem{panelID}State", BoolToInt(false));
         //DeselectedWeapon();
-        Debug.Log("ID =" + panelID + " | Remove Data");
+        //Debug.Log("ID =" + panelID + " | Remove Data");
     }
 
     private void FixedUpdate()
