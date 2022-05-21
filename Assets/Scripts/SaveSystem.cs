@@ -7,6 +7,7 @@ public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem saveSystem;
     public SkillController skillController;
+    public MoneyHandler moneyHandler;
 
     public List<PanelItem> items = new List<PanelItem>();
     public List<WorkshopItem> workshopItems = new List<WorkshopItem>();
@@ -23,34 +24,41 @@ public class SaveSystem : MonoBehaviour
         RemoveHubPanelData();
         RemovePanelsData();
         RemoveRoomsData();
-        RemoveSkillsData();
+        RemoveSkillsData(); 
+        RemoveMoneyData();
     }
 
-    [ContextMenu("Remove Panels Data")]
-    public void RemovePanelsData()
+    //[ContextMenu("Remove Panels Data")]
+    private void RemovePanelsData()
     {
         foreach (var item in items)
             item.RemoveData();
     }
 
-    [ContextMenu("Remove Rooms Data")]
-    public void RemoveRoomsData()
+    //[ContextMenu("Remove Rooms Data")]
+    private void RemoveRoomsData()
     {
         foreach (var item in workshopItems)
             item.RemoveData();
     }
 
-    [ContextMenu("Remove Hub Data")]
-    public void RemoveHubPanelData()
+    //[ContextMenu("Remove Hub Data")]
+    private void RemoveHubPanelData()
     {
         foreach (var item in workshopItems)
             item.RemoveData();
         hubItem.Clear();
     }
 
-    [ContextMenu("Remove Skills Data")]
-    public void RemoveSkillsData()
+    //[ContextMenu("Remove Skills Data")]
+    private void RemoveSkillsData()
     {
         skillController.RemoveData();
+    }
+
+    //[ContextMenu("Remove Money Data")]
+    private void RemoveMoneyData()
+    {
+        moneyHandler.RemoveData();
     }
 } 

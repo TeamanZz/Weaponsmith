@@ -7,6 +7,7 @@ using System;
 public class MoneyHandler : MonoBehaviour
 {
     public static MoneyHandler Instance;
+    private int currentID = 0;
 
     [Header("Currency Values")]
     public long moneyCount;
@@ -31,12 +32,30 @@ public class MoneyHandler : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        moneyPerSecond = PlayerPrefs.GetInt("MoneyPerSecond");
+        Instance = this; 
+        
+        LoadData();
+        
         if (moneyPerSecond == 0)
             moneyPerSecond = 1;
     }
+    public void SaveData()
+    {
+        PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyPerSecond", moneyPerSecond);
+        PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyCount", (int)moneyCount);
+    }
 
+    public void LoadData()
+    {
+        moneyPerSecond = PlayerPrefs.GetInt($"MoneyHandler{currentID}MoneyPerSecond");
+        moneyCount = (int)PlayerPrefs.GetInt($"MoneyHandler{currentID}MoneyCount");
+    }
+    
+    public void RemoveData()
+    {
+        PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyPerSecond", 0);
+        PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyCount", 0);
+    }
     private void Start()
     {
         InvokeRepeating("SaveMoneyPerSec", 1, 3);
@@ -59,14 +78,10 @@ public class MoneyHandler : MonoBehaviour
         boosterCoefficient = value;
     }
 
-    private void SaveMoneyPerSec()
-    {
-        // PlayerPrefs.SetInt("MoneyPerSecond", moneyPerSecond);
-    }
-
     public void IncreaseMoneyPerSecondValue(int value)
     {
         moneyPerSecond += value;
+        SaveData();
     }
 
     public void IncreaseIncomeByTap()

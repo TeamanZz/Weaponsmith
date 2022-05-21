@@ -123,6 +123,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
 
         CollapseItemView();
         SaveData();
+        MoneyHandler.Instance.SaveData();
         iconAnimator.Play("Jump", 0, 0);
     }
 

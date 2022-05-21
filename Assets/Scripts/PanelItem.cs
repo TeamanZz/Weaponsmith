@@ -79,6 +79,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             {
                 currentPrice += newPrice;
                 checkValue += 1;
+                MoneyHandler.Instance.SaveData();
             }
             else
             {
