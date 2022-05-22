@@ -8,6 +8,7 @@ public class SaveSystem : MonoBehaviour
     public static SaveSystem saveSystem;
     public SkillController skillController;
     public MoneyHandler moneyHandler;
+    public DungeonManager dungeonManager;
 
     public List<PanelItem> items = new List<PanelItem>();
     public List<WorkshopItem> workshopItems = new List<WorkshopItem>();
@@ -60,5 +61,11 @@ public class SaveSystem : MonoBehaviour
     private void RemoveMoneyData()
     {
         moneyHandler.RemoveData();
+    }
+
+    //[ContextMenu("Remove Dungeon Data")]
+    private void RemoveDungeonData()
+    {
+        dungeonManager.RemoveData();
     }
 } 

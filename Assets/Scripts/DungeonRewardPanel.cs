@@ -117,6 +117,8 @@ public class DungeonRewardPanel : MonoBehaviour
                 DungeonBuilder.Instance.lastChest.PlayRewardAnimation();
 
             DungeonManager.Instance.currentDungeonLevelId = Mathf.Clamp(DungeonManager.Instance.currentDungeonLevelId + 1, 0, DungeonBuilder.Instance.levels.Count);
+            DungeonManager.Instance.SaveData();
+
             Debug.Log("ID = " + DungeonManager.Instance.currentDungeonLevelId);
 
             SkillController.skillController.OpenNewSkill();

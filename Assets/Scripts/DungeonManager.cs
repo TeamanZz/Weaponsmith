@@ -33,11 +33,32 @@ public class DungeonManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        LoadData();
     }
-
+    
     private void Update()
     {
         UpdateProgressBarValue();
+    }
+
+    [ContextMenu("Save Data")]
+    public void SaveData()
+    {
+        PlayerPrefs.SetInt($"DungeonManager{0}Level", currentDungeonLevelId);
+        Debug.Log("Save Dungeon Data = " + " Level ID =" + currentDungeonLevelId);
+    }
+
+    [ContextMenu("Load Data")]
+    public void LoadData()
+    {
+        currentDungeonLevelId = PlayerPrefs.GetInt($"DungeonManager{0}Level");
+    }
+
+    [ContextMenu("Remove Data")]
+    public void RemoveData()
+    {
+        PlayerPrefs.SetInt($"DungeonManager{0}Level", 0);
+        currentDungeonLevelId = 0;
     }
 
     private void UpdateProgressBarValue()

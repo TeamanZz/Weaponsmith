@@ -37,6 +37,7 @@ public class DungeonBuilder : MonoBehaviour
     public SkillController skillController;
 
     public DungeonRewardPanel rewardPanel;
+    public DungeonManager dungeonManager;
 
     public bool endWallWasSpawned;
 
@@ -55,7 +56,7 @@ public class DungeonBuilder : MonoBehaviour
     public void BuildDungeon()
     {
         lastChest = null;
-        currentLevelSettings = levels[DungeonManager.Instance.currentDungeonLevelId];
+        currentLevelSettings = levels[dungeonManager.currentDungeonLevelId];
         levelLogo.sprite = currentLevelSettings.levelLogo;
         levelName.text = currentLevelSettings.levelName;
 
