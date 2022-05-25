@@ -148,9 +148,6 @@ public class FTUESystem : MonoBehaviour
                 moneyHandler.moneyPerSecond = moneyPerSec;
                 break;
 
-            case 2:
-
-                break;
         }
     }
 
@@ -191,6 +188,9 @@ public class FTUESystem : MonoBehaviour
                 break;
 
             case 4:
+                if (panelsHandler.currentIndex != 2)
+                    panelsHandler.OpenPanel(2);
+
                 armorText.gameObject.SetActive(false);
                 armorButton.gameObject.SetActive(false);
                 

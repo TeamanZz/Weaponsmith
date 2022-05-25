@@ -8,6 +8,8 @@ using DG.Tweening;
 public class PanelsHandler : MonoBehaviour
 {
     public static PanelsHandler Instance;
+    public SkillController skillController;
+    public LoadoutController loadoutController;
 
     public int dropChanceImprovements = 7;
 
@@ -142,73 +144,70 @@ public class PanelsHandler : MonoBehaviour
 
     public void OpenPanel(int panelIndex)
     {
-        if (panelIndex == currentIndex || panelIndex < 0 || panelIndex > panels.Count)
-        {
-            Debug.Log("Current = " + currentIndex + " | Panel index = " + panelIndex);
-            if (panelIndex != 99)
-                return;
-            else
-                panelIndex = 1;
-        }
+        currentIndex = Mathf.Clamp(panelIndex, 0, panels.Count - 1);
 
-        if (SkillController.skillController != null)
-            if (panelIndex != 3 && SkillController.skillController.selectedPanel != null)
-                SkillController.skillController.DeselectedAllPanelsBorder();
-
-        currentIndex = panelIndex;
         foreach (var panel in panels)
             panel.SetActive(false);
 
         panels[panelIndex].SetActive(true);
 
-        //dungeon panel
-        if (panelIndex == 2)
+        switch(panelIndex)
         {
-            if (LoadoutController.Instance != null)
-                LoadoutController.Instance.Initialization();
+            case 0:
+                currentLocationInTheDungeon = false;
+                mainCamera.SetActive(true);
+                dungeonCamera.SetActive(false);
+                loadoutObject.SetActive(false);
 
-            anvilSound.SetActive(false);
-            tapArea.SetActive(false);
-
-            currentLocationInTheDungeon = true;
-            mainCamera.SetActive(false);
-            dungeonCamera.SetActive(true);
-
-            panelLabelObject.SetActive(true);
-
-            if (LoadoutController.Instance != null)
-                LoadoutController.Instance.Initialization();
-
-            loadoutObject.SetActive(true);
-            //
-            DungeonHubManager.dungeonHubManager.OpenPanel(1);
-            return;
-        }
-        else
-        {
-            currentLocationInTheDungeon = false;
-            mainCamera.SetActive(true);
-            dungeonCamera.SetActive(false);
-
-            loadoutObject.SetActive(false);
-        }
-
-        if (panelIndex == 1 || panelIndex == 0)
-        {
-            anvilSound.SetActive(true);
-            if (panelIndex != 1)
+                anvilSound.SetActive(true);
                 tapArea.SetActive(false);
-            else
+
+                panelLabelObject.SetActive(true);
+                break;
+
+            case 1:
+                currentLocationInTheDungeon = false;
+                mainCamera.SetActive(true);
+                dungeonCamera.SetActive(false);
+                loadoutObject.SetActive(false);
+
+                anvilSound.SetActive(true);
                 tapArea.SetActive(true);
 
-        }
-        else
-        {
-            anvilSound.SetActive(false);
-            tapArea.SetActive(false);
-        }
+                panelLabelObject.SetActive(true);
+                break;
 
-        panelLabelObject.SetActive(true);
+            case 2:
+                loadoutController.Initialization(); 
+                
+                currentLocationInTheDungeon = true;
+                mainCamera.SetActive(false);
+                dungeonCamera.SetActive(true);
+                loadoutObject.SetActive(true);
+
+                anvilSound.SetActive(false);
+                tapArea.SetActive(false);
+
+                panelLabelObject.SetActive(true);
+
+                DungeonHubManager.dungeonHubManager.OpenPanel(1);
+                break;
+
+            case 3:
+                currentLocationInTheDungeon = false;
+                mainCamera.SetActive(true);
+                dungeonCamera.SetActive(false);
+                loadoutObject.SetActive(false);
+
+                anvilSound.SetActive(true);
+                tapArea.SetActive(true);
+
+                panelLabelObject.SetActive(false);
+
+                if (skillController.selectedPanel != null)
+                    skillController.DeselectedAllPanelsBorder();
+                break;
+        }
     }
 
     [ContextMenu("Cool Down")]
