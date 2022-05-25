@@ -79,7 +79,7 @@ public class EraController : MonoBehaviour
         //  boosters
         // boostersManager.Initialization(stortages[currentEraNumber].boostersItemPanels);
         //  open panel
-        panelsHandler.OpenPanel(1);
+        //panelsHandler.OpenPanel(1);
         //  skin stortage
         //stortages[currentEraNumber].skinStortageObject.SetActive(true);
         skinsManager.Initialization(stortages[currentEraNumber].skinsInRoom, stortages[currentEraNumber].dungeonSkins);

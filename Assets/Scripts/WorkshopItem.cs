@@ -26,8 +26,6 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [HideInInspector] public bool wasBoughted;
-    public static int dungeoonIsOpen = 0;
-    public static int enchantmentIsOpen = 0;
 
     private Button buyButtonComponent;
     private Image buyButtonImage;
@@ -40,8 +38,6 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
 
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
-        dungeoonIsOpen = PlayerPrefs.GetInt("dungeoonIsOpen");
-        enchantmentIsOpen = PlayerPrefs.GetInt("enchantmentIsOpen");
 
         generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
         LoadData();
@@ -108,18 +104,6 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         generalIncreaseValueTextAnimator.Play("Jump", 0, 0);
 
         generalIncreaseValueText.text = "";
-
-        if (currentType == PanelType.anDungeonItem)
-        {
-            dungeoonIsOpen = 1;
-            PanelsHandler.Instance.EnableDungeonButton();
-        }
-
-        if (currentType == PanelType.anEnchantmentTableItem)
-        {
-            enchantmentIsOpen = 1;
-            PanelsHandler.Instance.EnableBoostersButton();
-        }
 
         CollapseItemView();
         SaveData();

@@ -16,7 +16,6 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private GameObject panelLabelObject;
 
     [Header("Unlockable Buttons")]
-    public Button dungeonButtonComponent;
     public Button boostersButtonComponent;
     public Image dungeonButtonImageComponent;
     public Image boostersButtonImageComponent;
@@ -64,17 +63,8 @@ public class PanelsHandler : MonoBehaviour
         dungeonCamera.SetActive(false);
         loadoutObject.SetActive(false);
 
-        DisableDungeonPreviewUI(); 
+        DisableDungeonPreviewUI();
         OpenPanel(1);
-    }
-
-    public void Start()
-    {
-        WorkshopItem.dungeoonIsOpen = 1;
-        dungeonButtonComponent.interactable = true;
-        EnableDungeonButton();
-        EnableBoostersButton();
-        //OpenPanel(1);
     }
 
     public void Update()
@@ -155,7 +145,10 @@ public class PanelsHandler : MonoBehaviour
         if (panelIndex == currentIndex || panelIndex < 0 || panelIndex > panels.Count)
         {
             Debug.Log("Current = " + currentIndex + " | Panel index = " + panelIndex);
-            return;
+            if (panelIndex != 99)
+                return;
+            else
+                panelIndex = 1;
         }
 
         if (SkillController.skillController != null)
@@ -163,6 +156,11 @@ public class PanelsHandler : MonoBehaviour
                 SkillController.skillController.DeselectedAllPanelsBorder();
 
         currentIndex = panelIndex;
+        foreach (var panel in panels)
+            panel.SetActive(false);
+
+        panels[panelIndex].SetActive(true);
+
         //dungeon panel
         if (panelIndex == 2)
         {
@@ -172,33 +170,11 @@ public class PanelsHandler : MonoBehaviour
             anvilSound.SetActive(false);
             tapArea.SetActive(false);
 
-            if (WorkshopItem.dungeoonIsOpen == 0)
-            {
-                Debug.Log("ISOPEN 0");
-                currentLocationInTheDungeon = true;
-                mainCamera.SetActive(false);
-                dungeonCamera.SetActive(true);
-
-                panelLabelObject.SetActive(false);
-                panels[panelIndex].SetActive(false);
-
-
-                return;
-            }
-            else
-                dungeonButtonComponent.interactable = true;
-
             currentLocationInTheDungeon = true;
             mainCamera.SetActive(false);
             dungeonCamera.SetActive(true);
 
-            for (int i = 0; i < panels.Count; i++)
-            {
-                panels[i].SetActive(false);
-            }
-
             panelLabelObject.SetActive(true);
-            panels[panelIndex].SetActive(true);
 
             if (LoadoutController.Instance != null)
                 LoadoutController.Instance.Initialization();
@@ -217,31 +193,19 @@ public class PanelsHandler : MonoBehaviour
             loadoutObject.SetActive(false);
         }
 
-        for (int i = 0; i < panels.Count; i++)
+        if (panelIndex == 1 || panelIndex == 0)
         {
-            if (i == panelIndex)
-            {
-                if (panelIndex == 1 || panelIndex == 0)
-                {
-                    anvilSound.SetActive(true);
-                    if (panelIndex != 1)
-                        tapArea.SetActive(false);
-                    else
-                        tapArea.SetActive(true);
-
-                }
-                else
-                {
-                    anvilSound.SetActive(false);
-                    tapArea.SetActive(false);
-                }
-
-                panels[i].SetActive(true);
-            }
+            anvilSound.SetActive(true);
+            if (panelIndex != 1)
+                tapArea.SetActive(false);
             else
-            {
-                panels[i].SetActive(false);
-            }
+                tapArea.SetActive(true);
+
+        }
+        else
+        {
+            anvilSound.SetActive(false);
+            tapArea.SetActive(false);
         }
 
         panelLabelObject.SetActive(true);
@@ -287,18 +251,6 @@ public class PanelsHandler : MonoBehaviour
 
         buttonsToDungeonGroup[0].SetActive(true);
         buttonsToDungeonGroup[1].SetActive(false);
-    }
-
-    public void EnableDungeonButton()
-    {
-        dungeonButtonComponent.interactable = true;
-        dungeonButtonImageComponent.color = Color.white;
-    }
-
-    public void EnableBoostersButton()
-    {
-        boostersButtonComponent.interactable = true;
-        boostersButtonImageComponent.color = Color.white;
     }
 
     public void ResetButtonColorOnDeselect()
