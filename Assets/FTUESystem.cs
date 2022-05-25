@@ -116,13 +116,20 @@ public class FTUESystem : MonoBehaviour
         CheckCurrentInstruction();
     }
 
-    [Space(10)][Header("Instruction 1")]
+    [Space(10)]
+    [Header("Instruction 1")]
     [SerializeField] private int moneyPerSec = 10;
     [SerializeField] private int moneyPurpose = 1500;
 
-    [Space(10)][Header("Instruction 2")]
+    [Space(10)]
+    [Header("Instruction 2")]
     [SerializeField] private ScrollRect scrollGroup;
     [SerializeField] private PanelItem firstItem;
+
+    [Space(10)]
+    [Header("Instruction 3")]
+    [SerializeField] private PanelsHandler panelsHandler;
+    [SerializeField] private Image armorButton;
 
     //  start init instruction
     public void CheckCurrentInstruction()
@@ -153,21 +160,27 @@ public class FTUESystem : MonoBehaviour
                 break;
 
             case 1:
-                scrollGroup.enabled = false;
+                scrollGroup.vertical = false;
                 if (moneyHandler.moneyCount >= moneyPurpose)
                 {
-                    scrollGroup.enabled = true;
+                    scrollGroup.vertical = false;
                     ChangeState();
                 }
                 break;
 
             case 2:
-                scrollGroup.enabled = false;
-                if(firstItem.currentState == PanelItemState.Collapsed)
+                scrollGroup.vertical = false;
+                if (firstItem.currentState == PanelItemState.Collapsed)
                 {
-                    scrollGroup.enabled = true;
+                    scrollGroup.vertical = false;
                     ChangeState();
                 }
+                break;
+
+            case 3:
+                armorButton.gameObject.SetActive(false);
+                if(panelsHandler.currentIndex == 2)
+                    ChangeState();
                 break;
         }
     }
@@ -181,9 +194,12 @@ public class FTUESystem : MonoBehaviour
             DisableAllSettings();
             Debug.Log("Training Is Lost");
             currentUISettings = null;
-            
+
             mainButton.gameObject.SetActive(false);
             mainTitlePanel.gameObject.SetActive(false);
+
+            scrollGroup.vertical = true;
+            armorButton.gameObject.SetActive(false);
 
             isTrainingCompleted = true;
             SaveData();

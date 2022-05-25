@@ -203,7 +203,8 @@ public class PanelsHandler : MonoBehaviour
                 LoadoutController.Instance.Initialization();
 
             loadoutObject.SetActive(true);
-            DungeonHubManager.dungeonHubManager.OpenPanel(0);
+            //
+            DungeonHubManager.dungeonHubManager.OpenPanel(1);
             return;
         }
         else
