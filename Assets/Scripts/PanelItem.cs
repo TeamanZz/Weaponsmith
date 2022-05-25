@@ -149,7 +149,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         if (currentPanelItemInHub != null)
             Destroy(currentPanelItemInHub.gameObject);
 
-        if (panelID == 0 || panelID == 1)
+        if (panelID == 0 /*|| panelID == 1*/)
         {
             PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)PanelItemState.Available);
             ChangeState(PanelItemState.Available);

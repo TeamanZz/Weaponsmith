@@ -70,7 +70,7 @@ public class SkillController : MonoBehaviour
     }
 
     bool IntToBool(int n)
-   => n == 1;
+        => n == 1;
     int BoolToInt(bool b)
         => (b ? 1 : 0);
 

@@ -45,7 +45,7 @@ public class MoneyHandler : MonoBehaviour
     {
         PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyPerSecond", moneyPerSecond);
         PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyCount", (int)moneyCount);
-        Debug.Log("Money Handler " + " | Money Count =" + moneyCount + " | Money Per Second =" + moneyPerSecond);
+        //Debug.Log("Money Handler " + " | Money Count =" + moneyCount + " | Money Per Second =" + moneyPerSecond);
     }
 
     public void LoadData()
