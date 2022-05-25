@@ -14,6 +14,8 @@ public class FTUESystem : MonoBehaviour
     public Transform ftueTransform;
 
     public Button mainButton;
+    public Image mainTitlePanel;
+
     public TextMeshProUGUI mainTitles;
     public List<ViewUI> uiSettings = new List<ViewUI>();
 
@@ -21,13 +23,14 @@ public class FTUESystem : MonoBehaviour
     public bool isTrainingCompleted;
     public int currentTrainingNumber;
 
-    public ViewUI currentUISettings;
+    [SerializeField] private ViewUI currentUISettings;
+
     public void Awake()
     {
         trainingSystem = this;
 
         mainButton.gameObject.SetActive(false);
-        mainTitles.gameObject.SetActive(false);
+        mainTitlePanel.gameObject.SetActive(false);
 
         DisableAllSettings();
 
@@ -103,11 +106,11 @@ public class FTUESystem : MonoBehaviour
 
         if (viewUI.titlesText != "")
         {
-            mainTitles.gameObject.SetActive(true);
+            mainTitlePanel.gameObject.SetActive(true);
             mainTitles.text = viewUI.titlesText;
         }
         else
-            mainTitles.gameObject.SetActive(false);
+            mainTitlePanel.gameObject.SetActive(false);
 
         currentUISettings = viewUI;
         CheckCurrentInstruction();
@@ -119,6 +122,7 @@ public class FTUESystem : MonoBehaviour
 
     [Space(10)][Header("Instruction 2")]
     [SerializeField] private ScrollRect scrollGroup;
+    [SerializeField] private PanelItem firstItem;
 
     //  start init instruction
     public void CheckCurrentInstruction()
@@ -152,13 +156,18 @@ public class FTUESystem : MonoBehaviour
                 scrollGroup.enabled = false;
                 if (moneyHandler.moneyCount >= moneyPurpose)
                 {
-                    ChangeState();
                     scrollGroup.enabled = true;
+                    ChangeState();
                 }
                 break;
 
             case 2:
-
+                scrollGroup.enabled = false;
+                if(firstItem.currentState == PanelItemState.Collapsed)
+                {
+                    scrollGroup.enabled = true;
+                    ChangeState();
+                }
                 break;
         }
     }
@@ -171,6 +180,11 @@ public class FTUESystem : MonoBehaviour
         {
             DisableAllSettings();
             Debug.Log("Training Is Lost");
+            currentUISettings = null;
+            
+            mainButton.gameObject.SetActive(false);
+            mainTitlePanel.gameObject.SetActive(false);
+
             isTrainingCompleted = true;
             SaveData();
             return;

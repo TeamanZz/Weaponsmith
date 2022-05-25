@@ -9,6 +9,7 @@ public class SaveSystem : MonoBehaviour
     public SkillController skillController;
     public MoneyHandler moneyHandler;
     public DungeonManager dungeonManager;
+    public FTUESystem ftueSystem;
 
     public List<PanelItem> items = new List<PanelItem>();
     public List<WorkshopItem> workshopItems = new List<WorkshopItem>();
@@ -28,6 +29,7 @@ public class SaveSystem : MonoBehaviour
         RemoveSkillsData(); 
         RemoveMoneyData();
         RemoveDungeonData();
+        RemoveFTUEData();
     }
 
     //[ContextMenu("Remove Panels Data")]
@@ -68,5 +70,10 @@ public class SaveSystem : MonoBehaviour
     private void RemoveDungeonData()
     {
         dungeonManager.RemoveData();
+    }
+
+    public void RemoveFTUEData()
+    {
+        ftueSystem.RemoveData();
     }
 } 
