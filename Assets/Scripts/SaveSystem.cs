@@ -11,6 +11,8 @@ public class SaveSystem : MonoBehaviour
     public DungeonManager dungeonManager;
     public FTUESystem ftueSystem;
 
+    public PanelsHandler panelsHandler;
+
     public List<PanelItem> items = new List<PanelItem>();
     public List<WorkshopItem> workshopItems = new List<WorkshopItem>();
     public List<PanelItemInHub> hubItem = new List<PanelItemInHub>();
@@ -30,6 +32,7 @@ public class SaveSystem : MonoBehaviour
         RemoveMoneyData();
         RemoveDungeonData();
         RemoveFTUEData();
+        panelsHandler.OpenPanel(1);
     }
 
     //[ContextMenu("Remove Panels Data")]

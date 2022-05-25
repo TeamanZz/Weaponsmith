@@ -130,6 +130,11 @@ public class FTUESystem : MonoBehaviour
     [Header("Instruction 3")]
     [SerializeField] private PanelsHandler panelsHandler;
     [SerializeField] private Image armorButton;
+    [SerializeField] private TextMeshProUGUI armorText;
+
+    [Space(10)]
+    [Header("Instruction 3")]
+    [SerializeField] private DungeonHubManager dungeonHubManager;
 
     //  start init instruction
     public void CheckCurrentInstruction()
@@ -178,8 +183,18 @@ public class FTUESystem : MonoBehaviour
                 break;
 
             case 3:
+                armorButton.gameObject.SetActive(false); 
+                armorText.gameObject.SetActive(false);
+                
+                if (panelsHandler.currentIndex == 2)
+                    ChangeState();
+                break;
+
+            case 4:
+                armorText.gameObject.SetActive(false);
                 armorButton.gameObject.SetActive(false);
-                if(panelsHandler.currentIndex == 2)
+                
+                if (dungeonHubManager.weaponActivatePanel != null)
                     ChangeState();
                 break;
         }
@@ -199,7 +214,9 @@ public class FTUESystem : MonoBehaviour
             mainTitlePanel.gameObject.SetActive(false);
 
             scrollGroup.vertical = true;
-            armorButton.gameObject.SetActive(false);
+
+            armorButton.gameObject.SetActive(true);
+            armorText.gameObject.SetActive(true);
 
             isTrainingCompleted = true;
             SaveData();

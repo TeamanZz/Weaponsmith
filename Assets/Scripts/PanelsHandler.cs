@@ -64,7 +64,8 @@ public class PanelsHandler : MonoBehaviour
         dungeonCamera.SetActive(false);
         loadoutObject.SetActive(false);
 
-        DisableDungeonPreviewUI();
+        DisableDungeonPreviewUI(); 
+        OpenPanel(1);
     }
 
     public void Start()
@@ -73,7 +74,7 @@ public class PanelsHandler : MonoBehaviour
         dungeonButtonComponent.interactable = true;
         EnableDungeonButton();
         EnableBoostersButton();
-        OpenPanel(1);
+        //OpenPanel(1);
     }
 
     public void Update()
