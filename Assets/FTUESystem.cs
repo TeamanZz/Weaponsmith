@@ -108,6 +108,7 @@ public class FTUESystem : MonoBehaviour
         {
             mainTitlePanel.gameObject.SetActive(true);
             mainTitles.text = viewUI.titlesText;
+            mainTitlePanel.rectTransform.sizeDelta = viewUI.titlePanelRectTransform;
         }
         else
             mainTitlePanel.gameObject.SetActive(false);
@@ -295,6 +296,8 @@ public class ViewUI
     [Header("View Setting")]
     public RectTransform buttonPositions;
     public Vector2 buttonRectTransform;
+
     public bool titlePanelIsActive;
+    public Vector2 titlePanelRectTransform = new Vector2(400, 150);
     //public Image blurPanel;
 }
