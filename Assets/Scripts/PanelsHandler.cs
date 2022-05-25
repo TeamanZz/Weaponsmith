@@ -142,6 +142,8 @@ public class PanelsHandler : MonoBehaviour
         dungeonEnteringPanel.SetActive(false);
     }
 
+    public GameObject mainDungeon;
+
     public void OpenPanel(int panelIndex)
     {
         currentIndex = Mathf.Clamp(panelIndex, 0, panels.Count - 1);
@@ -149,9 +151,9 @@ public class PanelsHandler : MonoBehaviour
         foreach (var panel in panels)
             panel.SetActive(false);
 
-        panels[panelIndex].SetActive(true);
+        panels[currentIndex].SetActive(true);
 
-        switch(panelIndex)
+        switch(currentIndex)
         {
             case 0:
                 currentLocationInTheDungeon = false;
@@ -162,7 +164,9 @@ public class PanelsHandler : MonoBehaviour
                 anvilSound.SetActive(true);
                 tapArea.SetActive(false);
 
-                panelLabelObject.SetActive(true);
+                panelLabelObject.SetActive(true); 
+                
+                dungeonPreviewUI.SetActive(false);
                 break;
 
             case 1:
@@ -174,7 +178,9 @@ public class PanelsHandler : MonoBehaviour
                 anvilSound.SetActive(true);
                 tapArea.SetActive(true);
 
-                panelLabelObject.SetActive(true);
+                panelLabelObject.SetActive(true); 
+                
+                dungeonPreviewUI.SetActive(false);
                 break;
 
             case 2:
@@ -190,7 +196,8 @@ public class PanelsHandler : MonoBehaviour
 
                 panelLabelObject.SetActive(true);
 
-                DungeonHubManager.dungeonHubManager.OpenPanel(1);
+                dungeonPreviewUI.SetActive(true);
+                DungeonHubManager.dungeonHubManager.OpenPanel(1); 
                 break;
 
             case 3:
@@ -202,7 +209,9 @@ public class PanelsHandler : MonoBehaviour
                 anvilSound.SetActive(true);
                 tapArea.SetActive(true);
 
-                panelLabelObject.SetActive(false);
+                panelLabelObject.SetActive(false); 
+                
+                dungeonPreviewUI.SetActive(false);
 
                 if (skillController.selectedPanel != null)
                     skillController.DeselectedAllPanelsBorder();

@@ -8,6 +8,7 @@ public class DungeonRewardPanel : MonoBehaviour
 {
     public static DungeonRewardPanel Instance;
     public GameObject panel;
+    public bool panelIsActive = true;
 
     [Header("Viewing Elements")]
     //public TextMeshProUGUI titleText;
@@ -59,11 +60,13 @@ public class DungeonRewardPanel : MonoBehaviour
 
     }
 
+    
     public void ClosePanel()
     {
         blueprintGroup.SetActive(false);
         crystalGroup.SetActive(false);
-
+        
+        panelIsActive = false;
         panel.SetActive(false);
         PanelsHandler.Instance.StartCoolDown();
     }
@@ -86,6 +89,7 @@ public class DungeonRewardPanel : MonoBehaviour
 
     public void OpenRewardPanel(int starsValue)
     {
+        panelIsActive = true;
         DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", false);
         DungeonCharacter.Instance.animator.SetBool("EnemyIsNear", false);
         DungeonCharacter.Instance.isInBattle = false;

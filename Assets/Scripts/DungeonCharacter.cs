@@ -102,9 +102,11 @@ public class DungeonCharacter : MonoBehaviour
         }
     }
 
+    public bool hit;
     public void HitEnemy()
     {
         var damageValue = characterDamage + Random.Range((-characterDamage / 5), (characterDamage / 5));
+        hit = true;
 
         if (damageValue == 0)
             damageValue = 1;

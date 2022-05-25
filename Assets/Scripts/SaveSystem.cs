@@ -32,7 +32,7 @@ public class SaveSystem : MonoBehaviour
         RemoveMoneyData();
         RemoveDungeonData();
         RemoveFTUEData();
-        panelsHandler.OpenPanel(99);
+        panelsHandler.OpenPanel(1);
     }
 
     //[ContextMenu("Remove Panels Data")]

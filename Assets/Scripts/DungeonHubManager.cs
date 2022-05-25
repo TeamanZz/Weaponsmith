@@ -78,8 +78,11 @@ public class DungeonHubManager : MonoBehaviour
         newPunelItem.currentPanelItemInHub = newPanelItemInHub;
 
     }
+
+    public int currentIndex;
     public void OpenPanel(int panelIndex)
     {
+        currentIndex = panelIndex;
         for (int i = 0; i < equipmentPanelContent.Count; i++)
         {
             equipmentPanelContent[i].SetActive(false);

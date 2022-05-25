@@ -104,7 +104,7 @@ public class FTUESystem : MonoBehaviour
         else
             mainButton.gameObject.SetActive(false);
 
-        if (viewUI.titlesText != " ")
+        if (viewUI.titlePanelIsActive == true)
         {
             mainTitlePanel.gameObject.SetActive(true);
             mainTitles.text = viewUI.titlesText;
@@ -133,8 +133,16 @@ public class FTUESystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI armorText;
 
     [Space(10)]
-    [Header("Instruction 3")]
+    [Header("Instruction 5")]
     [SerializeField] private DungeonHubManager dungeonHubManager;
+
+    [Space(10)]
+    [Header("Instruction 6")]
+    [SerializeField] private DungeonCharacter dungeonCharacter;
+
+    [Space(10)]
+    [Header("Instruction 7")]
+    [SerializeField] private DungeonRewardPanel rewardPanel;
 
     //  start init instruction
     public void CheckCurrentInstruction()
@@ -148,9 +156,11 @@ public class FTUESystem : MonoBehaviour
                 moneyHandler.moneyPerSecond = moneyPerSec;
                 break;
 
+
         }
     }
 
+    bool isActive = false;
     public void Update()
     {
         if (currentUISettings == null)
@@ -180,9 +190,9 @@ public class FTUESystem : MonoBehaviour
                 break;
 
             case 3:
-                armorButton.gameObject.SetActive(false); 
+                armorButton.gameObject.SetActive(false);
                 armorText.gameObject.SetActive(false);
-                
+
                 if (panelsHandler.currentIndex == 2)
                     ChangeState();
                 break;
@@ -193,9 +203,50 @@ public class FTUESystem : MonoBehaviour
 
                 armorText.gameObject.SetActive(false);
                 armorButton.gameObject.SetActive(false);
-                
+
                 if (dungeonHubManager.weaponActivatePanel != null)
                     ChangeState();
+                break;
+
+            case 5:
+                if (panelsHandler.currentIndex != 2)
+                    panelsHandler.OpenPanel(2);
+
+                if (dungeonHubManager.currentIndex == 3)
+                    ChangeState();
+                break;
+
+            case 6:
+                if (dungeonCharacter.canAttack == true && isActive == false)
+                {
+                    isActive = true;
+                    Time.timeScale = 0.1f;
+                    Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+                    Debug.Log("Stop Time");
+                    ChangeState();
+                }
+                break;
+
+            case 7:
+                if (dungeonCharacter.hit == true)
+                {
+                    Debug.Log("Play Time");
+                    Time.timeScale = 1f;
+                    Time.fixedDeltaTime = Time.timeScale * 0.02f;
+                    ChangeState();
+                }
+                break;
+
+            case 8:
+                if (rewardPanel.panelIsActive == false)
+                {
+                    isActive = false;
+                    ChangeState();
+                    //currentUISettings = uiSettings[uiSettings.Count - 1];
+                    //CheckTrainingState();
+                }
+
                 break;
         }
     }
@@ -244,5 +295,6 @@ public class ViewUI
     [Header("View Setting")]
     public RectTransform buttonPositions;
     public Vector2 buttonRectTransform;
+    public bool titlePanelIsActive;
     //public Image blurPanel;
 }
