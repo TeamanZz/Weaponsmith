@@ -104,7 +104,7 @@ public class FTUESystem : MonoBehaviour
         else
             mainButton.gameObject.SetActive(false);
 
-        if (viewUI.titlesText != "")
+        if (viewUI.titlesText != " ")
         {
             mainTitlePanel.gameObject.SetActive(true);
             mainTitles.text = viewUI.titlesText;
