@@ -27,6 +27,7 @@ public class SaveSystem : MonoBehaviour
         RemoveRoomsData();
         RemoveSkillsData(); 
         RemoveMoneyData();
+        RemoveDungeonData();
     }
 
     //[ContextMenu("Remove Panels Data")]
