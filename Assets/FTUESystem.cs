@@ -156,8 +156,6 @@ public class FTUESystem : MonoBehaviour
             case 1:
                 moneyHandler.moneyPerSecond = moneyPerSec;
                 break;
-
-
         }
     }
 
@@ -274,12 +272,9 @@ public class FTUESystem : MonoBehaviour
             SaveData();
             return;
         }
-
         SaveData();
         CheckTrainingState();
     }
-
-
 }
 
 [Serializable]

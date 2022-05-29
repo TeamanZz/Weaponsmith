@@ -19,7 +19,13 @@ public class SaveSystem : MonoBehaviour
 
     public void Awake()
     {
-        saveSystem = this;    
+        saveSystem = this;
+    }
+
+    [ContextMenu("DELETEALLPREFS")]
+    public void DELETEALLPREFS()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
     [ContextMenu("Remove All Data")]
@@ -28,7 +34,7 @@ public class SaveSystem : MonoBehaviour
         RemoveHubPanelData();
         RemovePanelsData();
         RemoveRoomsData();
-        RemoveSkillsData(); 
+        RemoveSkillsData();
         RemoveMoneyData();
         RemoveDungeonData();
         RemoveFTUEData();
@@ -79,4 +85,4 @@ public class SaveSystem : MonoBehaviour
     {
         ftueSystem.RemoveData();
     }
-} 
+}

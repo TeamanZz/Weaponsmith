@@ -84,7 +84,7 @@ public class PanelItemInHub : MonoBehaviour
     public void LoadData()
     {
         isSelected = IntToBool(PlayerPrefs.GetInt($"HubItem{panelID}State"));
-
+        Debug.Log("IS SELECTED " + isSelected);
         if (isSelected)
             SelectedWeapon();
         //Debug.Log("ID =" + panelID + " | Load Data = " + isSelected);
@@ -94,7 +94,7 @@ public class PanelItemInHub : MonoBehaviour
     public void RemoveData()
     {
         PlayerPrefs.SetInt($"HubItem{panelID}State", BoolToInt(false));
-        //DeselectedWeapon();
+        DeselectedWeapon();
         //Debug.Log("ID =" + panelID + " | Remove Data");
     }
 
@@ -154,7 +154,7 @@ public class PanelItemInHub : MonoBehaviour
                 viewIcon.sprite = viewSprite[1];
                 break;
         }
-            //buyButtonComponent.onClick.AddListener(() => SelectedWeapon());
+        //buyButtonComponent.onClick.AddListener(() => SelectedWeapon());
     }
 
     public void SelectedWeapon()
@@ -176,10 +176,10 @@ public class PanelItemInHub : MonoBehaviour
                     DungeonHubManager.dungeonHubManager.weaponActivatePanel.DeselectedWeapon();
 
                 DungeonHubManager.dungeonHubManager.weaponActivatePanel = this;
-               
+
                 if (panelItem.iconSprite != null)
                     DungeonHubManager.dungeonHubManager.weaponSprite = panelItem.iconSprite;
-                
+
                 DungeonHubManager.dungeonHubManager.UpdateUI();
 
                 viewValueText.text = panelItem.currentItemEquipment.value.ToString();
@@ -193,10 +193,10 @@ public class PanelItemInHub : MonoBehaviour
                     DungeonHubManager.dungeonHubManager.armorActivatePanel.DeselectedWeapon();
 
                 DungeonHubManager.dungeonHubManager.armorActivatePanel = this;
-                
+
                 if (panelItem.iconSprite != null)
                     DungeonHubManager.dungeonHubManager.armorSprite = panelItem.iconSprite;
-                
+
                 DungeonHubManager.dungeonHubManager.UpdateUI();
 
                 if (DungeonHubManager.dungeonHubManager.armorList[0] != null)
