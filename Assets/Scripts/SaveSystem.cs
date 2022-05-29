@@ -58,7 +58,7 @@ public class SaveSystem : MonoBehaviour
     //[ContextMenu("Remove Hub Data")]
     private void RemoveHubPanelData()
     {
-        foreach (var item in workshopItems)
+        foreach (var item in hubItem)
             item.RemoveData();
         hubItem.Clear();
     }

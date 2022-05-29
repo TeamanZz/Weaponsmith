@@ -95,7 +95,7 @@ public class MoneyHandler : MonoBehaviour
             return;
 
         isIncreasedByTap = true;
-        increaseByTapAdditiveValue = (int)(moneyPerSecond * 0.1f);
+        increaseByTapAdditiveValue = (int)(moneyPerSecond * 0.2f);
         moneyPerSecond += increaseByTapAdditiveValue;
     }
 

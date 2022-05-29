@@ -66,7 +66,7 @@ public class DungeonRewardPanel : MonoBehaviour
         blueprintGroup.SetActive(false);
         crystalGroup.SetActive(false);
         
-        panelIsActive = false;
+        panelIsActive = true;
         panel.SetActive(false);
         PanelsHandler.Instance.StartCoolDown();
     }
@@ -89,7 +89,7 @@ public class DungeonRewardPanel : MonoBehaviour
 
     public void OpenRewardPanel(int starsValue)
     {
-        panelIsActive = true;
+        //panelIsActive = true;
         DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", false);
         DungeonCharacter.Instance.animator.SetBool("EnemyIsNear", false);
         DungeonCharacter.Instance.isInBattle = false;
