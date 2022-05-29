@@ -31,13 +31,23 @@ public class SaveSystem : MonoBehaviour
     [ContextMenu("Remove All Data")]
     public void RemoveAllData()
     {
-        RemoveHubPanelData();
         RemovePanelsData();
         RemoveRoomsData();
         RemoveSkillsData();
         RemoveMoneyData();
         RemoveDungeonData();
         RemoveFTUEData();
+        panelsHandler.OpenPanel(1);
+    }
+
+    public void RemoveDataExceptFTUE()
+    {
+        RemovePanelsData();
+        RemoveRoomsData();
+        RemoveSkillsData();
+        RemoveMoneyData();
+        RemoveDungeonData();
+        //RemoveFTUEData();
         panelsHandler.OpenPanel(1);
     }
 
@@ -56,12 +66,12 @@ public class SaveSystem : MonoBehaviour
     }
 
     //[ContextMenu("Remove Hub Data")]
-    private void RemoveHubPanelData()
-    {
-        foreach (var item in hubItem)
-            item.RemoveData();
-        hubItem.Clear();
-    }
+    //private void RemoveHubPanelData()
+    //{
+    //    foreach (var item in hubItem)
+    //        item.RemoveData();
+    //    hubItem.Clear();
+    //}
 
     //[ContextMenu("Remove Skills Data")]
     private void RemoveSkillsData()

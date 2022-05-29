@@ -27,6 +27,8 @@ public class FTUESystem : MonoBehaviour
 
     [SerializeField] private ViewUI currentUISettings;
 
+    public SaveSystem saveSystem;
+
     public void Awake()
     {
         trainingSystem = this;
@@ -38,6 +40,12 @@ public class FTUESystem : MonoBehaviour
 
         LoadData();
     }
+
+    [ContextMenu("Delete All Prefs")]
+    public void DeleteAllPrefs()
+	{
+        PlayerPrefs.DeleteAll();
+	}
 
     public void DisableButtomButtons()
 	{
@@ -74,16 +82,18 @@ public class FTUESystem : MonoBehaviour
     public void SaveData()
     {
         PlayerPrefs.SetInt($"FTUESystem{0}isTraining", BoolToInt(isTrainingCompleted));
-        PlayerPrefs.SetInt($"FTUESystem{0}trainingNumber", currentTrainingNumber);
+        //PlayerPrefs.SetInt($"FTUESystem{0}trainingNumber", currentTrainingNumber);
     }
 
     public void LoadData()
     {
         isTrainingCompleted = IntToBool(PlayerPrefs.GetInt($"FTUESystem{0}isTraining"));
-        currentTrainingNumber = PlayerPrefs.GetInt($"FTUESystem{0}trainingNumber");
+        currentTrainingNumber = 0;
 
         if (isTrainingCompleted == true)
             return;
+
+        saveSystem.RemoveDataExceptFTUE();
 
         CheckTrainingState();
     }

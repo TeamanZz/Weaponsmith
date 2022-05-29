@@ -22,6 +22,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     public List<GameObject> currentObject = new List<GameObject>();
 
     [HideInInspector] public PanelItemInHub currentPanelItemInHub;
+    public bool isSelected;
 
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI itemNameText;
     [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI priceText;
@@ -46,7 +47,6 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [SerializeField] private int increaseValue;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
-
     private void Awake()
     {
         weaponSprite = itemIcon.GetComponent<Image>();
@@ -54,6 +54,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         //Initialize();
         LoadData();
     }
+
+    bool IntToBool(int n)
+       => n == 1;
+    int BoolToInt(bool b)
+        => (b ? 1 : 0);
 
     public void CheckPriceCoefficient()
     {
@@ -126,10 +131,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     }
 
     [ContextMenu("Save Data")]
-    private void SaveData()
+    public void SaveData()
     {
         PlayerPrefs.SetInt($"PanelItem{panelID}State", (int)currentState);
         PlayerPrefs.SetInt($"PanelItem{panelID}Count", buysCount);
+        PlayerPrefs.SetInt($"PanelItem{panelID}Selected", BoolToInt(isSelected));
 
         //Debug.Log("Save Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
     }
@@ -138,9 +144,13 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     {
         currentState = (PanelItemState)PlayerPrefs.GetInt($"PanelItem{panelID}State");
         buysCount = PlayerPrefs.GetInt($"PanelItem{panelID}Count");
+        isSelected = IntToBool(PlayerPrefs.GetInt($"PanelItem{panelID}Selected"));
 
         //Debug.Log("Load Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
         Initialize();
+
+        if (isSelected && currentPanelItemInHub)
+            currentPanelItemInHub.SelectedWeapon();
     }
 
     [ContextMenu("Remove Data")]
@@ -161,10 +171,13 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             ChangeState(PanelItemState.Unknown);
             SetUnknownItemView();
         }
+
         PlayerPrefs.SetInt($"PanelItem{panelID}Count", 0);
+        PlayerPrefs.SetInt($"PanelItem{panelID}Selected", BoolToInt(false));
+
         //Debug.Log("Remove Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
         //Debug.Log("Receve Data = " + panelID);
-        
+
         progressBarFilled.fillAmount = 0;
         //
         Awake();
@@ -263,7 +276,9 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 if (DungeonHubManager.dungeonHubManager == null)
                     break;
 
+                  if (currentPanelItemInHub == null)
                 DungeonHubManager.dungeonHubManager.AddEquipment(this);
+
                 generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)increaseValue) + "/s";
                 break;
         }
