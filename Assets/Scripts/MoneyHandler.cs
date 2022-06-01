@@ -32,12 +32,12 @@ public class MoneyHandler : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this; 
-        
+        Instance = this;
+
         LoadData();
-        
+
         if (moneyPerSecond == 0)
-            moneyPerSecond = 1;
+            moneyPerSecond = 20;
 
         InvokeRepeating("SaveData", 3, 3);
     }
@@ -53,7 +53,7 @@ public class MoneyHandler : MonoBehaviour
         moneyPerSecond = PlayerPrefs.GetInt($"MoneyHandler{currentID}MoneyPerSecond");
         moneyCount = (int)PlayerPrefs.GetInt($"MoneyHandler{currentID}MoneyCount");
     }
-    
+
     public void RemoveData()
     {
         PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyPerSecond", 0);

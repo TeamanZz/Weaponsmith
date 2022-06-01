@@ -60,12 +60,12 @@ public class DungeonRewardPanel : MonoBehaviour
 
     }
 
-    
+
     public void ClosePanel()
     {
         blueprintGroup.SetActive(false);
         crystalGroup.SetActive(false);
-        
+
         panelIsActive = true;
         panel.SetActive(false);
         PanelsHandler.Instance.StartCoolDown();
@@ -121,6 +121,8 @@ public class DungeonRewardPanel : MonoBehaviour
                 DungeonBuilder.Instance.lastChest.PlayRewardAnimation();
 
             DungeonManager.Instance.currentDungeonLevelId = Mathf.Clamp(DungeonManager.Instance.currentDungeonLevelId + 1, 0, DungeonBuilder.Instance.levels.Count);
+            if (DungeonManager.Instance.currentDungeonLevelId >= DungeonBuilder.Instance.levels.Count)
+                DungeonManager.Instance.currentDungeonLevelId -= 1;
             DungeonManager.Instance.SaveData();
 
             Debug.Log("ID = " + DungeonManager.Instance.currentDungeonLevelId);
