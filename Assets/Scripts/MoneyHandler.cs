@@ -51,6 +51,7 @@ public class MoneyHandler : MonoBehaviour
     public void LoadData()
     {
         moneyPerSecond = PlayerPrefs.GetInt($"MoneyHandler{currentID}MoneyPerSecond");
+        Debug.Log(moneyPerSecond + "MONEY PER SEC");
         moneyCount = (int)PlayerPrefs.GetInt($"MoneyHandler{currentID}MoneyCount");
     }
 
@@ -78,10 +79,10 @@ public class MoneyHandler : MonoBehaviour
         moneyPerSecondText.text = FormatNumsHelper.FormatNum((double)moneyPerSecond * (double)boosterCoefficient) + "/s";
     }
 
-    public void ChangeBoosterCoefficient(float value)
-    {
-        boosterCoefficient = value;
-    }
+    // public void ChangeBoosterCoefficient(float value)
+    // {
+    //     boosterCoefficient = value;
+    // }
 
     public void IncreaseMoneyPerSecondValue(int value)
     {

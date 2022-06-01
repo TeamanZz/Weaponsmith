@@ -42,8 +42,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
     [FoldoutGroup("View Components")][SerializeField] private Animator buysCountTextAnimator;
 
-    [FoldoutGroup("View Components")] [SerializeField] private TextMeshProUGUI generalIncreaseValueText;
-    [FoldoutGroup("View Components")] [SerializeField] private Animator generalIncreaseValueTextAnimator;
+    [FoldoutGroup("View Components")][SerializeField] private TextMeshProUGUI generalIncreaseValueText;
+    [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
     [SerializeField] private int increaseValue;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
@@ -70,7 +70,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             if (CoefficientManager.coefficientValue == 1)
                 maxCount = 0;
             else
-                maxCount = (int)costCurve.keys[costCurve.length - 1].time; 
+                maxCount = (int)costCurve.keys[costCurve.length - 1].time;
         }
         else
         {
@@ -220,6 +220,13 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         PlayJumpAnimation();
         CheckOnCollapse();
 
+        if (currentState == PanelItemState.Collapsed)
+        {
+            MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
+            Debug.Log(increaseValue + "INCREASE VALUE");
+            generalIncreaseValueText.text = "";
+        }
+
         Debug.Log("Start Save = " + panelID);
         SaveData();
         MoneyHandler.Instance.SaveData();
@@ -276,8 +283,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 if (DungeonHubManager.dungeonHubManager == null)
                     break;
 
-                  if (currentPanelItemInHub == null)
-                DungeonHubManager.dungeonHubManager.AddEquipment(this);
+                if (currentPanelItemInHub == null)
+                    DungeonHubManager.dungeonHubManager.AddEquipment(this);
 
                 generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)increaseValue) + "/s";
                 break;
@@ -350,8 +357,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         completedSign.SetActive(true);
         itemIcon.SetActive(true);
 
-        MoneyHandler.Instance.IncreaseMoneyPerSecondValue(increaseValue);
-        generalIncreaseValueText.text = "";
+
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
     }

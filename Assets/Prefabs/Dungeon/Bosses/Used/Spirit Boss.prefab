@@ -2509,7 +2509,7 @@ MonoBehaviour:
   hitParticles: {fileID: 4108658266958865263}
   doubleHitParticles: {fileID: 4804952997777954392}
   deathParticles: {fileID: 8142781167481904350}
-  goldParticles: {fileID: 0}
+  goldParticles: {fileID: 2527915297104691917}
   enemyHPText: {fileID: 8889806753248128732}
 --- !u!82 &1447379779080449485
 AudioSource:
@@ -23439,6 +23439,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40058e83069903f499411aae8b2279ae, type: 3}
+--- !u!198 &2527915297104691917 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19806904, guid: 40058e83069903f499411aae8b2279ae, type: 3}
+  m_PrefabInstance: {fileID: 2527915297120041077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2527915297119873189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 430288, guid: 40058e83069903f499411aae8b2279ae, type: 3}
@@ -23521,14 +23526,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
---- !u!4 &4108658266943680279 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 441000, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
-  m_PrefabInstance: {fileID: 4108658266943313343}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &4108658266958865263 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19855056, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
+  m_PrefabInstance: {fileID: 4108658266943313343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4108658266943680279 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 441000, guid: 99af500b70896ae4f90508a543ccaefb, type: 3}
   m_PrefabInstance: {fileID: 4108658266943313343}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4804952997764264372
