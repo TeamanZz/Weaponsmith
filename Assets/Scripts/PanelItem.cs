@@ -84,11 +84,13 @@ public class PanelItem : MonoBehaviour, IBuyableItem
             if (currentPrice + newPrice <= MoneyHandler.Instance.moneyCount)
             {
                 currentPrice += newPrice;
+
                 checkValue += 1;
                 MoneyHandler.Instance.SaveData();
             }
             else
             {
+                checkValue += 1;
                 break;
             }
 

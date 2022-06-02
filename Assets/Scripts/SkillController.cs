@@ -54,7 +54,7 @@ public class SkillController : MonoBehaviour
         foreach (var item in mainSkillsView)
         {
             LoadData(item);
-                //item.EnabledBlur();
+            //item.EnabledBlur();
         }
         //Initialization(startNumber);
 
@@ -78,6 +78,7 @@ public class SkillController : MonoBehaviour
     {
         PlayerPrefs.SetInt($"SkillItem{skillItem.ID}SkillLvl", skillItem.skillLvl);
         PlayerPrefs.SetInt($"SkillItem{skillItem.ID}IsOpen", BoolToInt(skillItem.isActive));
+        PlayerPrefs.SetInt($"CurrentImprovementPoints", currentImprovementPoints);
     }
 
     public void LoadData(SkillItemView skillItem)
@@ -85,6 +86,7 @@ public class SkillController : MonoBehaviour
         int number = PlayerPrefs.GetInt($"SkillItem{skillItem.itemData.ID}SkillLvl");
         skillItem.itemData.skillLvl = number;
         bool isOpen = IntToBool(PlayerPrefs.GetInt($"SkillItem{skillItem.itemData.ID}IsOpen"));
+        currentImprovementPoints = PlayerPrefs.GetInt($"CurrentImprovementPoints");
 
         if (skillItem.itemData.ID < startNumber)
             isOpen = true;
@@ -107,11 +109,12 @@ public class SkillController : MonoBehaviour
     [ContextMenu("Remove Data")]
     public void RemoveData()
     {
-        foreach(var item in mainSkillsData)
+        foreach (var item in mainSkillsData)
         {
             PlayerPrefs.SetInt($"SkillItem{item.ID}SkillLvl", 0);
             PlayerPrefs.SetInt($"SkillItem{item.ID}IsOpen", BoolToInt(false));
-            Debug.Log("Skill ID = " + item.ID +" | Skill Lvl =" + item.skillLvl + " | State =" + item.isActive);
+            PlayerPrefs.SetInt($"CurrentImprovementPoints", 0);
+            Debug.Log("Skill ID = " + item.ID + " | Skill Lvl =" + item.skillLvl + " | State =" + item.isActive);
         }
     }
     public void Initialization(int firstNumber)
@@ -180,7 +183,7 @@ public class SkillController : MonoBehaviour
             maxPoints -= 1;
             currentImprovementPoints -= 1;
             selectedPanel.itemData.skillLvl += 1;
-            
+
             //SaveData(selectedPanel.itemData);
 
             previewSkillWindow.gameObject.SetActive(true);
@@ -203,7 +206,7 @@ public class SkillController : MonoBehaviour
         }
         else
             item.level.text = item.itemData.skillLvl.ToString();
-       
+
         SaveData(item.itemData);
     }
 

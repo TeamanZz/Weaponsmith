@@ -53,7 +53,6 @@ public class DungeonChest : MonoBehaviour
                 DungeonCharacter.Instance.DisableCharacterRun();
                 CraftPanelItemsManager.Instance.OpenNewBlueprint();
                 DungeonRewardPanel.Instance.OpenRewardPanel(3);
-                SkillController.skillController.AddImprovementPoint();
                 break;
         }
     }
@@ -77,7 +76,7 @@ public class DungeonChest : MonoBehaviour
 
     public void PlayRewardAnimation()
     {
-        foreach(var particl in rewardParticles)
+        foreach (var particl in rewardParticles)
         {
             particl.gameObject.SetActive(true);
             particl.Play();

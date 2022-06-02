@@ -22,6 +22,16 @@ public class SaveSystem : MonoBehaviour
         saveSystem = this;
     }
 
+    private void Start()
+    {
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     [ContextMenu("DELETEALLPREFS")]
     public void DELETEALLPREFS()
     {

@@ -162,12 +162,14 @@ public class DungeonRewardPanel : MonoBehaviour
         else
         {
             blueprintGroup.SetActive(false);
+            bottomBlueprintsGroup.SetActive(false);
 
-            bottomCrystalGroup.SetActive(false);
             crystalGroup.SetActive(false);
+            bottomCrystalGroup.SetActive(false);
 
             lostTitle.SetActive(true);
             successTitle.SetActive(false);
+
             successParticles.SetActive(false);
             lostParticles.SetActive(true);
         }
