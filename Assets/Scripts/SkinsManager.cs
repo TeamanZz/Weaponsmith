@@ -6,7 +6,7 @@ public class SkinsManager : MonoBehaviour
 {
     public static SkinsManager Instance;
 
-    [HideInInspector] public int currentSkinIndex;
+    public int currentSkinIndex;
     [HideInInspector] public int dungeonEnemySkinCount = 0;
 
     public List<ParticleSystem> particles = new List<ParticleSystem>();
@@ -18,49 +18,62 @@ public class SkinsManager : MonoBehaviour
         Instance = this;
         currentSkinIndex = PlayerPrefs.GetInt("skinIndex");
         dungeonEnemySkinCount = PlayerPrefs.GetInt("EnemySkinCount");
-
-        ChangeSkin();
-    }
-
-    private void Start()
-    {
-        var tempSkinIndex = PlayerPrefs.GetInt("skinIndex");
-        if (tempSkinIndex == 1)
-            ChangeSkin();
     }
 
     public void Initialization(List<GameObject> newSkins, List<GameObject> newDungeonSkins)
     {
-        skins.Clear();
-        dungeonSkins.Clear();
+        //skins.Clear();
+        //dungeonSkins.Clear();
 
-        skins = newSkins;
-        dungeonSkins = newDungeonSkins;
+        //skins = newSkins;
+        //dungeonSkins = newDungeonSkins;
 
-        ChangeSkin();
+        //ChangeSkin(needShowParticles: false);
     }
 
     [ContextMenu("Change Skin")]
-    public void ChangeSkin()
+    public void ChangeSkin(bool needShowParticles = true)
     {
-        int currentNumber = Mathf.Clamp(currentSkinIndex, 0, dungeonSkins.Count - 1);
+        //foreach (GameObject dungeSkin in dungeonSkins)
+        //{
+        //    dungeSkin.SetActive(false);
+        //}
 
-        foreach (GameObject dungeSkin in dungeonSkins)
-        {
-            dungeSkin.SetActive(false);
-        }
+        //foreach (GameObject skin in skins)
+        //{
+        //    skin.SetActive(false);
+        //}
+        //if (needShowParticles)
+        //{
+        //    foreach (var part in particles)
+        //    {
+        //        part.Play();
+        //    }
+        //}
 
-        foreach (GameObject skin in skins)
-        {
-            skin.SetActive(false);
-        }
+        //skins[0/*currentNumber*/].SetActive(true);
+        //dungeonSkins[currentSkinIndex].SetActive(true);
+    }
 
-        foreach (var part in particles)
-        {
-            part.Play();
-        }
+    public void ChangeSkin(int skinIndex)
+    {
+        //foreach (GameObject dungeSkin in dungeonSkins)
+        //{
+        //    dungeSkin.SetActive(false);
+        //}
 
-        skins[currentNumber].SetActive(true);
-        dungeonSkins[currentNumber].SetActive(true);
+        //foreach (GameObject skin in skins)
+        //{
+        //    skin.SetActive(false);
+        //}
+
+        //foreach (var part in particles)
+        //{
+        //    part.Play();
+        //}
+
+        //currentSkinIndex = skinIndex;
+        //skins[currentSkinIndex].SetActive(true);
+        //dungeonSkins[currentSkinIndex].SetActive(true);
     }
 }

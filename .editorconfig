@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0027: Использовать тело выражения для методов доступа
+csharp_style_expression_bodied_accessors = false

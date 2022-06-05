@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class WorkshopPanelItemsManager : MonoBehaviour
 {
     public static WorkshopPanelItemsManager Instance;
@@ -25,14 +26,19 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public CinemachineVirtualCamera dungeonCinemaCamera;
     public Transform calibrationPosition;
 
-    public float startCameraField = 80f;
+    private float startCameraField = 0;
+    // [SerializeField] private float lastCameraField = 80f;
+
     public float timeToReturnFocus = 0.5f;
+
+    public CameraWidth cameraWidth;
+    public Coroutine invokeCoroutine;
 
     [ContextMenu("Awake")]
     public void Awake()
     {
         Instance = this;
-
+        // startCameraField = dungeonCinemaCamera.m_Lens.FieldOfView;
         if (transitionPanel == null)
         {
             Debug.Log("Transition panel in storage is null");
@@ -72,7 +78,9 @@ public class WorkshopPanelItemsManager : MonoBehaviour
         Debug.Log("Open transition");
         transitionPanel.SetActive(true);
     }
-    public Coroutine invokeCoroutine;
+
+
+
     public void PreUnlock(int index, float focus)
     {
         CameraFocus(currentEraWorkshopObjects[index].transform, focus);
@@ -113,7 +121,9 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public IEnumerator EnterFocus(Transform target, float focusField)
     {
         Debug.Log("Enter Focus");
-
+        cameraWidth.enabled = false;
+        if (startCameraField == 0)
+            startCameraField = dungeonCinemaCamera.m_Lens.FieldOfView;
         dungeonCinemaCamera.LookAt = target;
         dungeonCinemaCamera.m_Lens.FieldOfView = startCameraField;
 
@@ -125,11 +135,12 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public IEnumerator ReturnFocus()
     {
         Debug.Log("Return Focus");
-
         DOTween.To(() => dungeonCinemaCamera.m_Lens.FieldOfView, x => dungeonCinemaCamera.m_Lens.FieldOfView = x, startCameraField, timeToReturnFocus);
         yield return new WaitForSeconds(timeToReturnFocus);
+        cameraWidth.enabled = true;
 
         dungeonCinemaCamera.LookAt = calibrationPosition;
+        // dungeonCinemaCamera.m_Lens.FieldOfView = lastCameraField;
         currentFocusCorutine = null;
         //dungeonCinemaCamera.m_Lens.FieldOfView = startCameraField;
     }

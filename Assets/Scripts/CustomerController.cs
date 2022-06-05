@@ -24,9 +24,9 @@ public class CustomerController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        MoneyHandler.Instance.IncreaseIncomeByTap();
         SpawnTapCircle();
         currentTapTimerValue = maxTapTimerValue;
+        MoneyHandler.Instance.IncreaseIncomeByTap();
     }
 
     private void FixedUpdate()
@@ -34,10 +34,12 @@ public class CustomerController : MonoBehaviour, IPointerClickHandler
         if (currentTapTimerValue > 0)
         {
             currentTapTimerValue -= Time.deltaTime;
-            characterAnimator.speed = 1.25f;
+            characterAnimator.speed = 1.35f;
         }
         else
         {
+            if (MoneyHandler.Instance.isIncreasedByTap)
+                MoneyHandler.Instance.DecreaseIncomeByTap();
             characterAnimator.speed = 1f;
         }
     }

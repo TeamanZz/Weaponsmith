@@ -8,6 +8,8 @@ using DG.Tweening;
 public class PanelsHandler : MonoBehaviour
 {
     public static PanelsHandler Instance;
+    public SkillController skillController;
+    public LoadoutController loadoutController;
 
     public int dropChanceImprovements = 7;
 
@@ -16,7 +18,6 @@ public class PanelsHandler : MonoBehaviour
     [SerializeField] private GameObject panelLabelObject;
 
     [Header("Unlockable Buttons")]
-    public Button dungeonButtonComponent;
     public Button boostersButtonComponent;
     public Image dungeonButtonImageComponent;
     public Image boostersButtonImageComponent;
@@ -27,16 +28,34 @@ public class PanelsHandler : MonoBehaviour
 
     [Space]
     public GameObject dungeonPreviewUI;
+    public GameObject dungeonBarsGroup;
     public GameObject dungeonEnteringPanel;
     public GameObject panelsContainer;
+
+    public DungeonRewardPanel dungeonRewardPanel;
+    public static bool currentLocationInTheDungeon = false;
+    public GameObject loadoutObject;
 
     [Space]
     [SerializeField] private List<string> panelNames = new List<string>();
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private List<BottomButton> bottomButtons = new List<BottomButton>();
 
-    public static bool currentLocationInTheDungeon = false;
+    [Header("Cool Down Settings")]
+    public Button buttonToDungeon;
+    public TextMeshProUGUI coolDownText;
+    public List<GameObject> buttonsToDungeonGroup = new List<GameObject>();
+    public Coroutine coolDownCoroutine;
 
+    public bool timerRunning = false;
+
+    public float reloadTime = 60;
+    [SerializeField] private float currentTime;
+
+    public GameObject anvilSound;
+    public GameObject tapArea;
+
+    public int currentIndex = 0;
     public void Awake()
     {
         Instance = this;
@@ -44,17 +63,16 @@ public class PanelsHandler : MonoBehaviour
         currentLocationInTheDungeon = false;
         mainCamera.SetActive(true);
         dungeonCamera.SetActive(false);
+        loadoutObject.SetActive(false);
+
         DisableDungeonPreviewUI();
+        OpenPanel(1);
     }
 
-    public void Start()
+    public void Update()
     {
-        WorkshopItem.dungeoonIsOpen = 1;
-        dungeonButtonComponent.interactable = true;
-        //
-        EnableDungeonButton();
-        EnableBoostersButton();
-        OpenPanel(1);
+        if (coolDownCoroutine == null && Input.GetKeyUp(KeyCode.Q))
+            StartCoolDown();
     }
 
     public void Initialization(PanelsStortage stortage)
@@ -63,9 +81,44 @@ public class PanelsHandler : MonoBehaviour
         panels.AddRange(stortage.panels);
     }
 
+    public void HandleDungeonPanelUI()
+    {
+        if (DungeonManager.Instance.isDungeonStarted)
+        {
+            panelsContainer.SetActive(false);
+            dungeonBarsGroup.SetActive(false);
+        }
+        else
+        {
+            EnablePanelsContainer();
+            dungeonPreviewUI.SetActive(true);
+            dungeonBarsGroup.SetActive(true);
+        }
+    }
+
+    public void DisablePanelsContainer()
+    {
+        if (DungeonManager.Instance.isDungeonStarted)
+        {
+            panelsContainer.SetActive(false);
+            dungeonBarsGroup.SetActive(false);
+        }
+    }
+
+    public void EnablePanelsContainer()
+    {
+        panelsContainer.SetActive(true);
+    }
+
+    public void DisableDungeonPreviewUI()
+    {
+        dungeonPreviewUI.SetActive(false);
+    }
+
     public void EnableDungeonEnteringPanel()
     {
         dungeonEnteringPanel.SetActive(true);
+        loadoutObject.SetActive(false);
         dungeonEnteringPanel.transform.localScale = Vector3.one;
         StartCoroutine(IEEnableDungeonEnteringPanel());
     }
@@ -75,129 +128,137 @@ public class PanelsHandler : MonoBehaviour
         dungeonEnteringPanel.transform.DOScale(0, 1f).SetEase(Ease.InBack);
     }
 
-    public void EnablePanelsContainer()
-    {
-        panelsContainer.SetActive(true);
-    }
-
     private IEnumerator IEEnableDungeonEnteringPanel()
     {
-        DungeonBuilder.Instance.SetCharacterOnStart();
+        DungeonManager.Instance.SetCharacterOnStart();
         DisablePanelsContainer();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         DisableDungeonEnteringPanel();
         DungeonCharacter.Instance.animator.SetBool("IsDungeonStarted", true);
-        DungeonCharacter.Instance.runSpeed = 0.1f;
+        DungeonCharacter.Instance.EnableCharacterRun();
+        SceneObjectsOptimizeHandler.Instance.EnableFirstPieces();
+        SceneObjectsOptimizeHandler.Instance.DisablePreviewScene();
         yield return new WaitForSeconds(1);
         dungeonEnteringPanel.SetActive(false);
     }
 
-    public void DisablePanelsContainer()
-    {
-        if (DungeonBuilder.Instance.isDungeonStarted)
-            panelsContainer.SetActive(false);
-    }
-
-    public void EnableDungeonPreviewUI()
-    {
-        if (DungeonBuilder.Instance.isDungeonStarted)
-            return;
-        dungeonPreviewUI.SetActive(true);
-    }
-
-    public void DisableDungeonPreviewUI()
-    {
-        dungeonPreviewUI.SetActive(false);
-    }
+    public GameObject mainDungeon;
 
     public void OpenPanel(int panelIndex)
     {
-        //dungeon panel
-        if (panelIndex == 2)
+        currentIndex = Mathf.Clamp(panelIndex, 0, panels.Count - 1);
+
+        foreach (var panel in panels)
+            panel.SetActive(false);
+
+        panels[currentIndex].SetActive(true);
+
+        switch(currentIndex)
         {
-            if (WorkshopItem.dungeoonIsOpen == 0)
-            {
-                Debug.Log("ISOPEN 0");
+            case 0:
+                currentLocationInTheDungeon = false;
+                mainCamera.SetActive(true);
+                dungeonCamera.SetActive(false);
+                loadoutObject.SetActive(false);
+
+                anvilSound.SetActive(true);
+                tapArea.SetActive(false);
+
+                panelLabelObject.SetActive(true); 
+                
+                dungeonPreviewUI.SetActive(false);
+                break;
+
+            case 1:
+                currentLocationInTheDungeon = false;
+                mainCamera.SetActive(true);
+                dungeonCamera.SetActive(false);
+                loadoutObject.SetActive(false);
+
+                anvilSound.SetActive(true);
+                tapArea.SetActive(true);
+
+                panelLabelObject.SetActive(true); 
+                
+                dungeonPreviewUI.SetActive(false);
+                break;
+
+            case 2:
+                loadoutController.Initialization(); 
+                
                 currentLocationInTheDungeon = true;
                 mainCamera.SetActive(false);
                 dungeonCamera.SetActive(true);
+                loadoutObject.SetActive(true);
 
-                panelLabelObject.SetActive(false);
-                panels[panelIndex].SetActive(false); 
-                //DisableDungeonPreviewUI
-                return;
-            }
-            else
-                dungeonButtonComponent.interactable = true;
+                anvilSound.SetActive(false);
+                tapArea.SetActive(false);
 
-            currentLocationInTheDungeon = true;
-            mainCamera.SetActive(false);
-            dungeonCamera.SetActive(true);
+                panelLabelObject.SetActive(true);
 
-            for (int i = 0; i < panels.Count; i++)
-            {
-                panels[i].SetActive(false);
-            }
+                dungeonPreviewUI.SetActive(true);
+                DungeonHubManager.dungeonHubManager.OpenPanel(1); 
+                break;
 
-            panelLabelObject.SetActive(true);
-            panels[panelIndex].SetActive(true);
+            case 3:
+                currentLocationInTheDungeon = false;
+                mainCamera.SetActive(true);
+                dungeonCamera.SetActive(false);
+                loadoutObject.SetActive(false);
 
-            Debug.Log("Update");
-            if (LoadoutController.loadoutController != null)
-                LoadoutController.loadoutController.Initialization();
+                anvilSound.SetActive(true);
+                tapArea.SetActive(true);
 
-            DungeonHubManager.dungeonHubManager.OpenPanel(0);
-            return;
+                panelLabelObject.SetActive(false); 
+                
+                dungeonPreviewUI.SetActive(false);
+
+                if (skillController.selectedPanel != null)
+                    skillController.DeselectedAllPanelsBorder();
+                break;
         }
-        else
-        {
-            DungeonRewardPanel.dungeonRewardPanel.ClosedPanel();
-
-            currentLocationInTheDungeon = false;
-            mainCamera.SetActive(true);
-            dungeonCamera.SetActive(false);
-        }
-
-        for (int i = 0; i < panels.Count; i++)
-        {
-            if (i == panelIndex)
-            {
-                panels[i].SetActive(true);
-            }
-            else
-            {
-                panels[i].SetActive(false);
-            }
-        }
-        panelLabelObject.SetActive(true);
     }
 
-    public void EnableDungeonButton()
+    [ContextMenu("Cool Down")]
+    public void StartCoolDown()
     {
-        //if (PlayerPrefs.GetInt("dungeoonIsOpen") == 0)
-        //{
-        //    dungeonButtonComponent.interactable = false;
-        //    dungeonButtonImageComponent.color = Color.grey;
-        //}
-        //else
-        //{
-            dungeonButtonComponent.interactable = true;
-            dungeonButtonImageComponent.color = Color.white;
-        //}
+        coolDownCoroutine = StartCoroutine(CoolDown());
     }
 
-    public void EnableBoostersButton()
+    public IEnumerator CoolDown()
     {
-        //if (PlayerPrefs.GetInt("enchantmentIsOpen") == 0)
-        //{
-        //    boostersButtonComponent.interactable = false;
-        //    boostersButtonImageComponent.color = Color.gray;
-        //}
-        //else
-        //{
-            boostersButtonComponent.interactable = true;
-            boostersButtonImageComponent.color = Color.white;
-        //}
+        Debug.Log("Start Cool Down");
+
+        currentTime = reloadTime;
+        buttonToDungeon.interactable = false;
+        timerRunning = false;
+        buttonsToDungeonGroup[0].SetActive(false);
+        buttonsToDungeonGroup[1].SetActive(true);
+
+        coolDownText.text = currentTime.ToString("F2");
+
+        while (!timerRunning)
+        {
+            yield return new WaitForSeconds(1f);
+            currentTime -= 1;
+            float seconds = currentTime % 60;
+            string secondsText;
+            if (seconds < 10)
+                secondsText = 0 + seconds.ToString();
+            else
+                secondsText = seconds.ToString();
+
+            coolDownText.text = (int)(currentTime / 60) + ":" + secondsText;
+
+            if (currentTime <= 0)
+                timerRunning = true;
+        }
+
+        coolDownCoroutine = null;
+        buttonToDungeon.interactable = true;
+
+        buttonsToDungeonGroup[0].SetActive(true);
+        buttonsToDungeonGroup[1].SetActive(false);
     }
 
     public void ResetButtonColorOnDeselect()

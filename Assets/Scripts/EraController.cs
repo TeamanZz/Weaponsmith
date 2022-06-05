@@ -9,8 +9,6 @@ public class EraController : MonoBehaviour
     public PanelsHandler panelsHandler;
     public WorkshopPanelItemsManager roomObjectsHandler;
     public CraftPanelItemsManager itemsManager;
-    public DungeonPanelItemsManager dungeonItemManager;
-    public BoostersPanelItemsManager boostersManager;
     public SkinsManager skinsManager;
 
     //  rooms
@@ -30,7 +28,7 @@ public class EraController : MonoBehaviour
     {
         Instance = this;
 
-        currentEraNumber = PlayerPrefs.GetInt("currentEraNumber");
+        currentEraNumber = 0;
         // Debug.Log(currentEraNumber);
 
         //  objects
@@ -78,11 +76,10 @@ public class EraController : MonoBehaviour
         //  uprage
         itemsManager.Initialization(stortages[currentEraNumber].panelItemsList);
         //  dungeon
-        dungeonItemManager.Initialization(stortages[currentEraNumber].dungeonPanelItemsList);
         //  boosters
-        boostersManager.Initialization(stortages[currentEraNumber].boostersItemPanels);
+        // boostersManager.Initialization(stortages[currentEraNumber].boostersItemPanels);
         //  open panel
-        panelsHandler.OpenPanel(1);
+        //panelsHandler.OpenPanel(1);
         //  skin stortage
         //stortages[currentEraNumber].skinStortageObject.SetActive(true);
         skinsManager.Initialization(stortages[currentEraNumber].skinsInRoom, stortages[currentEraNumber].dungeonSkins);

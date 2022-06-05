@@ -27,7 +27,7 @@ public class PrefsHandler : MonoBehaviour
 
     private void LoadMoney()
     {
-        MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount", "0"));
+        // MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount", "0"));
         // MoneyHandler.Instance.moneyCount = long.Parse(PlayerPrefs.GetString("MoneyCount", "999999999999999"));
     }
 
@@ -70,42 +70,42 @@ public class PrefsHandler : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
-        {
-            string value = PlayerPrefs.GetString("DungeonUpgradeItem" + i);
-            if (value == "collapsed")
-            {
-                DungeonPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
-            }
+        // for (int i = 0; i < DungeonPanelItemsManager.Instance.panelItemsList.Count; i++)
+        // {
+        //     string value = PlayerPrefs.GetString("DungeonUpgradeItem" + i);
+        //     if (value == "collapsed")
+        //     {
+        //         DungeonPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
+        //     }
 
-            if (value == "unknown")
-            {
-                DungeonPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
-            }
+        //     if (value == "unknown")
+        //     {
+        //         DungeonPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
+        //     }
 
-            if (value == "available")
-            {
-                DungeonPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
-            }
-        }
+        //     if (value == "available")
+        //     {
+        //         DungeonPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
+        //     }
+        // }
 
-        for (int i = 0; i < BoostersPanelItemsManager.Instance.panelItemsList.Count; i++)
-        {
-            string value = PlayerPrefs.GetString("BoostersUpgradeItem" + i);
-            if (value == "collapsed")
-            {
-                BoostersPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
-            }
+        // for (int i = 0; i < BoostersPanelItemsManager.Instance.panelItemsList.Count; i++)
+        // {
+        //     string value = PlayerPrefs.GetString("BoostersUpgradeItem" + i);
+        //     if (value == "collapsed")
+        //     {
+        //         BoostersPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Collapsed);
+        //     }
 
-            if (value == "unknown")
-            {
-                BoostersPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
-            }
+        //     if (value == "unknown")
+        //     {
+        //         BoostersPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Unknown);
+        //     }
 
-            if (value == "available")
-            {
-                BoostersPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
-            }
-        }
+        //     if (value == "available")
+        //     {
+        //         BoostersPanelItemsManager.Instance.panelItemsList[i].ChangeStateViaLoader(PanelItemState.Available);
+        //     }
+        // }
     }
 }

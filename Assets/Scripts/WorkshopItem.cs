@@ -7,6 +7,12 @@ using Sirenix.OdinInspector;
 
 public class WorkshopItem : MonoBehaviour, IBuyableItem
 {
+    [Header("Save Settings")]
+    public int panelID;
+    public bool panelIsOpen = false;
+
+    public WorkshopPanelItemsManager workshopManager;
+
     [SerializeField] private int index;
     public long price;
     public int generalIncreaseValue;
@@ -20,8 +26,6 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")][SerializeField] private Animator iconAnimator;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
     [HideInInspector] public bool wasBoughted;
-    public static int dungeoonIsOpen = 0;
-    public static int enchantmentIsOpen = 0;
 
     private Button buyButtonComponent;
     private Image buyButtonImage;
@@ -34,10 +38,9 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         generalIncreaseValueTextAnimator = generalIncreaseValueText.GetComponent<Animator>();
 
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
-        dungeoonIsOpen = PlayerPrefs.GetInt("dungeoonIsOpen");
-        enchantmentIsOpen = PlayerPrefs.GetInt("enchantmentIsOpen");
 
-        generalIncreaseValueText.text = generalIncreaseValue.ToString();
+        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
+        LoadData();
     }
 
     private void Update()
@@ -54,6 +57,42 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         }
     }
 
+    bool IntToBool(int n)
+    => n == 1;
+    int BoolToInt(bool b)
+        => (b ? 1 : 0);
+
+    [ContextMenu("Save Data")]
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt($"WorkshopItem{panelID}State", BoolToInt(panelIsOpen));
+        //Debug.Log("Save Data = " + panelID + " State =" + panelIsOpen);
+    }
+
+    public void LoadData()
+    {
+        panelIsOpen = IntToBool(PlayerPrefs.GetInt($"WorkshopItem{panelID}State"));
+
+        if (panelIsOpen == false)
+            CollapseItemView();
+        else
+            SetAvailableItemView();
+
+        //Debug.Log("Load Data = " + panelID + " State =" + panelIsOpen);
+    }
+
+    [ContextMenu("Remove Data")]
+    public void RemoveData()
+    {
+        PlayerPrefs.SetInt($"WorkshopItem{panelID}State", BoolToInt(true));
+
+        //Debug.Log("Remove Data = " + panelID + " State =" + price);
+
+        SetAvailableItemView();
+       // Awake();
+    }
+
+
     [Header("Focus")]
     public float focusField = 30f;
     public void BuyItem()
@@ -66,39 +105,35 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
 
         generalIncreaseValueText.text = "";
 
-        if (currentType == PanelType.anDungeonItem)
-        {
-            // PlayerPrefs.SetInt("dungeoonIsOpen", 1);
-            dungeoonIsOpen = 1;
-            PanelsHandler.Instance.EnableDungeonButton();
-        }
-
-        if (currentType == PanelType.anEnchantmentTableItem)
-        {
-            // PlayerPrefs.SetInt("enchantmentIsOpen", 1);
-            enchantmentIsOpen = 1;
-            PanelsHandler.Instance.EnableBoostersButton();
-        }
-
         CollapseItemView();
+        SaveData();
+        MoneyHandler.Instance.SaveData();
         iconAnimator.Play("Jump", 0, 0);
-        // PlayerPrefs.SetString("WorkshopGameobject" + index, "unlocked");
     }
 
     public void ReplaceOldObjects()
     {
         for (int i = 0; i < objectsToReplace.Count; i++)
-        {
             objectsToReplace[i].SetActive(false);
-        }
+    }
+
+    public void SetAvailableItemView()
+    {
+        panelIsOpen = true;
+        buyButton.SetActive(true);
+        wasBoughted = false;
+        generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
+        GetComponent<RectTransform>().sizeDelta = new Vector2(710, 120);
     }
 
     public void CollapseItemView()
     {
+        panelIsOpen = false;
         buyButton.SetActive(false);
+        generalIncreaseValueText.text = "";
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
         wasBoughted = true;
-        WorkshopPanelItemsManager.Instance.CheckBeforeTransition();
+        workshopManager.CheckBeforeTransition();
     }
 
     public enum PanelType

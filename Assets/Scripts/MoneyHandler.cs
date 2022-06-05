@@ -7,6 +7,7 @@ using System;
 public class MoneyHandler : MonoBehaviour
 {
     public static MoneyHandler Instance;
+    private int currentID = 0;
 
     [Header("Currency Values")]
     public long moneyCount;
@@ -23,28 +24,44 @@ public class MoneyHandler : MonoBehaviour
     private float timeBetweenMoneyIncrease = 0.5f;
     private float boosterCoefficient = 1;
 
-    [Header("improvement points")]
-    public int maxPoints = 24;
-    public int improvementCount = 0;
-    public int currentImprovementPoints = 0;
+    public Coroutine increaseByTapCoroutine;
+    public int increaseByTapMoneyCount;
+
+    public bool isIncreasedByTap;
+    private int increaseByTapAdditiveValue;
+
     private void Awake()
     {
         Instance = this;
-        moneyPerSecond = PlayerPrefs.GetInt("MoneyPerSecond");
+
+        LoadData();
+
         if (moneyPerSecond == 0)
-            moneyPerSecond = 1;
-    }
+            moneyPerSecond = 20;
 
-    [ContextMenu("Add Improvement Point")]
-    public void AddImprovementPoint()
+        InvokeRepeating("SaveData", 3, 3);
+    }
+    public void SaveData()
     {
-        if (improvementCount >= maxPoints)
-            return;
-
-        currentImprovementPoints += 1;
-        LoadoutController.loadoutController.UpdateImprovementPoints();
+        PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyPerSecond", moneyPerSecond);
+        PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyCount", (int)moneyCount);
+        //Debug.Log("Money Handler " + " | Money Count =" + moneyCount + " | Money Per Second =" + moneyPerSecond);
     }
 
+    public void LoadData()
+    {
+        moneyPerSecond = PlayerPrefs.GetInt($"MoneyHandler{currentID}MoneyPerSecond");
+        Debug.Log(moneyPerSecond + "MONEY PER SEC");
+        moneyCount = (int)PlayerPrefs.GetInt($"MoneyHandler{currentID}MoneyCount");
+    }
+
+    public void RemoveData()
+    {
+        PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyPerSecond", 0);
+        PlayerPrefs.SetInt($"MoneyHandler{currentID}MoneyCount", 0);
+        moneyCount = 0;
+        moneyPerSecond = 1;
+    }
     private void Start()
     {
         InvokeRepeating("SaveMoneyPerSec", 1, 3);
@@ -62,19 +79,31 @@ public class MoneyHandler : MonoBehaviour
         moneyPerSecondText.text = FormatNumsHelper.FormatNum((double)moneyPerSecond * (double)boosterCoefficient) + "/s";
     }
 
-    public void ChangeBoosterCoefficient(float value)
-    {
-        boosterCoefficient = value;
-    }
-
-    private void SaveMoneyPerSec()
-    {
-        // PlayerPrefs.SetInt("MoneyPerSecond", moneyPerSecond);
-    }
+    // public void ChangeBoosterCoefficient(float value)
+    // {
+    //     boosterCoefficient = value;
+    // }
 
     public void IncreaseMoneyPerSecondValue(int value)
     {
         moneyPerSecond += value;
+        SaveData();
+    }
+
+    public void IncreaseIncomeByTap()
+    {
+        if (isIncreasedByTap)
+            return;
+
+        isIncreasedByTap = true;
+        increaseByTapAdditiveValue = (int)(moneyPerSecond * 0.2f);
+        moneyPerSecond += increaseByTapAdditiveValue;
+    }
+
+    public void DecreaseIncomeByTap()
+    {
+        isIncreasedByTap = false;
+        moneyPerSecond -= increaseByTapAdditiveValue;
     }
 
     private IEnumerator IEIncreaseMoneyCount()
@@ -99,18 +128,7 @@ public class MoneyHandler : MonoBehaviour
     public void SpawnCurrencyPopUp()
     {
         var newPopup = Instantiate(currencyPopupPrefab, new Vector3(-1000, 1, 0), Quaternion.identity, currencyPopupContainer);
-        newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * 3 * (double)boosterCoefficient) + "$";
+        newPopup.GetComponent<CurrencyPopup>().currencyText.text = "+ " + FormatNumsHelper.FormatNum((double)moneyPerSecond * (double)boosterCoefficient) + "$";
         newPopup.transform.SetAsFirstSibling();
-    }
-
-    public void IncreaseIncomeByTap()
-    {
-        var increaseValue = moneyPerSecond / 10;
-        if (increaseValue == 0)
-            moneyCount++;
-        else
-            moneyCount += increaseValue;
-        moneyCountText.text = FormatNumsHelper.FormatNum((double)moneyCount);
-
     }
 }

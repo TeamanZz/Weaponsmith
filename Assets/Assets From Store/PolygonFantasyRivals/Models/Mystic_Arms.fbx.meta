@@ -1,108 +1,296 @@
 fileFormatVersion: 2
 guid: 856ccb4eb1ecabc4a948351747ed9eea
-timeCreated: 1526000995
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: Arm_Root
-    100002: Arms
-    100004: Clavicle_L
-    100006: Clavicle_R
-    100008: Elbow_L
-    100010: Elbow_R
-    100012: Finger_01
-    100014: Finger_01 1
-    100016: Finger_02
-    100018: Finger_02 1
-    100020: Finger_03
-    100022: Finger_03 1
-    100024: Finger_04
-    100026: Finger_04 1
-    100028: Hand_L
-    100030: Hand_R
-    100032: IndexFinger_01
-    100034: IndexFinger_01 1
-    100036: IndexFinger_02
-    100038: IndexFinger_02 1
-    100040: IndexFinger_03
-    100042: IndexFinger_03 1
-    100044: IndexFinger_04
-    100046: IndexFinger_04 1
-    100048: //RootNode
-    100050: Shoulder_L
-    100052: Shoulder_R
-    100054: Thumb_01
-    100056: Thumb_01 1
-    100058: Thumb_02
-    100060: Thumb_02 1
-    100062: Thumb_03
-    100064: Thumb_03 1
-    100066: Hips
-    100068: Spine
-    100070: Foot_LegLeft
-    100072: Foot_LegRight
-    100074: Lower_LegLeft
-    100076: Lower_LegRight
-    100078: Upper_LegLeft
-    100080: Upper_LegRight
-    100082: Head
-    100084: Arms_01
-    400000: Arm_Root
-    400002: Arms
-    400004: Clavicle_L
-    400006: Clavicle_R
-    400008: Elbow_L
-    400010: Elbow_R
-    400012: Finger_01
-    400014: Finger_01 1
-    400016: Finger_02
-    400018: Finger_02 1
-    400020: Finger_03
-    400022: Finger_03 1
-    400024: Finger_04
-    400026: Finger_04 1
-    400028: Hand_L
-    400030: Hand_R
-    400032: IndexFinger_01
-    400034: IndexFinger_01 1
-    400036: IndexFinger_02
-    400038: IndexFinger_02 1
-    400040: IndexFinger_03
-    400042: IndexFinger_03 1
-    400044: IndexFinger_04
-    400046: IndexFinger_04 1
-    400048: //RootNode
-    400050: Shoulder_L
-    400052: Shoulder_R
-    400054: Thumb_01
-    400056: Thumb_01 1
-    400058: Thumb_02
-    400060: Thumb_02 1
-    400062: Thumb_03
-    400064: Thumb_03 1
-    400066: Hips
-    400068: Spine
-    400070: Foot_LegLeft
-    400072: Foot_LegRight
-    400074: Lower_LegLeft
-    400076: Lower_LegRight
-    400078: Upper_LegLeft
-    400080: Upper_LegRight
-    400082: Head
-    400084: Arms_01
-    4300000: Arms
-    4300002: Arms_01
-    7400000: MysticArms_Bottom
-    7400002: MysticArms_Top
-    9500000: //RootNode
-    11100000: //RootNode
-    13700000: Arms
-    13700002: Arms_01
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Arm_Root
+  - first:
+      1: 100002
+    second: Arms
+  - first:
+      1: 100004
+    second: Clavicle_L
+  - first:
+      1: 100006
+    second: Clavicle_R
+  - first:
+      1: 100008
+    second: Elbow_L
+  - first:
+      1: 100010
+    second: Elbow_R
+  - first:
+      1: 100012
+    second: Finger_01
+  - first:
+      1: 100014
+    second: Finger_01 1
+  - first:
+      1: 100016
+    second: Finger_02
+  - first:
+      1: 100018
+    second: Finger_02 1
+  - first:
+      1: 100020
+    second: Finger_03
+  - first:
+      1: 100022
+    second: Finger_03 1
+  - first:
+      1: 100024
+    second: Finger_04
+  - first:
+      1: 100026
+    second: Finger_04 1
+  - first:
+      1: 100028
+    second: Hand_L
+  - first:
+      1: 100030
+    second: Hand_R
+  - first:
+      1: 100032
+    second: IndexFinger_01
+  - first:
+      1: 100034
+    second: IndexFinger_01 1
+  - first:
+      1: 100036
+    second: IndexFinger_02
+  - first:
+      1: 100038
+    second: IndexFinger_02 1
+  - first:
+      1: 100040
+    second: IndexFinger_03
+  - first:
+      1: 100042
+    second: IndexFinger_03 1
+  - first:
+      1: 100044
+    second: IndexFinger_04
+  - first:
+      1: 100046
+    second: IndexFinger_04 1
+  - first:
+      1: 100048
+    second: //RootNode
+  - first:
+      1: 100050
+    second: Shoulder_L
+  - first:
+      1: 100052
+    second: Shoulder_R
+  - first:
+      1: 100054
+    second: Thumb_01
+  - first:
+      1: 100056
+    second: Thumb_01 1
+  - first:
+      1: 100058
+    second: Thumb_02
+  - first:
+      1: 100060
+    second: Thumb_02 1
+  - first:
+      1: 100062
+    second: Thumb_03
+  - first:
+      1: 100064
+    second: Thumb_03 1
+  - first:
+      1: 100066
+    second: Hips
+  - first:
+      1: 100068
+    second: Spine
+  - first:
+      1: 100070
+    second: Foot_LegLeft
+  - first:
+      1: 100072
+    second: Foot_LegRight
+  - first:
+      1: 100074
+    second: Lower_LegLeft
+  - first:
+      1: 100076
+    second: Lower_LegRight
+  - first:
+      1: 100078
+    second: Upper_LegLeft
+  - first:
+      1: 100080
+    second: Upper_LegRight
+  - first:
+      1: 100082
+    second: Head
+  - first:
+      1: 100084
+    second: Arms_01
+  - first:
+      4: 400000
+    second: Arm_Root
+  - first:
+      4: 400002
+    second: Arms
+  - first:
+      4: 400004
+    second: Clavicle_L
+  - first:
+      4: 400006
+    second: Clavicle_R
+  - first:
+      4: 400008
+    second: Elbow_L
+  - first:
+      4: 400010
+    second: Elbow_R
+  - first:
+      4: 400012
+    second: Finger_01
+  - first:
+      4: 400014
+    second: Finger_01 1
+  - first:
+      4: 400016
+    second: Finger_02
+  - first:
+      4: 400018
+    second: Finger_02 1
+  - first:
+      4: 400020
+    second: Finger_03
+  - first:
+      4: 400022
+    second: Finger_03 1
+  - first:
+      4: 400024
+    second: Finger_04
+  - first:
+      4: 400026
+    second: Finger_04 1
+  - first:
+      4: 400028
+    second: Hand_L
+  - first:
+      4: 400030
+    second: Hand_R
+  - first:
+      4: 400032
+    second: IndexFinger_01
+  - first:
+      4: 400034
+    second: IndexFinger_01 1
+  - first:
+      4: 400036
+    second: IndexFinger_02
+  - first:
+      4: 400038
+    second: IndexFinger_02 1
+  - first:
+      4: 400040
+    second: IndexFinger_03
+  - first:
+      4: 400042
+    second: IndexFinger_03 1
+  - first:
+      4: 400044
+    second: IndexFinger_04
+  - first:
+      4: 400046
+    second: IndexFinger_04 1
+  - first:
+      4: 400048
+    second: //RootNode
+  - first:
+      4: 400050
+    second: Shoulder_L
+  - first:
+      4: 400052
+    second: Shoulder_R
+  - first:
+      4: 400054
+    second: Thumb_01
+  - first:
+      4: 400056
+    second: Thumb_01 1
+  - first:
+      4: 400058
+    second: Thumb_02
+  - first:
+      4: 400060
+    second: Thumb_02 1
+  - first:
+      4: 400062
+    second: Thumb_03
+  - first:
+      4: 400064
+    second: Thumb_03 1
+  - first:
+      4: 400066
+    second: Hips
+  - first:
+      4: 400068
+    second: Spine
+  - first:
+      4: 400070
+    second: Foot_LegLeft
+  - first:
+      4: 400072
+    second: Foot_LegRight
+  - first:
+      4: 400074
+    second: Lower_LegLeft
+  - first:
+      4: 400076
+    second: Lower_LegRight
+  - first:
+      4: 400078
+    second: Upper_LegLeft
+  - first:
+      4: 400080
+    second: Upper_LegRight
+  - first:
+      4: 400082
+    second: Head
+  - first:
+      4: 400084
+    second: Arms_01
+  - first:
+      43: 4300000
+    second: Arms
+  - first:
+      43: 4300002
+    second: Arms_01
+  - first:
+      74: 7400000
+    second: MysticArms_Bottom
+  - first:
+      74: 7400002
+    second: MysticArms_Top
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      111: 11100000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Arms
+  - first:
+      137: 13700002
+    second: Arms_01
+  externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -115,16 +303,20 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 0
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 2
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: MysticArms_Bottom
       takeName: Take 001
+      internalID: 0
       firstFrame: 1
       lastFrame: 99
       wrapMode: 2
@@ -229,6 +421,7 @@ ModelImporter:
     - serializedVersion: 16
       name: MysticArms_Top
       takeName: Take 001
+      internalID: 0
       firstFrame: 101
       lastFrame: 180
       wrapMode: 2
@@ -330,32 +523,51 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 0
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 0
     normalImportMode: 1
-    tangentImportMode: 3
+    tangentImportMode: 2
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -365,14 +577,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: Arm_Root
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 1
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
