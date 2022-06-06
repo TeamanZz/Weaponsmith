@@ -20,12 +20,6 @@ public class CraftPanelItemsManager : MonoBehaviour
         }
     }
 
-    public void Initialization(List<PanelItem> newPanelItems)
-    {
-        craftPanelItemsList.Clear();
-        craftPanelItemsList.AddRange(newPanelItems);
-    }
-
     [ContextMenu("Open new blueprint")]
     public void OpenNewBlueprint()
     {

@@ -75,12 +75,6 @@ public class PanelsHandler : MonoBehaviour
             StartCoolDown();
     }
 
-    public void Initialization(PanelsStortage stortage)
-    {
-        panels.Clear();
-        panels.AddRange(stortage.panels);
-    }
-
     public void HandleDungeonPanelUI()
     {
         if (DungeonManager.Instance.isDungeonStarted)

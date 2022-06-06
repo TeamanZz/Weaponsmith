@@ -33,7 +33,7 @@ public class PrefsHandler : MonoBehaviour
 
     private void LoadWorkshopItems()
     {
-        for (int i = 0; i < WorkshopPanelItemsManager.Instance.currentEraWorkshopObjects.Count; i++)
+        for (int i = 0; i < WorkshopPanelItemsManager.Instance.workshopObjects.Count; i++)
         {
             string state = PlayerPrefs.GetString("WorkshopGameobject" + i);
             if (state == "unlocked")

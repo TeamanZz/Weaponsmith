@@ -10,15 +10,10 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public static WorkshopPanelItemsManager Instance;
 
     public GameObject appearParticles;
-    public EraController eraController;
-
-    [HideInInspector] public List<GameObject> currentEraWorkshopObjects = new List<GameObject>();
-    [HideInInspector] public List<WorkshopItem> workshopPanelItems = new List<WorkshopItem>();
-    [HideInInspector] public GameObject transitionPanel;
-    [HideInInspector] public Button transitionButton;
-    [HideInInspector] public int numberOfOpenPanels = 0;
-    [HideInInspector] public bool endOfEra = false;
-
+ 
+    public List<GameObject> workshopObjects = new List<GameObject>();
+    public List<WorkshopItem> workshopPanelItems = new List<WorkshopItem>();
+ 
     [Header("Camera")]
     public Coroutine currentFocusCorutine;
     public float unlockObjectTime = 1f;
@@ -38,55 +33,11 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-        // startCameraField = dungeonCinemaCamera.m_Lens.FieldOfView;
-        if (transitionPanel == null)
-        {
-            Debug.Log("Transition panel in storage is null");
-            return;
-        }
-        transitionPanel.SetActive(false);
-        if (endOfEra == true)
-            return;
-
-        transitionButton = transitionPanel.GetComponent<Button>();
-        transitionButton.onClick.AddListener(() => eraController.TransitionToNewEra());
     }
-
-    public void Initialization(List<GameObject> objects, List<WorkshopItem> newWorkshopPanelItems, GameObject newTransitionButton, bool isEnd)
-    {
-        currentEraWorkshopObjects = objects;
-        endOfEra = isEnd;
-
-        transitionPanel = newTransitionButton;
-
-        workshopPanelItems.Clear();
-        workshopPanelItems.AddRange(newWorkshopPanelItems);
-    }
-
-    public void CheckBeforeTransition()
-    {
-        numberOfOpenPanels += 1;
-        if (numberOfOpenPanels < workshopPanelItems.Count || transitionPanel == null)
-            return;
-
-        if (endOfEra == true)
-        {
-            Debug.Log("End era");
-            return;
-        }
-
-        Debug.Log("Open transition");
-        transitionPanel.SetActive(true);
-    }
-
-
 
     public void PreUnlock(int index, float focus)
     {
-        CameraFocus(currentEraWorkshopObjects[index].transform, focus);
-        //if (invokeCoroutine != null)
-        //    StopCoroutine(invokeCoroutine);
-
+        CameraFocus(workshopObjects[index].transform, focus);
         invokeCoroutine = StartCoroutine(Unlock(index));
     }
     public IEnumerator Unlock(int index)
@@ -98,14 +49,14 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public void UnlockObject(int index)
     {
         Debug.Log("Unlock");
-        currentEraWorkshopObjects[index].SetActive(!currentEraWorkshopObjects[index].activeSelf);
-        Instantiate(appearParticles, currentEraWorkshopObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
+        workshopObjects[index].SetActive(!workshopObjects[index].activeSelf);
+        Instantiate(appearParticles, workshopObjects[index].transform.position, new Quaternion(0, 0, 0, 0));
         workshopPanelItems[index].ReplaceOldObjects();
     }
 
     public void UnlockObjectWithoutParticles(int index)
     {
-        currentEraWorkshopObjects[index].SetActive(!currentEraWorkshopObjects[index].activeSelf);
+        workshopObjects[index].SetActive(!workshopObjects[index].activeSelf);
         workshopPanelItems[index].ReplaceOldObjects();
     }
 

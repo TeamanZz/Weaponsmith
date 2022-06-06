@@ -61,7 +61,7 @@ public class SaveSystem : MonoBehaviour
         panelsHandler.OpenPanel(1);
     }
 
-    //[ContextMenu("Remove Panels Data")]
+    [ContextMenu("Remove Panels Data")]
     private void RemovePanelsData()
     {
         foreach (var item in items)

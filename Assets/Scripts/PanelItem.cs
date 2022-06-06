@@ -291,6 +291,8 @@ public class PanelItem : MonoBehaviour, IBuyableItem
                 generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)increaseValue) + "/s";
                 break;
         }
+
+        SaveData();
     }
 
     //  unkown

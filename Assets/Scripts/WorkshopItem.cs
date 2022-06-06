@@ -133,7 +133,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         generalIncreaseValueText.text = "";
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
         wasBoughted = true;
-        workshopManager.CheckBeforeTransition();
+        //workshopManager.CheckBeforeTransition();
     }
 
     public enum PanelType

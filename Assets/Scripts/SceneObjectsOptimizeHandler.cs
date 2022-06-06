@@ -12,8 +12,7 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
     public DungeonCharacter dungeonCharacter;
     public DungeonManager dungeonManager;
 
-    private GameObject mainRoom;
-
+    [SerializeField] private GameObject mainRoom;
 
     public GameObject anvilCharacter;
     public GameObject dungeonCharacterSkins;
@@ -24,11 +23,6 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
         EnableAnvilSceneObjects();
     }
 
-    public void Initialization(GameObject newMainRoom)
-    {
-        mainRoom = newMainRoom;
-        EnableAnvilSceneObjects();
-    }
     public void EnableDungeonSceneObjects()
     {
         dungeonRoom.SetActive(true);
@@ -62,8 +56,10 @@ public class SceneObjectsOptimizeHandler : MonoBehaviour
     {
         dungeonRoom.SetActive(false);
         dungeonCharacter.DisableCharacterRun();
+
         if (dungeonManager.isDungeonStarted)
             dungeonCharacter.animator.enabled = false;
+
         mainRoom.SetActive(true);
         dungeonCharacterSkins.SetActive(false);
         anvilCharacter.SetActive(true);
