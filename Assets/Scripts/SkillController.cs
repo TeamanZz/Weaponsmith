@@ -54,11 +54,8 @@ public class SkillController : MonoBehaviour
         foreach (var item in mainSkillsView)
         {
             LoadData(item);
-            //item.EnabledBlur();
         }
-        //Initialization(startNumber);
-
-        //  scoring
+        
         int currentMax = 0;
         foreach (var item in mainSkillsData)
         {

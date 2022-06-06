@@ -40,7 +40,7 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         priceText.text = "$" + FormatNumsHelper.FormatNum((double)price);
 
         generalIncreaseValueText.text = "+$" + FormatNumsHelper.FormatNum((double)generalIncreaseValue) + "/s";
-        LoadData();
+        //LoadData();
     }
 
     private void Update()
@@ -69,12 +69,16 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         //Debug.Log("Save Data = " + panelID + " State =" + panelIsOpen);
     }
 
+    [ContextMenu("Load")]
     public void LoadData()
     {
         panelIsOpen = IntToBool(PlayerPrefs.GetInt($"WorkshopItem{panelID}State"));
 
         if (panelIsOpen == false)
+        {
             CollapseItemView();
+            workshopManager.LoadData(index, !panelIsOpen);
+        }
         else
             SetAvailableItemView();
 
@@ -133,6 +137,8 @@ public class WorkshopItem : MonoBehaviour, IBuyableItem
         generalIncreaseValueText.text = "";
         GetComponent<RectTransform>().sizeDelta = new Vector2(680, 76);
         wasBoughted = true;
+        //WorkshopPanelItemsManager.Instance.LoadData(index, panelIsOpen);
+
         //workshopManager.CheckBeforeTransition();
     }
 

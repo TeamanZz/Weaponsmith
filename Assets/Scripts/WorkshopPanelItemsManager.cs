@@ -33,6 +33,13 @@ public class WorkshopPanelItemsManager : MonoBehaviour
     public void Awake()
     {
         Instance = this;
+        LoadAllData();
+    }
+
+    public void LoadAllData()
+    {
+        foreach (var item in workshopPanelItems)
+            item.LoadData();
     }
 
     public void PreUnlock(int index, float focus)
@@ -46,6 +53,11 @@ public class WorkshopPanelItemsManager : MonoBehaviour
         UnlockObject(index);
     }
 
+    public void LoadData(int index, bool state)
+    {
+       if(state == true)
+            workshopObjects[index].SetActive(/*state*/!workshopObjects[index].activeSelf);
+    }
     public void UnlockObject(int index)
     {
         Debug.Log("Unlock");

@@ -84,7 +84,7 @@ public class DungeonBuilder : MonoBehaviour
             Debug.Log("Blueprint Open");
         }
 
-        Debug.Log("Value =" + value + "Max Point =" + SkillController.skillController.maxPoints);
+        //Debug.Log("Value =" + value + "Max Point =" + SkillController.skillController.maxPoints);
 
         ResetVariablesValues();
         SpawnFirstWaveEnemies();
@@ -130,7 +130,7 @@ public class DungeonBuilder : MonoBehaviour
         GameObject chestObject = Instantiate(chestPrefab, Vector3.zero, Quaternion.identity, piecesContainer);
         DungeonChest chestComponent = chestObject.GetComponent<DungeonChest>();
         chestComponent.Initialize(DungeonChest.ChestFilling.BlueprintAndMoney, currentLevelSettings.secondChestGold);
-        rewardPanel.InitializeBlueprintItem();
+        //rewardPanel.InitializeBlueprintItem();
 
         lastChest = chestComponent;
 

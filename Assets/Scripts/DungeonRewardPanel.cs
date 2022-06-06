@@ -11,7 +11,6 @@ public class DungeonRewardPanel : MonoBehaviour
     public bool panelIsActive = true;
 
     [Header("Viewing Elements")]
-    //public TextMeshProUGUI titleText;
     public Image[] starsViewImage;
     public float openStarTime = 0.25f;
     public float timeToNewStar = 0.5f;
@@ -20,17 +19,12 @@ public class DungeonRewardPanel : MonoBehaviour
     public Sprite weaponSprite;
     public Sprite armorSprite;
     public GridLayoutGroup group;
-    //public RewardUIItem itemPrefab;
-    public PanelsStortage panelsStorage;
-
-    //public RewardUIItem moneyReward;
-    //public RewardUIItem blueprintReward;
+    public CraftPanelItemsManager craftPanelManager;
 
     [Space]
     public GameObject crystalGroup;
     public GameObject blueprintGroup;
 
-    //public TextMeshProUGUI allMoney;
     public TextMeshProUGUI moneyForEnemies;
     public TextMeshProUGUI moneyForChest;
 
@@ -52,14 +46,12 @@ public class DungeonRewardPanel : MonoBehaviour
         Instance = this;
     }
 
-    public void InitializeBlueprintItem()
-    {
-        var newAnvilItem = panelsStorage.panelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
-        if (newAnvilItem == null)
-            return;
-
-    }
-
+    //public void InitializeBlueprintItem()
+    //{
+    //    var newAnvilItem = craftPanelManager.craftPanelItemsList.Find(x => x.currentState == PanelItemState.Unknown);
+    //    if (newAnvilItem == null)
+    //        return;
+    //}
 
     public void ClosePanel()
     {
