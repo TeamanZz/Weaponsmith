@@ -139,6 +139,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         PlayerPrefs.SetInt($"PanelItem{panelID}Count", buysCount);
         PlayerPrefs.SetInt($"PanelItem{panelID}Selected", BoolToInt(isSelected));
 
+        Debug.Log("Selected = " + isSelected + " | Name = " + name);
         //Debug.Log("Save Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
     }
 
@@ -151,8 +152,11 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         //Debug.Log("Load Data = " + panelID + " State =" + currentState + " Count =" + buysCount);
         Initialize();
 
-        if (isSelected && currentPanelItemInHub)
+        if (isSelected && currentPanelItemInHub != null)
+        {
             currentPanelItemInHub.SelectedWeapon();
+        }
+        Debug.Log("Selected = " + isSelected + " | Name = " + name + " | Current Hub Panel = " + currentPanelItemInHub);
     }
 
     [ContextMenu("Remove Data")]

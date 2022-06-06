@@ -53,15 +53,14 @@ public class DungeonHubManager : MonoBehaviour
         armorUIImage.sprite = armorSprite;
         weaponUIImage.sprite = weaponSprite;
     }
-    public void AddEquipment(PanelItem newPunelItem)
+    public void AddEquipment(PanelItem newPanelItem)
     {
-
-        if (newPunelItem.currentEquipmentType == ItemEquipment.EquipmentType.Empty)
+        if (newPanelItem.currentEquipmentType == ItemEquipment.EquipmentType.Empty)
             return;
 
         PanelItemInHub newPanelItemInHub = null;
 
-        switch (newPunelItem.currentEquipmentType)
+        switch (newPanelItem.currentEquipmentType)
         {
             case ItemEquipment.EquipmentType.Weapon:
                 newPanelItemInHub = Instantiate(panelInHubPrefab, weaponContent);
@@ -74,9 +73,12 @@ public class DungeonHubManager : MonoBehaviour
                 break;
         }
 
-        newPanelItemInHub.Initialization(newPunelItem);
-        newPunelItem.currentPanelItemInHub = newPanelItemInHub;
+        newPanelItemInHub.Initialization(newPanelItem);
+        newPanelItem.currentPanelItemInHub = newPanelItemInHub;
 
+        //  Selected In Hub
+        if (newPanelItemInHub.panelItem.isSelected)
+            newPanelItemInHub.SelectedWeapon();
     }
 
     public int currentIndex;

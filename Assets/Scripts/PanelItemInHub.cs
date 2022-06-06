@@ -70,34 +70,6 @@ public class PanelItemInHub : MonoBehaviour
         UpdateUI();
     }
 
-    bool IntToBool(int n)
-    => n == 1;
-    int BoolToInt(bool b)
-        => (b ? 1 : 0);
-
-    //private void SaveData()
-    //{
-    //    PlayerPrefs.SetInt($"HubItem{panelID}State", BoolToInt(isSelected));
-    //    //Debug.Log("ID =" + panelID + " | Save Data = " + isSelected);
-    //}
-
-    //public void LoadData()
-    //{
-    //    isSelected = IntToBool(PlayerPrefs.GetInt($"HubItem{panelID}State"));
-
-    //    if (isSelected)
-    //        SelectedWeapon();
-    //    //Debug.Log("ID =" + panelID + " | Load Data = " + isSelected);
-    //}
-
-    //[ContextMenu("Remove Data")]
-    //public void RemoveData()
-    //{
-    //    PlayerPrefs.SetInt($"HubItem{panelID}State", BoolToInt(false));
-    //    //DeselectedWeapon();
-    //    //Debug.Log("ID =" + panelID + " | Remove Data");
-    //}
-
     private void FixedUpdate()
     {
         if (panelItem.price <= MoneyHandler.Instance.moneyCount)
