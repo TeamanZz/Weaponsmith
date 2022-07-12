@@ -113,6 +113,7 @@ public class DungeonRewardPanel : MonoBehaviour
 
         if (starsValue == 3)
         {
+
             lostTitle.SetActive(false);
             successTitle.SetActive(true);
             successParticles.SetActive(true);
@@ -129,6 +130,8 @@ public class DungeonRewardPanel : MonoBehaviour
 
             SkillController.skillController.OpenNewSkill();
             SkillController.skillController.AddImprovementPoint();
+            YsoCorp.GameUtils.YCManager.instance.OnGameFinished(true);
+
         }
 
 
@@ -172,6 +175,8 @@ public class DungeonRewardPanel : MonoBehaviour
 
             successParticles.SetActive(false);
             lostParticles.SetActive(true);
+
+            YsoCorp.GameUtils.YCManager.instance.OnGameFinished(false);
         }
 
         panel.SetActive(true);

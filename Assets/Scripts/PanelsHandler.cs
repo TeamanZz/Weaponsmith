@@ -117,6 +117,8 @@ public class PanelsHandler : MonoBehaviour
 
     public void EnableDungeonEnteringPanel()
     {
+        // Debug.Log("YSO START:" + DungeonManager.Instance.currentDungeonLevelId + 1);
+        YsoCorp.GameUtils.YCManager.instance.OnGameStarted(DungeonManager.Instance.currentDungeonLevelId + 1);
         dungeonEnteringPanel.SetActive(true);
         loadoutObject.SetActive(false);
         dungeonEnteringPanel.transform.localScale = Vector3.one;
@@ -153,7 +155,7 @@ public class PanelsHandler : MonoBehaviour
 
         panels[currentIndex].SetActive(true);
 
-        switch(currentIndex)
+        switch (currentIndex)
         {
             case 0:
                 currentLocationInTheDungeon = false;
@@ -164,8 +166,8 @@ public class PanelsHandler : MonoBehaviour
                 anvilSound.SetActive(true);
                 tapArea.SetActive(false);
 
-                panelLabelObject.SetActive(true); 
-                
+                panelLabelObject.SetActive(true);
+
                 dungeonPreviewUI.SetActive(false);
                 break;
 
@@ -178,14 +180,14 @@ public class PanelsHandler : MonoBehaviour
                 anvilSound.SetActive(true);
                 tapArea.SetActive(true);
 
-                panelLabelObject.SetActive(true); 
-                
+                panelLabelObject.SetActive(true);
+
                 dungeonPreviewUI.SetActive(false);
                 break;
 
             case 2:
-                loadoutController.Initialization(); 
-                
+                loadoutController.Initialization();
+
                 currentLocationInTheDungeon = true;
                 mainCamera.SetActive(false);
                 dungeonCamera.SetActive(true);
@@ -197,7 +199,7 @@ public class PanelsHandler : MonoBehaviour
                 panelLabelObject.SetActive(true);
 
                 dungeonPreviewUI.SetActive(true);
-                DungeonHubManager.dungeonHubManager.OpenPanel(1); 
+                DungeonHubManager.dungeonHubManager.OpenPanel(1);
                 break;
 
             case 3:
@@ -209,8 +211,8 @@ public class PanelsHandler : MonoBehaviour
                 anvilSound.SetActive(true);
                 tapArea.SetActive(true);
 
-                panelLabelObject.SetActive(false); 
-                
+                panelLabelObject.SetActive(false);
+
                 dungeonPreviewUI.SetActive(false);
 
                 if (skillController.selectedPanel != null)
