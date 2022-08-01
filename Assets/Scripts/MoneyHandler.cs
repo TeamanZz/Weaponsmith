@@ -64,7 +64,6 @@ public class MoneyHandler : MonoBehaviour
     }
     private void Start()
     {
-        InvokeRepeating("SaveMoneyPerSec", 1, 3);
         StartCoroutine(IEIncreaseMoneyCount());
         StartCoroutine(IESpawnCurrency());
     }
