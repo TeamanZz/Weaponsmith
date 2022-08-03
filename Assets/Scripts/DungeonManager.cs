@@ -35,7 +35,7 @@ public class DungeonManager : MonoBehaviour
         Instance = this;
         LoadData();
     }
-    
+
     private void Update()
     {
         UpdateProgressBarValue();
@@ -76,7 +76,7 @@ public class DungeonManager : MonoBehaviour
 
         dungeonCamera.transform.position = dungeonCameraStartPos.position;
         dungeonCamera.transform.rotation = Quaternion.Euler(32, 0, 0);
-        dungeonCamera.targetDistance = 17;
+        dungeonCamera.targetDistance = 10;
 
         isDungeonStarted = true;
         dungeonProgressBar.SetActive(true);
