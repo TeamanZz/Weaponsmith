@@ -46,6 +46,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
     [FoldoutGroup("View Components")][SerializeField] private Animator generalIncreaseValueTextAnimator;
     [SerializeField] private int increaseValue;
     [FoldoutGroup("View Components")] public Color buttonDefaultColor;
+    [FoldoutGroup("View Components")] public Color buttonChangedColor;
     [FoldoutGroup("View Components")] public Image weaponSprite;
     private void Awake()
     {
@@ -119,7 +120,7 @@ public class PanelItem : MonoBehaviour, IBuyableItem
         else
         {
             buyButtonComponent.enabled = false;
-            buyButtonImage.color = Color.gray;
+            buyButtonImage.color = buttonChangedColor;
         }
     }
 
